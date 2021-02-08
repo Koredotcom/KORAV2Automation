@@ -1,0 +1,38 @@
+{
+	"QA": {
+		"browser": "chrome",
+		"weburls": "https://developer.servicenow.com/dev.do#!/home",
+		"weburl": "https://qa1-app.kora.ai/",
+		"tool": "Selenium"
+	},
+	"IOSNATIVE": {
+		"tool": "Appium",
+		"device_UDID": "db7c046175ac287147dfa117edefe4836bf149fa",
+		"applicationPath": "D:/KORE_Info/MobileBinaries/Korav2.apk",
+		"bundleID": "com.kore.kora"
+	},
+	"ANDROIDNATIVE": {
+		"tool": "Appium",
+		"deviceName": "emulator-5554",
+		"appActivity": "com.koraapp.MainActivity",
+		"appPackage": "com.koraapp"
+	},
+	"UTILITIES": {
+		"macchromeDriverPath": "Drivers/chromedriver",
+		"winchromeDriverPath": "Drivers/chromedriver.exe",
+		"fireFoxDriverPath": "Drivers/geckodriver",
+		"edgeDriverPath": "Drivers/MicrosoftWebDriver.exe"
+	},
+	"TESTDATA": {
+		"checkmatchwith": "D",
+		"oneparticipant": "dileep.pisati@kore.com",
+		"onetoonechat": "Hi Dileep... Ignore_Automationmessage",
+		"groupname": "AutomationGroup",
+		"renamegroupto":"AutomationGroupRenamed",
+		"groupparticipants": "dileep.pisati@kore.com,prakash.rochkari@kore.com,ramana.kommula@kore.com,neha.malani@kore.com,roshini.kunarapu@kore.com",
+		"3usersgroup":"ramana.kommula@kore.com,neha.malani@kore.com,jayakrishna.dandru@kore.com",
+		"updateparticipant":"saishree.mishra@kore.com",
+		"groupchat": "Hi Team! Ignore_Automationmessage"
+		
+	}
+}

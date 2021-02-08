@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="My Test Suite" parallel="tests">
+  <test name="Sequential Tests">
+  </test> <!-- Sequential Tests -->
+  <test thread-count="2" name="Parallel Tests" parallel="classes">
+    <parameter name="environment" value="ANDROIDNATIVE"/>
+    <parameter name="browser" value="ANDROIDNATIVE"/>
+    <classes>
+      <class name="com.org.kore.mobile.tests.KoraV2AndroidTest"/>
+    </classes>
+  </test> <!-- Parallel Tests -->
+</suite> <!-- My Test Suite -->
