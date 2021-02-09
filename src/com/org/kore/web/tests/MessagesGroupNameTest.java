@@ -17,7 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 
-public class MessagesGroupTest extends DriverSetUp {
+public class MessagesGroupNameTest extends DriverSetUp {
 
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
@@ -26,9 +26,8 @@ public class MessagesGroupTest extends DriverSetUp {
 
 	String korausername;
 	String korapassword;
-	
 
-	public MessagesGroupTest() throws Exception {
+	public MessagesGroupNameTest() throws Exception {
 		super();
 
 	}
@@ -47,7 +46,7 @@ public class MessagesGroupTest extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority =1)
+	@Test(enabled = true, priority = 1)
 	public void koraGroupConversation() throws Exception {
 		test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 				.assignCategory("KORAV2Messages");
@@ -66,8 +65,8 @@ public class MessagesGroupTest extends DriverSetUp {
 		koramessagespage.enterYourMessageAs(grouptext);
 		extent.endTest(test);
 	}
-	
-	@Test(enabled = true, priority =2)
+
+	@Test(enabled = true, priority = 2)
 	public void manageGroupConversation() throws Exception {
 		String updatedname;
 		test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -75,12 +74,12 @@ public class MessagesGroupTest extends DriverSetUp {
 		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 		String url = DriverSetUp.propsMap.get("weburl");
-		String renameto =DriverSetUp.testdataMap.get("renamegroupto");
+		String renameto = DriverSetUp.testdataMap.get("renamegroupto");
 		String groupname = DriverSetUp.testdataMap.get("groupname");
-		
+
 		String originalgroupmems = DriverSetUp.testdataMap.get("groupparticipants");
 		String updatedgroupmems = DriverSetUp.testdataMap.get("updateparticipant");
-		
+
 		test.log(LogStatus.INFO, "Navigation url : " + url);
 		koraloginpage.loginToKora(url, korausername, korapassword);
 		korahomepage.selectMenuOption("Messages");
@@ -88,19 +87,20 @@ public class MessagesGroupTest extends DriverSetUp {
 		koramessagespage.goToGroupAndPerform(groupname, "3dots");
 		koramessagespage.operationsFrom3Dots("Manage Conversation");
 		koramananeconvpage.manageConversationValidations();
-		koramananeconvpage.clickOn("Members",false);
+		koramananeconvpage.clickOn("Members", false);
 		koramananeconvpage.clickOn("Add Participants", true);
 		koramessagespage.startNewConversationWith(updatedgroupmems, false);
-		koramananeconvpage.clickOn("Done",false);
+		koramananeconvpage.clickOn("Done", false);
 		koramananeconvpage.validateRecentAddedParticipants(updatedgroupmems);
-		koramananeconvpage.clickOn("General",false);
-		updatedname =koramananeconvpage.renameGroupAndClose(renameto);
+		koramananeconvpage.clickOn("General", false);
+		updatedname = koramananeconvpage.renameGroupAndClose(renameto);
 		koramessagespage.goToGroupAndPerform(updatedname, "Click");
 		koramessagespage.enterYourMessageAs("Sending text message after updating the Group");
 		koramessagespage.goToGroupAndPerform(updatedname, "3dots");
 		koramessagespage.operationsFrom3Dots("Manage Conversation");
-		koramananeconvpage.clickOn("Members",true); 
-		//koramananeconvpage.compareParticipants(originalgroupmems, updatedgroupmems);
+		koramananeconvpage.clickOn("Members", true);
+		// koramananeconvpage.compareParticipants(originalgroupmems,
+		// updatedgroupmems);
 		koramananeconvpage.removeParticipantsAndClose();
 		koramessagespage.goToGroupAndPerform(updatedname, "Click");
 		koramessagespage.goToGroupAndPerform(updatedname, "3dots");
@@ -108,7 +108,7 @@ public class MessagesGroupTest extends DriverSetUp {
 		koramessagespage.goToGroupAndPerform(updatedname, "Click");
 		koramessagespage.goToGroupAndPerform(updatedname, "3dots");
 		koramessagespage.operationsFrom3Dots("Delete Conversation");
-		koramananeconvpage.clickOn("Delete",false);
+		koramananeconvpage.clickOn("Delete", false);
 		extent.endTest(test);
 	}
 

@@ -51,7 +51,7 @@ public class CheckUrCode {
 		List<String> list = new ArrayList<String>();
 		list.add(one);
 		list.add(two);
-System.out.println(list);
+		System.out.println(list);
 		Iterator<String> it = list.iterator();
 		while (it.hasNext()) {
 			if (it.next().equals(" ")) {
@@ -74,8 +74,7 @@ System.out.println(list);
 		String updated = "abcd.xyz@kore.com";
 
 		List<String> list = new ArrayList<String>();
-		List<String> listB 
-        = new ArrayList<String>();
+		List<String> listB = new ArrayList<String>();
 		// List<Object> list = new ArrayList<Object>();
 		listB.add("abcd.xyz@kore.com, dileep.pisati@kore.com,rrakash.rochkari@kore.com,pamana.kommula@kore.com");
 		list.add(origina);
@@ -84,20 +83,15 @@ System.out.println(list);
 		Collections.sort(list);
 		System.out.println(list);
 		System.out.println(listB);
-		
-		boolean isEqual = list.equals(listB); 
-		
-		/*Iterator<String> it = list.iterator();
-		while (it.hasNext()) {
-			if (it.next().equals(" ")) {
-				it.remove();
-			}
-		}
 
-		for (String s : list) {
-			System.out.println("'" + s + "'");
-		}*/
+		boolean isEqual = list.equals(listB);
 
+		/*
+		 * Iterator<String> it = list.iterator(); while (it.hasNext()) { if
+		 * (it.next().equals(" ")) { it.remove(); } }
+		 * 
+		 * for (String s : list) { System.out.println("'" + s + "'"); }
+		 */
 
 		return list;
 

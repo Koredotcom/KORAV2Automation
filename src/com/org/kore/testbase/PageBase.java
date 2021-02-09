@@ -87,7 +87,6 @@ public class PageBase extends DriverSetUp {
 	 * @throws IOException
 	 */
 	public AppiumDriver<MobileElement> startAppiumDriver(String App) throws IOException {
-		// INTCP,QACP,UATCP,OBSERVATIONPORTAL,IOSNATIVE,ANDROIDNATIVE,IOSWEB,IVALETWEB
 
 		if (App.equalsIgnoreCase("ANDROIDNATIVE")) {
 			// EnhancedAndroidDriver<MobileElement> driver;
@@ -126,7 +125,7 @@ public class PageBase extends DriverSetUp {
 				System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("winchromeDriverPath"));
 
 				ChromeOptions options = new ChromeOptions();
-			//	options.addArguments("user-data-dir=/path/to/your/custom/profile");
+				// options.addArguments("user-data-dir=/path/to/your/custom/profile");
 				options.addArguments("--profile-directory=Default");
 				options.addArguments("--whitelisted-ips");
 				options.addArguments("--disable-plugins-discovery");
@@ -164,7 +163,7 @@ public class PageBase extends DriverSetUp {
 				System.out.println("ie driver");
 				remoteDriver = new InternetExplorerDriver();
 				remoteDriver.manage().window().maximize();
-				
+
 			} else if (browser.equalsIgnoreCase("safari")) {
 				System.out.println("launching Safari browser");
 				remoteDriver = new SafariDriver();
@@ -225,8 +224,8 @@ public class PageBase extends DriverSetUp {
 				break;
 			}
 		} catch (Exception exc) {
-			test.log(LogStatus.FAIL, elementName + " is not displayed",
-					elementName.toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL,
+					elementName + " is not displayed".toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
 	}
@@ -264,16 +263,12 @@ public class PageBase extends DriverSetUp {
 
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(linkText)));
-
 				appiumDriver.findElementByLinkText(linkText).click();
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
 
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
 				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(linkText)));
-				// JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
-				// js.executeScript("arguments[0].click();",
-				// remoteDriver.findElementByXPath(xpath));
 				remoteDriver.findElementByLinkText(linkText).click();
 				break;
 			}
@@ -294,15 +289,12 @@ public class PageBase extends DriverSetUp {
 			case "Appium":
 
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 300, 500);
-
 				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
-
 				break;
 			case "Selenium":
+
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 180, 500);
-
 				waitSelenium.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
-
 				break;
 
 			}
@@ -326,12 +318,9 @@ public class PageBase extends DriverSetUp {
 				if (target.isDisplayed() || target.isEnabled()) {
 					test.log(LogStatus.PASS,
 							"The element should be displayed " + "\n" + "The element is displayed" + appiumDriver);
-					// Thread.sleep(10000);
 					break;
 				} else {
-					// Extent_Reports.executionLog("FAIL", "The element should
-					// be displayed " + "\n"
-					// + "The element is not displayed", driver);
+					System.out.println("For now do nothing");
 				}
 
 			}
@@ -347,11 +336,10 @@ public class PageBase extends DriverSetUp {
 			case "Appium":
 
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 300, 500);
-
 				wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(locator)));
-
 				break;
 			case "Selenium":
+
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 180, 500);
 				if (locatorType.equalsIgnoreCase("xpath")) {
 					waitSelenium.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(locator)));
@@ -395,6 +383,7 @@ public class PageBase extends DriverSetUp {
 
 				break;
 			case "Selenium":
+
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 40, 500);
 				if (locatorType.equalsIgnoreCase("xpath")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
@@ -417,7 +406,8 @@ public class PageBase extends DriverSetUp {
 
 		} catch (Exception exc) {
 			System.out.println("Failed to find " + locator);
-			test.log(LogStatus.FAIL, elementName + " Element not present", test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL,
+					elementName + " element not displayed ".toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
 	}
@@ -428,20 +418,16 @@ public class PageBase extends DriverSetUp {
 
 			case "Appium":
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 80, 500);
-				// wait.until(ExpectedConditions.visibilityOf(e));
-
 				wait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(e)));
-
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 80, 500);
+
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 				waitSelenium.until(ExpectedConditions.elementToBeClickable(e));
 				break;
 			}
-
 			e.click();
-
-			test.log(LogStatus.PASS, "Click on Element " + elementName + " successful",
+			test.log(LogStatus.PASS, "Click on " + elementName + " successful".toString(),
 					test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception exc) {
@@ -458,15 +444,15 @@ public class PageBase extends DriverSetUp {
 			switch (DriverSetUp.propsMap.get("tool")) {
 
 			case "Appium":
+
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 				appiumDriver.findElementByXPath(xpath).clear();
 				break;
 			case "Selenium":
+
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
-
 				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-
 				remoteDriver.findElementByXPath(xpath).clear();
 				break;
 			}
@@ -484,23 +470,19 @@ public class PageBase extends DriverSetUp {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
 			case "Appium":
+
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				appiumDriver.findElementById(id).click();
 				break;
 			case "Selenium":
+
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 100, 1000);
 				remoteDriver.findElementById(id).click();
 				break;
 			}
 			test.log(LogStatus.INFO, elementName + "   Clicked Successfully");
-			/*
-			 * test.log(LogStatus.PASS, "Click on Element " + elementName +
-			 * " successful", test.addScreenCapture(takeScreenShot()));
-			 */
 
 		} catch (Exception exc) {
-
-			exc.printStackTrace();
 			test.log(LogStatus.FAIL, exc + "Exception on clicking webelement",
 					exc.toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
@@ -511,7 +493,6 @@ public class PageBase extends DriverSetUp {
 	public void scrollBottomOfPage() {
 
 		JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
-		// This will scroll the web page till end.
 		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 	}
 
@@ -523,7 +504,6 @@ public class PageBase extends DriverSetUp {
 				Actions actions = new Actions(remoteDriver);
 				actions.moveToElement(element);
 				actions.perform();
-
 			} else if (locatorType.equals("css")) {
 
 				WebElement element = remoteDriver.findElement(By.cssSelector(locator));
@@ -553,57 +533,44 @@ public class PageBase extends DriverSetUp {
 		WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 100, 1000);
 
 		if (locatorType.equals("xpath")) {
-
 			waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
-
 			WebElement element = remoteDriver.findElement(By.xpath(locator));
 			((JavascriptExecutor) remoteDriver).executeScript("arguments[0].scrollIntoView(true);", element);
 			Thread.sleep(500);
-
 		} else if (locatorType.equals("css")) {
 			waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
-
 			WebElement element = remoteDriver.findElement(By.cssSelector(locator));
 			((JavascriptExecutor) remoteDriver).executeScript("arguments[0].scrollIntoView(true);", element);
 			Thread.sleep(500);
 		} else if (locatorType.equals("id")) {
 			waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
-
 			WebElement element = remoteDriver.findElement(By.id(locator));
 			((JavascriptExecutor) remoteDriver).executeScript("arguments[0].scrollIntoView(true);", element);
 			Thread.sleep(500);
 		} else if (locatorType.equals("class")) {
 			waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
-
 			WebElement element = remoteDriver.findElement(By.className(locator));
 			((JavascriptExecutor) remoteDriver).executeScript("arguments[0].scrollIntoView(true);", element);
 			Thread.sleep(500);
 		}
 
-		/*
-		 * JavascriptExecutor js = (JavascriptExecutor) remoteDriver; // This
-		 * will scroll the web page till end.
-		 * js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-		 */
 	}
 
 	public void clickbycss(String css, String elementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
 			case "Appium":
+
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 100, 500);
 				appiumDriver.findElementByCssSelector(css).click();
 				break;
 			case "Selenium":
+
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 100, 1000);
 				remoteDriver.findElementByCssSelector(css).click();
 				break;
 			}
 			test.log(LogStatus.INFO, elementName + "   Clicked Successfully");
-			/*
-			 * test.log(LogStatus.PASS, "Click on Element " + elementName +
-			 * " successful", test.addScreenCapture(takeScreenShot()));
-			 */
 
 		} catch (Exception exc) {
 
@@ -621,11 +588,13 @@ public class PageBase extends DriverSetUp {
 			switch (DriverSetUp.propsMap.get("tool")) {
 
 			case "Appium":
+
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				List<MobileElement> sizeAppium = appiumDriver.findElementsByXPath(xpath);
 				size = sizeAppium.size();
 				break;
 			case "Selenium":
+
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 1000);
 				List<WebElement> sizeSelenium = remoteDriver.findElementsByXPath(xpath);
 				size = sizeSelenium.size();
@@ -634,10 +603,6 @@ public class PageBase extends DriverSetUp {
 			}
 
 			return size;
-			/*
-			 * test.log(LogStatus.PASS, "Click on Element " + elementName +
-			 * " successful", test.addScreenCapture(takeScreenShot()));
-			 */
 
 		} catch (Exception exc) {
 
@@ -652,15 +617,12 @@ public class PageBase extends DriverSetUp {
 	public ArrayList<String> selectVal(String id, String Selectvalue) {
 
 		WebElement element = remoteDriver.findElement(By.id(id));
-
 		Select oSelect = new Select(element);
-
 		List<WebElement> elementCount = oSelect.getOptions();
 		ArrayList<String> elementList = new ArrayList<>();
 		for (int i = 0; i < elementCount.size(); i++) {
 			elementList.add(elementCount.get(i).getText());
 		}
-
 		oSelect.selectByVisibleText(Selectvalue);
 		return elementList;
 	}
@@ -668,9 +630,7 @@ public class PageBase extends DriverSetUp {
 	public ArrayList<String> getListValuesinDropdown(String id) {
 
 		WebElement element = remoteDriver.findElement(By.id(id));
-
 		Select oSelect = new Select(element);
-
 		List<WebElement> elementCount = oSelect.getOptions();
 		ArrayList<String> elementList = new ArrayList<>();
 		for (int i = 0; i < elementCount.size(); i++) {
@@ -682,9 +642,7 @@ public class PageBase extends DriverSetUp {
 
 	public ArrayList<String> getListFrmDrpDwn(String id) {
 		WebElement element = remoteDriver.findElement(By.id(id));
-
 		Select oSelect = new Select(element);
-
 		List<WebElement> elementCount = oSelect.getOptions();
 		ArrayList<String> elementList = new ArrayList<>();
 		for (int i = 0; i < elementCount.size(); i++) {
@@ -692,19 +650,20 @@ public class PageBase extends DriverSetUp {
 		}
 
 		return elementList;
-
 	}
 
 	public void clickbyClassName(String className, String elementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
 			case "Appium":
+
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(className)));
 				appiumDriver.findElementByClassName(className).click();
 
 				break;
 			case "Selenium":
+
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 100, 1000);
 				remoteDriver.findElementByClassName(className).click();
 				break;
@@ -713,7 +672,6 @@ public class PageBase extends DriverSetUp {
 					test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception exc) {
-
 			exc.printStackTrace();
 			test.log(LogStatus.FAIL, exc + "Exception on clicking webelement",
 					exc.toString() + test.addScreenCapture(takeScreenShot()));
@@ -755,16 +713,16 @@ public class PageBase extends DriverSetUp {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
 			case "Appium":
+
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				Alert a2 = remoteDriver.switchTo().alert();
 				a2.accept();
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
 
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
 				Alert a1 = remoteDriver.switchTo().alert();
 				a1.accept();
-
 				break;
 			}
 
@@ -783,14 +741,14 @@ public class PageBase extends DriverSetUp {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
 			case "Appium":
+
 				Actions action = new Actions(appiumDriver);
 				action.dragAndDrop(e1, e2).perform();
-
 				break;
 			case "Selenium":
+
 				Actions action1 = new Actions(remoteDriver);
 				action1.dragAndDrop(e1, e2).perform();
-
 				break;
 			}
 
@@ -810,13 +768,12 @@ public class PageBase extends DriverSetUp {
 		if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Selenium")) {
 			pageTitle = remoteDriver.getTitle();
 		} else {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			pageTitle = appiumDriver.getTitle();
 
 		}
 
 		return pageTitle;
-
 	}
 
 	public boolean isEnabled(String locator, String locatorType) throws Exception {
@@ -826,21 +783,19 @@ public class PageBase extends DriverSetUp {
 			case "Appium":
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				if (locatorType.equals("xpath")) {
-
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 					flag = appiumDriver.findElementByXPath(locator).isEnabled();
 
 				} else if (locatorType.equals("css")) {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
-
 					flag = appiumDriver.findElementByCssSelector(locator).isEnabled();
+
 				} else if (locatorType.equals("id")) {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(locator)));
-
 					flag = appiumDriver.findElementById(locator).isEnabled();
+
 				} else if (locatorType.equals("class")) {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(locator)));
-
 					flag = appiumDriver.findElementByClassName(locator).isEnabled();
 				}
 
@@ -849,21 +804,19 @@ public class PageBase extends DriverSetUp {
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 250);
 
 				if (locatorType.equals("xpath")) {
-
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 					flag = remoteDriver.findElementByXPath(locator).isEnabled();
 
 				} else if (locatorType.equals("css")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
-
 					flag = remoteDriver.findElementByCssSelector(locator).isEnabled();
+
 				} else if (locatorType.equals("id")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.id(locator)));
-
 					flag = remoteDriver.findElementById(locator).isEnabled();
+
 				} else if (locatorType.equals("class")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.className(locator)));
-
 					flag = remoteDriver.findElementByClassName(locator).isEnabled();
 				}
 
@@ -877,30 +830,16 @@ public class PageBase extends DriverSetUp {
 
 	}
 
-	/*
-	 * public String getText(WebElement e, String elementName) throws Exception
-	 * {
-	 * 
-	 * switch (DriverSetUp.propsMap.get("tool")) { case "Appium": WebDriverWait
-	 * wait = new WebDriverWait(appiumDriver, 60, 500);
-	 * wait.until(ExpectedConditions.visibilityOf(e)); break; case "Selenium":
-	 * WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
-	 * waitSelenium.until(ExpectedConditions.visibilityOf(e)); break; } String
-	 * text = e.getText(); test.log(LogStatus.PASS, "Click on Element " +
-	 * elementName + " successful", test.addScreenCapture(takeScreenShot()));
-	 * return text;
-	 * 
-	 * }
-	 */
-
 	public String getValue(WebElement e, String elementName) throws Exception {
 
 		switch (DriverSetUp.propsMap.get("tool")) {
 		case "Appium":
+
 			WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 			wait.until(ExpectedConditions.visibilityOf(e));
 			break;
 		case "Selenium":
+
 			WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
 			waitSelenium.until(ExpectedConditions.visibilityOf(e));
 			break;
@@ -917,16 +856,13 @@ public class PageBase extends DriverSetUp {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
 			case "Appium":
-				/*
-				 * WebDriverWait wait = new WebDriverWait(appiumDriver, 60,
-				 * 500); wait.until(ExpectedConditions.visibilityOf(e));
-				 */
-				// e.clear();
+
 				e.click();
 				e.sendKeys(cred);
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
+
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 				waitSelenium.until(ExpectedConditions.visibilityOf(e));
 				break;
 			}
@@ -946,14 +882,14 @@ public class PageBase extends DriverSetUp {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
 			case "Appium":
-				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 
+				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 				appiumDriver.findElement(By.xpath(locator)).clear();
 				appiumDriver.findElement(By.xpath(locator)).sendKeys(cred);
-
 				break;
 			case "Selenium":
+
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 				remoteDriver.findElement(By.xpath(locator)).clear();
@@ -976,6 +912,7 @@ public class PageBase extends DriverSetUp {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
 			case "Appium":
+
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				if (locatorType.equals("xpath")) {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
@@ -994,10 +931,10 @@ public class PageBase extends DriverSetUp {
 					appiumDriver.findElement(By.name(locator)).clear();
 					appiumDriver.findElement(By.name(locator)).sendKeys(cred);
 				}
-
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 15, 500);
+
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 				if (locatorType.equals("xpath")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 					remoteDriver.findElement(By.xpath(locator)).clear();
@@ -1019,15 +956,9 @@ public class PageBase extends DriverSetUp {
 				break;
 			}
 
-			/*
-			 * test.log(LogStatus.PASS, " Enter text in " + elementName +
-			 * " successful", test.addScreenCapture(takeScreenShot()));
-			 */
 		} catch (Exception exc) {
-
 			test.log(LogStatus.FAIL, "Enter text failed", test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc + " Exception on Verified webelement");
-
 		}
 
 	}
@@ -1041,6 +972,7 @@ public class PageBase extends DriverSetUp {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
 			case "Appium":
+
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				if (locatorType.equals("xpath")) {
 					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
@@ -1059,10 +991,10 @@ public class PageBase extends DriverSetUp {
 
 					text = appiumDriver.findElement(By.className(locator)).getText();
 				}
-
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
+
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 				if (locatorType.equals("xpath")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 
@@ -1095,21 +1027,14 @@ public class PageBase extends DriverSetUp {
 
 		switch (DriverSetUp.propsMap.get("tool")) {
 		case "Appium":
+
 			WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 			wait.until(ExpectedConditions.visibilityOf(appiumDriver.findElementByXPath(xpath)));
 			text = appiumDriver.findElementByXPath(xpath).getText();
-
 			break;
 		case "Selenium":
 
-			/*
-			 * JavascriptExecutor jse = (JavascriptExecutor) remoteDriver;
-			 * WebElement element = remoteDriver.findElement(By.xpath(xpath));
-			 * text = jse.executeScript("return arguments[0].text",
-			 * element).toString();
-			 */
-
-			WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500); //
+			WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 			waitSelenium.until(ExpectedConditions.visibilityOf(remoteDriver.findElementByXPath(xpath)));
 			text = remoteDriver.findElementByXPath(xpath).getText();
 
@@ -1255,14 +1180,10 @@ public class PageBase extends DriverSetUp {
 			case "Appium":
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-				// appiumDriver.findElementByXPath(xpath).clear();
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 1, 500);
-
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 5, 500);
 				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-
-				// remoteDriver.findElementByXPath(xpath).clear();
 				break;
 			}
 			return true;
@@ -1280,13 +1201,10 @@ public class PageBase extends DriverSetUp {
 			case "Appium":
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
-				// appiumDriver.findElementByXPath(xpath).clear();
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
-
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
-
 				break;
 			}
 			return true;
@@ -1304,14 +1222,10 @@ public class PageBase extends DriverSetUp {
 			case "Appium":
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(id)));
-				// appiumDriver.findElementByXPath(xpath).clear();
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
-
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 15, 500);
 				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(id)));
-
-				// remoteDriver.findElementByXPath(xpath).clear();
 				break;
 			}
 			return true;
@@ -1322,23 +1236,6 @@ public class PageBase extends DriverSetUp {
 
 	}
 
-	/*
-	 * public void clickMultipleButtons(WebElement tab, WebElement pause, String
-	 * elementName) throws Exception {
-	 * 
-	 * try { Thread.sleep(20000); if (elementIsDisplayed(pause, "pausebutton"))
-	 * { pause.click(); } else { tab.click(); pause.click(); }
-	 * Thread.sleep(10000);
-	 * 
-	 * test.log(LogStatus.PASS, "Click on Element " + elementName +
-	 * " successful", test.addScreenCapture(takeScreenShot()));
-	 * 
-	 * } catch (Exception exc) { exc.printStackTrace(); test.log(LogStatus.FAIL,
-	 * exc + "Exception on clicking webelement", exc.toString() +
-	 * test.addScreenCapture(takeScreenShot())); throw new Exception(exc); }
-	 * 
-	 * }
-	 */
 	public void switchToCurrentWindowTitle() throws InterruptedException {
 		try {
 
@@ -1435,8 +1332,7 @@ public class PageBase extends DriverSetUp {
 		RemoteWebElement element = (RemoteWebElement) appiumDriver.findElement(By.className("XCUIElementTypeCell"));
 		String elementID = element.getId();
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
-		scrollObject.put("element", elementID); // Only for ‘scroll in
-												// element’
+		scrollObject.put("element", elementID);
 		scrollObject.put("direction", "down");
 		appiumDriver.executeScript("mobile:scroll", scrollObject);
 	}

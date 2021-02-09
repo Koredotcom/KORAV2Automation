@@ -13,10 +13,10 @@ public class ElementRepository {
 
 	public String footerText = null, kuser = null, kpwd = null, kloginnext = null, ksignwithgoogle = null,
 			ksignwithgooglepage = null, knext = null, kchoosetext = null, kselectaccount = null, kallow = null,
-			khistory = null, kheadermenu = null, kmplusicon = null,kmrecent=null, kmenterparticipant = null,
+			khistory = null, kheadermenu = null, kmplusicon = null, kmrecent = null, kmenterparticipant = null,
 			kmcloseconversation = null, kmsuggestnames = null, kmsuggestmailids = null, kmprofileicon = null,
-			kmcomposebar = null, kmgroupchevronicon = null, kmgroupname = null,kmmidgroup=null,km3dotoptions=null,km3dotoptionssize=null,
-			kmtext=null,kmmanageclose=null,kmmembername=null;
+			kmcomposebar = null, kmgroupchevronicon = null, kmgroupname = null, kmmidgroup = null, km3dotoptions = null,
+			km3dotoptionssize = null, kmtext = null, kmmanageclose = null, kmmembername = null;
 
 	public void repoIOS() {
 		footerText = "//*[@placeholder='Username']";
@@ -26,11 +26,6 @@ public class ElementRepository {
 	public void repoAnd() {
 
 		footerText = "//*[@class='row footerStripe']/div[1]";
-	}
-
-	public void selNativeiOS() {
-		footerText = "//*[@text='Service Quality - Observations']";
-
 	}
 
 	public void selWeb() {
@@ -53,7 +48,7 @@ public class ElementRepository {
 		khistory = "//span[@class='loadHistory']";
 		kheadermenu = "//span[@class='menuTabs']/a";
 		kmplusicon = "//span[@class='p-icon kr-plus']";
-		kmrecent="//span[@class='recenText']";
+		kmrecent = "//span[@class='recenText']";
 		kmenterparticipant = "//input[@placeholder='Enter participant name']";
 		kmcloseconversation = "//span[@class='kr-closeBox']";
 		kmsuggestnames = "//div[@class='p-clearfix userDetailBox']/div[@class='userDetail']";
@@ -62,12 +57,12 @@ public class ElementRepository {
 		kmgroupchevronicon = "//span[@class='kr-down_arrowBox']";
 		kmgroupname = "//input[@placeholder='Group Name']";
 		kmcomposebar = "//div[@placeholder='Type your message']";
-		kmmidgroup="//div[@class='userNameDiv'][text()='";
-		km3dotoptions="//div[@class='krDropDownMenu active']/div[text()='";
-		km3dotoptionssize="//div[@class='krDropDownMenu active']/div/i";
-		kmtext="//*[text()='";
-		kmmanageclose="//button[@aria-label='Close']";
-		kmmembername ="//span[text()='Member']/../../..//div[@class='emailUi']";
+		kmmidgroup = "//div[@class='userNameDiv'][text()='";
+		km3dotoptions = "//div[@class='krDropDownMenu active']/div[text()='";
+		km3dotoptionssize = "//div[@class='krDropDownMenu active']/div/i";
+		kmtext = "//*[text()='";
+		kmmanageclose = "//button[@aria-label='Close']";
+		kmmembername = "//span[text()='Member']/../../..//div[@class='emailUi']";
 
 	}
 

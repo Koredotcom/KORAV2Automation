@@ -87,7 +87,7 @@ public class KoraMessagesPage extends PageBase {
 		}
 	}
 
-	// Will change this to Do while Logic so that one method would suffise our
+	// Will change this to Do while Logic so that one method would solve our
 	// req
 	public void startNewConversationWith(String participantlist, boolean plusicon) throws Exception {
 		

@@ -10,7 +10,6 @@ import java.util.Map;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -165,7 +164,7 @@ public class DriverSetUp {
 
 	}
 
-	//@AfterMethod
+	// @AfterMethod
 	@AfterTest
 	public void flush() {
 		extent.flush();

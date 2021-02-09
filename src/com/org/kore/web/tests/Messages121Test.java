@@ -21,10 +21,10 @@ public class Messages121Test extends DriverSetUp {
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
 	KoraMessagesPage koramessagespage;
-	
+
 	String korausername;
 	String korapassword;
-	
+
 	String username;
 	String password;
 	String username1;
@@ -42,15 +42,15 @@ public class Messages121Test extends DriverSetUp {
 		koraloginpage = new KoraLoginPage(remoteDriver);
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesPage(remoteDriver);
-		
+
 		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
 		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
-		
+
 		username = dr.getValue("SERVICENOW", "ServiceNow", "Username");
 		password = dr.getValue("SERVICENOW", "ServiceNow", "Password");
 		username1 = dr.getValue("SERVICENOW", "ServiceNow1", "Username");
 		password1 = dr.getValue("SERVICENOW", "ServiceNow1", "Password");
-		
+
 	}
 
 	@Test(enabled = true)
@@ -78,5 +78,5 @@ public class Messages121Test extends DriverSetUp {
 		// softAssertion.assertAll();
 		extent.endTest(test);
 	}
-	
+
 }

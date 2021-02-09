@@ -59,8 +59,11 @@ public class MessagesNoGroupNameTest extends DriverSetUp {
 
 		test.log(LogStatus.INFO, "Navigation url : " + url);
 		koraloginpage.loginToKora(url, korausername, korapassword);
-		remoteDriver.get("https://qa1-app.kora.ai/");
 		korahomepage.selectMenuOption("Messages");
+		
+		koramessagespage.goToGroupAndPerform("", "Click");
+		koramessagespage.goToGroupAndPerform("", "3dots");
+		
 		koramessagespage.startNewConversationWith(newparticipants, true);
 		koramessagespage.enterYourMessageAs(grouptext);
 		
