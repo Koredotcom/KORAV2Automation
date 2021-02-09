@@ -5,9 +5,9 @@
     <parameter name="environment" value="QA"/>
     <parameter name="browser" value="chrome"/>
     <classes>
-     <!--  <class name="com.org.kore.web.tests.Messages121Test"/> -->
-   <!--    <class name="com.org.kore.web.tests.MessagesGroupTest"/> -->
-       <class name="com.org.kore.web.tests.MessagesNoGroupNameTest"/>
+     <class name="com.org.kore.web.tests.Messages121Test"/>
+     <!--  <class name="com.org.kore.web.tests.MessagesGroupTest"/>
+       <class name="com.org.kore.web.tests.MessagesNoGroupNameTest"/> -->
     </classes>
   </test> <!-- Sequential Tests -->
   <test thread-count="2" name="Parallel Tests" parallel="classes">
