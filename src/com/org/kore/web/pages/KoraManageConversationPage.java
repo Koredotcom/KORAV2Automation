@@ -31,33 +31,32 @@ public class KoraManageConversationPage extends PageBase {
 	}
 
 	public void manageConversationValidations() throws Exception {
-		String manageconvttl= getText("//div[@class='dialog-title']");
+		String manageconvttl = getText("//div[@class='dialog-title']");
 		int size = getSize("//div[@class='addParticipantsCtr-Btn']");
-		if (size>0)
+		if (size > 0)
 			test.log(LogStatus.FAIL, "Add Participants option displayed under General Tab");
 		clickOn("Members", true);
-		String addparticipants= getText("//div[@class='addParticipantsCtr-Btn']");
-		if (!manageconvttl.equalsIgnoreCase("Manage Conversation")||(!addparticipants.equalsIgnoreCase("Add Participants")))
+		String addparticipants = getText("//div[@class='addParticipantsCtr-Btn']");
+		if (!manageconvttl.equalsIgnoreCase("Manage Conversation")
+				|| (!addparticipants.equalsIgnoreCase("Add Participants")))
 			test.log(LogStatus.FAIL, "New conversation text displayed as " + manageconvttl);
-		clickOn("General",true);
-		test.log(LogStatus.INFO, "Manage Conversation title displayed as : <b>"+manageconvttl+"</b> ");
-		test.log(LogStatus.INFO, "Add Participants text displayed as : <b>"+addparticipants+"</b> ");
-	}
-	
-	public void clickOn(String option, boolean screenshot) throws Exception{
-		
-		click(er.kmtext+option+"']", option+" tab");
-		if(screenshot)
-		test.log(LogStatus.PASS, "Clicked on "+option,
-				test.addScreenCapture(takeScreenShot()));
-		
+		clickOn("General", true);
+		test.log(LogStatus.INFO, "Manage Conversation title displayed as : <b>" + manageconvttl + "</b> ");
+		test.log(LogStatus.INFO, "Add Participants text displayed as : <b>" + addparticipants + "</b> ");
 	}
 
-	
-	public void validateRecentAddedParticipants(String participant) throws Exception{
+	public void clickOn(String option, boolean screenshot) throws Exception {
+
+		click(er.kmtext + option + "']", option + " tab");
+		if (screenshot)
+			test.log(LogStatus.PASS, "Clicked on " + option, test.addScreenCapture(takeScreenShot()));
+
+	}
+
+	public void validateRecentAddedParticipants(String participant) throws Exception {
 		boolean flag = false;
-		//span[text()='Member']/../../..//div[@class='emailUi'][text()='neha.malani@kore.com']
-		moveToElement(er.kmmembername+"[text()='"+participant+"']", "xpath");
+		// span[text()='Member']/../../..//div[@class='emailUi'][text()='neha.malani@kore.com']
+		moveToElement(er.kmmembername + "[text()='" + participant + "']", "xpath");
 		try {
 			List<WebElement> Menulist = remoteDriver.findElements(By.xpath("//div[@class='emailUi']"));
 			for (WebElement e : Menulist) {
@@ -78,7 +77,7 @@ public class KoraManageConversationPage extends PageBase {
 			e.printStackTrace();
 		}
 	}
-		
+
 	public String renameGroupAndClose(String renameto) throws Exception {
 		String updatedname = null;
 		try {
@@ -101,7 +100,7 @@ public class KoraManageConversationPage extends PageBase {
 		return updatedname;
 
 	}
-	
+
 	/*
 	 * ToDo // Still need improvements for this validation
 	 */
@@ -131,23 +130,23 @@ public class KoraManageConversationPage extends PageBase {
 		}
 
 	}
-	
+
 	public void removeParticipantsAndClose() throws Exception {
 		try {
-			boolean memb=false;
+			boolean memb = false;
 			test.log(LogStatus.INFO, "Now will remove all the members from the group");
-		//	test.log(LogStatus.INFO, test.addScreenCapture(takeScreenShot()));
+			// test.log(LogStatus.INFO,
+			// test.addScreenCapture(takeScreenShot()));
 			do {
-				memb = remoteDriver.findElements(By.xpath("//span[text()='Member']"))
-						.size() > 0;
+				memb = remoteDriver.findElements(By.xpath("//span[text()='Member']")).size() > 0;
 				if (memb) {
 					clickOn("Member", false);
 					String name = getText(er.kmmembername);
 					clickOn("Remove", false);
-					test.log(LogStatus.INFO, "Removed : "+name);
+					test.log(LogStatus.INFO, "Removed : " + name);
 					Thread.sleep(1000);
 					clickOn("Members", false);
-					
+
 				}
 			} while ((memb));
 			test.log(LogStatus.PASS, "Removed all the members from the group");

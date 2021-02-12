@@ -15,7 +15,7 @@ public class ElementRepository {
 			ksignwithgooglepage = null, knext = null, kchoosetext = null, kselectaccount = null, kallow = null,
 			khistory = null, kheadermenu = null, kmplusicon = null, kmrecent = null, kmenterparticipant = null,
 			kmcloseconversation = null, kmsuggestnames = null, kmsuggestmailids = null, kmprofileicon = null,
-			kmcomposebar = null, kmgroupchevronicon = null, kmgroupname = null, kmmidgroup = null, km3dotoptions = null,
+			kmcomposebar = null, kmgroupchevronicon = null, kmgroupname = null, kmmidgroup = null,kmmidchatdesc=null, km3dotoptions = null,
 			km3dotoptionssize = null, kmtext = null, kmmanageclose = null, kmmembername = null;
 
 	public void repoIOS() {
@@ -58,6 +58,7 @@ public class ElementRepository {
 		kmgroupname = "//input[@placeholder='Group Name']";
 		kmcomposebar = "//div[@placeholder='Type your message']";
 		kmmidgroup = "//div[@class='userNameDiv'][text()='";
+		kmmidchatdesc="']/../../..//div[@class='userChatDEsc']";
 		km3dotoptions = "//div[@class='krDropDownMenu active']/div[text()='";
 		km3dotoptionssize = "//div[@class='krDropDownMenu active']/div/i";
 		kmtext = "//*[text()='";

@@ -1,5 +1,6 @@
 package com.org.kore.web.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -15,7 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
 /**
  * 
  * @author Jay
- * @Description : All the functions related Home
+ * @Description : All the functions related to Messages page
  *
  */
 
@@ -29,29 +30,39 @@ public class KoraMessagesPage extends PageBase {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * To validate message screen
+	 * 
+	 * @throws Exception
+	 */
 	public void messagesScreenValidations() throws Exception {
-		// SoftAssert softAssertion= new SoftAssert();
 		waitTillappear(er.kmplusicon, "xpath", "Plus icon");
 		String plusicon = getAttributeValue(er.kmplusicon, "title");
 		if (!plusicon.equalsIgnoreCase("New Conversation"))
 			test.log(LogStatus.FAIL, "New conversation text displayed as " + plusicon);
 		test.log(LogStatus.INFO, "For + icon text displayed as : <b>New Conversation</b> ");
 	}
-	
+
 	public void checkRecents() throws Exception {
-		try{
-		List<WebElement> recents = remoteDriver.findElements(By.xpath(er.kmrecent));
-		if (recents.size()>0)
-		test.log(LogStatus.PASS, "Displayed "+recents.size()+" Recent suggestions");
-		test.log(LogStatus.INFO, test.addScreenCapture(takeScreenShot()));
-		
-	}catch (Exception e){
-		test.log(LogStatus.FAIL, "Not displaying any recent suggestions for a new conversation");
-		test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
-	}
-		
+		try {
+			List<WebElement> recents = remoteDriver.findElements(By.xpath(er.kmrecent));
+			if (recents.size() > 0)
+				test.log(LogStatus.PASS, "Displayed " + recents.size() + " Recent suggestions");
+			test.log(LogStatus.INFO, test.addScreenCapture(takeScreenShot()));
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Not displaying any recent suggestions for a new conversation");
+			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
+		}
+
 	}
 
+	/**
+	 * 
+	 * @param nameorletter
+	 *            : To check the suggestions based on this parameter
+	 * @throws Exception
+	 */
 	public void checkMatchesWith(String nameorletter) throws Exception {
 		try {
 			int i = 1;
@@ -89,8 +100,17 @@ public class KoraMessagesPage extends PageBase {
 
 	// Will change this to Do while Logic so that one method would solve our
 	// req
+	/**
+	 * 
+	 * @param participantlist
+	 *            : Input parameter from Json file to add these participants
+	 * @param plusicon
+	 *            : If it is true, then it will click on + icon
+	 * @throws Exception
+	 *             : Fail, when unable to select the provided participant
+	 */
 	public void startNewConversationWith(String participantlist, boolean plusicon) throws Exception {
-		
+
 		try {
 			if (plusicon)
 				click(er.kmplusicon, "New Conversation");
@@ -127,6 +147,12 @@ public class KoraMessagesPage extends PageBase {
 		}
 	}
 
+	/**
+	 * 
+	 * @param groupname
+	 *            : This will be your group name for a new group
+	 * @throws Exception
+	 */
 	public void createGroupAs(String groupname) throws Exception {
 		try {
 			click(er.kmgroupchevronicon, "Chevron Icon");
@@ -144,7 +170,7 @@ public class KoraMessagesPage extends PageBase {
 
 	/**
 	 * @param enterthistext
-	 *            : Mentioned text from here will be sent as a message
+	 *            : Mentioned text from here will be send as a message
 	 * @throws Exception
 	 */
 	public void enterYourMessageAs(String enterthistext) throws Exception {
@@ -152,7 +178,7 @@ public class KoraMessagesPage extends PageBase {
 			WebElement compose = remoteDriver.findElement(By.xpath("//div[@placeholder='Type your message']"));
 			compose.sendKeys(enterthistext, Keys.ENTER);
 			Thread.sleep(3000);
-			test.log(LogStatus.INFO, "Entered messages as : <b>" +  enterthistext + "</b>");
+			test.log(LogStatus.INFO, "Entered messages as : <b>" + enterthistext + "</b>");
 			test.log(LogStatus.INFO, "Entered message as " + enterthistext, test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception e) {
@@ -161,105 +187,251 @@ public class KoraMessagesPage extends PageBase {
 		}
 
 	}
-	
-	// Yet to implement switch case for on hover elements
-	public void goToGroupAndPerform(String groupname,String action) throws Exception {
-		moveToElement(er.kmmidgroup+groupname+"']", "xpath");
-		String timestamp=getText("//span[@class='dayTime']");
-		test.log(LogStatus.INFO, "For "+groupname+"Timestamp displayed as : <b>"+timestamp+"</b>");
-		
-		try {
-			switch (action.trim()) {
-			case "Click":
-				click(er.kmmidgroup+groupname+"']", "Group click");
-				break;
 
-			case "Star":
-				moveToElement(er.kmmidgroup+groupname+"']/../../..//span[@title='Star']", "xpath");
-				click(er.kmmidgroup+groupname+"']/../../..//span[@title='Star']", "Star");
-				break;
-				
-			case "Unstar":
-				moveToElement(er.kmmidgroup+groupname+"']/../../..//span[@title='Unstar']", "xpath");
-				click(er.kmmidgroup+groupname+"']/../../..//span[@title='Unstar']", "Unstar");
-				break;
-
-			case "Mute":
-				moveToElement(er.kmmidgroup+groupname+"']/../../..//i[@title='Mute']", "xpath");
-				click(er.kmmidgroup+groupname+"']/../../..//i[@title='Mute']", "Mute");
-				break;
-
-			case "read":
-				moveToElement(er.kmmidgroup+groupname+"']/../../..//i[@title='Read']", "xpath");
-				click(er.kmmidgroup+groupname+"']/../../..//i[@title='Un-Read']", "Read");
-				break;
-
-			case "unread":
-				moveToElement(er.kmmidgroup+groupname+"']/../../..//i[@title='Un-Read']", "xpath");
-				click(er.kmmidgroup+groupname+"']/../../..//i[@title='Un-Read']", "Un-Read");
-				break;
-				
-			case "3dots":
-				moveToElement(er.kmmidgroup+groupname+"']/../../..//div[@class='_content']/i[@class='icon __i kr-ellipsis']", "xpath");
-				click(er.kmmidgroup+groupname+"']/../../..//div[@class='_content']/i[@class='icon __i kr-ellipsis']", "xpath");
-				break;
-
-			default:
-				test.log(LogStatus.FAIL, "User provided action is not available");
-			}
-			
-			
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
-		}
-
-	}
-	
-	// This may not be required ... if needed yet to modigy 
-	public void operationsFrom3Dots1(String operation) throws Exception {
-		try {
-			switch (operation.trim()) {
-			case "Leave Conversation":
-				click(er.km3dotoptions+operation+"']", "xpath");
-				break;
-
-			case "Manage Conversation":
-				break;
-				
-			case "Clear Chat History":
-				break;
-
-			case "Delete Conversation":
-				break;
-
-			default:
-				test.log(LogStatus.FAIL, "User provided action is not available");
-			}
-			
-			
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
-		}
-
-	}
-	
 	/**
 	 * 
-	 * @param operation : It should match with the text displayed in App
-	 * operation parameter can be given as follow :
-	 * Leave Conversation , Manage Conversation , Clear Chat History , Delete Conversation
+	 * @param groupname
+	 *            : Will get the time stamp of the group provided by user
 	 * @throws Exception
 	 */
-	public void operationsFrom3Dots(String operation) throws Exception{
-		try{
-			click(er.km3dotoptions+operation+"']", "xpath");
-			Thread.sleep(3000);
-			test.log(LogStatus.INFO, "Selected" + operation +"3dots");
-		
-	}catch (Exception e){
-		System.out.println(e);
+	public void getGroupTimestamp(String groupname) throws Exception {
+		String timestamp = getText(er.kmmidgroup + groupname + "']/..//span[@class='dayTime']");
+		test.log(LogStatus.INFO, "For " + groupname + "Timestamp displayed as : <b>" + timestamp + "</b>");
 	}
-		
+
+	/**
+	 * @param groupname
+	 *            : Actions will perform on this group
+	 * @param check
+	 *            : If this flag is true, then followed action will be performed
+	 * @param action
+	 *            : This parameter is valid only when @check is true
+	 * @throws Exception
+	 *             : Fail, if it fail to perform action
+	 */
+	public void goToGroupAndPerform(String groupname, boolean check, String action) throws Exception {
+		moveToElement(er.kmmidgroup + groupname + er.kmmidchatdesc, "xpath");
+		click(er.kmmidgroup + groupname + er.kmmidchatdesc, "Group click");
+		/* click(er.kmmidgroup + groupname + "']", "Group click"); */
+		try {
+			if (check) {
+				switch (action.trim()) {
+				case "Star":
+					moveToElement(er.kmmidgroup + groupname + "']/../../..//span[@title='Star']", "xpath");
+					click(er.kmmidgroup + groupname + "']/../../..//span[@title='Star']", "Star");
+					break;
+
+				case "Unstar":
+					moveToElement(er.kmmidgroup + groupname + "']/../../..//span[@title='Unstar']", "xpath");
+					click(er.kmmidgroup + groupname + "']/../../..//span[@title='Unstar']", "Unstar");
+					break;
+
+				case "Mute":
+					moveToElement(er.kmmidgroup + groupname + "']/../../..//i[@title='Mute']", "xpath");
+					click(er.kmmidgroup + groupname + "']/../../..//i[@title='Mute']", "Mute");
+					break;
+
+				case "read":
+					moveToElement(er.kmmidgroup + groupname + "']/../../..//i[@title='Read']", "xpath");
+					click(er.kmmidgroup + groupname + "']/../../..//i[@title='Un-Read']", "Read");
+					break;
+
+				case "unread":
+					moveToElement(er.kmmidgroup + groupname + "']/../../..//i[@title='Un-Read']", "xpath");
+					click(er.kmmidgroup + groupname + "']/../../..//i[@title='Un-Read']", "Un-Read");
+					break;
+
+				case "3dots":
+					moveToElement(er.kmmidgroup + groupname
+							+ "']/../../..//div[@class='_content']/i[@class='icon __i kr-ellipsis']", "xpath");
+					click(er.kmmidgroup + groupname
+							+ "']/../../..//div[@class='_content']/i[@class='icon __i kr-ellipsis']", "xpath");
+					break;
+
+				default:
+					test.log(LogStatus.FAIL, "User provided action is not available");
+				}
+			}
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Unable to click on " + action,
+					toString() + test.addScreenCapture(takeScreenShot()));
+		}
+
+	}
+
+	public void optionsDisplayedOn3Dots(String... actual) {
+		ArrayList<String> actuallist = null;
+		try {
+			List<WebElement> options = remoteDriver
+					.findElements(By.xpath("//div[@class='krDropDownMenu active']//div"));
+			int i = 0;
+			for (WebElement ele : options) {
+
+				String act = ele.getText();
+				actuallist.add(act);
+				boolean check = actual[i].equals(act);
+				i++;
+				if (check) {
+					test.log(LogStatus.PASS, "Option " + i + 1 + " displayed as " + check);
+					System.out.println("Pass");
+				} else {
+					System.out.println("Pass");
+					test.log(LogStatus.FAIL, "Option " + i + 1 + " displayed as " + check);
+				}
+			}
+			test.log(LogStatus.INFO, "3 dot options displayed as " + actuallist);
+		} catch (Exception e) {
+			System.out.println("wnt  wrong");
+		}
+	}
+
+	/**
+	 * 
+	 * @param operation
+	 *            : It should match with the text displayed in App operation
+	 *            parameter can be given as follow : Leave Conversation , Manage
+	 *            Conversation , Clear Chat History , Delete Conversation
+	 * @throws Exception
+	 */
+	public void operationsFrom3Dots(String operation) throws Exception {
+		try {
+			click(er.km3dotoptions + operation + "']", "xpath");
+			Thread.sleep(3000);
+			test.log(LogStatus.INFO, "Selected" + operation + "3dots");
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+	}
+
+	public void createGroupAndSendMessageAs(String participants, boolean plusicon, String groupname, String groupText)
+			throws Exception {
+		startNewConversationWith(participants, true);
+		createGroupAs(groupname);
+		enterYourMessageAs(groupText);
+	}
+
+	/**
+	 * 
+	 * @param groupname
+	 *            : Will get on hover participants of this group
+	 * @param loginuser
+	 *            : to check if the last message is from current user
+	 * @return : Will return the count of participants of the group name
+	 *         provided
+	 * @throws Exception
+	 */
+	public int getOnHoverParticipantsCount(String groupname, String loginuser) throws Exception {
+		ArrayList<String> count;
+		int groupparticipants = 0;
+		try {
+			goToGroupAndPerform(groupname, false, "NA");
+			count = getAndValidateGroupIcons(groupname, false, loginuser);
+			String val = count.get(2);
+			int i = Integer.parseInt(val);
+			System.out.println(i = i + 2);
+			moveToElement(er.kmmidgroup + groupname
+					+ "']/../../..//div[@class='avatarDiv']//span[@class='nameAvatar chatAvatar']", "xpath");
+			Thread.sleep(2000);
+			List<WebElement> totalparticipants = remoteDriver
+					.findElements(By.xpath(er.kmmidgroup + groupname + "']/../../..//div[@class='userPopupUi']"));
+			if (i == totalparticipants.size()) {
+				test.log(LogStatus.PASS,
+						"Three group icouns count matching with the total participants from group Onhover");
+				test.log(LogStatus.PASS, "For<b> " + groupname + "</b> On Hover total participants are " + i
+						+ " ".toString() + test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL,
+						"On Hover participants are not available".toString() + test.addScreenCapture(takeScreenShot()));
+			}
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate on hover participants");
+		}
+		return groupparticipants;
+	}
+
+	/**
+	 * 
+	 * @param groupname
+	 *            : Group icon validations performs on this group name
+	 * @param validation
+	 *            : true, will validate first icon from last messaged person
+	 * @param loginuser
+	 *            : to check if the last message is from current user
+	 * @return allicons : return list of group icons i.e. Left, Right and Top
+	 * @throws Exception
+	 */
+	public ArrayList<String> getAndValidateGroupIcons(String groupname, boolean validation, String loginuser)
+			throws Exception {
+		String value = null;
+		goToGroupAndPerform(groupname, false, "NA");
+		ArrayList<String> allicons = new ArrayList<>();
+		try {
+			List<WebElement> profileicons = remoteDriver.findElements(By.xpath(er.kmmidgroup + groupname
+					+ "']/../../..//div[@class='avatarDiv']//span[@class='nameAvatar triple']//span"));
+			for (WebElement e : profileicons) {
+				value = e.getText();
+				allicons.add(value);
+			}
+			test.log(LogStatus.INFO, "Group profile Icons displayed as <b>" + allicons + "</b>".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+			if (validation) {
+				String lastmessagefrom = getLastMessageParticipant(groupname, loginuser);
+				String firstchar = cf.getFirstChar(lastmessagefrom);
+				if (firstchar.equalsIgnoreCase(allicons.get(0))) {
+					test.log(LogStatus.PASS,
+							"Last message participant and the first(Left) group icon letters are matching".toString()
+									+ test.addScreenCapture(takeScreenShot()));
+					test.log(LogStatus.INFO,
+							"Second icon i.e. Right icon displayed as :<b>" + allicons.get(1) + "</b>");
+					test.log(LogStatus.INFO, "Third icon i.e. Top icon displayed as :<b>" + allicons.get(2) + "</b>");
+				} else {
+					test.log(LogStatus.FAIL,
+							"Last message participant name starts with <b>" + firstchar
+									+ "</b> But the first icon displayed as <b>" + allicons.get(0) + "</b>".toString()
+									+ test.addScreenCapture(takeScreenShot()));
+				}
+			}
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to get Group profile icons of : " + groupname.toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}
+		return allicons;
+	}
+
+	/**
+	 * @param groupname
+	 *            : TO print this group name in the reports
+	 * @param logedinuser
+	 *            :If the last message is from logedinuser, will return the same
+	 * @return : returns last message username
+	 * @throws InterruptedException
+	 * @throws Exception
+	 */
+	public String getLastMessageParticipant(String groupname, String logedinuser)
+			throws InterruptedException, Exception {
+		String lastmessagefrom = null;
+		try {
+			List<WebElement> msgs = remoteDriver.findElements(By.xpath("//div[@class='bodyMsg ']"));
+			int i = msgs.size();
+			moveToElement("//div[@class='bodyMsg '][" + i + "]", "xpath");
+			try {
+				lastmessagefrom = getText("//div[@class='bodyMsg '][" + i + "]//div[@class='nameTime']");
+				test.log(LogStatus.INFO,
+						"In <b>" + groupname + " </b> group, last message was from : " + lastmessagefrom);
+			} catch (Exception e) {
+				lastmessagefrom = logedinuser;
+				test.log(LogStatus.INFO, "In <b>" + groupname + " </b> group, last message was from current user i.e. "
+						+ lastmessagefrom);
+			}
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to get last message person name and is displayed as " + lastmessagefrom);
+		}
+		return lastmessagefrom;
 	}
 
 }

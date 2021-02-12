@@ -25,11 +25,6 @@ public class Messages121Test extends DriverSetUp {
 	String korausername;
 	String korapassword;
 
-	String username;
-	String password;
-	String username1;
-	String password1;
-
 	public Messages121Test() throws Exception {
 		super();
 
@@ -45,17 +40,10 @@ public class Messages121Test extends DriverSetUp {
 
 		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
 		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
-
-		username = dr.getValue("SERVICENOW", "ServiceNow", "Username");
-		password = dr.getValue("SERVICENOW", "ServiceNow", "Password");
-		username1 = dr.getValue("SERVICENOW", "ServiceNow1", "Username");
-		password1 = dr.getValue("SERVICENOW", "ServiceNow1", "Password");
-
 	}
 
 	@Test(enabled = true)
 	public void koraOneToOneConversation() throws Exception {
-		// SoftAssert softAssertion= new SoftAssert();
 		test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 				.assignCategory("KORAV2Messages");
 		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
@@ -65,17 +53,12 @@ public class Messages121Test extends DriverSetUp {
 		String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 		String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 
-		test.log(LogStatus.INFO, "Navigation url : " + url);
 		koraloginpage.loginToKora(url, korausername, korapassword);
 		korahomepage.selectMenuOption("Messages");
 		koramessagespage.messagesScreenValidations();
 		koramessagespage.checkMatchesWith(checkmatch);
 		koramessagespage.startNewConversationWith(newparticipants, true);
 		koramessagespage.enterYourMessageAs(onetoonetext);
-		// String actual =korahomepage.getAttributeValue(er.kmplusicon,"title");
-		// softAssertion.assertEquals(actual, "New Convers");
-		// korahomepage.screenValidations();
-		// softAssertion.assertAll();
 		extent.endTest(test);
 	}
 
