@@ -13,7 +13,6 @@ import com.relevantcodes.extentreports.LogStatus;
 /**
  * 
  * @author Jay
- * @Description : All TC's related to Web page
  *
  */
 
@@ -109,5 +108,5 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		koramananeconvpage.clickOn("Delete", true);
 		extent.endTest(test);
 	}
-
+	
 }

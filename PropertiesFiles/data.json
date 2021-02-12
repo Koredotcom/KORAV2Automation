@@ -31,7 +31,10 @@
 		"renamegroupto":"AutomationGroupRenamed",
 		"groupparticipants": "dileep.pisati@kore.com,prakash.rochkari@kore.com,ramana.kommula@kore.com,neha.malani@kore.com,roshini.kunarapu@kore.com",
 		"updateparticipant":"saishree.mishra@kore.com",
-		"groupchat": "Hi Team! Ignore_Automationmessage"
-		
+		"groupchat": "Hi Team! Ignore_Automationmessage",
+		"standardgroupname":"QA Pride",
+		"expectedoptionsforgroup":"Leave Conversation, Manage Conversation,Clear Chat History",
+		"expectedoptionsfor121":"Clear Chat History, Delete Conversation",
+		"expectedmuteslots":"15 mins, 30 mins, 45 mins, 1 hour, 5 hours, 8 hours, 12 hours"
 	}
 }

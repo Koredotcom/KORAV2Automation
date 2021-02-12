@@ -1,5 +1,6 @@
 package com.org.kore.web.pages;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -212,7 +213,6 @@ public class KoraMessagesPage extends PageBase {
 	public void goToGroupAndPerform(String groupname, boolean check, String action) throws Exception {
 		moveToElement(er.kmmidgroup + groupname + er.kmmidchatdesc, "xpath");
 		click(er.kmmidgroup + groupname + er.kmmidchatdesc, "Group click");
-		/* click(er.kmmidgroup + groupname + "']", "Group click"); */
 		try {
 			if (check) {
 				switch (action.trim()) {
@@ -259,30 +259,77 @@ public class KoraMessagesPage extends PageBase {
 		}
 
 	}
-
-	public void optionsDisplayedOn3Dots(String... actual) {
-		ArrayList<String> actuallist = null;
+	
+	/**
+	 * 
+	 * @param expectedoptions
+	 *            : Getting actual options from testdata json file
+	 * @throws IOException
+	 */
+	public void validateMuteSlots(String expectedmuteslots) throws IOException{
+		String[] exp = cf.convertStringstoArray(expectedmuteslots);
+		int i = 0;
+		boolean check = false;
 		try {
 			List<WebElement> options = remoteDriver
-					.findElements(By.xpath("//div[@class='krDropDownMenu active']//div"));
-			int i = 0;
+					.findElements(By.xpath(er.kmmuteslots));
 			for (WebElement ele : options) {
-
 				String act = ele.getText();
-				actuallist.add(act);
-				boolean check = actual[i].equals(act);
-				i++;
+				System.out.println("From applicaton:" + act);
+				check = exp[i].trim().equals(act);
 				if (check) {
-					test.log(LogStatus.PASS, "Option " + i + 1 + " displayed as " + check);
-					System.out.println("Pass");
+					test.log(LogStatus.PASS, "Expected option : " + exp[i] + "\n" + " Displayed option : " + act);
 				} else {
-					System.out.println("Pass");
-					test.log(LogStatus.FAIL, "Option " + i + 1 + " displayed as " + check);
+					test.log(LogStatus.FAIL,
+							"Expected option : " + exp[i] + "\n" + " But, displayed option : " + act);
 				}
+				i++;
 			}
-			test.log(LogStatus.INFO, "3 dot options displayed as " + actuallist);
+			test.log(LogStatus.INFO,
+					"Mute slots".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 		} catch (Exception e) {
-			System.out.println("wnt  wrong");
+			test.log(LogStatus.FAIL, "Failed to validate mute slots".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+
+		}
+		
+	}
+
+	/**
+	 * 
+	 * @param typeofConv
+	 *            : it says 3dot option validation is for group or one to one
+	 * @param expectedoptions
+	 *            : Getting actual options from testdata json file
+	 * @throws IOException
+	 */
+	public void optionsDisplayedOn3Dots(String typeofConv, String expectedoptions) throws IOException {
+		String[] exp = cf.convertStringstoArray(expectedoptions);
+		int i = 0;
+		boolean check = false;
+		try {
+			List<WebElement> options = remoteDriver
+					.findElements(By.xpath(er.km3dotoptions));
+			for (WebElement ele : options) {
+				String act = ele.getText();
+				System.out.println("From applicaton:" + act);
+				check = exp[i].trim().equals(act);
+				if (check) {
+					test.log(LogStatus.PASS, "Expected option : " + exp[i] + "\n" + " Displayed option : " + act);
+				} else {
+					test.log(LogStatus.FAIL,
+							"Expected option : " + exp[i] + "\n" + " But, displayed option : " + act);
+				}
+				i++;
+			}
+			test.log(LogStatus.INFO,
+					"For <b>" + typeofConv + "</b> 3 dot options displayed as per the above validation".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Array index out of bounce exception. Issue with test data split".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+
 		}
 	}
 
@@ -296,7 +343,7 @@ public class KoraMessagesPage extends PageBase {
 	 */
 	public void operationsFrom3Dots(String operation) throws Exception {
 		try {
-			click(er.km3dotoptions + operation + "']", "xpath");
+			click(er.km3dotoptions + "[text()='" + operation + "']", "xpath");
 			Thread.sleep(3000);
 			test.log(LogStatus.INFO, "Selected" + operation + "3dots");
 

@@ -13,7 +13,6 @@ import com.relevantcodes.extentreports.LogStatus;
 /**
  * 
  * @author Jay
- * @Description : All TC's related to Web page
  *
  */
 
@@ -53,16 +52,12 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 		String url = DriverSetUp.propsMap.get("weburl");
+		String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 
 		test.log(LogStatus.INFO, "Navigation url :" + url);
 		koraloginpage.loginToKora(url, korausername, korapassword);
 		korahomepage.selectMenuOption("Messages");
-		koramessagespage.getAndValidateGroupIcons("QA Pride", true, korausername);
-
-		// String[] expectedval={"Leave Conversation","Manage
-		// Conversation","Clear Chat History"};
-		// koramessagespage.optionsDisplayedOn3Dots(expectedval);
-
+		koramessagespage.getAndValidateGroupIcons(groupname, true, korausername);
 		extent.endTest(test);
 	}
 
@@ -73,14 +68,32 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 		String url = DriverSetUp.propsMap.get("weburl");
+		String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 
 		test.log(LogStatus.INFO, "Navigation url :" + url);
 		korahomepage.selectMenuOption("Messages");
-		koramessagespage.getOnHoverParticipantsCount("QA Pride", korausername);
+		koramessagespage.getOnHoverParticipantsCount(groupname, korausername);
 
-		koramessagespage.getAndValidateGroupIcons("TimeLines here", true, korausername);
-		koramessagespage.getOnHoverParticipantsCount("TimeLines here", korausername);
+		extent.endTest(test);
+	}
 
+
+	@Test(enabled = true, priority = 3)
+	public void koraGroupChat3dotOptions() throws Exception {
+		test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+				.assignCategory("KORAV2Messages");
+		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+		String url = DriverSetUp.propsMap.get("weburl");
+		String groupname = DriverSetUp.testdataMap.get("standardgroupname");
+		String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsforgroup");
+		
+		test.log(LogStatus.INFO, "Navigation url :" + url);
+		koraloginpage.loginToKora(url, korausername, korapassword);
+		korahomepage.selectMenuOption("Messages");
+		koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
+		koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expected3dotoptions);
+		
 		extent.endTest(test);
 	}
 

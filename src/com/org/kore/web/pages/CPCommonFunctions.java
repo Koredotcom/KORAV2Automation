@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
@@ -113,10 +114,16 @@ public class CPCommonFunctions extends PageBase {
 		return myStr;
 	}
 	
-	public List<String> generateListFromStrings(String one, String two){
+	public String[] convertStringstoArray(String actual){
+	String str[] = actual.split(",");
+	return str;
+	}
+	
+	//Yet to implement based on the need
+	public List<String> generateListFromStrings(String... input){
 		 List<String> list = new ArrayList<String>();
-		 list.add(one);
-		 list.add(two);
+		 list.add(input[1]);
+		 list.add(input[2]);
 		return list;
 		
 	}

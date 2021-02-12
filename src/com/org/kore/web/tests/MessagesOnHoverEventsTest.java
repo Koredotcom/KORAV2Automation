@@ -11,13 +11,11 @@ import com.org.kore.web.pages.KoraMessagesPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
- * 
- * @author Jay
- * @Description : All TC's related to Web page
+ * @author Ramana
  *
  */
 
-public class MessagesNoGroupNameTest extends DriverSetUp {
+public class MessagesOnHoverEventsTest extends DriverSetUp {
 
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
@@ -26,9 +24,8 @@ public class MessagesNoGroupNameTest extends DriverSetUp {
 
 	String korausername;
 	String korapassword;
-	
 
-	public MessagesNoGroupNameTest() throws Exception {
+	public MessagesOnHoverEventsTest() throws Exception {
 		super();
 
 	}
@@ -47,42 +44,23 @@ public class MessagesNoGroupNameTest extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority =1)
-	public void koraGroupConversation() throws Exception {
+	@Test(enabled = true, priority = 1)
+	public void koraMuteSlotsVerification() throws Exception {
 		test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 				.assignCategory("KORAV2Messages");
 		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 		String url = DriverSetUp.propsMap.get("weburl");
-		String newparticipants = DriverSetUp.testdataMap.get("3usersgroup");
-		String grouptext = DriverSetUp.testdataMap.get("groupchat");
-
-		test.log(LogStatus.INFO, "Navigation url : " + url);
+		String groupname = DriverSetUp.testdataMap.get("standardgroupname");
+		String muteslots = DriverSetUp.testdataMap.get("expectedmuteslots");
+		
+		test.log(LogStatus.INFO, "Navigation url :" + url);
 		koraloginpage.loginToKora(url, korausername, korapassword);
 		korahomepage.selectMenuOption("Messages");
-		
-		koramessagespage.goToGroupAndPerform("", "Click");
-		koramessagespage.goToGroupAndPerform("", "3dots");
-		
-		koramessagespage.startNewConversationWith(newparticipants, true);
-		koramessagespage.enterYourMessageAs(grouptext);
-		
-		//Get first icon
-		
-		// Login with other user (User B) from the group
-		
-		// Get first icons
-		// Enter message and get first icon
-		
-		// Now login with first user(User A) and get icons
-		
-		// Then final validations
-		
-		// Manage and remove particpants then leave conv and delete conv --> This is already covered
-		
-		
+		koramessagespage.goToGroupAndPerform(groupname, true, "Mute");
+		koramessagespage.validateMuteSlots(muteslots);
 		
 		extent.endTest(test);
 	}
-	
+
 }

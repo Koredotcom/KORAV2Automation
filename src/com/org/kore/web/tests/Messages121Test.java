@@ -12,7 +12,6 @@ import com.relevantcodes.extentreports.LogStatus;
 /**
  * 
  * @author Jay
- * @Description : All TC's related to Web page
  *
  */
 
@@ -52,6 +51,7 @@ public class Messages121Test extends DriverSetUp {
 		String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
 		String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 		String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+		String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 
 		test.log(LogStatus.INFO, "Navigation url :" + url);
 		koraloginpage.loginToKora(url, korausername, korapassword);
@@ -60,7 +60,9 @@ public class Messages121Test extends DriverSetUp {
 		koramessagespage.checkMatchesWith(checkmatch);
 		koramessagespage.startNewConversationWith(newparticipants, true);
 		koramessagespage.enterYourMessageAs(onetoonetext);
+		
+		koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions);
 		extent.endTest(test);
 	}
-
+	
 }
