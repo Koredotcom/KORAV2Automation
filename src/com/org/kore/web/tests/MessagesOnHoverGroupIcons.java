@@ -26,7 +26,6 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 	String korausername;
 	String korapassword;
-	
 
 	public MessagesOnHoverGroupIcons() throws Exception {
 		super();
@@ -47,7 +46,6 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 	}
 
-	
 	@Test(enabled = true, priority = 1)
 	public void koraFirstGroupIconValidation() throws Exception {
 		test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -56,17 +54,19 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 		String url = DriverSetUp.propsMap.get("weburl");
 
+		test.log(LogStatus.INFO, "Navigation url :" + url);
 		koraloginpage.loginToKora(url, korausername, korapassword);
 		korahomepage.selectMenuOption("Messages");
 		koramessagespage.getAndValidateGroupIcons("QA Pride", true, korausername);
-		
-	//	String[] expectedval={"Leave Conversation","Manage Conversation","Clear Chat History"};
-	//	koramessagespage.optionsDisplayedOn3Dots(expectedval);
-		
+
+		// String[] expectedval={"Leave Conversation","Manage
+		// Conversation","Clear Chat History"};
+		// koramessagespage.optionsDisplayedOn3Dots(expectedval);
+
 		extent.endTest(test);
 	}
-	
-	@Test(enabled = false, priority = 2)
+
+	@Test(enabled = true, priority = 2)
 	public void koraOnHoverParticipantsValidation() throws Exception {
 		test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 				.assignCategory("KORAV2Messages");
@@ -74,13 +74,14 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 		String url = DriverSetUp.propsMap.get("weburl");
 
+		test.log(LogStatus.INFO, "Navigation url :" + url);
 		korahomepage.selectMenuOption("Messages");
-		koramessagespage.getOnHoverParticipantsCount("QA Pride",korausername);
-		
-	//	koramessagespage.getAndValidateGroupIcons("TimeLines here", true,korausername );
-	//	koramessagespage.getOnHoverParticipantsCount("TimeLines here",korausername);
-		
+		koramessagespage.getOnHoverParticipantsCount("QA Pride", korausername);
+
+		koramessagespage.getAndValidateGroupIcons("TimeLines here", true, korausername);
+		koramessagespage.getOnHoverParticipantsCount("TimeLines here", korausername);
+
 		extent.endTest(test);
 	}
-	
+
 }

@@ -53,6 +53,7 @@ public class Messages121Test extends DriverSetUp {
 		String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 		String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 
+		test.log(LogStatus.INFO, "Navigation url :" + url);
 		koraloginpage.loginToKora(url, korausername, korapassword);
 		korahomepage.selectMenuOption("Messages");
 		koramessagespage.messagesScreenValidations();

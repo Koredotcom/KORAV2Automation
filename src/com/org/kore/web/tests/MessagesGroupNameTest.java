@@ -57,9 +57,11 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		String groupname = DriverSetUp.testdataMap.get("groupname");
 		String grouptext = DriverSetUp.testdataMap.get("groupchat");
 
+		test.log(LogStatus.INFO, "Navigation url :" + url);
 		koraloginpage.loginToKora(url, korausername, korapassword);
 		korahomepage.selectMenuOption("Messages");
-		//koramessagespage.createGroupAndSendMessageAs(participants, true, icongroupname, grouptext);
+		// koramessagespage.createGroupAndSendMessageAs(participants, true,
+		// icongroupname, grouptext);
 		koramessagespage.startNewConversationWith(newparticipants, true);
 		koramessagespage.createGroupAs(groupname);
 		koramessagespage.enterYourMessageAs(grouptext);
@@ -79,9 +81,9 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		String groupname = DriverSetUp.testdataMap.get("groupname");
 		String updatedgroupmems = DriverSetUp.testdataMap.get("updateparticipant");
 
-	//	koraloginpage.loginToKora(url, korausername, korapassword);
+		test.log(LogStatus.INFO, "Navigation url :" + url);
 		korahomepage.selectMenuOption("Messages");
-		koramessagespage.goToGroupAndPerform(groupname,true, "3dots");
+		koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 		koramessagespage.operationsFrom3Dots("Manage Conversation");
 		koramananeconvpage.manageConversationValidations();
 		koramananeconvpage.clickOn("Members", false);
@@ -91,18 +93,18 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		koramananeconvpage.validateRecentAddedParticipants(updatedgroupmems);
 		koramananeconvpage.clickOn("General", false);
 		updatedname = koramananeconvpage.renameGroupAndClose(renameto);
-		koramessagespage.goToGroupAndPerform(updatedname,false, "NA");
+		koramessagespage.goToGroupAndPerform(updatedname, false, "NA");
 		koramessagespage.enterYourMessageAs("Sending text message after updating the Group");
 		koramessagespage.getGroupTimestamp(updatedname);
-		
-	// Yet to split this TC from here by taking renameto as a groupname	
-		koramessagespage.goToGroupAndPerform(updatedname,true, "3dots");
+
+		// Yet to split this TC from here by taking renameto as a groupname
+		koramessagespage.goToGroupAndPerform(updatedname, true, "3dots");
 		koramessagespage.operationsFrom3Dots("Manage Conversation");
 		koramananeconvpage.clickOn("Members", true);
 		koramananeconvpage.removeParticipantsAndClose();
-		koramessagespage.goToGroupAndPerform(updatedname,true, "3dots");
+		koramessagespage.goToGroupAndPerform(updatedname, true, "3dots");
 		koramessagespage.operationsFrom3Dots("Clear Chat History");
-		koramessagespage.goToGroupAndPerform(updatedname,true, "3dots");
+		koramessagespage.goToGroupAndPerform(updatedname, true, "3dots");
 		koramessagespage.operationsFrom3Dots("Delete Conversation");
 		koramananeconvpage.clickOn("Delete", true);
 		extent.endTest(test);
