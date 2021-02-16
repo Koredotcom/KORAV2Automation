@@ -46,21 +46,23 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 
 	@Test(enabled = true, priority = 1)
 	public void koraMuteSlotsVerification() throws Exception {
-		test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-				.assignCategory("KORAV2Messages");
-		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("KORAV2Messages");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-		String url = DriverSetUp.propsMap.get("weburl");
-		String groupname = DriverSetUp.testdataMap.get("standardgroupname");
-		String muteslots = DriverSetUp.testdataMap.get("expectedmuteslots");
-		
-		test.log(LogStatus.INFO, "Navigation url :" + url);
-		koraloginpage.loginToKora(url, korausername, korapassword);
-		korahomepage.selectMenuOption("Messages");
-		koramessagespage.goToGroupAndPerform(groupname, true, "Mute");
-		koramessagespage.validateMuteSlots(muteslots);
-		
-		extent.endTest(test);
+			String url = DriverSetUp.propsMap.get("weburl");
+			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
+			String muteslots = DriverSetUp.testdataMap.get("expectedmuteslots");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korausername, korapassword);
+			korahomepage.selectMenuOption("Messages");
+			koramessagespage.goToGroupAndPerform(groupname, true, "Mute");
+			koramessagespage.validateMuteSlots(muteslots);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate mute slots");
+		}
 	}
-
 }

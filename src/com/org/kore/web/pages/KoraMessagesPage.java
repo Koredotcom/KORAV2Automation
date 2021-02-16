@@ -134,7 +134,8 @@ public class KoraMessagesPage extends PageBase {
 
 	/**
 	 * 
-	 * @param participant : To select the user from the suggestion based on entered text
+	 * @param participant
+	 *            : To select the user from the suggestion based on entered text
 	 * @throws Exception
 	 */
 	public void select(String participant) throws Exception {
@@ -179,19 +180,22 @@ public class KoraMessagesPage extends PageBase {
 	 *            : Mentioned text from here will be send as a message
 	 * @throws Exception
 	 */
-	public void enterYourMessageAs(String enterthistext) throws Exception {
+	public String enterYourMessageAs(String enterthistext) throws Exception {
+		String chatheadername = null;
 		try {
-			WebElement compose = remoteDriver.findElement(By.xpath("//div[@placeholder='Type your message']"));
+			WebElement compose = remoteDriver.findElement(By.xpath(er.kmcomposebar));
 			compose.sendKeys(enterthistext, Keys.ENTER);
-			Thread.sleep(3000);
-			test.log(LogStatus.INFO, "Entered messages as : <b>" + enterthistext + "</b>");
-			test.log(LogStatus.INFO, "Entered message as " + enterthistext, test.addScreenCapture(takeScreenShot()));
+			Thread.sleep(4000);
+			chatheadername = getText("//div[@class='chatHeader']//span");
+			test.log(LogStatus.INFO,
+					"Entered message as " + enterthistext + " ".toString() + test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Compose bar is not displaying");
+			test.log(LogStatus.FAIL, "Compose bar is not available for " + chatheadername);
 			test.log(LogStatus.FAIL, "Unable to enter the message", test.addScreenCapture(takeScreenShot()));
 		}
 
+		return chatheadername;
 	}
 
 	/**
@@ -263,8 +267,8 @@ public class KoraMessagesPage extends PageBase {
 			}
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Unable to click on " + action,
-					toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL,
+					"Unable to click on " + action + " ".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 	}
@@ -320,9 +324,11 @@ public class KoraMessagesPage extends PageBase {
 				System.out.println("From applicaton:" + act);
 				check = exp[i].trim().equals(act);
 				if (check) {
-					test.log(LogStatus.PASS, "Expected option : " + exp[i] + "\n" + " Displayed option : " + act);
+					test.log(LogStatus.PASS,
+							"Expected option : " + exp[i] + "<b> --></b>" + " Displayed option : " + act);
 				} else {
-					test.log(LogStatus.FAIL, "Expected option : " + exp[i] + "\n" + " But, displayed option : " + act);
+					test.log(LogStatus.FAIL,
+							"Expected option : " + exp[i] + "<b> --></b>" + " But, displayed option : " + act);
 				}
 				i++;
 			}
@@ -342,18 +348,78 @@ public class KoraMessagesPage extends PageBase {
 	 *            : It should match with the text displayed in App operation
 	 *            parameter can be given as follow : Leave Conversation , Manage
 	 *            Conversation , Clear Chat History , Delete Conversation
+	 * 
 	 * @throws Exception
 	 */
 	public void operationsFrom3Dots(String operation) throws Exception {
 		try {
 			click(er.km3dotoptions + "[text()='" + operation + "']", "xpath");
 			Thread.sleep(3000);
-			test.log(LogStatus.INFO, "Selected" + operation + "3dots");
+			test.log(LogStatus.INFO,
+					"Selected " + operation + " from 3dots ".toString() + test.addScreenCapture(takeScreenShot()));
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Unable to select " + operation + " from 3 dots".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}
+	}
+
+	/**
+	 * @Description : To check empty state message
+	 * @param expected
+	 *            : Expected message
+	 * @throws Exception
+	 */
+	public void checkEmptyScreen() throws Exception {
+		String expected = "How about, Let’s start with just a hello?";
+		try {
+			String actual = getText("//div[@class='emptyScreenMsg']").trim();
+			if (actual.equals(expected)) {
+				test.log(LogStatus.PASS, "Displayed empty screen message as expected".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL,
+						"Displayed incorrect empty screen message : Expected :<b>" + expected + "</b> But found : <b>"
+								+ actual + "</b> ".toString() + test.addScreenCapture(takeScreenShot()));
+			}
 
 		} catch (Exception e) {
-			System.out.println(e);
+			test.log(LogStatus.FAIL, "Found incorrect elements in check empty screen".toString()
+					+ test.addScreenCapture(takeScreenShot()));
 		}
+	}
 
+	/**
+	 * @Description : It will verify the visibility of compose bar
+	 * @param display
+	 *            : For true, it will check return pass only when compose bar is
+	 *            available other wise it returns fail
+	 * @throws Exception
+	 */
+	public void visibilityOfComposeBar(boolean display) throws Exception {
+		remoteDriver.findElement(By.xpath(er.footerText)).click();
+		boolean displayed = cf.elementIsDisplayed(er.kmcomposebar, "xpath");
+		if (display) {
+			if (displayed) {
+				test.log(LogStatus.PASS,
+						"Expected compose bar is: <b>" + display + "</b> Displayed compose bar status is: <b>"
+								+ displayed + "</b>".toString() + test.addScreenCapture(takeScreenShot()));
+			} else {
+
+				test.log(LogStatus.FAIL,
+						"Expected compose bar is: <b>" + display + "</b> Displayed compose bar status is: <b>"
+								+ displayed + "</b>".toString() + test.addScreenCapture(takeScreenShot()));
+			}
+		} else if (!display) {
+			if (displayed) {
+				test.log(LogStatus.FAIL,
+						"Expected compose bar is: <b>" + display + "</b> Displayed compose bar status is: <b>"
+								+ displayed + "</b>".toString() + test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.PASS,
+						"Expected compose bar is: <b>" + display + "</b> Displayed compose bar status is: <b>"
+								+ displayed + "</b>".toString() + test.addScreenCapture(takeScreenShot()));
+			}
+		}
 	}
 
 	public void createGroupAndSendMessageAs(String participants, boolean plusicon, String groupname, String groupText)
@@ -521,7 +587,7 @@ public class KoraMessagesPage extends PageBase {
 	/**
 	 * @Description : To get group updated(info) i.e. if any one added and
 	 *              removed from the group @ : Yet to implement better logic for
-	 * this
+	 *              this
 	 * @throws IOException
 	 */
 	@SuppressWarnings("null")
@@ -530,23 +596,22 @@ public class KoraMessagesPage extends PageBase {
 		ArrayList<String> timelines = new ArrayList<>();
 		try {
 			moveToElement(
-					"//div[@class='msgMemberTimeline'][1]//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
+					"//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
 							+ typeofAmend + "')]",
 					"xpath");
 			List<WebElement> alltimelines = remoteDriver.findElements(By
-					.xpath("//div[@class='msgMemberTimeline'][1]//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
+					.xpath("//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
 							+ typeofAmend + "')]/..//span"));
-			if(alltimelines.size()>0){
-			System.out.println(alltimelines.size());
-			for (WebElement e : alltimelines) {
-				System.out.println(e.getText());
-				timelines.add(e.getText());
-			}
-			test.log(LogStatus.INFO, "Timeline displayed as " + timelines);
-			test.log(LogStatus.INFO, "Cross check the time lines from below screenshot".toString()
-					+ test.addScreenCapture(takeScreenShot()));
-			}else {
-				test.log(LogStatus.FAIL, typeofAmend+" timeline was not updated in the group".toString()
+			if (alltimelines.size() > 0) {
+				System.out.println(alltimelines.size());
+				for (WebElement e : alltimelines) {
+					timelines.add(e.getText());
+				}
+				test.log(LogStatus.INFO, "Timeline displayed as " + timelines);
+				test.log(LogStatus.INFO, "Cross check the time lines from below screenshot".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL, typeofAmend + " timeline was not updated in the group".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 			}
 

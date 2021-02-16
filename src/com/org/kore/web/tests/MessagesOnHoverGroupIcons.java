@@ -47,54 +47,62 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 	@Test(enabled = true, priority = 1)
 	public void koraFirstGroupIconValidation() throws Exception {
-		test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-				.assignCategory("KORAV2Messages");
-		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("KORAV2Messages");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-		String url = DriverSetUp.propsMap.get("weburl");
-		String groupname = DriverSetUp.testdataMap.get("standardgroupname");
+			String url = DriverSetUp.propsMap.get("weburl");
+			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 
-		test.log(LogStatus.INFO, "Navigation url :" + url);
-		koraloginpage.loginToKora(url, korausername, korapassword);
-		korahomepage.selectMenuOption("Messages");
-		koramessagespage.getAndValidateGroupIcons(groupname, true, korausername);
-		extent.endTest(test);
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korausername, korapassword);
+			korahomepage.selectMenuOption("Messages");
+			koramessagespage.getAndValidateGroupIcons(groupname, true, korausername);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
+		}
 	}
 
 	@Test(enabled = true, priority = 2)
 	public void koraOnHoverParticipantsValidation() throws Exception {
-		test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-				.assignCategory("KORAV2Messages");
-		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("KORAV2Messages");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-		String url = DriverSetUp.propsMap.get("weburl");
-		String groupname = DriverSetUp.testdataMap.get("standardgroupname");
+			String url = DriverSetUp.propsMap.get("weburl");
+			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 
-		test.log(LogStatus.INFO, "Navigation url :" + url);
-		korahomepage.selectMenuOption("Messages");
-		koramessagespage.getOnHoverParticipantsCount(groupname, korausername);
-
-		extent.endTest(test);
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption("Messages");
+			koramessagespage.getOnHoverParticipantsCount(groupname, korausername);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate on hover participants count");
+		}
 	}
-
 
 	@Test(enabled = true, priority = 3)
 	public void koraGroupChat3dotOptions() throws Exception {
-		test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-				.assignCategory("KORAV2Messages");
-		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("KORAV2Messages");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-		String url = DriverSetUp.propsMap.get("weburl");
-		String groupname = DriverSetUp.testdataMap.get("standardgroupname");
-		String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsforgroup");
-		
-		test.log(LogStatus.INFO, "Navigation url :" + url);
-		koraloginpage.loginToKora(url, korausername, korapassword);
-		korahomepage.selectMenuOption("Messages");
-		koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
-		koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expected3dotoptions);
-		
-		extent.endTest(test);
+			String url = DriverSetUp.propsMap.get("weburl");
+			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
+			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsforgroup");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korausername, korapassword);
+			korahomepage.selectMenuOption("Messages");
+			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
+			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expected3dotoptions);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate 3 dot options for a group");
+		}
 	}
-
 }

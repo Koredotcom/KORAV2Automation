@@ -607,7 +607,7 @@ public class PageBase extends DriverSetUp {
 		} catch (Exception exc) {
 
 			exc.printStackTrace();
-			test.log(LogStatus.FAIL, exc + "Exception on clicking webelement",
+			test.log(LogStatus.FAIL, exc + "Exception in getting of element",
 					exc.toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 
@@ -1144,7 +1144,7 @@ public class PageBase extends DriverSetUp {
 
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 5, 100);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 100);
 
 				if (locatorType.equals("xpath")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
