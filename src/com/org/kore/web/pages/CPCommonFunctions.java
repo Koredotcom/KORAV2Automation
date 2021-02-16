@@ -108,8 +108,8 @@ public class CPCommonFunctions extends PageBase {
 		}
 	}
 
-	public String getFirstChar(String name) {
-		char first = name.charAt(0);
+	public String getFirstChar(String input) {
+		char first = input.charAt(0);
 		String myStr = Character.toString(first);
 		return myStr;
 	}

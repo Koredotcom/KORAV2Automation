@@ -132,6 +132,11 @@ public class KoraMessagesPage extends PageBase {
 		}
 	}
 
+	/**
+	 * 
+	 * @param participant : To select the user from the suggestion based on entered text
+	 * @throws Exception
+	 */
 	public void select(String participant) throws Exception {
 		enterText(er.kmenterparticipant, participant, "xpath", "Participant name");
 		Thread.sleep(1000);
@@ -196,8 +201,12 @@ public class KoraMessagesPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void getGroupTimestamp(String groupname) throws Exception {
-		String timestamp = getText(er.kmmidgroup + groupname + "']/..//span[@class='dayTime']");
-		test.log(LogStatus.INFO, "For " + groupname + "Timestamp displayed as : <b>" + timestamp + "</b>");
+		try {
+			String timestamp = getText(er.kmmidgroup + groupname + "']/..//span[@class='dayTime']");
+			test.log(LogStatus.INFO, "For " + groupname + " Timestamp displayed as : <b>" + timestamp + "</b>");
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "For " + groupname + " unable to get the Timestamp");
+		}
 	}
 
 	/**
@@ -259,20 +268,19 @@ public class KoraMessagesPage extends PageBase {
 		}
 
 	}
-	
+
 	/**
 	 * 
 	 * @param expectedoptions
 	 *            : Getting actual options from testdata json file
 	 * @throws IOException
 	 */
-	public void validateMuteSlots(String expectedmuteslots) throws IOException{
+	public void validateMuteSlots(String expectedmuteslots) throws IOException {
 		String[] exp = cf.convertStringstoArray(expectedmuteslots);
 		int i = 0;
 		boolean check = false;
 		try {
-			List<WebElement> options = remoteDriver
-					.findElements(By.xpath(er.kmmuteslots));
+			List<WebElement> options = remoteDriver.findElements(By.xpath(er.kmmuteslots));
 			for (WebElement ele : options) {
 				String act = ele.getText();
 				System.out.println("From applicaton:" + act);
@@ -280,20 +288,17 @@ public class KoraMessagesPage extends PageBase {
 				if (check) {
 					test.log(LogStatus.PASS, "Expected option : " + exp[i] + "\n" + " Displayed option : " + act);
 				} else {
-					test.log(LogStatus.FAIL,
-							"Expected option : " + exp[i] + "\n" + " But, displayed option : " + act);
+					test.log(LogStatus.FAIL, "Expected option : " + exp[i] + "\n" + " But, displayed option : " + act);
 				}
 				i++;
 			}
-			test.log(LogStatus.INFO,
-					"Mute slots".toString()
-							+ test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.INFO, "Mute slots".toString() + test.addScreenCapture(takeScreenShot()));
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate mute slots".toString()
-					+ test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL,
+					"Failed to validate mute slots".toString() + test.addScreenCapture(takeScreenShot()));
 
 		}
-		
+
 	}
 
 	/**
@@ -309,8 +314,7 @@ public class KoraMessagesPage extends PageBase {
 		int i = 0;
 		boolean check = false;
 		try {
-			List<WebElement> options = remoteDriver
-					.findElements(By.xpath(er.km3dotoptions));
+			List<WebElement> options = remoteDriver.findElements(By.xpath(er.km3dotoptions));
 			for (WebElement ele : options) {
 				String act = ele.getText();
 				System.out.println("From applicaton:" + act);
@@ -318,8 +322,7 @@ public class KoraMessagesPage extends PageBase {
 				if (check) {
 					test.log(LogStatus.PASS, "Expected option : " + exp[i] + "\n" + " Displayed option : " + act);
 				} else {
-					test.log(LogStatus.FAIL,
-							"Expected option : " + exp[i] + "\n" + " But, displayed option : " + act);
+					test.log(LogStatus.FAIL, "Expected option : " + exp[i] + "\n" + " But, displayed option : " + act);
 				}
 				i++;
 			}
@@ -479,6 +482,79 @@ public class KoraMessagesPage extends PageBase {
 			test.log(LogStatus.FAIL, "Failed to get last message person name and is displayed as " + lastmessagefrom);
 		}
 		return lastmessagefrom;
+	}
+
+	/**
+	 * @Description : To get group timeline(info) i.e. Who created and when the
+	 *              group created info
+	 * @throws IOException
+	 */
+	public void verifyGroupCreationTimeline(String currentuser) throws IOException {
+		try {
+			moveToElement("//div[@class='threadCreationInfo']//div[@class='userInitial']", "xpath");
+			String userinitial = getText("//div[@class='threadCreationInfo']//div[@class='userInitial']");
+			String usernameforgroup = getText("//div[@class='threadCreationInfo']//span[@class='userName']");
+			String creationdate = getText("//div[@class='threadCreationInfo']//span[@class='creationDate']");
+			String firstchar = cf.getFirstChar(usernameforgroup);
+
+			if (usernameforgroup.startsWith("You"))
+				firstchar = cf.getFirstChar(currentuser);
+			if (usernameforgroup.contains(currentuser))
+				test.log(LogStatus.FAIL,
+						"Group timeline name displayed as : " + currentuser + "<b> It should be displayed as you</b>");
+			test.log(LogStatus.INFO, "Group timeline name displayed as : " + usernameforgroup);
+			test.log(LogStatus.INFO, "Group timeline date and time displayed as : " + creationdate);
+			if (firstchar.equalsIgnoreCase(userinitial)) {
+				test.log(LogStatus.PASS, "User initial matches with the first character of the user".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL, "Initial displayed as :" + userinitial + " but, expected inital is :<b>"
+						+ firstchar + "</b>".toString() + test.addScreenCapture(takeScreenShot()));
+			}
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"Failed to verify group creation timeline".toString() + test.addScreenCapture(takeScreenShot()));
+		}
+	}
+
+	/**
+	 * @Description : To get group updated(info) i.e. if any one added and
+	 *              removed from the group @ : Yet to implement better logic for
+	 * this
+	 * @throws IOException
+	 */
+	@SuppressWarnings("null")
+	public void verifyGroupUpdateTimelines(String typeofAmend) throws IOException {
+
+		ArrayList<String> timelines = new ArrayList<>();
+		try {
+			moveToElement(
+					"//div[@class='msgMemberTimeline'][1]//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
+							+ typeofAmend + "')]",
+					"xpath");
+			List<WebElement> alltimelines = remoteDriver.findElements(By
+					.xpath("//div[@class='msgMemberTimeline'][1]//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
+							+ typeofAmend + "')]/..//span"));
+			if(alltimelines.size()>0){
+			System.out.println(alltimelines.size());
+			for (WebElement e : alltimelines) {
+				System.out.println(e.getText());
+				timelines.add(e.getText());
+			}
+			test.log(LogStatus.INFO, "Timeline displayed as " + timelines);
+			test.log(LogStatus.INFO, "Cross check the time lines from below screenshot".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+			}else {
+				test.log(LogStatus.FAIL, typeofAmend+" timeline was not updated in the group".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+			}
+
+		} catch (Exception e) {
+			System.out.println("");
+			test.log(LogStatus.FAIL,
+					"Failed to display timeline for amends".toString() + test.addScreenCapture(takeScreenShot()));
+		}
 	}
 
 }

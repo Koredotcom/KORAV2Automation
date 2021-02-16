@@ -23,13 +23,20 @@ import com.relevantcodes.extentreports.LogStatus;
 public class KoraManageConversationPage extends PageBase {
 	CPCommonFunctions cf;
 	ElementRepository er = DriverSetUp.er;
+	KoraMessagesPage koramessagespage;
 
 	public KoraManageConversationPage(RemoteWebDriver remoteWebDriver) {
 		super(remoteWebDriver);
 		cf = new CPCommonFunctions(remoteWebDriver);
+		koramessagespage = new KoraMessagesPage(remoteWebDriver);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @Description : To check manage conversation screen w.r.t available
+	 *              widgets on the screen
+	 * @throws Exception
+	 */
 	public void manageConversationValidations() throws Exception {
 		String manageconvttl = getText("//div[@class='dialog-title']");
 		int size = getSize("//div[@class='addParticipantsCtr-Btn']");
@@ -45,6 +52,37 @@ public class KoraManageConversationPage extends PageBase {
 		test.log(LogStatus.INFO, "Add Participants text displayed as : <b>" + addparticipants + "</b> ");
 	}
 
+	/**
+	 * 
+	 * @param memberstoadd
+	 *            : THese members will be added to group
+	 * @param plusiconclick
+	 *            : If true it will click on plus icon
+	 * @throws Exception
+	 */
+	public void AddParticipants(String memberstoadd, boolean plusiconclick) throws Exception {
+		try {
+			clickOn("Members", false);
+			clickOn("Add Participants", true);
+			koramessagespage.startNewConversationWith(memberstoadd, false);
+			clickOn("Done", false);
+			validateRecentAddedParticipants(memberstoadd);
+			click(er.kmmanageclose, "Close button");
+
+		} catch (Exception e) {
+			click(er.kmmanageclose, "Close button");
+			test.log(LogStatus.FAIL, "Failed to add participants ".toString(), test.addScreenCapture(takeScreenShot()));
+		}
+	}
+
+	/**
+	 * 
+	 * @param option
+	 *            : It will click on this button based on the user provided text
+	 * @param screenshot
+	 *            : If this parameter is true , it will capture screenshot
+	 * @throws Exception
+	 */
 	public void clickOn(String option, boolean screenshot) throws Exception {
 
 		click(er.kmtext + option + "']", option + " tab");
@@ -53,6 +91,12 @@ public class KoraManageConversationPage extends PageBase {
 
 	}
 
+	/**
+	 * 
+	 * @param participant
+	 *            : Will check this participant added to the group or not
+	 * @throws Exception
+	 */
 	public void validateRecentAddedParticipants(String participant) throws Exception {
 		boolean flag = false;
 		// span[text()='Member']/../../..//div[@class='emailUi'][text()='neha.malani@kore.com']
@@ -78,6 +122,14 @@ public class KoraManageConversationPage extends PageBase {
 		}
 	}
 
+	/**
+	 * 
+	 * @param renameto
+	 *            : This will rename the group to the user provided name as a
+	 *            parameter
+	 * @return : Return the updated name from the application
+	 * @throws Exception
+	 */
 	public String renameGroupAndClose(String renameto) throws Exception {
 		String updatedname = null;
 		try {
@@ -131,12 +183,15 @@ public class KoraManageConversationPage extends PageBase {
 
 	}
 
+	/**
+	 * @Description : It will remove all the members from the group
+	 * @throws Exception
+	 */
 	public void removeParticipantsAndClose() throws Exception {
 		try {
 			boolean memb = false;
 			test.log(LogStatus.INFO, "Now will remove all the members from the group");
-			// test.log(LogStatus.INFO,
-			// test.addScreenCapture(takeScreenShot()));
+			clickOn("Members", true);
 			do {
 				memb = remoteDriver.findElements(By.xpath("//span[text()='Member']")).size() > 0;
 				if (memb) {

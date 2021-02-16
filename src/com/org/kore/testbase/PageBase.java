@@ -125,7 +125,7 @@ public class PageBase extends DriverSetUp {
 				System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("winchromeDriverPath"));
 
 				ChromeOptions options = new ChromeOptions();
-			//	options.addArguments("user-data-dir=/path/to/your/custom/profile");
+				// options.addArguments("user-data-dir=/path/to/your/custom/profile");
 				options.addArguments("--profile-directory=Default");
 				options.addArguments("--whitelisted-ips");
 				options.addArguments("--disable-plugins-discovery");
@@ -476,7 +476,7 @@ public class PageBase extends DriverSetUp {
 				break;
 			case "Selenium":
 
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 100, 1000);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 1000);
 				remoteDriver.findElementById(id).click();
 				break;
 			}
@@ -524,13 +524,13 @@ public class PageBase extends DriverSetUp {
 				actions.perform();
 			}
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Exception on clicking webelement", test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL, "Exception on moving to the element", test.addScreenCapture(takeScreenShot()));
 		}
 
 	}
 
 	public void scrollToElement(String locator, String locatorType) throws InterruptedException {
-		WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 100, 1000);
+		WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 1000);
 
 		if (locatorType.equals("xpath")) {
 			waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
@@ -566,7 +566,7 @@ public class PageBase extends DriverSetUp {
 				break;
 			case "Selenium":
 
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 100, 1000);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 1000);
 				remoteDriver.findElementByCssSelector(css).click();
 				break;
 			}
@@ -664,7 +664,7 @@ public class PageBase extends DriverSetUp {
 				break;
 			case "Selenium":
 
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 100, 1000);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 1000);
 				remoteDriver.findElementByClassName(className).click();
 				break;
 			}
@@ -690,7 +690,7 @@ public class PageBase extends DriverSetUp {
 				appiumDriver.findElementByName(name).click();
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 				waitSelenium.until(ExpectedConditions.elementToBeClickable(By.name(name)));
 				remoteDriver.findElementByName(name).click();
 				break;
@@ -720,7 +720,7 @@ public class PageBase extends DriverSetUp {
 				break;
 			case "Selenium":
 
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 15, 500);
 				Alert a1 = remoteDriver.switchTo().alert();
 				a1.accept();
 				break;
@@ -801,7 +801,7 @@ public class PageBase extends DriverSetUp {
 
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 250);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 20, 250);
 
 				if (locatorType.equals("xpath")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
@@ -840,7 +840,7 @@ public class PageBase extends DriverSetUp {
 			break;
 		case "Selenium":
 
-			WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
+			WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 			waitSelenium.until(ExpectedConditions.visibilityOf(e));
 			break;
 		}
