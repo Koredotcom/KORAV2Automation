@@ -166,7 +166,7 @@ public class KoraMessagesPage extends PageBase {
 			click(er.kmgroupname, "GroupName");
 			Thread.sleep(1000);
 			enterText(er.kmgroupname, groupname, "GroupName");
-			test.log(LogStatus.INFO, "Group created successfully as" + groupname);
+			test.log(LogStatus.INFO, "Group created successfully as <b>" + groupname+"</b>".toString());
 			test.log(LogStatus.INFO, test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception e) {
@@ -191,8 +191,7 @@ public class KoraMessagesPage extends PageBase {
 					"Entered message as " + enterthistext + " ".toString() + test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Compose bar is not available for " + chatheadername);
-			test.log(LogStatus.FAIL, "Unable to enter the message", test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL, "Compose bar or Chat header name is Missing ".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 		return chatheadername;
@@ -208,11 +207,16 @@ public class KoraMessagesPage extends PageBase {
 		try {
 			String timestamp = getText(er.kmmidgroup + groupname + "']/..//span[@class='dayTime']");
 			test.log(LogStatus.INFO, "For " + groupname + " Timestamp displayed as : <b>" + timestamp + "</b>");
+			List<WebElement> ele=remoteDriver.findElements(By.xpath("//div[@class='userDetails active']//div[@class='userNameDiv'][text()='AutomationGroup']/../..//div[@class='userChatDEsc']//span"));
+			for (WebElement e : ele) {
+					e.getText();
+					test.log(LogStatus.INFO, "For " + groupname + " sender or message displayed as : <b>" + e.getText() + "</b>");
+			}
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "For " + groupname + " unable to get the Timestamp");
+			test.log(LogStatus.FAIL, "For " + groupname + " unable to get the Timestamp or user chat descriptions");
 		}
 	}
-
+//div[@class='userDetails active']//div[@class='userNameDiv'][text()='AutomationGroup']/../..//div[@class='userChatDEsc']//span
 	/**
 	 * @param groupname
 	 *            : Actions will perform on this group
@@ -240,8 +244,8 @@ public class KoraMessagesPage extends PageBase {
 					break;
 
 				case "Mute":
-					moveToElement(er.kmmidgroup + groupname + "']/../../..//i[@title='Mute']", "xpath");
-					click(er.kmmidgroup + groupname + "']/../../..//i[@title='Mute']", "Mute");
+					moveToElement(er.kmmidgroup + groupname + "']/../../..//i[@class='icon __i kr-audio  ']", "xpath");
+					click(er.kmmidgroup + groupname + "']/../../..//i[@class='icon __i kr-audio  ']", "Mute");
 					break;
 
 				case "read":
@@ -256,19 +260,17 @@ public class KoraMessagesPage extends PageBase {
 
 				case "3dots":
 					moveToElement(er.kmmidgroup + groupname
-							+ "']/../../..//div[@class='_content']/i[@class='icon __i kr-ellipsis']", "xpath");
+							+ "']/../../.."+er.km3dots, "xpath");
 					click(er.kmmidgroup + groupname
-							+ "']/../../..//div[@class='_content']/i[@class='icon __i kr-ellipsis']", "xpath");
+							+ "']/../../.."+er.km3dots, "3dots");
 					break;
-
 				default:
 					test.log(LogStatus.FAIL, "User provided action is not available");
 				}
 			}
-
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"Unable to click on " + action + " ".toString() + test.addScreenCapture(takeScreenShot()));
+					"Unable to click on " + action + "... Seems element got updated ".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 	}
@@ -358,7 +360,7 @@ public class KoraMessagesPage extends PageBase {
 			test.log(LogStatus.INFO,
 					"Selected " + operation + " from 3dots ".toString() + test.addScreenCapture(takeScreenShot()));
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Unable to select " + operation + " from 3 dots".toString()
+			test.log(LogStatus.FAIL, "Unable to select " + operation + " from 3 dots .. Seems element got updated".toString()
 					+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
@@ -396,7 +398,6 @@ public class KoraMessagesPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void visibilityOfComposeBar(boolean display) throws Exception {
-		remoteDriver.findElement(By.xpath(er.footerText)).click();
 		boolean displayed = cf.elementIsDisplayed(er.kmcomposebar, "xpath");
 		if (display) {
 			if (displayed) {
@@ -513,10 +514,35 @@ public class KoraMessagesPage extends PageBase {
 			}
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to get Group profile icons of : " + groupname.toString()
+			test.log(LogStatus.FAIL, "Failed to get Group profile icons of : " + groupname+" ".toString()
 					+ test.addScreenCapture(takeScreenShot()));
 		}
 		return allicons;
+	}
+	
+	/**
+	 * @Description : Will compare one to conversation profile icon
+	 * @param username : Based this name profile icon will be compared with first character
+	 * @throws Exception
+	 */
+	public void userProfileIconValidation(String username) throws Exception{
+		String expfirstchar = cf.getFirstChar(username);
+		String actfirstchar = getText(er.kmactiveusericon);
+		moveToElement(er.kmactiveusericon, "xpath");
+		Thread.sleep(2000);
+		String onhovericon= getText("//div[@class='circle']", "xpath");
+		
+		if (expfirstchar.equals(actfirstchar)&&(expfirstchar.equals(onhovericon))){
+			test.log(LogStatus.PASS,
+					"For one to conversation with "+username +", Profile icon and onhover icons are matching with first character i.e.<b> "+actfirstchar+"</b>".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+		}else {
+			test.log(LogStatus.FAIL,
+					"For one to conversation with "+username +", displayed incorrect Profile icon/onhover icons i.e.<b> "+actfirstchar+"</b>".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+			
+		}
+		
 	}
 
 	/**
@@ -580,7 +606,7 @@ public class KoraMessagesPage extends PageBase {
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"Failed to verify group creation timeline".toString() + test.addScreenCapture(takeScreenShot()));
+					"Group creation time line is not displaying".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 	}
 
@@ -616,7 +642,6 @@ public class KoraMessagesPage extends PageBase {
 			}
 
 		} catch (Exception e) {
-			System.out.println("");
 			test.log(LogStatus.FAIL,
 					"Failed to display timeline for amends".toString() + test.addScreenCapture(takeScreenShot()));
 		}

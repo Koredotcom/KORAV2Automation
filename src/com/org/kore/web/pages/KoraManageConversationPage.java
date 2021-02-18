@@ -99,7 +99,7 @@ public class KoraManageConversationPage extends PageBase {
 	 */
 	public void validateRecentAddedParticipants(String participant) throws Exception {
 		boolean flag = false;
-		// span[text()='Member']/../../..//div[@class='emailUi'][text()='neha.malani@kore.com']
+		Thread.sleep(1500);
 		moveToElement(er.kmmembername + "[text()='" + participant + "']", "xpath");
 		try {
 			List<WebElement> Menulist = remoteDriver.findElements(By.xpath("//div[@class='emailUi']"));
@@ -199,19 +199,17 @@ public class KoraManageConversationPage extends PageBase {
 					String name = getText(er.kmmembername);
 					clickOn("Remove", false);
 					test.log(LogStatus.INFO, "Removed : " + name);
-					Thread.sleep(1000);
-					clickOn("Members", false);
-
+					Thread.sleep(1500);
+					// clickOn("Members", false);
 				}
 			} while ((memb));
-			test.log(LogStatus.PASS, "Removed all the members from the group");
-			test.log(LogStatus.INFO, test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.PASS,
+					"Removed all the members from the group".toString() + test.addScreenCapture(takeScreenShot()));
 			click(er.kmmanageclose, "Close");
-
 		} catch (Exception e) {
 			click(er.kmmanageclose, "Close");
-			test.log(LogStatus.FAIL, "Faled to Removed Members of the group");
-			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL,
+					"Faled to Remove Members of the group".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 	}

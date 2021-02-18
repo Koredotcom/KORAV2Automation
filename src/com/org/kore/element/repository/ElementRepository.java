@@ -15,8 +15,9 @@ public class ElementRepository {
 			ksignwithgooglepage = null, knext = null, kchoosetext = null, kselectaccount = null, kallow = null,
 			khistory = null, kheadermenu = null, kmplusicon = null, kmrecent = null, kmenterparticipant = null,
 			kmcloseconversation = null, kmsuggestnames = null, kmsuggestmailids = null, kmprofileicon = null,
-			kmcomposebar = null, kmgroupchevronicon = null, kmgroupname = null, kmmidgroup = null,kmmidchatdesc=null, km3dotoptions = null,
-			kmtext = null, kmmanageclose = null, kmmembername = null, kmmuteslots=null;
+			kmcomposebar = null, kmgroupchevronicon = null, kmgroupname = null, kmmidgroup = null, kmmidchatdesc = null,
+			km3dots = null, km3dotoptions = null, kmtext = null, kmmanageclose = null, kmmembername = null,
+			kmmuteslots = null, kmactiveusericon = null;
 
 	public void repoIOS() {
 		footerText = "//*[@placeholder='Username']";
@@ -58,12 +59,14 @@ public class ElementRepository {
 		kmgroupname = "//input[@placeholder='Group Name']";
 		kmcomposebar = "//div[@placeholder='Type your message']";
 		kmmidgroup = "//div[@class='userNameDiv'][text()='";
-		kmmidchatdesc="']/../../..//div[@class='userChatDEsc']";
+		kmmidchatdesc = "']/../../..//div[@class='userChatDEsc']";
 		kmtext = "//*[text()='";
 		kmmanageclose = "//button[@aria-label='Close']";
 		kmmembername = "//span[text()='Member']/../../..//div[@class='emailUi']";
-		km3dotoptions="//div[@class='krDropDownMenu active']//div";
-		kmmuteslots="//div[@class='dorpDownBoxMute msgThreadDD']//li[@class='dorpDownBoxLI']";
+		km3dots = "//div[@class='_content']/i[@class='icon __i kr-ellipsis  ']";
+		km3dotoptions = "//div[@class='krDropDownMenu active  ']//div";
+		kmmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD']//li[@class='dorpDownBoxLI']";
+		kmactiveusericon = "//div[@class='userDetails active']//span[@class='nameAvatar single']";
 
 	}
 

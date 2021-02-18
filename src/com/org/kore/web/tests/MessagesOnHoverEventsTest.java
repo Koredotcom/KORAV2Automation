@@ -11,7 +11,7 @@ import com.org.kore.web.pages.KoraMessagesPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
- * @author Ramana
+ * @author Jay
  *
  */
 
@@ -44,7 +44,7 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 1)
+	@Test(enabled = true, priority = 12)
 	public void koraMuteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())

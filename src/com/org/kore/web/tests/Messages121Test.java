@@ -24,6 +24,8 @@ public class Messages121Test extends DriverSetUp {
 	String korausername;
 	String korapassword;
 
+	static String user = null;
+
 	public Messages121Test() throws Exception {
 		super();
 
@@ -41,7 +43,7 @@ public class Messages121Test extends DriverSetUp {
 		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
 	}
 
-	@Test(enabled = true)
+	@Test(enabled = true, priority = 1)
 	public void koraOneToOneConversation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -60,12 +62,30 @@ public class Messages121Test extends DriverSetUp {
 			koramessagespage.messagesScreenValidations();
 			koramessagespage.checkMatchesWith(checkmatch);
 			koramessagespage.startNewConversationWith(newparticipants, true);
-			String name= koramessagespage.enterYourMessageAs(onetoonetext);
-			koramessagespage.goToGroupAndPerform(name, true, "3dots");
+			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			koramessagespage.goToGroupAndPerform(user, true, "3dots");
 			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
+		}
+	}
+
+	@Test(enabled = true, priority = 2)
+	public void koraOneToOneProfileIconValidation() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("KORAV2Messages");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption("Messages");
+			koramessagespage.userProfileIconValidation(user);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton profile icons");
 		}
 	}
 }

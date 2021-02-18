@@ -225,7 +225,7 @@ public class PageBase extends DriverSetUp {
 			}
 		} catch (Exception exc) {
 			test.log(LogStatus.FAIL,
-					elementName + " is not displayed".toString() + test.addScreenCapture(takeScreenShot()));
+					elementName + " element is not displayed".toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
 	}
@@ -524,7 +524,7 @@ public class PageBase extends DriverSetUp {
 				actions.perform();
 			}
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Exception on moving to the element", test.addScreenCapture(takeScreenShot()));
+			System.out.println("Failed to move to the emement ");
 		}
 
 	}
@@ -1016,7 +1016,8 @@ public class PageBase extends DriverSetUp {
 			}
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, e);
+			test.log(LogStatus.FAIL,
+					"Failed to get text from " + locator + " ".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 		return text;
 
