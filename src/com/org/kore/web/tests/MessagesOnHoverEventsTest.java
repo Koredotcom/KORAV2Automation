@@ -1,5 +1,7 @@
 package com.org.kore.web.tests;
 
+import java.util.ArrayList;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -65,4 +67,26 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate mute slots");
 		}
 	}
+	
+	@Test(enabled = true, priority = 13)
+	public void koraAtmentionUsers() throws Exception {
+		ArrayList<String> allicon;
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("KORAV2Messages");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption("Messages");
+			allicon=koramessagespage.getAndValidateGroupIcons(groupname, false, korausername);
+			String count = allicon.get(2);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
+		}
+	}
+	
 }
