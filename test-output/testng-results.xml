@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="My Test Suite" duration-ms="56120" started-at="2021-02-23T09:21:55Z" finished-at="2021-02-23T09:22:51Z">
+    <groups>
+    </groups>
+    <test name="Parallel Tests" duration-ms="6" started-at="2021-02-23T09:21:55Z" finished-at="2021-02-23T09:21:55Z">
+      <class name="com.org.kore.web.tests.Messages121Test">
+        <test-method status="PASS" signature="executeSuite()[pri:0, instance:com.org.kore.web.tests.Messages121Test@192b07fd]" name="executeSuite" is-config="true" duration-ms="382" started-at="2021-02-23T14:51:55Z" finished-at="2021-02-23T14:51:55Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- executeSuite -->
+        <test-method status="PASS" signature="closeConnections()[pri:0, instance:com.org.kore.web.tests.Messages121Test@192b07fd]" name="closeConnections" is-config="true" duration-ms="912" started-at="2021-02-23T14:52:51Z" finished-at="2021-02-23T14:52:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeConnections -->
+      </class> <!-- com.org.kore.web.tests.Messages121Test -->
+    </test> <!-- Parallel Tests -->
+    <test name="Sequential Tests" duration-ms="56120" started-at="2021-02-23T09:21:55Z" finished-at="2021-02-23T09:22:51Z">
+      <class name="com.org.kore.web.tests.Messages121Test">
+        <test-method status="PASS" signature="setUp(org.testng.ITestContext)[pri:0, instance:com.org.kore.web.tests.Messages121Test@192b07fd]" name="setUp" is-config="true" duration-ms="5148" started-at="2021-02-23T14:51:55Z" finished-at="2021-02-23T14:52:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@7ff95560]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="getDriver()[pri:0, instance:com.org.kore.web.tests.Messages121Test@192b07fd]" name="getDriver" is-config="true" duration-ms="903" started-at="2021-02-23T14:52:00Z" finished-at="2021-02-23T14:52:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getDriver -->
+        <test-method status="PASS" signature="koraOneToOneConversation()[pri:1, instance:com.org.kore.web.tests.Messages121Test@192b07fd]" name="koraOneToOneConversation" duration-ms="8362" started-at="2021-02-23T14:52:01Z" finished-at="2021-02-23T14:52:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- koraOneToOneConversation -->
+        <test-method status="PASS" signature="getDriver()[pri:0, instance:com.org.kore.web.tests.Messages121Test@192b07fd]" name="getDriver" is-config="true" duration-ms="243" started-at="2021-02-23T14:52:09Z" finished-at="2021-02-23T14:52:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getDriver -->
+        <test-method status="PASS" signature="koraOneToOneProfileIconValidation()[pri:2, instance:com.org.kore.web.tests.Messages121Test@192b07fd]" name="koraOneToOneProfileIconValidation" duration-ms="40341" started-at="2021-02-23T14:52:10Z" finished-at="2021-02-23T14:52:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- koraOneToOneProfileIconValidation -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestContext)[pri:0, instance:com.org.kore.web.tests.Messages121Test@192b07fd]" name="tearDown" is-config="true" duration-ms="770" started-at="2021-02-23T14:52:50Z" finished-at="2021-02-23T14:52:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@7ff95560]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="flush()[pri:0, instance:com.org.kore.web.tests.Messages121Test@192b07fd]" name="flush" is-config="true" duration-ms="330" started-at="2021-02-23T14:52:51Z" finished-at="2021-02-23T14:52:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- flush -->
+      </class> <!-- com.org.kore.web.tests.Messages121Test -->
+    </test> <!-- Sequential Tests -->
+  </suite> <!-- My Test Suite -->
+</testng-results>

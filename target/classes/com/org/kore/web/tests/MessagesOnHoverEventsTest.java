@@ -1,91 +1,95 @@
 package com.org.kore.web.tests;
 
+import java.util.ArrayList;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.org.kore.testbase.DriverSetUp;
 import com.org.kore.web.pages.KoraHomePage;
 import com.org.kore.web.pages.KoraLoginPage;
+import com.org.kore.web.pages.KoraManageConversationPage;
 import com.org.kore.web.pages.KoraMessagesPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
- * 
  * @author Jay
  *
  */
 
-public class Messages121Test extends DriverSetUp {
+public class MessagesOnHoverEventsTest extends DriverSetUp {
 
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
 	KoraMessagesPage koramessagespage;
+	KoraManageConversationPage koramananeconvpage;
 
 	String korausername;
 	String korapassword;
 
-	static String user = null;
-
-	public Messages121Test() throws Exception {
+	public MessagesOnHoverEventsTest() throws Exception {
 		super();
 
 	}
 
 	@BeforeMethod
 	public void getDriver() throws Exception {
-		System.out.println("About to execute 121 test");
+		System.out.println("About to execute Group test");
 
 		koraloginpage = new KoraLoginPage(remoteDriver);
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesPage(remoteDriver);
+		koramananeconvpage = new KoraManageConversationPage(remoteDriver);
 
 		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
 		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
+
 	}
 
-	@Test(enabled = true, priority = 1)
-	public void koraOneToOneConversation() throws Exception {
+	@Test(enabled = true, priority = 12)
+	public void koraMuteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("KORAV2Messages");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
-			String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
-			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
-			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
+			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
+			String muteslots = DriverSetUp.testdataMap.get("expectedmuteslots");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption("Messages");
-			koramessagespage.messagesScreenValidations();
-			koramessagespage.checkMatchesWith(checkmatch);
-			koramessagespage.startNewConversationWith(newparticipants, true);
-			user = koramessagespage.enterYourMessageAs(onetoonetext);
-			koramessagespage.goToGroupAndPerform(user, true, "3dots");
-			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions);
+			koramessagespage.goToGroupAndPerform(groupname, true, "Mute");
+			koramessagespage.validateMuteSlots(muteslots);
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
+			test.log(LogStatus.FAIL, "Failed to validate mute slots");
 		}
 	}
-
-	@Test(enabled = true, priority = 2)
-	public void koraOneToOneProfileIconValidation() throws Exception {
+	
+	@Test(enabled = true, priority = 13)
+	public void koraAtmentionUsers() throws Exception {
+		
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("KORAV2Messages");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption("Messages");
-			koramessagespage.userProfileIconValidation(user);
+			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
+			int totalparticipants=koramessagespage.profileAvtarCount();
+			koramessagespage.atMentionValidation(totalparticipants);
+			System.out.println(totalparticipants);
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton profile icons");
+			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
 		}
 	}
+	
 }

@@ -48,8 +48,7 @@ public class KoraLoginPage extends PageBase {
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
-			test.log(LogStatus.FAIL, e);
+			test.log(LogStatus.FAIL, "Failed to login ".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 	}
