@@ -183,7 +183,7 @@
 				<directory>src</directory>
 			</testResource>
 		</testResources>
-		<!-- <plugins>
+	<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -198,21 +198,11 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
 				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>
+					<suiteXmlFiles>websrunner.xml</suiteXmlFiles>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.19.1</version>
-				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>
-
-				</configuration>
-
-			</plugin>
-
-			<plugin>
+		
+		<!-- 	<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.1.1</version>
@@ -228,7 +218,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -254,7 +244,7 @@
 				</executions>
 			</plugin>
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<executions>
@@ -273,9 +263,8 @@
 						<mainClass>com.org.runner.runner.TestRunner</mainClass>
 					</arguments>
 				</configuration>
-			</plugin>
-		</plugins> -->
-
+			</plugin> -->
+		</plugins>
 
 	</build>
 
