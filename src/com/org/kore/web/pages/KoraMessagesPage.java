@@ -196,6 +196,63 @@ public class KoraMessagesPage extends PageBase {
 
 		return chatheadername;
 	}
+	
+	public int profileAvtarCount() throws Exception {
+		String count = null;
+		int i = 0;
+		// boolean flag=false;
+		try {
+			boolean tripleflag = false;
+			boolean countavtarflag = false;
+			boolean topavtarflag = false;
+
+			tripleflag = remoteDriver
+					.findElements(By.xpath("//span[@class='chatUserIcon']//span[@class='nameAvatar triple']"))
+					.size() > 0;
+			countavtarflag = remoteDriver
+					.findElements(By.xpath("//span[@class='chatUserIcon']//span[@class='countAvatar']")).size() > 0;
+			topavtarflag = remoteDriver
+					.findElements(By.xpath("//span[@class='chatUserIcon']//span[@class='topAvatar']")).size() > 0;
+
+			if (tripleflag) {
+
+				if (tripleflag && countavtarflag) {
+					count = getText("//span[@class='chatUserIcon']//span[@class='countAvatar']");
+					i = Integer.parseInt(count);
+					i = i + 2;
+					test.log(LogStatus.PASS, "This group is having <b>" + count + " </b>participants".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+				} else if ((tripleflag && topavtarflag)) {
+					count = getText("//span[@class='chatUserIcon']//span[@class='topAvatar']");
+					test.log(LogStatus.PASS, "This group is having only 3 participants".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+					i = 3;
+				}
+
+			} else {
+				count = getText("//span[@class='chatUserIcon']//span[@class='nameAvatar single']");
+				test.log(LogStatus.FAIL,
+						"Seems it is 1 2 1 Conversation. Try with group conversation to work with @mentions functionality "
+								.toString() + test.addScreenCapture(takeScreenShot()));
+				i = 1;
+			}
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"Profile icons are not displaying on chat window or avtar elements got changed".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+
+		}
+		return i;
+
+	}
+
+	public void atMentionValidation(int groupcount){
+		
+		
+	}
+	
+	
 
 	/**
 	 * 
