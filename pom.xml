@@ -222,10 +222,10 @@
 						<goals>
 							<goal>java</goal>
 						</goals>
-						<configuration>
+						<!-- <configuration>
 							<mainClass>com.org.runner.TestRunner</mainClass>
 
-						</configuration>
+						</configuration> -->
 					</execution>
 				</executions>
 			</plugin>
