@@ -183,7 +183,7 @@
 				<directory>src</directory>
 			</testResource>
 		</testResources>
-		<plugins>
+		<!-- <plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -222,10 +222,10 @@
 						<goals>
 							<goal>java</goal>
 						</goals>
-						<!-- <configuration>
+						<configuration>
 							<mainClass>com.org.runner.TestRunner</mainClass>
 
-						</configuration> -->
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -267,14 +267,14 @@
 					</execution>
 				</executions>
 				<configuration>
-					<!-- <executable>java</executable>
+					<executable>java</executable>
 					<classpathScope>test</classpathScope>
 					<arguments>
 						<mainClass>com.org.runner.runner.TestRunner</mainClass>
-					</arguments> -->
+					</arguments>
 				</configuration>
 			</plugin>
-		</plugins>
+		</plugins> -->
 
 
 	</build>
