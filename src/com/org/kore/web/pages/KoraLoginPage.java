@@ -56,7 +56,7 @@ public class KoraLoginPage extends PageBase {
 	public void loginToKora(String url, String userName, String password) throws Exception {
 		try {
 			cf.launchSite(url);
-		//	signIn(userName, password);
+			signIn(userName, password);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
 			test.log(LogStatus.FAIL, e);
