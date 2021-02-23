@@ -197,40 +197,44 @@ public class KoraMessagesPage extends PageBase {
 		return chatheadername;
 	}
 	
+	/**
+	 * @Description : To get right side profile icons count
+	 * @return
+	 * @throws Exception
+	 */
 	public int profileAvtarCount() throws Exception {
 		String count = null;
 		int i = 0;
-		// boolean flag=false;
 		try {
 			boolean tripleflag = false;
 			boolean countavtarflag = false;
 			boolean topavtarflag = false;
 
 			tripleflag = remoteDriver
-					.findElements(By.xpath("//span[@class='chatUserIcon']//span[@class='nameAvatar triple']"))
+					.findElements(By.xpath(er.kmrightchaticon+"//span[@class='nameAvatar triple']"))
 					.size() > 0;
 			countavtarflag = remoteDriver
-					.findElements(By.xpath("//span[@class='chatUserIcon']//span[@class='countAvatar']")).size() > 0;
+					.findElements(By.xpath(er.kmrightchaticon+"//span[@class='countAvatar']")).size() > 0;
 			topavtarflag = remoteDriver
-					.findElements(By.xpath("//span[@class='chatUserIcon']//span[@class='topAvatar']")).size() > 0;
+					.findElements(By.xpath(er.kmrightchaticon+"//span[@class='topAvatar']")).size() > 0;
 
 			if (tripleflag) {
 
 				if (tripleflag && countavtarflag) {
-					count = getText("//span[@class='chatUserIcon']//span[@class='countAvatar']");
+					count = getText(er.kmrightchaticon+"//span[@class='countAvatar']");
 					i = Integer.parseInt(count);
 					i = i + 2;
 					test.log(LogStatus.PASS, "This group is having <b>" + count + " </b>participants".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 				} else if ((tripleflag && topavtarflag)) {
-					count = getText("//span[@class='chatUserIcon']//span[@class='topAvatar']");
+					count = getText(er.kmrightchaticon+"//span[@class='topAvatar']");
 					test.log(LogStatus.PASS, "This group is having only 3 participants".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 					i = 3;
 				}
 
 			} else {
-				count = getText("//span[@class='chatUserIcon']//span[@class='nameAvatar single']");
+				count = getText(er.kmrightchaticon+"//span[@class='nameAvatar single']");
 				test.log(LogStatus.FAIL,
 						"Seems it is 1 2 1 Conversation. Try with group conversation to work with @mentions functionality "
 								.toString() + test.addScreenCapture(takeScreenShot()));
@@ -247,13 +251,35 @@ public class KoraMessagesPage extends PageBase {
 
 	}
 
-	public void atMentionValidation(int groupcount){
-		
-		
+	/**
+	 * @Description : TO validate @ mention functionality
+	 * @param groupcount : Group count will be the input parameter
+	 * @param select : If this is true select user parameter should be mentioned
+	 * @param selectuser : This is mandatory when select is true
+	 * @throws Exception
+	 */
+	public void atMentionValidation(int groupcount, boolean select, String selectuser) throws Exception {
+		enterText(er.kmcomposebar, "@", "xpath", "Type your message");
+		List<WebElement> atmentionusers = remoteDriver.findElements(By.xpath(er.kmatmentionusernames));
+		System.out.println("" + atmentionusers.size());
+		if (groupcount==atmentionusers.size()){
+			test.log(LogStatus.PASS,
+					"Total participants count and @ mention users count is matchng including Everyone option ".toString() + test.addScreenCapture(takeScreenShot()));
+		}else {
+			test.log(LogStatus.PASS,
+					"Total participants count and @ mention users count igot deviated".toString() + test.addScreenCapture(takeScreenShot()));
+		}
+		if (select)
+			for (WebElement e : atmentionusers) {
+				System.out.println(e.getText());
+				if (e.getText().trim().equalsIgnoreCase(selectuser)) {
+					e.click();
+					break;
+				}
+			}
+		System.out.println("out of if");
 	}
 	
-	
-
 	/**
 	 * 
 	 * @param groupname

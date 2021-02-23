@@ -17,7 +17,7 @@ public class ElementRepository {
 			kmcloseconversation = null, kmsuggestnames = null, kmsuggestmailids = null, kmprofileicon = null,
 			kmcomposebar = null, kmgroupchevronicon = null, kmgroupname = null, kmmidgroup = null, kmmidchatdesc = null,
 			km3dots = null, km3dotoptions = null, kmtext = null, kmmanageclose = null, kmmembername = null,
-			kmmuteslots = null, kmactiveusericon = null,kmatmentionusernames=null;
+			kmmuteslots = null, kmactiveusericon = null,kmrightchaticon=null,kmatmentionusernames=null;
 
 	public void repoIOS() {
 		footerText = "//*[@placeholder='Username']";
@@ -67,8 +67,9 @@ public class ElementRepository {
 		km3dotoptions = "//div[@class='krDropDownMenu active  ']//div";
 		kmmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD']//li[@class='dorpDownBoxLI']";
 		kmactiveusericon = "//div[@class='userDetails active']//span[@class='nameAvatar single']";
+		kmrightchaticon="//span[@class='chatUserIcon']";
 		kmatmentionusernames="//table[@class='mentionDialogBoxTable']//span[@class='mentionFullName']";
-
+		
 	}
 
 }

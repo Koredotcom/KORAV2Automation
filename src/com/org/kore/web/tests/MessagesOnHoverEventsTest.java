@@ -84,8 +84,7 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 			korahomepage.selectMenuOption("Messages");
 			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
 			int totalparticipants=koramessagespage.profileAvtarCount();
-			koramessagespage.atMentionValidation(totalparticipants);
-			System.out.println(totalparticipants);
+			koramessagespage.atMentionValidation(totalparticipants,false,"NA");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
