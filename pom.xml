@@ -267,11 +267,11 @@
 					</execution>
 				</executions>
 				<configuration>
-					<executable>java</executable>
+					<!-- <executable>java</executable>
 					<classpathScope>test</classpathScope>
 					<arguments>
 						<mainClass>com.org.runner.runner.TestRunner</mainClass>
-					</arguments>
+					</arguments> -->
 				</configuration>
 			</plugin>
 		</plugins>
