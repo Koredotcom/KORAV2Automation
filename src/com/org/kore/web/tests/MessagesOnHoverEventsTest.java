@@ -46,7 +46,7 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 12)
+	@Test(enabled = true, priority = 13)
 	public void koraMuteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -68,7 +68,7 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 13)
+	@Test(enabled = true, priority = 14)
 	public void koraAtmentionUsers() throws Exception {
 		
 		try {
@@ -80,9 +80,8 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption("Messages");
-			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
+			koramessagespage.goToGroupAndPerform(groupname, false, "NA");
 			int totalparticipants=koramessagespage.profileAvtarCount();
 			koramessagespage.atMentionValidation(totalparticipants,false,"NA");
 			extent.endTest(test);

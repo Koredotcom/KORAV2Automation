@@ -94,6 +94,7 @@ public class KoraMessagesPage extends PageBase {
 			test.log(LogStatus.INFO, "Closed new conversation view");
 
 		} catch (Exception e) {
+			click(er.kmcloseconversation, "Close");
 			test.log(LogStatus.FAIL, "Failed to check the user suggestions for new conversation");
 			test.log(LogStatus.FAIL, "Something went wrong and displayed incorrect screen");
 		}
@@ -224,7 +225,7 @@ public class KoraMessagesPage extends PageBase {
 					count = getText(er.kmrightchaticon+"//span[@class='countAvatar']");
 					i = Integer.parseInt(count);
 					i = i + 2;
-					test.log(LogStatus.PASS, "This group is having <b>" + count + " </b>participants".toString()
+					test.log(LogStatus.PASS, "This group is having <b>" + i + " </b>participants".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 				} else if ((tripleflag && topavtarflag)) {
 					count = getText(er.kmrightchaticon+"//span[@class='topAvatar']");
@@ -261,17 +262,18 @@ public class KoraMessagesPage extends PageBase {
 	public void atMentionValidation(int groupcount, boolean select, String selectuser) throws Exception {
 		enterText(er.kmcomposebar, "@", "xpath", "Type your message");
 		List<WebElement> atmentionusers = remoteDriver.findElements(By.xpath(er.kmatmentionusernames));
-		System.out.println("" + atmentionusers.size());
+		int atsize= atmentionusers.size();
 		if (groupcount==atmentionusers.size()){
 			test.log(LogStatus.PASS,
 					"Total participants count and @ mention users count is matchng including Everyone option ".toString() + test.addScreenCapture(takeScreenShot()));
 		}else {
-			test.log(LogStatus.PASS,
-					"Total participants count and @ mention users count igot deviated".toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL,
+					"Total participants<b> "+groupcount+"</b> count and @ mention users<b> "+atsize+" </b>count got deviated".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 		if (select)
 			for (WebElement e : atmentionusers) {
 				System.out.println(e.getText());
+				// Here we need to scroll for the element beyond the screen level
 				if (e.getText().trim().equalsIgnoreCase(selectuser)) {
 					e.click();
 					break;
@@ -371,6 +373,7 @@ public class KoraMessagesPage extends PageBase {
 		try {
 			List<WebElement> options = remoteDriver.findElements(By.xpath(er.kmmuteslots));
 			for (WebElement ele : options) {
+				Thread.sleep(500);
 				String act = ele.getText();
 				System.out.println("From applicaton:" + act);
 				check = exp[i].trim().equals(act);
@@ -694,14 +697,14 @@ public class KoraMessagesPage extends PageBase {
 	}
 
 	/**
+	 * @throws Exception 
 	 * @Description : To get group updated(info) i.e. if any one added and
 	 *              removed from the group @ : Yet to implement better logic for
 	 *              this
-	 * @throws IOException
 	 */
-	@SuppressWarnings("null")
-	public void verifyGroupUpdateTimelines(String typeofAmend) throws IOException {
-
+	public void verifyGroupUpdateTimelines(String typeofAmend) throws Exception {
+		waitTillappear("//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
+							+ typeofAmend + "')]", "xpath", "Timeline");
 		ArrayList<String> timelines = new ArrayList<>();
 		try {
 			moveToElement(

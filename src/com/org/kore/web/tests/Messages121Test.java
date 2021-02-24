@@ -42,9 +42,9 @@ public class Messages121Test extends DriverSetUp {
 		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
 		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
 	}
-
+	
 	@Test(enabled = true, priority = 1)
-	public void koraOneToOneConversation() throws Exception {
+	public void koraUserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("KORAV2Messages");
@@ -52,15 +52,32 @@ public class Messages121Test extends DriverSetUp {
 
 			String url = DriverSetUp.propsMap.get("weburl");
 			String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
-			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
-			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption("Messages");
 			koramessagespage.messagesScreenValidations();
 			koramessagespage.checkMatchesWith(checkmatch);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
+		}
+	}
+
+	@Test(enabled = true, priority = 2)
+	public void koraOneToOneConversation() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("KORAV2Messages");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption("Messages");
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
@@ -70,8 +87,9 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
 		}
 	}
+	
 
-	@Test(enabled = true, priority = 2)
+	@Test(enabled = true, priority = 3)
 	public void koraOneToOneProfileIconValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())

@@ -30,7 +30,7 @@ public class KoraLoginPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void signIn(String userName, String password) throws Exception {
-		try {
+	//	try {
 			waitTillappear(er.kuser, "xpath", "Enter Email ID");
 			enterText(er.kuser, userName, "xpath", "Username");
 			click(er.kloginnext, "UsrNext");
@@ -46,22 +46,22 @@ public class KoraLoginPage extends PageBase {
 			test.log(LogStatus.INFO, "Kora User logged in successfully as : " + userName);
 			test.log(LogStatus.PASS, "Home screen ", test.addScreenCapture(takeScreenShot()));
 
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			System.out.println(e.getMessage());
 			test.log(LogStatus.FAIL, "Failed to login ".toString() + test.addScreenCapture(takeScreenShot()));
-		}
+		}*/
 
 	}
 
 	public void loginToKora(String url, String userName, String password) throws Exception {
-		try {
+	//	try {
 			cf.launchSite(url);
 			signIn(userName, password);
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
 			test.log(LogStatus.FAIL, e);
 
-		}
+		}*/
 
 	}
 }
