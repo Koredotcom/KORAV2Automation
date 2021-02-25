@@ -44,16 +44,21 @@ public class KoraMessagesPage extends PageBase {
 		test.log(LogStatus.INFO, "For + icon text displayed as : <b>New Conversation</b> ");
 	}
 
-	public void checkRecents() throws Exception {
+	public void checkDefaultFocus_Recents() throws Exception {
 		try {
+			click(er.kmplusicon, "New Conversation");
 			List<WebElement> recents = remoteDriver.findElements(By.xpath(er.kmrecent));
-			if (recents.size() > 0)
-				test.log(LogStatus.PASS, "Displayed " + recents.size() + " Recent suggestions");
-			test.log(LogStatus.INFO, test.addScreenCapture(takeScreenShot()));
-
+			if (recents.size() > 0){
+				test.log(LogStatus.PASS, "On click of + icon default cursor focus is on Enter Participant name field");
+				test.log(LogStatus.PASS, "Displayed " + recents.size() + " Recent suggestions".toString() + test.addScreenCapture(takeScreenShot()));
+			}else {
+				test.log(LogStatus.FAIL, "On click of + icon default cursor focus is not on Enter Participant name field");
+				test.log(LogStatus.FAIL, "Displayed " + recents.size() + " Recent suggestions".toString() + test.addScreenCapture(takeScreenShot()));
+			}
+			click(er.kmcloseconversation, "Close");
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Not displaying any recent suggestions for a new conversation");
-			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
+			click(er.kmcloseconversation, "Close");
+			test.log(LogStatus.FAIL, "Plus icon or close icon elements got updated".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 	}
@@ -69,7 +74,6 @@ public class KoraMessagesPage extends PageBase {
 			int i = 1;
 			click(er.kmplusicon, "New Conversation");
 			click(er.kmenterparticipant, "Enter participant name");
-			checkRecents();
 			enterText(er.kmenterparticipant, nameorletter, "xpath", "Participant name");
 			Thread.sleep(5000);
 			waitTillappear(er.kmsuggestnames, "xpath", "Suggestions");

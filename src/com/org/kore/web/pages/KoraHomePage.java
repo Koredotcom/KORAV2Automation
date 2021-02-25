@@ -37,7 +37,7 @@ public class KoraHomePage extends PageBase {
 
 	public void selectMenuOption(String menuoption) throws Exception {
 		boolean flag = false;
-		try {
+	//	try {
 			waitTillappear(er.kheadermenu, "xpath", "Enter Email ID");
 			System.out.println("Header menu displayed");
 			Thread.sleep(5000);
@@ -48,24 +48,21 @@ public class KoraHomePage extends PageBase {
 					flag = true;
 					e.click();
 					Thread.sleep(1000);
-					System.out.println(menuoption + ":" + "clicked successfully");
-					test.log(LogStatus.INFO, menuoption + " selected");
-					test.log(LogStatus.PASS, test.addScreenCapture(takeScreenShot()));
+					test.log(LogStatus.INFO, menuoption + " selected".toString()+test.addScreenCapture(takeScreenShot()));
 					break;
 				}
 			}
 			if (!flag) {
-				test.log(LogStatus.FAIL, menuoption + "  option not selected or it is not available in the options");
-				test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.FAIL, menuoption + "  option not selected or it is not available in the options".toString()+test.addScreenCapture(takeScreenShot()));
 				System.out.println("Reached FailXXXXXXXX, Provided option is not available on the Dom");
 			}
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Not clicked on menu option");
 			test.log(LogStatus.FAIL, "Header menu option element got changed or login was not success");
 			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 }

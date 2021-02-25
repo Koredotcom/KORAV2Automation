@@ -44,42 +44,65 @@ public class Messages121Test extends DriverSetUp {
 	}
 	
 	@Test(enabled = true, priority = 1)
-	public void koraUserSuggestionValidation() throws Exception {
+	public void m_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("KORAV2Messages");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
-			String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
+			String Messages = DriverSetUp.propsMap.get("messages");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.messagesScreenValidations();
-			koramessagespage.checkMatchesWith(checkmatch);
+			koramessagespage.checkDefaultFocus_Recents();
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
+			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
 		}
 	}
 
 	@Test(enabled = true, priority = 2)
-	public void koraOneToOneConversation() throws Exception {
+	public void m_TC6_userSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("KORAV2Messages");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.propsMap.get("messages");
+			String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Messages);
+			koramessagespage.checkMatchesWith(checkmatch);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate user suggestion validation");
+		}
+	}
+
+	
+	@Test(enabled = true, priority = 3)
+	public void m_TC8_TC9_OneToOneConv_3dotOptions() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("KORAV2Messages");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.propsMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			koramessagespage.userProfileIconValidation(user);
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
 			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions);
 			extent.endTest(test);
@@ -89,21 +112,5 @@ public class Messages121Test extends DriverSetUp {
 	}
 	
 
-	@Test(enabled = true, priority = 3)
-	public void koraOneToOneProfileIconValidation() throws Exception {
-		try {
-			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
-			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-
-			String url = DriverSetUp.propsMap.get("weburl");
-
-			test.log(LogStatus.INFO, "Navigation url :" + url);
-			korahomepage.selectMenuOption("Messages");
-			koramessagespage.userProfileIconValidation(user);
-			extent.endTest(test);
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton profile icons");
-		}
-	}
+	
 }

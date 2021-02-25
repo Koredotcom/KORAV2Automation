@@ -39,12 +39,12 @@ public class KoraLoginPage extends PageBase {
 			click(er.knext, "selected Next");
 			enterText(er.kpwd, password, "xpath", "Username");
 			click(er.knext, "selected account");
-			test.log(LogStatus.INFO, "Password entered successfully", test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.INFO, "Password entered successfully".toString()+ test.addScreenCapture(takeScreenShot()));
 			waitTillappear(er.kallow, "xpath", "Allow");
 			moveToElement(er.kallow, "xpath");
 			jsClick(er.kallow, "xpath");
-			test.log(LogStatus.INFO, "Kora User logged in successfully as : " + userName);
-			test.log(LogStatus.PASS, "Home screen ", test.addScreenCapture(takeScreenShot()));
+			Thread.sleep(3000);
+			test.log(LogStatus.PASS, "Kora User logged in successfully as : " + userName+" ".toString()+test.addScreenCapture(takeScreenShot()));
 
 		/*} catch (Exception e) {
 			System.out.println(e.getMessage());

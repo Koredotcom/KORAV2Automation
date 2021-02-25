@@ -24,6 +24,7 @@
 		"edgeDriverPath": "Drivers/MicrosoftWebDriver.exe"
 	},
 	"TESTDATA": {
+		"messages":"Messages",
 		"checkmatchwith": "D",
 		"oneparticipant": "dileep.pisati@kore.com",
 		"onetoonechat": "Hi Dileep... Ignore_Automationmessage",
