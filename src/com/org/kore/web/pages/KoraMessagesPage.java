@@ -626,10 +626,12 @@ public class KoraMessagesPage extends PageBase {
 			test.log(LogStatus.PASS,
 					"For one to conversation with "+username +", Profile icon and onhover icons are matching with first character i.e.<b> "+actfirstchar+"</b>".toString()
 							+ test.addScreenCapture(takeScreenShot()));
+			click(er.kmcomposebar, "Type your message");
 		}else {
 			test.log(LogStatus.FAIL,
 					"For one to conversation with "+username +", displayed incorrect Profile icon/onhover icons i.e.<b> "+actfirstchar+"</b>".toString()
 							+ test.addScreenCapture(takeScreenShot()));
+			click(er.kmcomposebar, "Type your message");
 			
 		}
 		
