@@ -29,39 +29,46 @@ public class KoraLoginPage extends PageBase {
 	 * @param password
 	 * @throws Exception
 	 */
-	public void signIn(String userName, String password) throws Exception {
-	//	try {
-			waitTillappear(er.kuser, "xpath", "Enter Email ID");
-			enterText(er.kuser, userName, "xpath", "Username");
-			click(er.kloginnext, "UsrNext");
-			click(er.ksignwithgoogle, "SigninWithGoogle");
-			test.log(LogStatus.INFO, "Sign in to Google screen displayed", test.addScreenCapture(takeScreenShot()));
-			click(er.knext, "selected Next");
-			enterText(er.kpwd, password, "xpath", "Username");
-			click(er.knext, "selected account");
-			test.log(LogStatus.INFO, "Password entered successfully".toString()+ test.addScreenCapture(takeScreenShot()));
-			waitTillappear(er.kallow, "xpath", "Allow");
-			moveToElement(er.kallow, "xpath");
-			jsClick(er.kallow, "xpath");
-			Thread.sleep(3000);
-			test.log(LogStatus.PASS, "Kora User logged in successfully as : " + userName+" ".toString()+test.addScreenCapture(takeScreenShot()));
-
-		/*} catch (Exception e) {
-			System.out.println(e.getMessage());
-			test.log(LogStatus.FAIL, "Failed to login ".toString() + test.addScreenCapture(takeScreenShot()));
-		}*/
+	public void signInWith2FactorAuthentication(String userName, String password) throws Exception {
+		waitTillappear(er.kuser, "xpath", "Enter Email ID");
+		enterText(er.kuser, userName, "xpath", "Username");
+		click(er.kloginnext, "UsrNext");
+		click(er.ksignwithgoogle, "SigninWithGoogle");
+		test.log(LogStatus.INFO, "Sign in to Google screen displayed", test.addScreenCapture(takeScreenShot()));
+		click(er.knext, "selected Next");
+		enterText(er.kpwd, password, "xpath", "Password");
+		click(er.knext, "selected account");
+		test.log(LogStatus.INFO, "Password entered successfully".toString() + test.addScreenCapture(takeScreenShot()));
+		waitTillappear(er.kallow, "xpath", "Allow");
+		moveToElement(er.kallow, "xpath");
+		jsClick(er.kallow, "xpath");
+		Thread.sleep(3000);
+		test.log(LogStatus.PASS, "Kora User logged in successfully as : " + userName + " ".toString()
+				+ test.addScreenCapture(takeScreenShot()));
 
 	}
 
+	/**
+	 * @param userName
+	 * @param password
+	 * @throws Exception
+	 */
+	public void signInWithO365(String userName, String password) throws Exception {
+		waitTillappear(er.kuser, "xpath", "Enter Email ID");
+		enterText(er.kuser, userName, "xpath", "Username");
+		click(er.kloginnext, "UsrNext");
+		enterText(er.kpwd, password, "xpath", "Password");
+		test.log(LogStatus.INFO, "Password entered successfully");
+		click(er.kosignin, "Signin");
+		click(er.kstaysignin, "Stay Signin");
+		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName + " ".toString()
+				+ test.addScreenCapture(takeScreenShot()));
+		
+	}
+
 	public void loginToKora(String url, String userName, String password) throws Exception {
-	//	try {
-			cf.launchSite(url);
-			signIn(userName, password);
-		/*} catch (Exception e) {
-			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
-			test.log(LogStatus.FAIL, e);
-
-		}*/
-
+		cf.launchSite(url);
+		signInWithO365(userName, password);
+		// signInWith2FactorAuthentication(userName, password);
 	}
 }

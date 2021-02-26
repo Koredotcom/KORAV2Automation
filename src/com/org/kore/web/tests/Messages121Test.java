@@ -51,8 +51,8 @@ public class Messages121Test extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
-			String Messages = DriverSetUp.propsMap.get("messages");
-
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption(Messages);
@@ -72,7 +72,7 @@ public class Messages121Test extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
-			String Messages = DriverSetUp.propsMap.get("messages");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -93,7 +93,7 @@ public class Messages121Test extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
-			String Messages = DriverSetUp.propsMap.get("messages");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
@@ -110,7 +110,4 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
 		}
 	}
-	
-
-	
 }

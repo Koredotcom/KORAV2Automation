@@ -11,7 +11,7 @@ public class ElementRepository {
 
 	public String suserid = null, susernext = null, spassword = null, spasswordnext = null;
 
-	public String footerText = null, kuser = null, kpwd = null, kloginnext = null, ksignwithgoogle = null,
+	public String footerText = null, kuser = null, kloginnext = null,konext=null,kpwd = null,kosignin=null,kstaysignin=null, ksignwithgoogle = null,
 			ksignwithgooglepage = null, knext = null, kchoosetext = null, kselectaccount = null, kallow = null,
 			khistory = null, kheadermenu = null, kmplusicon = null, kmrecent = null, kmenterparticipant = null,
 			kmcloseconversation = null, kmsuggestnames = null, kmsuggestmailids = null, kmprofileicon = null,
@@ -38,14 +38,20 @@ public class ElementRepository {
 
 		footerText = "//*[@class='row footerStripe']/div[1]";
 		kuser = "//input[@placeholder='Enter your email']";
-		kpwd = "//input[@type='password']";
 		kloginnext = "//button[@class='signInNext']";
+		konext="//input[@id='idSubmit_ProofUp_Redirect']";
+		kpwd = "//input[@type='password']";
+		kosignin ="//input[@type='submit']";
+		kstaysignin="//input[@value='Yes']";
+		konext="//input[@value='Next']";
+		
 		ksignwithgoogle = "//div[@class='pull-left googleLoginIconW']";
 		ksignwithgooglepage = "//div[@class='kHn9Lb'][text() = 'Sign in with Google']";
 		kchoosetext = "//h1[@class='ahT6S  y77zqe']";
 		knext = "//div[@class='VfPpkd-RLmnJb']";
 		kselectaccount = "//div[@class='qQWzTd']";
 		kallow = "//span[text()='Allow']";
+		
 		khistory = "//span[@class='loadHistory']";
 		kheadermenu = "//span[@class='menuTabs']/a";
 		kmplusicon = "//span[@class='p-icon kr-plus']";
