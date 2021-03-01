@@ -25,6 +25,7 @@ public class KoraLoginPage extends PageBase {
 	}
 
 	/**
+	 * @Description : This login works with kore.com credentials
 	 * @param userName
 	 * @param password
 	 * @throws Exception
@@ -49,6 +50,7 @@ public class KoraLoginPage extends PageBase {
 	}
 
 	/**
+	 * @Description : This login works with O'365 account
 	 * @param userName
 	 * @param password
 	 * @throws Exception
@@ -65,7 +67,7 @@ public class KoraLoginPage extends PageBase {
 				+ test.addScreenCapture(takeScreenShot()));
 		
 	}
-
+	
 	public void loginToKora(String url, String userName, String password) throws Exception {
 		cf.launchSite(url);
 		signInWithO365(userName, password);
