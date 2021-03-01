@@ -186,4 +186,34 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate delete conversation flow");
 		}
 	}
+	
+	@Test(enabled = true, priority = 10)
+	public void km_createAndDeleteGroupWithNoName() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("KORAV2Messages");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String newparticipants = DriverSetUp.testdataMap.get("groupparticipants");
+			String grouptext = DriverSetUp.testdataMap.get("groupchat");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korausername, korapassword);
+			korahomepage.selectMenuOption("Messages");
+			koramessagespage.startNewConversationWith(newparticipants, true);
+			String user = koramessagespage.enterYourMessageAs(grouptext);
+			koramessagespage.verifyGroupCreationTimeline(korausername);
+			koramessagespage.goToGroupAndPerform(user, true, "3dots");
+			koramessagespage.operationsFrom3Dots("Manage Conversation");
+			koramananeconvpage.removeParticipantsAndClose();
+			koramessagespage.enterYourMessageAs("Removed participants");
+			koramessagespage.operationsFrom3Dots("Clear Chat History");
+			koramessagespage.operationsFrom3Dots("Delete Conversation");
+			koramananeconvpage.clickOn("Delete", true);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate create new group conversation flow");
+		}
+	}
 }

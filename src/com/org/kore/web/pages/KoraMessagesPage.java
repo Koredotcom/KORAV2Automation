@@ -44,9 +44,27 @@ public class KoraMessagesPage extends PageBase {
 		test.log(LogStatus.INFO, "For + icon text displayed as : <b>New Conversation</b> ");
 	}
 
+	/**
+	 * @Description : To select an option after clicking on plus icon
+	 * @param userchoice : this should be either chat or discussion
+	 * @throws Exception
+	 */
+	public void newChatOrDiscussion(String userchoice) throws Exception {
+		click(er.kmplusicon, "New Conversation");
+		if (userchoice.equalsIgnoreCase("chat")){
+			click(er.kmchat, "Create a new Chat");
+		}else if (userchoice.equalsIgnoreCase("discussion")){
+			click(er.kmdiscussion, "Create a Discussion Room");
+		}else {
+			test.log(LogStatus.FAIL, "Please provide valid userchaoice after clicking on + icon".toString() + test.addScreenCapture(takeScreenShot()));
+		}
+	}
+	
 	public void checkDefaultFocus_Recents() throws Exception {
 		try {
-			click(er.kmplusicon, "New Conversation");
+		//	click(er.kmplusicon, "New Conversation");
+			newChatOrDiscussion("chat");
+			Thread.sleep(1500);
 			List<WebElement> recents = remoteDriver.findElements(By.xpath(er.kmrecent));
 			if (recents.size() > 0){
 				test.log(LogStatus.PASS, "On click of + icon default cursor focus is on Enter Participant name field");
@@ -72,7 +90,8 @@ public class KoraMessagesPage extends PageBase {
 	public void checkMatchesWith(String nameorletter) throws Exception {
 		try {
 			int i = 1;
-			click(er.kmplusicon, "New Conversation");
+			//click(er.kmplusicon, "New Conversation");
+			newChatOrDiscussion("chat");
 			click(er.kmenterparticipant, "Enter participant name");
 			enterText(er.kmenterparticipant, nameorletter, "xpath", "Participant name");
 			Thread.sleep(5000);
@@ -119,7 +138,8 @@ public class KoraMessagesPage extends PageBase {
 
 		try {
 			if (plusicon)
-				click(er.kmplusicon, "New Conversation");
+				//click(er.kmplusicon, "New Conversation");
+				newChatOrDiscussion("chat");
 			click(er.kmenterparticipant, "Enter participant name");
 			if (participantlist.contains(",")) {
 				String result[] = participantlist.trim().split("\\s*,\\s*");

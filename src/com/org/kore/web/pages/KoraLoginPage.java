@@ -31,7 +31,8 @@ public class KoraLoginPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void signInWith2FactorAuthentication(String userName, String password) throws Exception {
-		waitTillappear(er.kuser, "xpath", "Enter Email ID");
+		//waitTillappear(er.kuser, "xpath", "Enter Email ID");
+		waitTillappear(er.ko365, "xpath", "Choose ur account type");
 		enterText(er.kuser, userName, "xpath", "Username");
 		click(er.kloginnext, "UsrNext");
 		click(er.ksignwithgoogle, "SigninWithGoogle");
@@ -56,9 +57,10 @@ public class KoraLoginPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void signInWithO365(String userName, String password) throws Exception {
-		waitTillappear(er.kuser, "xpath", "Enter Email ID");
-		enterText(er.kuser, userName, "xpath", "Username");
-		click(er.kloginnext, "UsrNext");
+		waitTillappear(er.ko365, "xpath", "Choose ur account type");
+		click(er.ko365, "Select Microsoft option");
+		enterText(er.koenteremail, userName, "xpath", "Enter Email");
+		click(er.kousernext, "UsrNext");
 		enterText(er.kpwd, password, "xpath", "Password");
 		test.log(LogStatus.INFO, "Password entered successfully");
 		click(er.kosignin, "Signin");
@@ -71,6 +73,5 @@ public class KoraLoginPage extends PageBase {
 	public void loginToKora(String url, String userName, String password) throws Exception {
 		cf.launchSite(url);
 		signInWithO365(userName, password);
-		// signInWith2FactorAuthentication(userName, password);
 	}
 }

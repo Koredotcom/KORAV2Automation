@@ -1,7 +1,5 @@
 package com.org.kore.web.tests;
 
-import java.util.ArrayList;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -46,7 +44,7 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 13)
+	@Test(enabled = true, priority = 14)
 	public void koraMuteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -68,7 +66,7 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 14)
+	@Test(enabled = true, priority = 15)
 	public void koraAtmentionUsers() throws Exception {
 		
 		try {
