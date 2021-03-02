@@ -1,5 +1,10 @@
 package com.org.kore.runner;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,13 +21,78 @@ public class CheckUrCode {
 	public static void main(String[] a) throws ParseException {
 		// getFirstChar();
 		// stringsplit();
-		totalGroupParticipants();
+		/*totalGroupParticipants();
 		String sample1 = "wwe.sds@cl.com,sdsd.dssds@xcxc.com,dsd.sd@df.com";
 		String sample2 = "sdsd.dds@dd.com,";
-		generateListFromStrings(sample1, sample2);
+		generateListFromStrings(sample1, sample2);*/
+		
+//		moveReportFile("C:/Users/Jayakrishna.Dandru/git/KORAV2Automation/ReportGenerator/HtmlReport_2021-03-02-11-48-26/Screenshots/TestReport.html",
+		//	 "C:/Users/Jayakrishna.Dandru/git/KORAV2Automation/ReportGenerator/JenkinsReport/TestReport.html");
+		
+		//	moveReportFile("C:/Users/Jayakrishna.Dandru/Desktop/Copy/File1/TestReport.html",
+		//			 "C:/Users/Jayakrishna.Dandru/Desktop/Copy/File2/TestReport.html");
+			
+			copyReportFile();
 
 	}
 
+	/*public static void moveReportFile(String src, String dest) {
+	Path result = null;
+	try {
+	//	result = Files.move(Paths.get(src), Paths.get(dest));
+		result = Files.copy(Paths.get(src), Paths.get(dest));
+	} catch (IOException e) {
+		System.out.println("Exception while moving file: " + e.getMessage());
+	}
+	if (result != null) {
+		System.out.println("File moved successfully.");
+	} else {
+		System.out.println("File movement failed.");
+	}
+}*/
+
+
+public static void copyReportFile() {
+	Path result = null;
+	
+	String dir= System.getProperty("user.dir");
+	System.out.println(dir);
+	
+	String source;
+	source = new File(dir+"/ReportGenerator/HtmlReport_2021-03-02-15-41-10/TestReport.html").getPath();
+	source.toString();
+	
+	String finalpath;
+	finalpath = new File(dir+"/ReportGenerator/JenkinsReport/TestReport.html").getPath();
+	finalpath.toString();
+	
+	/*String source;
+	source = new File("C:/Users/Jayakrishna.Dandru/Desktop/Copy/File1/TestReport.html").getPath();
+	source.toString();
+	
+	String finalpath;
+	finalpath = new File("C:/Users/Jayakrishna.Dandru/Desktop/Copy/File2/TestReport.html").getPath();
+	finalpath.toString();*/
+	try {
+	//	result = Files.move(Paths.get(src), Paths.get(dest));
+		result = Files.copy(Paths.get(source), Paths.get(finalpath));
+	} catch (IOException e) {
+		System.out.println("Exception while moving file: " + e.getMessage());
+	}
+	if (result != null) {
+		System.out.println("File moved successfully.");
+	} else {
+		System.out.println("File movement failed.");
+	}
+}
+
+
+private static void copyFileUsingJava7Files(File source, File dest) throws IOException {
+	
+    Files.copy(source.toPath(), dest.toPath());
+}
+
+	
 	public static void getFirstChar() {
 		String name = "Jaya";
 		char first = name.charAt(0);
