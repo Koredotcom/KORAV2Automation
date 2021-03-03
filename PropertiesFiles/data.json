@@ -2,6 +2,12 @@
 	"QA": {
 		"browser": "chrome",
 		"weburls": "https://developer.servicenow.com/dev.do#!/home",
+		"weburl": "https://koraqa.kora.ai/",
+		"tool": "Selenium"
+	},
+	"Dev": {
+		"browser": "chrome",
+		"weburls": "https://developer.servicenow.com/dev.do#!/home",
 		"weburl": "https://qa1-app.kora.ai/",
 		"tool": "Selenium"
 	},
@@ -41,12 +47,12 @@
 	"TESTDATA": {
 		"messages":"Messages",
 		"checkmatchwith": "D",
-		"oneparticipant": "Danny Alexander",
+		"oneparticipant": "alexander@koraqa1.com",
 		"onetoonechat": "Hi Danny... Ignore_Automationmessage",
 		"groupname": "AutomationGroup",
 		"renamegroupto":"AutomationGroupRenamed",
-		"groupparticipants": "dileep.pisati@kore.com,prakash.rochkari@kore.com,ramana.kommula@kore.com,neha.malani@kore.com,roshini.kunarapu@kore.com",
-		"updateparticipant":"saishree.mishra@kore.com",
+		"groupparticipants": "alexander@koraqa1.com,ab@koraqa1.com,scottbrown@koraqa1.com,charles@koraqa1.com,ginessa@koraqa1.com",
+		"updateparticipant":"hana@koraqa1.com",
 		"groupchat": "Hi Team! Ignore_Automationmessage",
 		"standardgroupname":"QA Pride",
 		"expectedoptionsforgroup":"Leave Conversation, Manage Conversation,Clear Chat History",

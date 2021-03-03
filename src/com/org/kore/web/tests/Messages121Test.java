@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import com.org.kore.testbase.DriverSetUp;
 import com.org.kore.web.pages.KoraHomePage;
 import com.org.kore.web.pages.KoraLoginPage;
-import com.org.kore.web.pages.KoraManageConversationPage;
 import com.org.kore.web.pages.KoraMessagesPage;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -24,9 +23,6 @@ public class Messages121Test extends DriverSetUp {
 
 	String korausername;
 	String korapassword;
-	
-	String korauserhana;
-	String korapasswordhana;
 
 	static String user = null;
 
@@ -45,13 +41,10 @@ public class Messages121Test extends DriverSetUp {
 
 		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
 		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
-		
-		korauserhana = dr.getValue("KORAV2", "KoraV2hana", "Username");
-		korapasswordhana = dr.getValue("KORAV2", "KoraV2hana", "Password");
 	}
 
 	@Test(enabled = true, priority = 1)
-	public void m_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
+	public void mc_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("KORAV2Messages");
@@ -71,8 +64,8 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 2)
-	public void m_TC6_userSuggestionValidation() throws Exception {
+	/*@Test(enabled = true, priority = 2)
+	public void mc_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("KORAV2Messages");
@@ -92,7 +85,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 3)
-	public void m_TC8_TC9_OneToOneConv_3dotOptions() throws Exception {
+	public void mc_TC8_TC9_OneToOneConv_3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("KORAV2Messages");
@@ -116,9 +109,9 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
 		}
 	}
-	
-	@Test(enabled = true)
-	public void m_DeleteAndSend() throws Exception {
+
+	@Test(enabled = true, priority = 4)
+	public void mc_TC12_DeleteAndCheckActiveParticipant() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("KORAV2Messages");
@@ -134,15 +127,17 @@ public class Messages121Test extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
-			koramessagespage.getFirstActiveUser(user,true);
+			koramessagespage.getFirstActiveUser(user, true);
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Delete Conversation");
 			korahomepage.clickOn("Delete", true);
-			koramessagespage.getFirstActiveUser(user,false);
-			
+			koramessagespage.getFirstActiveUser(user, false);
+			koramessagespage.startNewConversationWith(newparticipants, true);
+			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			koramessagespage.getFirstActiveUser(user, true);
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
+			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
 		}
-	}
+	}*/
 }

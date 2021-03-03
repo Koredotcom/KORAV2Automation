@@ -44,7 +44,7 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 14)
+	@Test(enabled = true, priority = 15)
 	public void koraMuteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -66,7 +66,7 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 15)
+	@Test(enabled = true, priority = 16)
 	public void koraAtmentionUsers() throws Exception {
 		
 		try {

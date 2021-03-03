@@ -64,7 +64,7 @@ public class KoraMessagesPage extends PageBase {
 
 	public void checkDefaultFocus_Recents() throws Exception {
 		try {
-			// click(er.kmplusicon, "New Conversation");
+		//	click(er.kmplusicon, "New Conversation");
 			newChatOrDiscussion("chat");
 			Thread.sleep(1500);
 			List<WebElement> recents = remoteDriver.findElements(By.xpath(er.kmrecent));
@@ -96,7 +96,7 @@ public class KoraMessagesPage extends PageBase {
 	public void checkMatchesWith(String nameorletter) throws Exception {
 		try {
 			int i = 1;
-			// click(er.kmplusicon, "New Conversation");
+		//	click(er.kmplusicon, "New Conversation");
 			newChatOrDiscussion("chat");
 			click(er.kmenterparticipant, "Enter participant name");
 			enterText(er.kmenterparticipant, nameorletter, "xpath", "Participant name");
@@ -144,7 +144,7 @@ public class KoraMessagesPage extends PageBase {
 
 		try {
 			if (plusicon)
-				// click(er.kmplusicon, "New Conversation");
+			//	click(er.kmplusicon, "New Conversation");
 				newChatOrDiscussion("chat");
 			click(er.kmenterparticipant, "Enter participant name");
 			if (participantlist.contains(",")) {
@@ -231,24 +231,19 @@ public class KoraMessagesPage extends PageBase {
 
 	public String getFirstActiveUser(String expecteduser, boolean check) throws Exception {
 		String activeuser = null;
-		// div[@class='userDetails
-		// active']//div[@class='userNameDiv'][text()='Danny Alexander']
 		try {
 			activeuser = getText(er.kmfirstactiveuser);
 			test.log(LogStatus.INFO,
-					"Current active user is " + activeuser + " ".toString() + test.addScreenCapture(takeScreenShot()));
-			if (check) {
-				boolean actuser = false;
-				actuser = remoteDriver.findElements(By.xpath(er.kmfirstactiveuser + "[text()='" + expecteduser + "']"))
+					"Current active user is " + activeuser);
+				boolean	actuser = remoteDriver.findElements(By.xpath(er.kmfirstactiveuser + "[text()='" + expecteduser + "']"))
 						.size() > 0;
 				if (actuser == check) {
-					test.log(LogStatus.PASS, "Current active user is " + activeuser + " ".toString()
+					test.log(LogStatus.PASS, "Current active user is displayed as expected i.e. <b>" + activeuser + "</b> ".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 				} else {
-					test.log(LogStatus.PASS, "Current active user is not as expected".toString()
+					test.log(LogStatus.PASS, "Current active user Actual : "+activeuser+" Expected : "+expecteduser+" ".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 				}
-			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
 					"Failed to get active username".toString() + test.addScreenCapture(takeScreenShot()));
