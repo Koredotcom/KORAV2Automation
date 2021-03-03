@@ -11,13 +11,16 @@ public class ElementRepository {
 
 	public String suserid = null, susernext = null, spassword = null, spasswordnext = null;
 
-	public String footerText = null,ko365=null, koenteremail=null, kousernext=null,kuser = null, kloginnext = null,konext=null,kpwd = null,kosignin=null,kstaysignin=null, ksignwithgoogle = null,
+	public String footerText = null, ko365 = null, koenteremail = null, kousernext = null, kuser = null,
+			kloginnext = null, konext = null, kpwd = null, kosignin = null, kstaysignin = null, ksignwithgoogle = null,
 			ksignwithgooglepage = null, knext = null, kchoosetext = null, kselectaccount = null, kallow = null,
-			khistory = null, kheadermenu = null, kmplusicon = null, kmdiscussion=null, kmchat=null, kmrecent = null, kmenterparticipant = null,
-			kmcloseconversation = null, kmsuggestnames = null, kmsuggestmailids = null, kmprofileicon = null,
-			kmcomposebar = null, kmgroupchevronicon = null, kmgroupname = null, kmmidgroup = null, kmmidchatdesc = null,
-			km3dots = null, km3dotoptions = null, kmtext = null, kmmanageclose = null, kmmembername = null,
-			kmmuteslots = null, kmactiveusericon = null,kmrightchaticon=null,kmatmentionusernames=null;
+			klogout = null, klogoutyes = null, khistory = null, kheadermenu = null, kmplusicon = null,
+			kmdiscussion = null, kmchat = null, kmrecent = null, kmenterparticipant = null, kmcloseconversation = null,
+			kmsuggestnames = null, kmsuggestmailids = null, kmprofileicon = null, kmcomposebar = null,
+			kmgroupchevronicon = null, kmgroupname = null, kmmidgroup = null, kmmidchatdesc = null, km3dots = null,
+			km3dotoptions = null, kmtext = null, kmmanageclose = null, kmmembername = null, kmmuteslots = null,
+			kmactiveusericon = null, kmrightchaticon = null, kmatmentionusernames = null, kmmessagebubbles = null,
+			kmfirstactiveuser = null;
 
 	public void repoIOS() {
 		footerText = "//*[@placeholder='Username']";
@@ -37,29 +40,31 @@ public class ElementRepository {
 		spasswordnext = "//*[@id='submitButton']";
 
 		footerText = "//*[@class='row footerStripe']/div[1]";
-		ko365="//div[@class='loginButton microsoft']";
-		koenteremail="//input[@name='loginfmt']";
-		kousernext="//input[@value='Next']";
+		ko365 = "//div[@class='loginButton microsoft']";
+		koenteremail = "//input[@name='loginfmt']";
+		kousernext = "//input[@value='Next']";
 		kuser = "//input[@placeholder='Enter your email']";
 		kloginnext = "//button[@class='signInNext']";
-		konext="//input[@id='idSubmit_ProofUp_Redirect']";
+		konext = "//input[@id='idSubmit_ProofUp_Redirect']";
 		kpwd = "//input[@type='password']";
-		kosignin ="//input[@type='submit']";
-		kstaysignin="//input[@value='Yes']";
-		konext="//input[@value='Next']";
-		
+		kosignin = "//input[@type='submit']";
+		kstaysignin = "//input[@value='Yes']";
+		konext = "//input[@value='Next']";
+
 		ksignwithgoogle = "//div[@class='pull-left googleLoginIconW']";
 		ksignwithgooglepage = "//div[@class='kHn9Lb'][text() = 'Sign in with Google']";
 		kchoosetext = "//h1[@class='ahT6S  y77zqe']";
 		knext = "//div[@class='VfPpkd-RLmnJb']";
 		kselectaccount = "//div[@class='qQWzTd']";
 		kallow = "//span[text()='Allow']";
-		
+
+		klogout = "//i[@class='p-icon pi pi-power-off']";
+		klogoutyes = "//span[text()='Yes']";
 		khistory = "//span[@class='loadHistory']";
 		kheadermenu = "//span[@class='menuTabs']/a";
 		kmplusicon = "//span[@class='p-icon kr-plus']";
-		kmdiscussion="//div[@class='krDropDownMenu']//*[text()='Create a Discussion Room']";
-		kmchat="//div[@class='krDropDownMenu']//*[text()='Crete a new Chat']";
+		kmdiscussion = "//div[@class='krDropDownMenu']//*[text()='Create a Discussion Room']";
+		kmchat = "//div[@class='krDropDownMenu']//*[text()='Crete a new Chat']";
 		kmrecent = "//span[@class='recenText']";
 		kmenterparticipant = "//input[@placeholder='Enter participant name']";
 		kmcloseconversation = "//span[@class='kr-closeBox']";
@@ -78,9 +83,11 @@ public class ElementRepository {
 		km3dotoptions = "//div[@class='krDropDownMenu active  ']//div";
 		kmmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD']//li[@class='dorpDownBoxLI']";
 		kmactiveusericon = "//div[@class='userDetails active']//span[@class='nameAvatar single']";
-		kmrightchaticon="//span[@class='chatUserIcon']";
-		kmatmentionusernames="//table[@class='mentionDialogBoxTable']//span[@class='mentionFullName']";
-		
+		kmrightchaticon = "//span[@class='chatUserIcon']";
+		kmatmentionusernames = "//table[@class='mentionDialogBoxTable']//span[@class='mentionFullName']";
+		kmmessagebubbles = "//div[@class='sendBubble messageBubble saveMsg']";
+		kmfirstactiveuser = "//div[@class='userDetails active']//div[@class='userNameDiv']";
+
 	}
 
 }

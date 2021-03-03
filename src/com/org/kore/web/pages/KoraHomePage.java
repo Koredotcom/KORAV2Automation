@@ -45,19 +45,35 @@ public class KoraHomePage extends PageBase {
 			if (e.getText().trim().equalsIgnoreCase(menuoption)) {
 				flag = true;
 				e.click();
-				System.out.println(menuoption+" option got selected");
+				System.out.println(menuoption + " option got selected");
 				Thread.sleep(1000);
 				test.log(LogStatus.PASS, menuoption + " selected".toString() + test.addScreenCapture(takeScreenShot()));
 				break;
 			}
 		}
 		if (!flag) {
-			System.out.println(menuoption+" option was not selected");
+			System.out.println(menuoption + " option was not selected");
 			test.log(LogStatus.FAIL,
 					menuoption + "  option not selected or it is not available in the options".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 			System.out.println("Reached FailXXXXXXXX, Provided option is not available on the Dom");
 		}
+	}
+
+	/**
+	 * 
+	 * @param option
+	 *            : It will click on this button based on the user provided text
+	 * @param screenshot
+	 *            : If this parameter is true , it will capture screenshot
+	 * @throws Exception
+	 */
+	public void clickOn(String option, boolean screenshot) throws Exception {
+
+		click(er.kmtext + option + "']", option + " tab");
+		if (screenshot)
+			test.log(LogStatus.PASS, "Clicked on " + option, test.addScreenCapture(takeScreenShot()));
+
 	}
 
 }

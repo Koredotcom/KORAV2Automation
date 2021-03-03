@@ -18,9 +18,6 @@ public class ExtentReportUtility extends DriverSetUp {
 			s = new File("ReportGenerator/" + reportFolder + "/TestReport.html").getPath();
 
 			extent = new ExtentReports(s, true, Locale.ENGLISH);
-			// extent.loadConfig(new
-			// File("extent-config.xml").getAbsoluteFile());
-
 			extent.addSystemInfo("Environment", "UAT");
 			extent.assignProject("Kore Application");
 

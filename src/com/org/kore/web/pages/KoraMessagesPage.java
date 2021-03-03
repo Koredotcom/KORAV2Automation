@@ -46,37 +46,43 @@ public class KoraMessagesPage extends PageBase {
 
 	/**
 	 * @Description : To select an option after clicking on plus icon
-	 * @param userchoice : this should be either chat or discussion
+	 * @param userchoice
+	 *            : this should be either chat or discussion
 	 * @throws Exception
 	 */
 	public void newChatOrDiscussion(String userchoice) throws Exception {
 		click(er.kmplusicon, "New Conversation");
-		if (userchoice.equalsIgnoreCase("chat")){
+		if (userchoice.equalsIgnoreCase("chat")) {
 			click(er.kmchat, "Create a new Chat");
-		}else if (userchoice.equalsIgnoreCase("discussion")){
+		} else if (userchoice.equalsIgnoreCase("discussion")) {
 			click(er.kmdiscussion, "Create a Discussion Room");
-		}else {
-			test.log(LogStatus.FAIL, "Please provide valid userchaoice after clicking on + icon".toString() + test.addScreenCapture(takeScreenShot()));
+		} else {
+			test.log(LogStatus.FAIL, "Please provide valid userchaoice after clicking on + icon".toString()
+					+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
-	
+
 	public void checkDefaultFocus_Recents() throws Exception {
 		try {
-		//	click(er.kmplusicon, "New Conversation");
+			// click(er.kmplusicon, "New Conversation");
 			newChatOrDiscussion("chat");
 			Thread.sleep(1500);
 			List<WebElement> recents = remoteDriver.findElements(By.xpath(er.kmrecent));
-			if (recents.size() > 0){
+			if (recents.size() > 0) {
 				test.log(LogStatus.PASS, "On click of + icon default cursor focus is on Enter Participant name field");
-				test.log(LogStatus.PASS, "Displayed " + recents.size() + " Recent suggestions".toString() + test.addScreenCapture(takeScreenShot()));
-			}else {
-				test.log(LogStatus.FAIL, "On click of + icon default cursor focus is not on Enter Participant name field");
-				test.log(LogStatus.FAIL, "Displayed " + recents.size() + " Recent suggestions".toString() + test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.PASS, "Displayed " + recents.size() + " Recent suggestions".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL,
+						"On click of + icon default cursor focus is not on Enter Participant name field");
+				test.log(LogStatus.FAIL, "Displayed " + recents.size() + " Recent suggestions".toString()
+						+ test.addScreenCapture(takeScreenShot()));
 			}
 			click(er.kmcloseconversation, "Close");
 		} catch (Exception e) {
 			click(er.kmcloseconversation, "Close");
-			test.log(LogStatus.FAIL, "Plus icon or close icon elements got updated".toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL, "Plus icon or close icon elements got updated".toString()
+					+ test.addScreenCapture(takeScreenShot()));
 		}
 
 	}
@@ -90,7 +96,7 @@ public class KoraMessagesPage extends PageBase {
 	public void checkMatchesWith(String nameorletter) throws Exception {
 		try {
 			int i = 1;
-			//click(er.kmplusicon, "New Conversation");
+			// click(er.kmplusicon, "New Conversation");
 			newChatOrDiscussion("chat");
 			click(er.kmenterparticipant, "Enter participant name");
 			enterText(er.kmenterparticipant, nameorletter, "xpath", "Participant name");
@@ -138,7 +144,7 @@ public class KoraMessagesPage extends PageBase {
 
 		try {
 			if (plusicon)
-				//click(er.kmplusicon, "New Conversation");
+				// click(er.kmplusicon, "New Conversation");
 				newChatOrDiscussion("chat");
 			click(er.kmenterparticipant, "Enter participant name");
 			if (participantlist.contains(",")) {
@@ -191,7 +197,7 @@ public class KoraMessagesPage extends PageBase {
 			click(er.kmgroupname, "GroupName");
 			Thread.sleep(1000);
 			enterText(er.kmgroupname, groupname, "GroupName");
-			test.log(LogStatus.INFO, "Group created successfully as <b>" + groupname+"</b>".toString());
+			test.log(LogStatus.INFO, "Group created successfully as <b>" + groupname + "</b>".toString());
 			test.log(LogStatus.INFO, test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception e) {
@@ -216,12 +222,40 @@ public class KoraMessagesPage extends PageBase {
 					"Entered message as " + enterthistext + " ".toString() + test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Compose bar or Chat header name is Missing ".toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL,
+					"Compose bar or Chat header name is Missing ".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 		return chatheadername;
 	}
-	
+
+	public String getFirstActiveUser(String expecteduser, boolean check) throws Exception {
+		String activeuser = null;
+		// div[@class='userDetails
+		// active']//div[@class='userNameDiv'][text()='Danny Alexander']
+		try {
+			activeuser = getText(er.kmfirstactiveuser);
+			test.log(LogStatus.INFO,
+					"Current active user is " + activeuser + " ".toString() + test.addScreenCapture(takeScreenShot()));
+			if (check) {
+				boolean actuser = false;
+				actuser = remoteDriver.findElements(By.xpath(er.kmfirstactiveuser + "[text()='" + expecteduser + "']"))
+						.size() > 0;
+				if (actuser == check) {
+					test.log(LogStatus.PASS, "Current active user is " + activeuser + " ".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+				} else {
+					test.log(LogStatus.PASS, "Current active user is not as expected".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+				}
+			}
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"Failed to get active username".toString() + test.addScreenCapture(takeScreenShot()));
+		}
+		return activeuser;
+	}
+
 	/**
 	 * @Description : To get right side profile icons count
 	 * @return
@@ -235,31 +269,30 @@ public class KoraMessagesPage extends PageBase {
 			boolean countavtarflag = false;
 			boolean topavtarflag = false;
 
-			tripleflag = remoteDriver
-					.findElements(By.xpath(er.kmrightchaticon+"//span[@class='nameAvatar triple']"))
+			tripleflag = remoteDriver.findElements(By.xpath(er.kmrightchaticon + "//span[@class='nameAvatar triple']"))
 					.size() > 0;
-			countavtarflag = remoteDriver
-					.findElements(By.xpath(er.kmrightchaticon+"//span[@class='countAvatar']")).size() > 0;
-			topavtarflag = remoteDriver
-					.findElements(By.xpath(er.kmrightchaticon+"//span[@class='topAvatar']")).size() > 0;
+			countavtarflag = remoteDriver.findElements(By.xpath(er.kmrightchaticon + "//span[@class='countAvatar']"))
+					.size() > 0;
+			topavtarflag = remoteDriver.findElements(By.xpath(er.kmrightchaticon + "//span[@class='topAvatar']"))
+					.size() > 0;
 
 			if (tripleflag) {
 
 				if (tripleflag && countavtarflag) {
-					count = getText(er.kmrightchaticon+"//span[@class='countAvatar']");
+					count = getText(er.kmrightchaticon + "//span[@class='countAvatar']");
 					i = Integer.parseInt(count);
 					i = i + 2;
 					test.log(LogStatus.PASS, "This group is having <b>" + i + " </b>participants".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 				} else if ((tripleflag && topavtarflag)) {
-					count = getText(er.kmrightchaticon+"//span[@class='topAvatar']");
+					count = getText(er.kmrightchaticon + "//span[@class='topAvatar']");
 					test.log(LogStatus.PASS, "This group is having only 3 participants".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 					i = 3;
 				}
 
 			} else {
-				count = getText(er.kmrightchaticon+"//span[@class='nameAvatar single']");
+				count = getText(er.kmrightchaticon + "//span[@class='nameAvatar single']");
 				test.log(LogStatus.FAIL,
 						"Seems it is 1 2 1 Conversation. Try with group conversation to work with @mentions functionality "
 								.toString() + test.addScreenCapture(takeScreenShot()));
@@ -278,26 +311,31 @@ public class KoraMessagesPage extends PageBase {
 
 	/**
 	 * @Description : TO validate @ mention functionality
-	 * @param groupcount : Group count will be the input parameter
-	 * @param select : If this is true select user parameter should be mentioned
-	 * @param selectuser : This is mandatory when select is true
+	 * @param groupcount
+	 *            : Group count will be the input parameter
+	 * @param select
+	 *            : If this is true select user parameter should be mentioned
+	 * @param selectuser
+	 *            : This is mandatory when select is true
 	 * @throws Exception
 	 */
 	public void atMentionValidation(int groupcount, boolean select, String selectuser) throws Exception {
 		enterText(er.kmcomposebar, "@", "xpath", "Type your message");
 		List<WebElement> atmentionusers = remoteDriver.findElements(By.xpath(er.kmatmentionusernames));
-		int atsize= atmentionusers.size();
-		if (groupcount==atmentionusers.size()){
+		int atsize = atmentionusers.size();
+		if (groupcount == atmentionusers.size()) {
 			test.log(LogStatus.PASS,
-					"Total participants count and @ mention users count is matchng including Everyone option ".toString() + test.addScreenCapture(takeScreenShot()));
-		}else {
-			test.log(LogStatus.FAIL,
-					"Total participants<b> "+groupcount+"</b> count and @ mention users<b> "+atsize+" </b>count got deviated".toString() + test.addScreenCapture(takeScreenShot()));
+					"Total participants count and @ mention users count is matchng including Everyone option "
+							.toString() + test.addScreenCapture(takeScreenShot()));
+		} else {
+			test.log(LogStatus.FAIL, "Total participants<b> " + groupcount + "</b> count and @ mention users<b> "
+					+ atsize + " </b>count got deviated".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 		if (select)
 			for (WebElement e : atmentionusers) {
 				System.out.println(e.getText());
-				// Here we need to scroll for the element beyond the screen level
+				// Here we need to scroll for the element beyond the screen
+				// level
 				if (e.getText().trim().equalsIgnoreCase(selectuser)) {
 					e.click();
 					break;
@@ -305,7 +343,7 @@ public class KoraMessagesPage extends PageBase {
 			}
 		System.out.println("out of if");
 	}
-	
+
 	/**
 	 * 
 	 * @param groupname
@@ -316,16 +354,20 @@ public class KoraMessagesPage extends PageBase {
 		try {
 			String timestamp = getText(er.kmmidgroup + groupname + "']/..//span[@class='dayTime']");
 			test.log(LogStatus.INFO, "For " + groupname + " Timestamp displayed as : <b>" + timestamp + "</b>");
-			List<WebElement> ele=remoteDriver.findElements(By.xpath("//div[@class='userDetails active']//div[@class='userNameDiv'][text()='AutomationGroup']/../..//div[@class='userChatDEsc']//span"));
+			List<WebElement> ele = remoteDriver.findElements(By.xpath(
+					"//div[@class='userDetails active']//div[@class='userNameDiv'][text()='AutomationGroup']/../..//div[@class='userChatDEsc']//span"));
 			for (WebElement e : ele) {
-					e.getText();
-					test.log(LogStatus.INFO, "For " + groupname + " sender or message displayed as : <b>" + e.getText() + "</b>");
+				e.getText();
+				test.log(LogStatus.INFO,
+						"For " + groupname + " sender or message displayed as : <b>" + e.getText() + "</b>");
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "For " + groupname + " unable to get the Timestamp or user chat descriptions");
 		}
 	}
-//div[@class='userDetails active']//div[@class='userNameDiv'][text()='AutomationGroup']/../..//div[@class='userChatDEsc']//span
+
+	// div[@class='userDetails
+	// active']//div[@class='userNameDiv'][text()='AutomationGroup']/../..//div[@class='userChatDEsc']//span
 	/**
 	 * @param groupname
 	 *            : Actions will perform on this group
@@ -368,18 +410,16 @@ public class KoraMessagesPage extends PageBase {
 					break;
 
 				case "3dots":
-					moveToElement(er.kmmidgroup + groupname
-							+ "']/../../.."+er.km3dots, "xpath");
-					click(er.kmmidgroup + groupname
-							+ "']/../../.."+er.km3dots, "3dots");
+					moveToElement(er.kmmidgroup + groupname + "']/../../.." + er.km3dots, "xpath");
+					click(er.kmmidgroup + groupname + "']/../../.." + er.km3dots, "3dots");
 					break;
 				default:
 					test.log(LogStatus.FAIL, "User provided action is not available");
 				}
 			}
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL,
-					"Unable to click on " + action + "... Seems element got updated ".toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL, "Unable to click on " + action + "... Seems element got updated ".toString()
+					+ test.addScreenCapture(takeScreenShot()));
 		}
 
 	}
@@ -470,8 +510,8 @@ public class KoraMessagesPage extends PageBase {
 			test.log(LogStatus.INFO,
 					"Selected " + operation + " from 3dots ".toString() + test.addScreenCapture(takeScreenShot()));
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Unable to select " + operation + " from 3 dots .. Seems element got updated".toString()
-					+ test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL, "Unable to select " + operation
+					+ " from 3 dots .. Seems element got updated".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 	}
 
@@ -624,37 +664,41 @@ public class KoraMessagesPage extends PageBase {
 			}
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to get Group profile icons of : " + groupname+" ".toString()
+			test.log(LogStatus.FAIL, "Failed to get Group profile icons of : " + groupname + " ".toString()
 					+ test.addScreenCapture(takeScreenShot()));
 		}
 		return allicons;
 	}
-	
+
 	/**
 	 * @Description : Will compare one to conversation profile icon
-	 * @param username : Based this name profile icon will be compared with first character
+	 * @param username
+	 *            : Based this name profile icon will be compared with first
+	 *            character
 	 * @throws Exception
 	 */
-	public void userProfileIconValidation(String username) throws Exception{
+	public void userProfileIconValidation(String username) throws Exception {
 		String expfirstchar = cf.getFirstChar(username);
 		String actfirstchar = getText(er.kmactiveusericon);
 		moveToElement(er.kmactiveusericon, "xpath");
 		Thread.sleep(2000);
-		String onhovericon= getText("//div[@class='circle']", "xpath");
-		
-		if (expfirstchar.equals(actfirstchar)&&(expfirstchar.equals(onhovericon))){
+		String onhovericon = getText("//div[@class='circle']", "xpath");
+
+		if (expfirstchar.equals(actfirstchar) && (expfirstchar.equals(onhovericon))) {
 			test.log(LogStatus.PASS,
-					"For one to conversation with "+username +", Profile icon and onhover icons are matching with first character i.e.<b> "+actfirstchar+"</b>".toString()
-							+ test.addScreenCapture(takeScreenShot()));
+					"For one to conversation with " + username
+							+ ", Profile icon and onhover icons are matching with first character i.e.<b> "
+							+ actfirstchar + "</b>".toString() + test.addScreenCapture(takeScreenShot()));
 			click(er.kmcomposebar, "Type your message");
-		}else {
+		} else {
 			test.log(LogStatus.FAIL,
-					"For one to conversation with "+username +", displayed incorrect Profile icon/onhover icons i.e.<b> "+actfirstchar+"</b>".toString()
-							+ test.addScreenCapture(takeScreenShot()));
+					"For one to conversation with " + username
+							+ ", displayed incorrect Profile icon/onhover icons i.e.<b> " + actfirstchar
+							+ "</b>".toString() + test.addScreenCapture(takeScreenShot()));
 			click(er.kmcomposebar, "Type your message");
-			
+
 		}
-		
+
 	}
 
 	/**
@@ -723,14 +767,16 @@ public class KoraMessagesPage extends PageBase {
 	}
 
 	/**
-	 * @throws Exception 
+	 * @throws Exception
 	 * @Description : To get group updated(info) i.e. if any one added and
 	 *              removed from the group @ : Yet to implement better logic for
 	 *              this
 	 */
 	public void verifyGroupUpdateTimelines(String typeofAmend) throws Exception {
-		waitTillappear("//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
-							+ typeofAmend + "')]", "xpath", "Timeline");
+		waitTillappear(
+				"//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
+						+ typeofAmend + "')]",
+				"xpath", "Timeline");
 		ArrayList<String> timelines = new ArrayList<>();
 		try {
 			moveToElement(
@@ -757,6 +803,22 @@ public class KoraMessagesPage extends PageBase {
 			test.log(LogStatus.FAIL,
 					"Failed to display timeline for amends".toString() + test.addScreenCapture(takeScreenShot()));
 		}
+	}
+
+	public void isMessagesAvaiable(boolean check) throws Exception {
+		boolean isAvailable = false;
+		Thread.sleep(1500);
+		isAvailable = remoteDriver.findElements(By.xpath(er.kmmessagebubbles)).size() > 0;
+		List<WebElement> msgs = remoteDriver.findElements(By.xpath(er.kmmessagebubbles));
+
+		if (isAvailable == check) {
+			test.log(LogStatus.PASS, "Displayed " + msgs.size() + " messages count as expected".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		} else {
+			test.log(LogStatus.FAIL, "Displayed " + msgs.size() + " messages count was not as expected".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}
+
 	}
 
 }

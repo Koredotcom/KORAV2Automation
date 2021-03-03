@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.org.kore.testbase.DriverSetUp;
 import com.org.kore.web.pages.KoraHomePage;
 import com.org.kore.web.pages.KoraLoginPage;
+import com.org.kore.web.pages.KoraManageConversationPage;
 import com.org.kore.web.pages.KoraMessagesPage;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -23,6 +24,9 @@ public class Messages121Test extends DriverSetUp {
 
 	String korausername;
 	String korapassword;
+	
+	String korauserhana;
+	String korapasswordhana;
 
 	static String user = null;
 
@@ -41,6 +45,9 @@ public class Messages121Test extends DriverSetUp {
 
 		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
 		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
+		
+		korauserhana = dr.getValue("KORAV2", "KoraV2hana", "Username");
+		korapasswordhana = dr.getValue("KORAV2", "KoraV2hana", "Password");
 	}
 
 	@Test(enabled = true, priority = 1)
@@ -110,7 +117,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void m_DeleteAndSend() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -121,17 +128,18 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
-			koramessagespage.userProfileIconValidation(user);
+			koramessagespage.getFirstActiveUser(user,true);
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Delete Conversation");
-			// Here need to include delete and resend by login from other user
-			//koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions);
+			korahomepage.clickOn("Delete", true);
+			koramessagespage.getFirstActiveUser(user,false);
+			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");

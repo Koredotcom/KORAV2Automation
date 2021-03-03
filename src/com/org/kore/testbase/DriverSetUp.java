@@ -174,7 +174,7 @@ public class DriverSetUp {
 	public void closeConnections() throws IOException {
 		// stopServer();
 		File htmlFile = new File(ExtentReportUtility.s);
-		System.out.println("_______________This is my latest report_________________"+htmlFile);
+		System.out.println("_______________This is my latest report_________________" + htmlFile);
 		Desktop.getDesktop().browse(htmlFile.toURI());
 
 	}
