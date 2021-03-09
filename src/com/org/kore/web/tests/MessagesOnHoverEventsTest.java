@@ -24,6 +24,8 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 
 	String korausername;
 	String korapassword;
+	
+	static String user = null;
 
 	public MessagesOnHoverEventsTest() throws Exception {
 		super();
@@ -52,12 +54,13 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 			String muteslots = DriverSetUp.testdataMap.get("expectedmuteslots");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(groupname, true, "Mute");
 			koramessagespage.validateMuteSlots(muteslots);
 			extent.endTest(test);
@@ -75,10 +78,11 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(groupname, false, "NA");
 			int totalparticipants=koramessagespage.profileAvtarCount();
 			koramessagespage.atMentionValidation(totalparticipants,false,"NA");
@@ -88,4 +92,37 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 		}
 	}
 	
+	@Test(enabled = true, priority = 17)
+	public void mc_validateStarredChats() throws Exception {
+		
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("KORAV2Messages");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String Starred = DriverSetUp.testdataMap.get("kmstarred");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korausername, korapassword);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
+			koramessagespage.startNewConversationWith(newparticipants, true);
+			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			koramessagespage.goToGroupAndPerform(user, true, "Star");
+			koramessagespage.goToGroupAndPerform(user, true, "Un-Read");
+			korahomepage.selectLeftMenuOption(Starred);
+			koramessagespage.searchAndSelectFrom(Starred, user);
+			koramessagespage.goToGroupAndPerform(user, true, "Unstar");
+			korahomepage.selectLeftMenuOption("Unread");
+			koramessagespage.searchAndSelectFrom("Unread", user);
+			korahomepage.selectLeftMenuOption("All Messages");
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
+		}
+	}
 }

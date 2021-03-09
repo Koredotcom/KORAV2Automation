@@ -59,6 +59,42 @@ public class KoraHomePage extends PageBase {
 			System.out.println("Reached FailXXXXXXXX, Provided option is not available on the Dom");
 		}
 	}
+	
+	/**
+	 * @param menuoption
+	 *            To select left menu options by passing menu text 
+	 * @throws Exception
+	 */
+
+	public void selectLeftMenuOption(String menuoption) throws Exception {
+		boolean flag = false;
+		waitTillappear(er.kheadermenu, "xpath", "Top header");
+		List<WebElement> Menulist = remoteDriver.findElements(By.xpath(er.kmcleftmenu));
+		for (WebElement e : Menulist) {
+			if (e.getText().trim().equalsIgnoreCase(menuoption)) {
+				flag = true;
+				e.click();
+				System.out.println(menuoption + " option got selected");
+				Thread.sleep(1000);
+				test.log(LogStatus.PASS, "Selected <b>"+menuoption+" </b>option from left menu".toString() + test.addScreenCapture(takeScreenShot()));
+				break;
+			}
+		}
+			if(menuoption.equals("All Messages"))
+				menuoption="Search Messages";
+			if(elementIsDisplayed("//*[contains (@placeholder, '"+menuoption+"')]", "xpath")){
+			test.log(LogStatus.PASS, "Searchbox place holder contains "+menuoption);
+			}else {
+				test.log(LogStatus.FAIL, "Searchbox place holder doesnot contains "+menuoption);
+			}
+		if (!flag) {
+			System.out.println(menuoption + " option was not selected");
+			test.log(LogStatus.FAIL,
+					menuoption + "  option not selected or it is not available in the options".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+			System.out.println("Reached FailXXXXXXXX, Provided option is not available on the Dom for left nav");
+		}
+	}
 
 	/**
 	 * 
@@ -70,7 +106,7 @@ public class KoraHomePage extends PageBase {
 	 */
 	public void clickOn(String option, boolean screenshot) throws Exception {
 
-		click(er.kmtext + option + "']", option + " tab");
+		click(er.ktext + option + "']", option + " tab");
 		if (screenshot)
 			test.log(LogStatus.PASS, "Clicked on " + option, test.addScreenCapture(takeScreenShot()));
 

@@ -11,25 +11,23 @@ public class ElementRepository {
 
 	public String suserid = null, susernext = null, spassword = null, spasswordnext = null;
 
-	public String footerText = null, ko365 = null, koenteremail = null, kousernext = null, kuser = null,
-			kloginnext = null, konext = null, kpwd = null, kosignin = null, kstaysignin = null, ksignwithgoogle = null,
-			ksignwithgooglepage = null, knext = null, kchoosetext = null, kselectaccount = null, kallow = null,
-			klogout = null, klogoutyes = null, khistory = null, kheadermenu = null, kmplusicon = null,
-			kmdiscussion = null, kmchat = null, kmrecent = null, kmenterparticipant = null, kmcloseconversation = null,
-			kmsuggestnames = null, kmsuggestmailids = null, kmprofileicon = null, kmcomposebar = null,
-			kmgroupchevronicon = null, kmgroupname = null, kmmidgroup = null, kmmidchatdesc = null, km3dots = null,
-			km3dotoptions = null, kmtext = null, kmmanageclose = null, kmmembername = null, kmmuteslots = null,
-			kmactiveusericon = null, kmrightchaticon = null, kmatmentionusernames = null, kmmessagebubbles = null,
-			kmfirstactiveuser = null;
+	public String ko365 = null, koenteremail = null, kousernext = null, kuser = null, kloginnext = null, konext = null,
+			kpwd = null, kosignin = null, kstaysignin = null, ksignwithgoogle = null, ksignwithgooglepage = null,
+			knext = null, kchoosetext = null, kselectaccount = null, kallow = null, klogout = null, klogoutyes = null,
+			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null, kmcleftmenu = null,
+			kmcplusicon = null, kmchat = null, kmcomposebar = null, kmcrecent = null, kmcenterparticipant = null,
+			kmcloseconversation = null, kmcsuggestnames = null, kmcsuggestmailids = null, kmcprofileicon = null,
+			kmcgroupchevronicon = null, kmcgroupname = null, kmcidgroup = null, kmcidchatdesc = null, kmc3dots = null,
+			kmc3dotoptions = null, kmcmanageclose = null, kmcmembername = null, kmcmuteslots = null,
+			kmcactiveusericon = null, kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null,
+			kmcfirstactiveuser = null, kmcactivebackground = null, kmdiscussion = null,kmplaceholder=null,kmsearchsuggestions=null;
 
 	public void repoIOS() {
-		footerText = "//*[@placeholder='Username']";
 
 	}
 
 	public void repoAnd() {
 
-		footerText = "//*[@class='row footerStripe']/div[1]";
 	}
 
 	public void selWeb() {
@@ -39,7 +37,6 @@ public class ElementRepository {
 		spassword = "//*[@id='password']";
 		spasswordnext = "//*[@id='submitButton']";
 
-		footerText = "//*[@class='row footerStripe']/div[1]";
 		ko365 = "//div[@class='loginButton microsoft']";
 		koenteremail = "//input[@name='loginfmt']";
 		kousernext = "//input[@value='Next']";
@@ -50,43 +47,48 @@ public class ElementRepository {
 		kosignin = "//input[@type='submit']";
 		kstaysignin = "//input[@value='Yes']";
 		konext = "//input[@value='Next']";
-
 		ksignwithgoogle = "//div[@class='pull-left googleLoginIconW']";
 		ksignwithgooglepage = "//div[@class='kHn9Lb'][text() = 'Sign in with Google']";
 		kchoosetext = "//h1[@class='ahT6S  y77zqe']";
 		knext = "//div[@class='VfPpkd-RLmnJb']";
 		kselectaccount = "//div[@class='qQWzTd']";
 		kallow = "//span[text()='Allow']";
-
 		klogout = "//i[@class='p-icon pi pi-power-off']";
 		klogoutyes = "//span[text()='Yes']";
 		khistory = "//span[@class='loadHistory']";
+		ktext = "//*[text()='";
 		kheadermenu = "//span[@class='menuTabs']/a";
-		kmplusicon = "//span[@class='p-icon kr-plus']";
-		kmdiscussion = "//div[@class='krDropDownMenu']//*[text()='Create a Discussion Room']";
+		ksinglquote = "']";
+
+		kmcleftmenu = "//span[@class='p-menuitem-text']";
+		kmcplusicon = "//span[@class='p-icon kr-plus']";
 		kmchat = "//div[@class='krDropDownMenu']//*[text()='Crete a new Chat']";
-		kmrecent = "//span[@class='recenText']";
-		kmenterparticipant = "//input[@placeholder='Enter participant name']";
-		kmcloseconversation = "//span[@class='kr-closeBox']";
-		kmsuggestnames = "//div[@class='p-clearfix userDetailBox']/div[@class='userDetail']";
-		kmsuggestmailids = "//div[@class='p-clearfix userDetailBox']//div[@class='userEmailId']";
-		kmprofileicon = "//div[@class='p-clearfix userDetailBox']/div[@class='userDetail']/../div[@class='circle']";
-		kmgroupchevronicon = "//span[@class='kr-down_arrowBox']";
-		kmgroupname = "//input[@placeholder='Group Name']";
 		kmcomposebar = "//div[@placeholder='Type your message']";
-		kmmidgroup = "//div[@class='userNameDiv'][text()='";
-		kmmidchatdesc = "']/../../..//div[@class='userChatDEsc']";
-		kmtext = "//*[text()='";
-		kmmanageclose = "//button[@aria-label='Close']";
-		kmmembername = "//span[text()='Member']/../../..//div[@class='emailUi']";
-		km3dots = "//div[@class='_content']/i[@class='icon __i kr-ellipsis']";
-		km3dotoptions = "//div[@class='krDropDownMenu active']//div";
-		kmmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD']//li[@class='dorpDownBoxLI']";
-		kmactiveusericon = "//div[@class='userDetails active']//span[@class='nameAvatar single']";
-		kmrightchaticon = "//span[@class='chatUserIcon']";
-		kmatmentionusernames = "//table[@class='mentionDialogBoxTable']//span[@class='mentionFullName']";
-		kmmessagebubbles = "//div[@class='sendBubble messageBubble saveMsg']";
-		kmfirstactiveuser = "//div[@class='userDetails active']//div[@class='userNameDiv']";
+		kmcrecent = "//span[@class='recenText']";
+		kmcenterparticipant = "//input[@placeholder='Enter participant name']";
+		kmcloseconversation = "//span[@class='kr-closeBox']";
+		kmcsuggestnames = "//div[@class='p-clearfix userDetailBox']/div[@class='userDetail']";
+		kmcsuggestmailids = "//div[@class='p-clearfix userDetailBox']//div[@class='userEmailId']";
+		kmcprofileicon = "//div[@class='p-clearfix userDetailBox']/div[@class='userDetail']/../div[@class='circle']";
+		kmcgroupchevronicon = "//span[@class='kr-down_arrowBox']";
+		kmcgroupname = "//input[@placeholder='Group Name']";
+		kmcidgroup = "//div[@class='userNameDiv'][text()='";
+		kmcidchatdesc = "']/../../..//div[@class='userChatDEsc']";
+		kmc3dots = "//div[@class='_content']/i[@class='icon __i kr-ellipsis']";
+		kmc3dotoptions = "//div[@class='krDropDownMenu active']//div";
+		kmcmanageclose = "//button[@aria-label='Close']";
+		kmcmembername = "//span[text()='Member']/../../..//div[@class='emailUi']";
+		kmcmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD']//li[@class='dorpDownBoxLI']";
+		kmcactiveusericon = "//div[@class='userDetails active']//span[@class='nameAvatar single']";
+		kmcrightchaticon = "//span[@class='chatUserIcon']";
+		kmcatmentionusernames = "//table[@class='mentionDialogBoxTable']//span[@class='mentionFullName']";
+		kmcmessagebubbles = "//div[@class='sendBubble messageBubble saveMsg']";
+		kmcfirstactiveuser = "//div[@class='userDetails active']//div[@class='userNameDiv']";
+		kmcactivebackground = "//div[@class='userDetails active']";
+		kmplaceholder="//input[@class='searchInput fullWidth']"; // will remove
+		kmsearchsuggestions="//div[@class='p-menuitem-link']//div[@class='heroText']//*[text()='";
+
+		kmdiscussion = "//div[@class='krDropDownMenu']//*[text()='Create a Discussion Room']";
 
 	}
 

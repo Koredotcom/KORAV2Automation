@@ -64,7 +64,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	/*@Test(enabled = true, priority = 2)
+	@Test(enabled = true, priority = 2)
 	public void mc_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -85,7 +85,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 3)
-	public void mc_TC8_TC9_OneToOneConv_3dotOptions() throws Exception {
+	public void mc_TC8_TC9_TC24_OneToOneConv_3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("KORAV2Messages");
@@ -96,11 +96,13 @@ public class Messages121Test extends DriverSetUp {
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
+			String expbgclr= DriverSetUp.testdataMap.get("expectedlabelbackground");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			koramessagespage.getActiveLabelBackgroundColor(expbgclr);
 			koramessagespage.userProfileIconValidation(user);
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
 			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions);
@@ -139,5 +141,5 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
 		}
-	}*/
+	}
 }

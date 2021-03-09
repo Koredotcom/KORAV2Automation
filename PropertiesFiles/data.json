@@ -40,6 +40,7 @@
 		"updateparticipant":"saishree.mishra@kore.com",
 		"groupchat": "Hi Team! Ignore_Automationmessage",
 		"standardgroupname":"QA Pride",
+		"expectedlabelbackground":"rgba(231, 241, 255, 1)",
 		"expectedoptionsforgroup":"Leave Conversation, Manage Conversation,Clear Chat History",
 		"expectedoptionsfor121":"Clear Chat History, Delete Conversation",
 		"expectedmuteslots":"15 mins, 30 mins, 45 mins, 1 hour, 5 hours, 8 hours, 12 hours"
@@ -51,12 +52,16 @@
 		"onetoonechat": "Hi Danny... Ignore_Automationmessage",
 		"groupname": "AutomationGroup",
 		"renamegroupto":"AutomationGroupRenamed",
-		"groupparticipants": "alexander@koraqa1.com,ab@koraqa1.com,scottbrown@koraqa1.com,charles@koraqa1.com,ginessa@koraqa1.com",
-		"updateparticipant":"hana@koraqa1.com",
+		"groupparticipants": "alexander@koraqa1.com,ab@koraqa1.com,james@koraqa1.com,hana@koraqa1.com",
+		"updateparticipant":"ginessa@koraqa1.com",
 		"groupchat": "Hi Team! Ignore_Automationmessage",
 		"standardgroupname":"QA Pride",
+		"expectedlabelbackground":"rgba(231, 241, 255, 1)",
 		"expectedoptionsforgroup":"Leave Conversation, Manage Conversation,Clear Chat History",
 		"expectedoptionsfor121":"Clear Chat History, Delete Conversation",
+		"kmstarred":"Starred",
+		"kmmuted":"Muted",
+		"kmunread":"Unread",
 		"expectedmuteslots":"15 mins, 30 mins, 45 mins, 1 hour, 5 hours, 8 hours, 12 hours"
 	}
 }

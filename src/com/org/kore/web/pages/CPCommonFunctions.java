@@ -125,5 +125,4 @@ public class CPCommonFunctions extends PageBase {
 		return list;
 		
 	}
-
 }

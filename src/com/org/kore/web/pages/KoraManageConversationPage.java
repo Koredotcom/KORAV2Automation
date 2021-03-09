@@ -67,10 +67,10 @@ public class KoraManageConversationPage extends PageBase {
 			koramessagespage.startNewConversationWith(memberstoadd, false);
 			clickOn("Done", false);
 			validateRecentAddedParticipants(memberstoadd);
-			click(er.kmmanageclose, "Close button");
+			click(er.kmcmanageclose, "Close button");
 
 		} catch (Exception e) {
-			click(er.kmmanageclose, "Close button");
+			click(er.kmcmanageclose, "Close button");
 			test.log(LogStatus.FAIL, "Failed to add participants ".toString(), test.addScreenCapture(takeScreenShot()));
 		}
 	}
@@ -85,7 +85,7 @@ public class KoraManageConversationPage extends PageBase {
 	 */
 	public void clickOn(String option, boolean screenshot) throws Exception {
 
-		click(er.kmtext + option + "']", option + " tab");
+		click(er.ktext + option + "']", option + " tab");
 		if (screenshot)
 			test.log(LogStatus.PASS, "Clicked on " + option, test.addScreenCapture(takeScreenShot()));
 
@@ -100,7 +100,7 @@ public class KoraManageConversationPage extends PageBase {
 	public void validateRecentAddedParticipants(String participant) throws Exception {
 		boolean flag = false;
 		Thread.sleep(1500);
-		moveToElement(er.kmmembername + "[text()='" + participant + "']", "xpath");
+		moveToElement(er.kmcmembername + "[text()='" + participant + "']", "xpath");
 		try {
 			List<WebElement> Menulist = remoteDriver.findElements(By.xpath("//div[@class='emailUi']"));
 			for (WebElement e : Menulist) {
@@ -144,7 +144,7 @@ public class KoraManageConversationPage extends PageBase {
 				test.log(LogStatus.FAIL, "Failed to update the group name as expected from Manage Conversation screen");
 				test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
 			}
-			click(er.kmmanageclose, "Close button");
+			click(er.kmcmanageclose, "Close button");
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -196,7 +196,7 @@ public class KoraManageConversationPage extends PageBase {
 				memb = remoteDriver.findElements(By.xpath("//span[text()='Member']")).size() > 0;
 				if (memb) {
 					clickOn("Member", false);
-					String name = getText(er.kmmembername);
+					String name = getText(er.kmcmembername);
 					clickOn("Remove", false);
 					test.log(LogStatus.INFO, "Removed : " + name);
 					Thread.sleep(1500);
@@ -205,9 +205,9 @@ public class KoraManageConversationPage extends PageBase {
 			} while ((memb));
 			test.log(LogStatus.PASS,
 					"Removed all the members from the group".toString() + test.addScreenCapture(takeScreenShot()));
-			click(er.kmmanageclose, "Close");
+			click(er.kmcmanageclose, "Close");
 		} catch (Exception e) {
-			click(er.kmmanageclose, "Close");
+			click(er.kmcmanageclose, "Close");
 			test.log(LogStatus.FAIL,
 					"Faled to Remove Members of the group".toString() + test.addScreenCapture(takeScreenShot()));
 		}

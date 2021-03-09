@@ -53,11 +53,12 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.getAndValidateGroupIcons(groupname, true, korausername);
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -73,10 +74,11 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.getOnHoverParticipantsCount(groupname, korausername);
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -92,12 +94,13 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsforgroup");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expected3dotoptions);
 			extent.endTest(test);

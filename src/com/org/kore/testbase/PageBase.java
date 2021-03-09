@@ -497,36 +497,31 @@ public class PageBase extends DriverSetUp {
 	}
 
 	public void moveToElement(String locator, String locatorType) throws InterruptedException, Exception {
-		try {
-			if (locatorType.equals("xpath")) {
+		if (locatorType.equals("xpath")) {
 
-				WebElement element = remoteDriver.findElement(By.xpath(locator));
-				Actions actions = new Actions(remoteDriver);
-				actions.moveToElement(element);
-				actions.perform();
-			} else if (locatorType.equals("css")) {
+			WebElement element = remoteDriver.findElement(By.xpath(locator));
+			Actions actions = new Actions(remoteDriver);
+			actions.moveToElement(element);
+			actions.perform();
+		} else if (locatorType.equals("css")) {
 
-				WebElement element = remoteDriver.findElement(By.cssSelector(locator));
-				Actions actions = new Actions(remoteDriver);
-				actions.moveToElement(element);
-				actions.perform();
-			} else if (locatorType.equals("id")) {
+			WebElement element = remoteDriver.findElement(By.cssSelector(locator));
+			Actions actions = new Actions(remoteDriver);
+			actions.moveToElement(element);
+			actions.perform();
+		} else if (locatorType.equals("id")) {
 
-				WebElement element = remoteDriver.findElement(By.id(locator));
-				Actions actions = new Actions(remoteDriver);
-				actions.moveToElement(element);
-				actions.perform();
-			} else if (locatorType.equals("class")) {
+			WebElement element = remoteDriver.findElement(By.id(locator));
+			Actions actions = new Actions(remoteDriver);
+			actions.moveToElement(element);
+			actions.perform();
+		} else if (locatorType.equals("class")) {
 
-				WebElement element = remoteDriver.findElement(By.className(locator));
-				Actions actions = new Actions(remoteDriver);
-				actions.moveToElement(element);
-				actions.perform();
-			}
-		} catch (Exception e) {
-			System.out.println("Failed to move to the emement ");
+			WebElement element = remoteDriver.findElement(By.className(locator));
+			Actions actions = new Actions(remoteDriver);
+			actions.moveToElement(element);
+			actions.perform();
 		}
-
 	}
 
 	public void scrollToElement(String locator, String locatorType) throws InterruptedException {
@@ -897,11 +892,12 @@ public class PageBase extends DriverSetUp {
 				break;
 			}
 
-			test.log(LogStatus.PASS, " Enter text in " + elementName + " successful",
-					test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.PASS, " Entered " + cred + " in " + elementName + "".toString()
+					+ test.addScreenCapture(takeScreenShot()));
 		} catch (Exception exc) {
 
-			test.log(LogStatus.FAIL, "Enter text failed", test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL,
+					"Enter text failed on" + elementName + " ".toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc + " Exception on Verified webelement");
 
 		}
@@ -1171,27 +1167,6 @@ public class PageBase extends DriverSetUp {
 			return false;
 		}
 		return flag;
-
-	}
-
-	public boolean elementIsDisplayedValet(String xpath, String ElementName) throws Exception {
-		try {
-			switch (DriverSetUp.propsMap.get("tool")) {
-
-			case "Appium":
-				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-				break;
-			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 5, 500);
-				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-				break;
-			}
-			return true;
-
-		} catch (Exception exc) {
-			return false;
-		}
 
 	}
 

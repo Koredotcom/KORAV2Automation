@@ -53,13 +53,14 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("groupparticipants");
 			String groupname = DriverSetUp.testdataMap.get("groupname");
 			String grouptext = DriverSetUp.testdataMap.get("groupchat");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			koramessagespage.createGroupAs(groupname);
 			koramessagespage.enterYourMessageAs(grouptext);
@@ -79,11 +80,12 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("groupname");
 			String updatedgroupmems = DriverSetUp.testdataMap.get("updateparticipant");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
 			koramananeconvpage.manageConversationValidations();
@@ -104,11 +106,12 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			String updatedname;
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String renameto = DriverSetUp.testdataMap.get("renamegroupto");
 			String groupname = DriverSetUp.testdataMap.get("groupname");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
 			updatedname = koramananeconvpage.renameGroupAndClose(renameto);
@@ -129,10 +132,11 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
 			koramananeconvpage.removeParticipantsAndClose();
@@ -152,10 +156,11 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Clear Chat History");
 			koramessagespage.checkEmptyScreen();
@@ -174,10 +179,11 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Delete Conversation");
 			koramananeconvpage.clickOn("Delete", true);
@@ -195,12 +201,13 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("groupparticipants");
 			String grouptext = DriverSetUp.testdataMap.get("groupchat");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
-			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			String user = koramessagespage.enterYourMessageAs(grouptext);
 			koramessagespage.verifyGroupCreationTimeline(korausername);
