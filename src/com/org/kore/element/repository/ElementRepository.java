@@ -14,7 +14,7 @@ public class ElementRepository {
 	public String ko365 = null, koenteremail = null, kousernext = null, kuser = null, kloginnext = null, konext = null,
 			kpwd = null, kosignin = null, kstaysignin = null, ksignwithgoogle = null, ksignwithgooglepage = null,
 			knext = null, kchoosetext = null, kselectaccount = null, kallow = null, klogout = null, klogoutyes = null,
-			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null, kmcleftmenu = null,
+			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null,klogo=null, kmcleftmenu = null,
 			kmcplusicon = null, kmchat = null, kmcomposebar = null, kmcrecent = null, kmcenterparticipant = null,
 			kmcloseconversation = null, kmcsuggestnames = null, kmcsuggestmailids = null, kmcprofileicon = null,
 			kmcgroupchevronicon = null, kmcgroupname = null, kmcidgroup = null, kmcidchatdesc = null, kmc3dots = null,
@@ -59,6 +59,7 @@ public class ElementRepository {
 		ktext = "//*[text()='";
 		kheadermenu = "//span[@class='menuTabs']/a";
 		ksinglquote = "']";
+		klogo="//span[@class='logoSpan']";
 
 		kmcleftmenu = "//span[@class='p-menuitem-text']";
 		kmcplusicon = "//span[@class='p-icon kr-plus']";
@@ -78,7 +79,7 @@ public class ElementRepository {
 		kmc3dotoptions = "//div[@class='krDropDownMenu active']//div";
 		kmcmanageclose = "//button[@aria-label='Close']";
 		kmcmembername = "//span[text()='Member']/../../..//div[@class='emailUi']";
-		kmcmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD']//li[@class='dorpDownBoxLI']";
+		kmcmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD overflow']//li[@class='dorpDownBoxLI']";
 		kmcactiveusericon = "//div[@class='userDetails active']//span[@class='nameAvatar single']";
 		kmcrightchaticon = "//span[@class='chatUserIcon']";
 		kmcatmentionusernames = "//table[@class='mentionDialogBoxTable']//span[@class='mentionFullName']";

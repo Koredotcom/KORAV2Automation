@@ -125,7 +125,7 @@ public class PageBase extends DriverSetUp {
 				System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("winchromeDriverPath"));
 
 				ChromeOptions options = new ChromeOptions();
-				// options.addArguments("user-data-dir=/path/to/your/custom/profile");
+				options.addArguments("user-data-dir=/path/to/your/custom/profile");
 				options.addArguments("--profile-directory=Default");
 				options.addArguments("--whitelisted-ips");
 				options.addArguments("--disable-plugins-discovery");
@@ -892,8 +892,7 @@ public class PageBase extends DriverSetUp {
 				break;
 			}
 
-			test.log(LogStatus.PASS, " Entered " + cred + " in " + elementName + "".toString()
-					+ test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.PASS, " Entered " + cred + " in " + elementName);
 		} catch (Exception exc) {
 
 			test.log(LogStatus.FAIL,
@@ -1031,7 +1030,7 @@ public class PageBase extends DriverSetUp {
 			break;
 		case "Selenium":
 
-			WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 5, 500);
+			WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 8, 500);
 			waitSelenium.until(ExpectedConditions.visibilityOf(remoteDriver.findElementByXPath(xpath)));
 			text = remoteDriver.findElementByXPath(xpath).getText();
 

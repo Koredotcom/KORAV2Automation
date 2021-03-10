@@ -61,11 +61,15 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "Mute");
-			koramessagespage.validateMuteSlots(muteslots);
+			koramessagespage.validateAndSelectMuteSlots(muteslots, true);
+			korahomepage.selectLeftMenuOption("Muted");
+			koramessagespage.searchAndSelectFrom("Muted", groupname, true);
+			koramessagespage.goToGroupAndPerform(groupname, true, "UnMute");
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate mute slots");
+			test.log(LogStatus.FAIL, "Failed to validate/select mute slots");
 		}
 	}
 	
@@ -113,16 +117,40 @@ public class MessagesOnHoverEventsTest extends DriverSetUp {
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			koramessagespage.goToGroupAndPerform(user, true, "Star");
-			koramessagespage.goToGroupAndPerform(user, true, "Un-Read");
 			korahomepage.selectLeftMenuOption(Starred);
-			koramessagespage.searchAndSelectFrom(Starred, user);
+			koramessagespage.searchAndSelectFrom(Starred, user, true);
 			koramessagespage.goToGroupAndPerform(user, true, "Unstar");
-			korahomepage.selectLeftMenuOption("Unread");
-			koramessagespage.searchAndSelectFrom("Unread", user);
-			korahomepage.selectLeftMenuOption("All Messages");
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
+			test.log(LogStatus.FAIL, "Failed to validate on hover star/unstar actions");
+		}
+	}
+	
+	@Test(enabled = true, priority = 18)
+	public void mc_validateUnreadChats() throws Exception {
+		
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("KORAV2Messages");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korausername, korapassword);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
+			koramessagespage.startNewConversationWith(newparticipants, true);
+			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			koramessagespage.goToGroupAndPerform(user, true, "Unread");
+			korahomepage.selectLeftMenuOption("Unread");
+			koramessagespage.goToGroupAndPerform(user, false, "na");
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate on hover actions");
 		}
 	}
 }

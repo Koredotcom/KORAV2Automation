@@ -192,7 +192,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate delete conversation flow");
 		}
 	}
-	
+
 	@Test(enabled = true, priority = 11)
 	public void km_createAndDeleteGroupWithNoName() throws Exception {
 		try {

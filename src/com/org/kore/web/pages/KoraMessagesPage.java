@@ -64,7 +64,7 @@ public class KoraMessagesPage extends PageBase {
 
 	public void checkDefaultFocus_Recents() throws Exception {
 		try {
-		//	click(er.kmplusicon, "New Conversation");
+			// click(er.kmplusicon, "New Conversation");
 			newChatOrDiscussion("chat");
 			Thread.sleep(1500);
 			List<WebElement> recents = remoteDriver.findElements(By.xpath(er.kmcrecent));
@@ -96,7 +96,7 @@ public class KoraMessagesPage extends PageBase {
 	public void checkMatchesWith(String nameorletter) throws Exception {
 		try {
 			int i = 1;
-		//	click(er.kmplusicon, "New Conversation");
+			// click(er.kmplusicon, "New Conversation");
 			newChatOrDiscussion("chat");
 			click(er.kmcenterparticipant, "Enter participant name");
 			enterText(er.kmcenterparticipant, nameorletter, "xpath", "Participant name");
@@ -144,7 +144,7 @@ public class KoraMessagesPage extends PageBase {
 
 		try {
 			if (plusicon)
-			//	click(er.kmplusicon, "New Conversation");
+				// click(er.kmplusicon, "New Conversation");
 				newChatOrDiscussion("chat");
 			click(er.kmcenterparticipant, "Enter participant name");
 			if (participantlist.contains(",")) {
@@ -233,24 +233,23 @@ public class KoraMessagesPage extends PageBase {
 		String activeuser = null;
 		try {
 			activeuser = getText(er.kmcfirstactiveuser);
-			test.log(LogStatus.INFO,
-					"Current active user is " + activeuser);
-				boolean	actuser = remoteDriver.findElements(By.xpath(er.kmcfirstactiveuser + "[text()='" + expecteduser + "']"))
-						.size() > 0;
-				if (actuser == check) {
-					test.log(LogStatus.PASS, "Current active user is displayed as expected i.e. <b>" + activeuser + "</b> ".toString()
-							+ test.addScreenCapture(takeScreenShot()));
-				} else {
-					test.log(LogStatus.PASS, "Current active user Actual : "+activeuser+" Expected : "+expecteduser+" ".toString()
-							+ test.addScreenCapture(takeScreenShot()));
-				}
+			test.log(LogStatus.INFO, "Current active user is " + activeuser);
+			boolean actuser = remoteDriver
+					.findElements(By.xpath(er.kmcfirstactiveuser + "[text()='" + expecteduser + "']")).size() > 0;
+			if (actuser == check) {
+				test.log(LogStatus.PASS, "Current active user is displayed as expected i.e. <b>" + activeuser
+						+ "</b> ".toString() + test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.PASS, "Current active user Actual : " + activeuser + " Expected : " + expecteduser
+						+ " ".toString() + test.addScreenCapture(takeScreenShot()));
+			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
 					"Failed to get active username".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 		return activeuser;
 	}
-	
+
 	public String getActiveLabelBackgroundColor(String expected) throws Exception {
 		String actbckgclr = null;
 		try {
@@ -270,8 +269,7 @@ public class KoraMessagesPage extends PageBase {
 		return actbckgclr;
 
 	}
-	
-	
+
 	/**
 	 * @Description : To get right side profile icons count
 	 * @return
@@ -382,8 +380,6 @@ public class KoraMessagesPage extends PageBase {
 		}
 	}
 
-	// div[@class='userDetails
-	// active']//div[@class='userNameDiv'][text()='AutomationGroup']/../..//div[@class='userChatDEsc']//span
 	/**
 	 * @param groupname
 	 *            : Actions will perform on this group
@@ -396,56 +392,86 @@ public class KoraMessagesPage extends PageBase {
 	 */
 	public void goToGroupAndPerform(String groupname, boolean check, String action) throws Exception {
 		moveToElement(er.kmcidgroup + groupname + er.kmcidchatdesc, "xpath");
-		click(er.kmcidgroup + groupname + er.kmcidchatdesc, "Group click");
+		click(er.kmcidgroup + groupname + er.kmcidchatdesc, groupname + " chat");
 		try {
 			if (check) {
 				switch (action.trim()) {
 				case "Star":
 					System.out.println("In Star");
-					moveToElement(er.kmcidgroup + groupname + "']/../../../..//span[@title='Star']", "xpath");
-					moveToElement(er.kmcidgroup + groupname + "']/../../../..//span[@class='icon __i right kr-starred']", "xpath");
-					click(er.kmcidgroup + groupname + "']/../../../..//span[@class='icon __i right kr-starred']", "Star");
+					// moveToElement(er.kmcidgroup + groupname +
+					// "']/../../../..//span[@title='Star']", "xpath");
 					Thread.sleep(1000);
-					test.log(LogStatus.PASS, groupname+" was Starred".toString()
-							+ test.addScreenCapture(takeScreenShot()));
+					moveToElement(
+							er.kmcidgroup + groupname + "']/../../../..//span[@class='icon __i right kr-starred']",
+							"xpath");
+					Thread.sleep(1000);
+					click(er.kmcidgroup + groupname + "']/../../../..//span[@class='icon __i right kr-starred']",
+							"Star");
+					Thread.sleep(1000);
+					test.log(LogStatus.PASS,
+							groupname + " was Starred ".toString() + test.addScreenCapture(takeScreenShot()));
 					break;
 
 				case "Unstar":
 					System.out.println("In Unstar");
-					moveToElement(er.kmcidgroup + groupname + "']/../../../..//span[@title='Unstar']", "xpath");
-					click(er.kmcidgroup + groupname + "']/../../../..//span[@class='icon __i right kr-starred-filled']", "Unstar");
-					test.log(LogStatus.PASS, groupname+" was Unstarred".toString()
-							+ test.addScreenCapture(takeScreenShot()));
+					Thread.sleep(1000);
+					moveToElement(er.kmcidgroup + groupname
+							+ "']/../../../..//span[@class='icon __i right kr-starred-filled']", "xpath");
+					Thread.sleep(1000);
+					click(er.kmcidgroup + groupname + "']/../../../..//span[@class='icon __i right kr-starred-filled']",
+							"Unstar");
+					Thread.sleep(1000);
+					test.log(LogStatus.PASS,
+							groupname + " was Unstarred".toString() + test.addScreenCapture(takeScreenShot()));
 					break;
 
 				case "Mute":
-					moveToElement(er.kmcidgroup + groupname + "']/../../..//i[@class='icon __i kr-audio  ']", "xpath");
-					click(er.kmcidgroup + groupname + "']/../../..//i[@class='icon __i kr-audio  ']", "Mute");
-					test.log(LogStatus.PASS, groupname+" was Muted".toString()
+					moveToElement(er.kmcidgroup + groupname + "']/../../../..//i[@class='icon __i kr-audio  ']",
+							"xpath");
+					Thread.sleep(1000);
+					click(er.kmcidgroup + groupname + "']/../../../..//i[@class='icon __i kr-audio  ']", "Mute");
+					test.log(LogStatus.PASS, groupname + " was displayed with mute slots".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 					break;
 
-				case "read":
+				case "UnMute":
+					moveToElement(er.kmcidgroup + groupname + "']/../../../..//i[@class='icon __i kr-mute']", "xpath");
+					Thread.sleep(1000);
+					click(er.kmcidgroup + groupname + "']/../../../..//i[@class='icon __i kr-mute']", "Mute");
+					test.log(LogStatus.PASS, groupname + " was displayed with mute slots".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+					break;
+
+				case "Read":
 					moveToElement(er.kmcidgroup + groupname + "']/../../../..//i[@title='Read']", "xpath");
+					Thread.sleep(1000);
 					click(er.kmcidgroup + groupname + "']/../../../..//i[@class='icon __i kr-eye-open']", "Read");
-					test.log(LogStatus.PASS, groupname+" has marked as read".toString()
-							+ test.addScreenCapture(takeScreenShot()));
+					test.log(LogStatus.PASS,
+							groupname + " has marked as read".toString() + test.addScreenCapture(takeScreenShot()));
 					break;
 
-				case "unread":
+				case "Unread":
 					System.out.println("In Unread");
-				//	moveToElement(er.kmcidgroup + groupname + "']/../../../..//i[@title='Un-Read']", "xpath");
-					moveToElement(er.kmcidgroup + groupname + "']/../../../..//i[@class='icon __i kr-eyeLash']", "xpath");
-					Thread.sleep(3000);
+					Thread.sleep(1000);
+					moveToElement(er.kmcidgroup + groupname + "']/../../../..//i[@class='icon __i kr-eyeLash']",
+							"xpath");
+					Thread.sleep(1000);
 					click(er.kmcidgroup + groupname + "']/../../../..//i[@class='icon __i kr-eyeLash']", "Un-Read");
-					if(elementIsDisplayed("//div[@class='userNameDiv'][text()='Danny Alexander']/../../..//span[@class='unreadCount']", "Unread count")){
-						String unreadcount=getText("//div[@class='userNameDiv'][text()='Danny Alexander']/../../..//span[@class='unreadCount']");
-						test.log(LogStatus.PASS, groupname+" has marked as Un-Read and the badge count displayed as <b>"+unreadcount+"</b>".toString()
-								+ test.addScreenCapture(takeScreenShot()));
-					}else {
-						test.log(LogStatus.FAIL, groupname+" Badge count was not displayed for unread chat".toString()
-								+ test.addScreenCapture(takeScreenShot()));
+					moveToElement(er.klogo, "Work Assist Logo");
+					click(er.klogo, "Work Assist Logo");
+					Thread.sleep(5000);
+					try {
+						String unreadcount = getText(
+								er.kmcidgroup + groupname + "']/../../..//span[@class='unreadCount']");
+						test.log(LogStatus.PASS,
+								groupname + " has marked as Un-Read and the badge count displayed as <b>" + unreadcount
+										+ "</b>".toString() + test.addScreenCapture(takeScreenShot()));
+					} catch (Exception e) {
+						test.log(LogStatus.FAIL,
+								groupname + " my Badge count was not displayed for unread chat".toString()
+										+ test.addScreenCapture(takeScreenShot()));
 					}
+
 					break;
 
 				case "3dots":
@@ -453,34 +479,61 @@ public class KoraMessagesPage extends PageBase {
 					click(er.kmcidgroup + groupname + "']/../../.." + er.kmc3dots, "3dots");
 					break;
 				default:
-					test.log(LogStatus.FAIL, "User provided on hover action i.e. "+action +" was not selected");
+					test.log(LogStatus.FAIL,
+							"Please provided valid on hover action i.e. , should be match with case value");
 				}
 			}
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "For <b>"+groupname+"</b>Unable to click on <b>" + action + "</b>... Seems element got updated ".toString()
-					+ test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL, "For <b>" + groupname + "</b> Unable to click on <b>" + action
+					+ "</b>... Seems element got updated ".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 	}
-	
-	public void searchAndSelectFrom(String searchfrom, String searchwith) throws Exception{
-		if(searchfrom.equals("All Messages"))
-			searchfrom="Search Messages";
-	//	click("//*[contains (@placeholder, '"+searchfrom+"')]", "Search from "+searchfrom);
-		enterText("//*[contains (@placeholder, '"+searchfrom+"')]", searchwith, "Search from "+searchfrom);
-	//	enterText(er.kmcenterparticipant, participant, "xpath", "Participant name");
+
+	public void searchAndSelectFrom(String searchfrom, String searchwith, boolean expuserdisplay) throws Exception {
+		boolean actuserdisplay = false;
+		if (searchfrom.equals("All Messages"))
+			searchfrom = "Search Messages";
+		enterText("//*[contains (@placeholder, '" + searchfrom + "')]", searchwith, "Search from " + searchfrom);
 		Thread.sleep(1000);
-		click(er.kmsearchsuggestions+searchwith+er.ksinglquote, "Search Suggested user i.e."+searchwith);
-	//	waitTillappear(er.kmsearchsuggestions+searchwith+er.ksinglquote, "xpath", "Suggested emails");
+		actuserdisplay = elementIsDisplayed(er.kmsearchsuggestions + searchwith + er.ksinglquote, "xpath");
+		if (expuserdisplay) {
+			if (actuserdisplay) {
+				test.log(LogStatus.PASS,
+						"From " + searchfrom + " search, expected visibility of thread i.e. <b>" + searchwith + " is : "
+								+ expuserdisplay + "</b> and found --> <b>" + actuserdisplay + "</b>".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+				click(er.kmsearchsuggestions + searchwith + er.ksinglquote, "Search Suggested user i.e." + searchwith);
+
+			} else {
+				test.log(LogStatus.FAIL,
+						"From " + searchfrom + " search, expected visibility of thread i.e. <b>" + searchwith + " is : "
+								+ expuserdisplay + "</b> But found --> <b>" + actuserdisplay + "</b>".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+			}
+		} else if (!expuserdisplay) {
+			if (actuserdisplay) {
+				test.log(LogStatus.FAIL,
+						"From " + searchfrom + " search, expected visibility of thread i.e. <b>" + searchwith + " is : "
+								+ expuserdisplay + "</b> But found --> <b>" + actuserdisplay + "</b>".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+
+			} else {
+				test.log(LogStatus.PASS,
+						"From " + searchfrom + " search, expected visibility of thread i.e. <b>" + searchwith + " is : "
+								+ expuserdisplay + "</b> and found --> <b>" + actuserdisplay + "</b>".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+
+			}
 		}
+	}
 
 	/**
 	 * 
-	 * @param expectedoptions
-	 *            : Getting actual options from testdata json file
-	 * @throws IOException
+	 * @param expectedoptions : Getting actual options from testdata json
+	 * file @throws IOException @throws
 	 */
-	public void validateMuteSlots(String expectedmuteslots) throws IOException {
+	public void validateAndSelectMuteSlots(String expectedmuteslots, boolean select) throws Exception {
 		String[] exp = cf.convertStringstoArray(expectedmuteslots);
 		int i = 0;
 		boolean check = false;
@@ -492,16 +545,21 @@ public class KoraMessagesPage extends PageBase {
 				System.out.println("From applicaton:" + act);
 				check = exp[i].trim().equals(act);
 				if (check) {
-					test.log(LogStatus.PASS, "Expected option : " + exp[i] + "\n" + " Displayed option : " + act);
+					test.log(LogStatus.PASS, "Expected option : " + exp[i] + " --> Displayed option : " + act);
 				} else {
-					test.log(LogStatus.FAIL, "Expected option : " + exp[i] + "\n" + " But, displayed option : " + act);
+					test.log(LogStatus.FAIL, "Expected option : " + exp[i] + " --> But, displayed option : " + act);
 				}
 				i++;
 			}
 			test.log(LogStatus.INFO, "Mute slots".toString() + test.addScreenCapture(takeScreenShot()));
+			if (select) {
+				options.get(0).click();
+				test.log(LogStatus.PASS, "Selected a slot and Muted the thread");
+			}
+
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"Failed to validate mute slots".toString() + test.addScreenCapture(takeScreenShot()));
+					"Failed to validate/select mute slots".toString() + test.addScreenCapture(takeScreenShot()));
 
 		}
 
