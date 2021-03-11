@@ -6,8 +6,7 @@ import org.testng.annotations.Test;
 import com.org.kore.testbase.DriverSetUp;
 import com.org.kore.web.pages.KoraHomePage;
 import com.org.kore.web.pages.KoraLoginPage;
-import com.org.kore.web.pages.KoraManageConversationPage;
-import com.org.kore.web.pages.KoraMessagesPage;
+import com.org.kore.web.pages.KoraMessagesChatsPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
@@ -20,8 +19,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
-	KoraMessagesPage koramessagespage;
-	KoraManageConversationPage koramananeconvpage;
+	KoraMessagesChatsPage koramessagespage;
 
 	String korausername;
 	String korapassword;
@@ -37,8 +35,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 		koraloginpage = new KoraLoginPage(remoteDriver);
 		korahomepage = new KoraHomePage(remoteDriver);
-		koramessagespage = new KoraMessagesPage(remoteDriver);
-		koramananeconvpage = new KoraManageConversationPage(remoteDriver);
+		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 
 		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
 		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");

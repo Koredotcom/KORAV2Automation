@@ -21,11 +21,11 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 
-public class KoraMessagesPage extends PageBase {
+public class KoraMessagesChatsPage extends PageBase {
 	CPCommonFunctions cf;
 	ElementRepository er = DriverSetUp.er;
 
-	public KoraMessagesPage(RemoteWebDriver remoteWebDriver) {
+	public KoraMessagesChatsPage(RemoteWebDriver remoteWebDriver) {
 		super(remoteWebDriver);
 		cf = new CPCommonFunctions(remoteWebDriver);
 		// TODO Auto-generated constructor stub
@@ -37,13 +37,13 @@ public class KoraMessagesPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void messagesScreenValidations() throws Exception {
-	//	waitTillappear(er.kmcplusicon, "xpath", "Plus icon");
-		String plusicon =null;
+		// waitTillappear(er.kmcplusicon, "xpath", "Plus icon");
+		String plusicon = null;
 		plusicon = getAttributeValue(er.kmcplusicon, "title");
 		if (!plusicon.equalsIgnoreCase("New Conversation"))
 			test.log(LogStatus.FAIL, "For plus icon, New conversation text is not displaying".toString()
 					+ test.addScreenCapture(takeScreenShot()));
-		test.log(LogStatus.INFO, "For + icon text displayed as : <b>"+plusicon+"</b>");
+		test.log(LogStatus.INFO, "For + icon text displayed as : <b>" + plusicon + "</b>");
 	}
 
 	/**
@@ -77,8 +77,7 @@ public class KoraMessagesPage extends PageBase {
 			} else {
 				test.log(LogStatus.FAIL, "For a new chat displayed " + recents.size() + " Recent suggestions".toString()
 						+ test.addScreenCapture(takeScreenShot()));
-				test.log(LogStatus.FAIL,
-						"For a new chat default cursor focus is not on Enter Participant name field");
+				test.log(LogStatus.FAIL, "For a new chat default cursor focus is not on Enter Participant name field");
 			}
 			click(er.kmcloseconversation, "Close");
 		} catch (Exception e) {
@@ -469,9 +468,8 @@ public class KoraMessagesPage extends PageBase {
 								groupname + " has marked as Un-Read and the badge count displayed as <b>" + unreadcount
 										+ "</b>".toString() + test.addScreenCapture(takeScreenShot()));
 					} catch (Exception e) {
-						test.log(LogStatus.FAIL,
-								groupname + " Badge count was not displayed for unread chat".toString()
-										+ test.addScreenCapture(takeScreenShot()));
+						test.log(LogStatus.FAIL, groupname + " Badge count was not displayed for unread chat".toString()
+								+ test.addScreenCapture(takeScreenShot()));
 					}
 
 					break;
@@ -533,8 +531,9 @@ public class KoraMessagesPage extends PageBase {
 
 	/**
 	 * 
-	 * @param expectedoptions : Getting actual options from testdata json
-	 * file @throws IOException @throws
+	 * @param expectedoptions
+	 *            : Getting actual options from testdata json file @throws
+	 *            IOException @throws
 	 */
 	public void validateAndSelectMuteSlots(String expectedmuteslots, boolean select) throws Exception {
 		String[] exp = cf.convertStringstoArray(expectedmuteslots);
@@ -582,27 +581,27 @@ public class KoraMessagesPage extends PageBase {
 		boolean check = false;
 		try {
 			List<WebElement> options = remoteDriver.findElements(By.xpath(er.kmc3dotoptions));
-			if(options.size()>0){
-			for (WebElement ele : options) {
-				String act = ele.getText();
-				System.out.println("From applicaton:" + act);
-				check = exp[i].trim().equals(act);
-				if (check) {
-					test.log(LogStatus.PASS,
-							"Expected option : " + exp[i] + "<b>  --></b>" + " displayed option : " + act);
-				} else {
-					test.log(LogStatus.FAIL,
-							"Expected option : " + exp[i] + "<b>  --></b>" + " displayed option : " + act);
+			if (options.size() > 0) {
+				for (WebElement ele : options) {
+					String act = ele.getText();
+					System.out.println("From applicaton:" + act);
+					check = exp[i].trim().equals(act);
+					if (check) {
+						test.log(LogStatus.PASS,
+								"Expected option : " + exp[i] + "<b>  --></b>" + " displayed option : " + act);
+					} else {
+						test.log(LogStatus.FAIL,
+								"Expected option : " + exp[i] + "<b>  --></b>" + " displayed option : " + act);
+					}
+					i++;
 				}
-				i++;
+				test.log(LogStatus.INFO,
+						"For <b>" + typeofConv + "</b> 3 dot options displayed as per the above validation".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL, "For <b>" + typeofConv + "</b> 3 dot options are not displayed".toString()
+						+ test.addScreenCapture(takeScreenShot()));
 			}
-			test.log(LogStatus.INFO,
-					"For <b>" + typeofConv + "</b> 3 dot options displayed as per the above validation".toString()
-							+ test.addScreenCapture(takeScreenShot()));
-			}
-			test.log(LogStatus.FAIL,
-					"For <b>" + typeofConv + "</b> 3 dot options are not displayed".toString()
-							+ test.addScreenCapture(takeScreenShot()));
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Array index out of bounce exception. Issue with test data split".toString()
 					+ test.addScreenCapture(takeScreenShot()));
@@ -621,7 +620,7 @@ public class KoraMessagesPage extends PageBase {
 	 */
 	public void operationsFrom3Dots(String operation) throws Exception {
 		try {
-			click(er.kmc3dotoptions + "[text()='" + operation + "']", "From 3 dots "+operation);
+			click(er.kmc3dotoptions + "[text()='" + operation + "']", "From 3 dots " + operation);
 			Thread.sleep(3000);
 			test.log(LogStatus.PASS,
 					"Selected " + operation + " from 3dots ".toString() + test.addScreenCapture(takeScreenShot()));
@@ -936,5 +935,162 @@ public class KoraMessagesPage extends PageBase {
 		}
 
 	}
+
+	// -------- Below methodss are form KoraManageConversationPage 11-03-2021 -
+	// 17:00 to 17:30 Commit ---------//
+	/**
+	 * @Description : To check manage conversation screen w.r.t available
+	 *              widgets on the screen
+	 * @throws Exception
+	 */
+	public void manageConversationValidations() throws Exception {
+		String manageconvttl = getText("//div[@class='dialog-title']");
+		int size = getSize("//div[@class='addParticipantsCtr-Btn']");
+		if (size > 0)
+			test.log(LogStatus.FAIL, "Add Participants option displayed under General Tab");
+		clickOn("Members", true);
+		String addparticipants = getText("//div[@class='addParticipantsCtr-Btn']");
+		if (!manageconvttl.equalsIgnoreCase("Manage Conversation")
+				|| (!addparticipants.equalsIgnoreCase("Add Participants")))
+			test.log(LogStatus.FAIL, "New conversation text displayed as " + manageconvttl);
+		clickOn("General", true);
+		test.log(LogStatus.INFO, "Manage Conversation title displayed as : <b>" + manageconvttl + "</b> ");
+		test.log(LogStatus.INFO, "Add Participants text displayed as : <b>" + addparticipants + "</b> ");
+	}
+
+	/**
+	 * 
+	 * @param memberstoadd
+	 *            : THese members will be added to group
+	 * @param plusiconclick
+	 *            : If true it will click on plus icon
+	 * @throws Exception
+	 */
+	public void AddParticipantsFromManage(String memberstoadd, boolean plusiconclick) throws Exception {
+		try {
+			clickOn("Members", false);
+			clickOn("Add Participants", true);
+			startNewConversationWith(memberstoadd, false);
+			clickOn("Done", false);
+			validateRecentAddedParticipants(memberstoadd);
+			click(er.kmcmanageclose, "Close button");
+
+		} catch (Exception e) {
+			click(er.kmcmanageclose, "Close button");
+			test.log(LogStatus.FAIL, "Failed to add participants ".toString(), test.addScreenCapture(takeScreenShot()));
+		}
+	}
+
+	/**
+	 * 
+	 * @param option
+	 *            : It will click on this button based on the user provided text
+	 * @param screenshot
+	 *            : If this parameter is true , it will capture screenshot
+	 * @throws Exception
+	 */
+	public void clickOn(String option, boolean screenshot) throws Exception {
+
+		click(er.ktext + option + "']", option + " tab");
+		if (screenshot)
+			test.log(LogStatus.PASS, "Clicked on " + option, test.addScreenCapture(takeScreenShot()));
+
+	}
+
+	/**
+	 * 
+	 * @param participant
+	 *            : Will check this participant added to the group or not
+	 * @throws Exception
+	 */
+	public void validateRecentAddedParticipants(String participant) throws Exception {
+		boolean flag = false;
+		Thread.sleep(1500);
+		moveToElement(er.kmcmembername + "[text()='" + participant + "']", "xpath");
+		try {
+			List<WebElement> Menulist = remoteDriver.findElements(By.xpath("//div[@class='emailUi']"));
+			for (WebElement e : Menulist) {
+				if (e.getText().trim().equalsIgnoreCase(participant)) {
+					flag = true;
+					test.log(LogStatus.INFO, participant + " Added to the Group");
+					test.log(LogStatus.PASS, test.addScreenCapture(takeScreenShot()));
+					break;
+				}
+			}
+			if (!flag) {
+				test.log(LogStatus.FAIL, participant + " was not added to the group");
+				test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
+			}
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Participant mail id element got changed");
+			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * @param renameto
+	 *            : This will rename the group to the user provided name as a
+	 *            parameter
+	 * @return : Return the updated name from the application
+	 * @throws Exception
+	 */
+	public String renameGroupAndClose(String renameto) throws Exception {
+		String updatedname = null;
+		try {
+			click("//input[@placeholder='Group Name']", "xpath");
+			enterText("//input[@placeholder='Group Name']", renameto, "xpath");
+			updatedname = getAttributeValue("//input[@placeholder='Group Name']", "value");
+			System.out.println(updatedname);
+			if (renameto.equals(updatedname)) {
+				test.log(LogStatus.PASS, "Group name Updated successfully as " + updatedname);
+				test.log(LogStatus.PASS, test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL, "Failed to update the group name as expected from Manage Conversation screen");
+				test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
+			}
+			click(er.kmcmanageclose, "Close button");
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return updatedname;
+
+	}
+
+	/**
+	 * @Description : It will remove all the members from the group
+	 * @throws Exception
+	 */
+	public void removeParticipantsAndClose() throws Exception {
+		try {
+			boolean memb = false;
+			test.log(LogStatus.INFO, "Now will remove all the members from the group");
+			clickOn("Members", true);
+			do {
+				memb = remoteDriver.findElements(By.xpath("//span[text()='Member']")).size() > 0;
+				if (memb) {
+					clickOn("Member", false);
+					String name = getText(er.kmcmembername);
+					clickOn("Remove", false);
+					clickOn("Delete", false);
+					test.log(LogStatus.INFO, "Removed : " + name);
+					Thread.sleep(500);
+				}
+			} while ((memb));
+			test.log(LogStatus.PASS,
+					"Removed all the members from the group".toString() + test.addScreenCapture(takeScreenShot()));
+			click(er.kmcmanageclose, "Close");
+		} catch (Exception e) {
+			click(er.kmcmanageclose, "Close");
+			test.log(LogStatus.FAIL,
+					"Faled to Remove Members of the group".toString() + test.addScreenCapture(takeScreenShot()));
+		}
+
+	}
+
+	// -------- Above methodss are form KoraManageConversationPage 11-03-2021 -
+	// 17:00 to 17:30 Commit ---------//
 
 }

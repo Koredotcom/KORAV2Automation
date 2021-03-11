@@ -6,8 +6,7 @@ import org.testng.annotations.Test;
 import com.org.kore.testbase.DriverSetUp;
 import com.org.kore.web.pages.KoraHomePage;
 import com.org.kore.web.pages.KoraLoginPage;
-import com.org.kore.web.pages.KoraManageConversationPage;
-import com.org.kore.web.pages.KoraMessagesPage;
+import com.org.kore.web.pages.KoraMessagesChatsPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
@@ -20,8 +19,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
-	KoraMessagesPage koramessagespage;
-	KoraManageConversationPage koramananeconvpage;
+	KoraMessagesChatsPage koramessagespage;
 
 	String korausername;
 	String korapassword;
@@ -37,8 +35,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 		koraloginpage = new KoraLoginPage(remoteDriver);
 		korahomepage = new KoraHomePage(remoteDriver);
-		koramessagespage = new KoraMessagesPage(remoteDriver);
-		koramananeconvpage = new KoraManageConversationPage(remoteDriver);
+		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 
 		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
 		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
@@ -66,16 +63,16 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			koramessagespage.verifyGroupCreationTimeline(korausername);
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
-			koramananeconvpage.removeParticipantsAndClose();
+			koramessagespage.removeParticipantsAndClose();
 			koramessagespage.enterYourMessageAs("Removed participants");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Clear Conversation History");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Leave Conversation");
-			koramananeconvpage.clickOn("Leave Conversation", true);
+			koramessagespage.clickOn("Leave Conversation", true);
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Delete Conversation");
-			koramananeconvpage.clickOn("Delete", true);
+			koramessagespage.clickOn("Delete", true);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate create new group conversation flow");
@@ -124,8 +121,8 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
-			koramananeconvpage.manageConversationValidations();
-			koramananeconvpage.AddParticipants(updatedgroupmems, false);
+			koramessagespage.manageConversationValidations();
+			koramessagespage.AddParticipantsFromManage(updatedgroupmems, false);
 			koramessagespage.verifyGroupUpdateTimelines("added");
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -150,7 +147,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
-			updatedname = koramananeconvpage.renameGroupAndClose(renameto);
+			updatedname = koramessagespage.renameGroupAndClose(renameto);
 			koramessagespage.goToGroupAndPerform(updatedname, false, "NA");
 			koramessagespage.verifyGroupUpdateTimelines("updated");
 			koramessagespage.enterYourMessageAs("Sending text message after updating the Group");
@@ -175,7 +172,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
-			koramananeconvpage.removeParticipantsAndClose();
+			koramessagespage.removeParticipantsAndClose();
 			koramessagespage.enterYourMessageAs("Removed participants");
 			koramessagespage.verifyGroupUpdateTimelines("removed");
 			extent.endTest(test);
@@ -222,10 +219,10 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Leave Conversation");
-			koramananeconvpage.clickOn("Leave Conversation", true);
+			koramessagespage.clickOn("Leave Conversation", true);
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Delete Conversation");
-			koramananeconvpage.clickOn("Delete", true);
+			koramessagespage.clickOn("Delete", true);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate delete conversation flow");

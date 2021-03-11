@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import com.org.kore.testbase.DriverSetUp;
 import com.org.kore.web.pages.KoraHomePage;
 import com.org.kore.web.pages.KoraLoginPage;
-import com.org.kore.web.pages.KoraMessagesPage;
+import com.org.kore.web.pages.KoraMessagesChatsPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
@@ -19,7 +19,7 @@ public class Messages121Test extends DriverSetUp {
 
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
-	KoraMessagesPage koramessagespage;
+	KoraMessagesChatsPage koramessagespage;
 
 	String korausername;
 	String korapassword;
@@ -37,7 +37,7 @@ public class Messages121Test extends DriverSetUp {
 
 		koraloginpage = new KoraLoginPage(remoteDriver);
 		korahomepage = new KoraHomePage(remoteDriver);
-		koramessagespage = new KoraMessagesPage(remoteDriver);
+		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 
 		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
 		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
