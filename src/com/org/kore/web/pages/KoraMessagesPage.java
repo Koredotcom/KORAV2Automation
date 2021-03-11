@@ -37,11 +37,13 @@ public class KoraMessagesPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void messagesScreenValidations() throws Exception {
-		waitTillappear(er.kmcplusicon, "xpath", "Plus icon");
-		String plusicon = getAttributeValue(er.kmcplusicon, "title");
+	//	waitTillappear(er.kmcplusicon, "xpath", "Plus icon");
+		String plusicon =null;
+		plusicon = getAttributeValue(er.kmcplusicon, "title");
 		if (!plusicon.equalsIgnoreCase("New Conversation"))
-			test.log(LogStatus.FAIL, "New conversation text displayed as " + plusicon);
-		test.log(LogStatus.INFO, "For + icon text displayed as : <b>New Conversation</b> ");
+			test.log(LogStatus.FAIL, "For plus icon, New conversation text is not displaying".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		test.log(LogStatus.INFO, "For + icon text displayed as : <b>"+plusicon+"</b>");
 	}
 
 	/**
@@ -69,14 +71,14 @@ public class KoraMessagesPage extends PageBase {
 			Thread.sleep(1500);
 			List<WebElement> recents = remoteDriver.findElements(By.xpath(er.kmcrecent));
 			if (recents.size() > 0) {
-				test.log(LogStatus.PASS, "On click of + icon default cursor focus is on Enter Participant name field");
-				test.log(LogStatus.PASS, "Displayed " + recents.size() + " Recent suggestions".toString()
+				test.log(LogStatus.PASS, "For a new chat displayed " + recents.size() + " Recent suggestions".toString()
 						+ test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.PASS, "For a new chat default cursor focus is on Enter Participant name field");
 			} else {
-				test.log(LogStatus.FAIL,
-						"On click of + icon default cursor focus is not on Enter Participant name field");
-				test.log(LogStatus.FAIL, "Displayed " + recents.size() + " Recent suggestions".toString()
+				test.log(LogStatus.FAIL, "For a new chat displayed " + recents.size() + " Recent suggestions".toString()
 						+ test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.FAIL,
+						"For a new chat default cursor focus is not on Enter Participant name field");
 			}
 			click(er.kmcloseconversation, "Close");
 		} catch (Exception e) {
@@ -459,7 +461,7 @@ public class KoraMessagesPage extends PageBase {
 					click(er.kmcidgroup + groupname + "']/../../../..//i[@class='icon __i kr-eyeLash']", "Un-Read");
 					moveToElement(er.klogo, "Work Assist Logo");
 					click(er.klogo, "Work Assist Logo");
-					Thread.sleep(5000);
+					Thread.sleep(2000);
 					try {
 						String unreadcount = getText(
 								er.kmcidgroup + groupname + "']/../../..//span[@class='unreadCount']");
@@ -468,15 +470,16 @@ public class KoraMessagesPage extends PageBase {
 										+ "</b>".toString() + test.addScreenCapture(takeScreenShot()));
 					} catch (Exception e) {
 						test.log(LogStatus.FAIL,
-								groupname + " my Badge count was not displayed for unread chat".toString()
+								groupname + " Badge count was not displayed for unread chat".toString()
 										+ test.addScreenCapture(takeScreenShot()));
 					}
 
 					break;
-
 				case "3dots":
-					moveToElement(er.kmcidgroup + groupname + "']/../../.." + er.kmc3dots, "xpath");
-					click(er.kmcidgroup + groupname + "']/../../.." + er.kmc3dots, "3dots");
+					moveToElement(er.kmcidgroup + groupname + "']/.././../../.." + er.kmc3dots, "xpath");
+					Thread.sleep(1000);
+					click(er.kmcidgroup + groupname + "']/.././../../.." + er.kmc3dots, "3dots");
+					Thread.sleep(1000);
 					break;
 				default:
 					test.log(LogStatus.FAIL,
@@ -579,21 +582,26 @@ public class KoraMessagesPage extends PageBase {
 		boolean check = false;
 		try {
 			List<WebElement> options = remoteDriver.findElements(By.xpath(er.kmc3dotoptions));
+			if(options.size()>0){
 			for (WebElement ele : options) {
 				String act = ele.getText();
 				System.out.println("From applicaton:" + act);
 				check = exp[i].trim().equals(act);
 				if (check) {
 					test.log(LogStatus.PASS,
-							"Expected option : " + exp[i] + "<b> --></b>" + " Displayed option : " + act);
+							"Expected option : " + exp[i] + "<b>  --></b>" + " displayed option : " + act);
 				} else {
 					test.log(LogStatus.FAIL,
-							"Expected option : " + exp[i] + "<b> --></b>" + " But, displayed option : " + act);
+							"Expected option : " + exp[i] + "<b>  --></b>" + " displayed option : " + act);
 				}
 				i++;
 			}
 			test.log(LogStatus.INFO,
 					"For <b>" + typeofConv + "</b> 3 dot options displayed as per the above validation".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+			}
+			test.log(LogStatus.FAIL,
+					"For <b>" + typeofConv + "</b> 3 dot options are not displayed".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Array index out of bounce exception. Issue with test data split".toString()
@@ -613,9 +621,9 @@ public class KoraMessagesPage extends PageBase {
 	 */
 	public void operationsFrom3Dots(String operation) throws Exception {
 		try {
-			click(er.kmc3dotoptions + "[text()='" + operation + "']", "xpath");
+			click(er.kmc3dotoptions + "[text()='" + operation + "']", "From 3 dots "+operation);
 			Thread.sleep(3000);
-			test.log(LogStatus.INFO,
+			test.log(LogStatus.PASS,
 					"Selected " + operation + " from 3dots ".toString() + test.addScreenCapture(takeScreenShot()));
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to select " + operation

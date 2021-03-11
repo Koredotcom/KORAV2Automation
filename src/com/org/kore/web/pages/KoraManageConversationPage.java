@@ -198,9 +198,9 @@ public class KoraManageConversationPage extends PageBase {
 					clickOn("Member", false);
 					String name = getText(er.kmcmembername);
 					clickOn("Remove", false);
+					clickOn("Delete", false);
 					test.log(LogStatus.INFO, "Removed : " + name);
-					Thread.sleep(1500);
-					// clickOn("Members", false);
+					Thread.sleep(500);
 				}
 			} while ((memb));
 			test.log(LogStatus.PASS,

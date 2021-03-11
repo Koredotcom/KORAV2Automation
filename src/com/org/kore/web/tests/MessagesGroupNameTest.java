@@ -46,10 +46,47 @@ public class MessagesGroupNameTest extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 5)
-	public void km_createNewGroupConversation() throws Exception {
+	public void MC_TC13_createAndDeleteGroupWithNoName() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String groupname = null;
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String newparticipants = DriverSetUp.testdataMap.get("groupparticipants");
+			String grouptext = DriverSetUp.testdataMap.get("groupchat");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korausername, korapassword);
+			korahomepage.selectMenuOption(Messages);
+			koramessagespage.startNewConversationWith(newparticipants, true);
+			groupname = koramessagespage.enterYourMessageAs(grouptext);
+			koramessagespage.verifyGroupCreationTimeline(korausername);
+			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
+			koramessagespage.operationsFrom3Dots("Manage Conversation");
+			koramananeconvpage.removeParticipantsAndClose();
+			koramessagespage.enterYourMessageAs("Removed participants");
+			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
+			koramessagespage.operationsFrom3Dots("Clear Conversation History");
+			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
+			koramessagespage.operationsFrom3Dots("Leave Conversation");
+			koramananeconvpage.clickOn("Leave Conversation", true);
+			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
+			koramessagespage.operationsFrom3Dots("Delete Conversation");
+			koramananeconvpage.clickOn("Delete", true);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate create new group conversation flow");
+		}
+	}
+
+	@Test(enabled = true, priority = 6)
+	public void MC_TC14_TC15_TC16_TC20_TC21_createNewGroupConversation() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -59,7 +96,6 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			String grouptext = DriverSetUp.testdataMap.get("groupchat");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			koramessagespage.createGroupAs(groupname);
@@ -72,11 +108,11 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 6)
-	public void km_addMemberToGroup() throws Exception {
+	@Test(enabled = true, priority = 7)
+	public void MC_TC17_TC18_TC19_addMemberToGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
+					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -97,11 +133,11 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 7)
-	public void km_renameExistingGroup() throws Exception {
+	@Test(enabled = true, priority = 8)
+	public void MC_TC17_renameExistingGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
+					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String updatedname;
@@ -124,11 +160,11 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 8)
-	public void km_removeParticipantsFromGroup() throws Exception {
+	@Test(enabled = true, priority = 9)
+	public void MC_TC17_removeParticipantsFromGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
+					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -148,11 +184,11 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 9)
-	public void km_clearChatHistory() throws Exception {
+	@Test(enabled = true, priority = 10)
+	public void MC_TC25_TC26_clearChatHistory() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
+					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -162,20 +198,20 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Clear Chat History");
+			koramessagespage.operationsFrom3Dots("Clear Conversation History");
 			koramessagespage.checkEmptyScreen();
 			koramessagespage.visibilityOfComposeBar(true);
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate clear chat history flow");
+			test.log(LogStatus.FAIL, "Failed to validate clear conversation history flow");
 		}
 	}
 
-	@Test(enabled = true, priority = 10)
-	public void km_deleteConversation() throws Exception {
+	@Test(enabled = true, priority = 11)
+	public void MC_TC_27_deleteConversation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
+					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -184,6 +220,9 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
+			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
+			koramessagespage.operationsFrom3Dots("Leave Conversation");
+			koramananeconvpage.clickOn("Leave Conversation", true);
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Delete Conversation");
 			koramananeconvpage.clickOn("Delete", true);
@@ -193,34 +232,4 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 11)
-	public void km_createAndDeleteGroupWithNoName() throws Exception {
-		try {
-			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
-			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-
-			String url = DriverSetUp.propsMap.get("weburl");
-			String Messages = DriverSetUp.testdataMap.get("messages");
-			String newparticipants = DriverSetUp.testdataMap.get("groupparticipants");
-			String grouptext = DriverSetUp.testdataMap.get("groupchat");
-
-			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korausername, korapassword);
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.startNewConversationWith(newparticipants, true);
-			String user = koramessagespage.enterYourMessageAs(grouptext);
-			koramessagespage.verifyGroupCreationTimeline(korausername);
-			koramessagespage.goToGroupAndPerform(user, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Manage Conversation");
-			koramananeconvpage.removeParticipantsAndClose();
-			koramessagespage.enterYourMessageAs("Removed participants");
-			koramessagespage.operationsFrom3Dots("Clear Chat History");
-			koramessagespage.operationsFrom3Dots("Delete Conversation");
-			koramananeconvpage.clickOn("Delete", true);
-			extent.endTest(test);
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate create new group conversation flow");
-		}
-	}
 }

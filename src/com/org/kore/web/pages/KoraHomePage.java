@@ -106,7 +106,7 @@ public class KoraHomePage extends PageBase {
 	 */
 	public void clickOn(String option, boolean screenshot) throws Exception {
 
-		click(er.ktext + option + "']", option + " tab");
+		click(er.ktext + option + "']", option + " option");
 		if (screenshot)
 			test.log(LogStatus.PASS, "Clicked on " + option, test.addScreenCapture(takeScreenShot()));
 

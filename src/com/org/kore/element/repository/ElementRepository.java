@@ -75,8 +75,8 @@ public class ElementRepository {
 		kmcgroupname = "//input[@placeholder='Group Name']";
 		kmcidgroup = "//div[@class='userNameDiv'][text()='";
 		kmcidchatdesc = "']/../../..//div[@class='userChatDEsc']";
-		kmc3dots = "//div[@class='_content']/i[@class='icon __i kr-ellipsis']";
-		kmc3dotoptions = "//div[@class='krDropDownMenu active']//div";
+		kmc3dots = "//div[@class='_content']/i[@class='icon __i kr-ellipsis  ']";
+		kmc3dotoptions = "//div[@class='krDropDownMenu active  ']//div";
 		kmcmanageclose = "//button[@aria-label='Close']";
 		kmcmembername = "//span[text()='Member']/../../..//div[@class='emailUi']";
 		kmcmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD overflow']//li[@class='dorpDownBoxLI']";

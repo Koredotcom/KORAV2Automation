@@ -5,11 +5,11 @@
 		<parameter name="environment" value="QA" />
 		<parameter name="browser" value="chrome" />
 		<classes>
-			<!-- <class name="com.org.kore.web.tests.Messages121Test" /> -->
-			<!-- <class name="com.org.kore.web.tests.MessagesGroupNameTest" />
-			<class name="com.org.kore.web.tests.MessagesOnHoverGroupIcons" />
-			<class name="com.org.kore.web.tests.MessagesOnHoverEventsTest" /> -->
-			<class name="com.org.kore.web.tests.MessagesOnHoverEventsTest" />
+		
+			  <class name="com.org.kore.web.tests.Messages121Test" />
+			<!--  <class name="com.org.kore.web.tests.MessagesGroupNameTest" />
+			<class name="com.org.kore.web.tests.MessagesOnHoverGroupIcons" /> -->
+			
 		</classes>
 	</test> <!-- Sequential Tests -->
 	<test thread-count="2" name="Parallel Tests" parallel="classes">

@@ -44,10 +44,10 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 1)
-	public void mc_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
+	public void MC_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
+					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -56,6 +56,7 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.messagesScreenValidations();
 			koramessagespage.checkDefaultFocus_Recents();
 			extent.endTest(test);
@@ -64,11 +65,11 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	/*@Test(enabled = true, priority = 2)
-	public void mc_TC6_UserSuggestionValidation() throws Exception {
+	@Test(enabled = true, priority = 2)
+	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
+					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -85,10 +86,10 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 3)
-	public void mc_TC8_TC9_TC24_OneToOneConv_3dotOptions() throws Exception {
+	public void MC_TC8_TC9_TC24_OneToOneConv_3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
+					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -113,10 +114,10 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 4)
-	public void mc_TC12_DeleteAndCheckActiveParticipant() throws Exception {
+	public void MC_TC12_DeleteAndCheckActiveParticipant() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("KORAV2Messages");
+					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -125,7 +126,6 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
@@ -141,5 +141,5 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
 		}
-	}*/
+	}
 }
