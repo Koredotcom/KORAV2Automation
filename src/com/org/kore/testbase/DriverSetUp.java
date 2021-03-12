@@ -3,6 +3,10 @@ package com.org.kore.testbase;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -96,7 +100,6 @@ public class DriverSetUp {
 	@BeforeClass
 	public void setUp(ITestContext ctx) throws Exception {
 		try {
-			System.out.println("I am in Before class");
 			// System.out.println(System.getProperty("user.dir"));
 			pb = new PageBase(remoteDriver);
 			System.out.println(this.getClass().getName());
@@ -130,7 +133,6 @@ public class DriverSetUp {
 				appiumDriver = pb.startAppiumDriver(App);
 				break;
 			}
-			System.out.println("End of Before class");
 		} catch (Exception e) {
 			System.out.println(e);
 			// TODO: handle exception
@@ -139,7 +141,6 @@ public class DriverSetUp {
 
 	@AfterClass
 	public void tearDown(ITestContext ctx) throws Exception {
-		System.out.println("I am in After class");
 		switch (App) {
 		case "QA":
 			remoteDriver.quit();
@@ -160,8 +161,6 @@ public class DriverSetUp {
 			remoteDriver.quit();
 			break;
 		}
-		System.out.println("End of After class");
-
 	}
 
 	// @AfterMethod
@@ -171,12 +170,50 @@ public class DriverSetUp {
 	}
 
 	@AfterSuite
+	public void closeConnections() throws Exception{
+		File htmlFile = null;
+		try{
+		Path result = null;
+
+		String dir= System.getProperty("user.dir");
+		
+		htmlFile = new File(ExtentReportUtility.s);
+		System.out.println("____ This is my original path :____ " + htmlFile);
+		String test=htmlFile.toString();
+		
+		String finalpath;
+		finalpath = new File(dir+"/JenkinsReport/TestReport.html").getPath();
+		finalpath.toString();
+
+		File htmlaftercopy = new File(finalpath);
+		
+		try {
+			result = Files.copy(Paths.get(test), Paths.get(finalpath).resolveSibling("TestReport.html"),
+		              StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			System.out.println("Exception while moving file: " + e.getMessage());
+		}
+		if (result != null) {
+			System.out.println("File moved successfully.");
+			System.out.println("____ This is my updated path :____ " + htmlaftercopy);
+			
+			Desktop.getDesktop().browse(htmlFile.toURI());
+			
+		} else {
+			System.out.println("File movement failed.");
+		}
+		
+	}catch(Exception e){
+		Desktop.getDesktop().browse(htmlFile.toURI());
+	}
+	}
+	
+	/*@AfterSuite  // This is working original before moving the report to other location
 	public void closeConnections() throws IOException {
 		// stopServer();
 		File htmlFile = new File(ExtentReportUtility.s);
 		System.out.println("_______________This is my latest report_________________" + htmlFile);
 		Desktop.getDesktop().browse(htmlFile.toURI());
-
-	}
+	}*/
 
 }
