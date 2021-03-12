@@ -12,11 +12,11 @@
 			
 		</classes>
 	</test> <!-- Sequential Tests -->
-	<test thread-count="2" name="Parallel Tests" parallel="classes">
+	<!-- <test thread-count="2" name="Parallel Tests" parallel="classes">
 		<parameter name="environment" value="QA" />
 		<parameter name="browser" value="chrome" />
 		<classes>
-			<!-- <class name="com.org.kore.web.tests.WM121HostTest"/> <class name="com.org.kore.web.tests.WM121RecipientTest"/> -->
+			<class name="com.org.kore.web.tests.WM121HostTest"/> <class name="com.org.kore.web.tests.WM121RecipientTest"/>
 		</classes>
-	</test> <!-- Parallel Tests -->
+	</test> Parallel Tests -->
 </suite> <!-- My Test Suite -->

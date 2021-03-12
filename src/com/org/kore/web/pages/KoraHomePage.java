@@ -56,7 +56,7 @@ public class KoraHomePage extends PageBase {
 			test.log(LogStatus.FAIL,
 					menuoption + "  option not selected or it is not available in the options".toString()
 							+ test.addScreenCapture(takeScreenShot()));
-			System.out.println("Reached FailXXXXXXXX, Provided option is not available on the Dom");
+			System.out.println("Reached FailXXXXXXXX "+menuoption+" is not available on the Dom for top header menu");
 		}
 	}
 	
@@ -90,9 +90,9 @@ public class KoraHomePage extends PageBase {
 		if (!flag) {
 			System.out.println(menuoption + " option was not selected");
 			test.log(LogStatus.FAIL,
-					menuoption + "  option not selected or it is not available in the options".toString()
+					menuoption + "  option not selected or it is not available in the left nav options".toString()
 							+ test.addScreenCapture(takeScreenShot()));
-			System.out.println("Reached FailXXXXXXXX, Provided option is not available on the Dom for left nav");
+			System.out.println("Reached FailXXXXXXXX "+menuoption+" is not available on the Dom for left nav");
 		}
 	}
 
