@@ -14,6 +14,7 @@ import java.util.Map;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -55,6 +56,7 @@ public class DriverSetUp {
 	public static LinkedHashMap<String, String> propsMap = new LinkedHashMap<>();
 	public static LinkedHashMap<String, String> UtilityMap = new LinkedHashMap<>();
 	public static LinkedHashMap<String, String> testdataMap = new LinkedHashMap<>();
+	public static LinkedHashMap<String, String> drdataMap = new LinkedHashMap<>();
 	public static DataReader dr;
 	PageBase pb;
 
@@ -117,6 +119,7 @@ public class DriverSetUp {
 
 			UtilityMap = fu.jsonRead("UTILITIES");
 			testdataMap = fu.jsonRead("TESTDATA");
+			drdataMap= fu.jsonRead("WSTESTDATA");
 
 			switch (App) {
 
@@ -166,8 +169,15 @@ public class DriverSetUp {
 	// @AfterMethod
 	@AfterTest
 	public void flush() {
+		System.out.println("Executes only once after all the TC's");
 		extent.flush();
 	}
+	
+	/*@AfterMethod
+	public void afterMethod(){
+		System.out.println("Executes after every test case");
+	}*/
+	
 
 	@AfterSuite
 	public void closeConnections() throws Exception{

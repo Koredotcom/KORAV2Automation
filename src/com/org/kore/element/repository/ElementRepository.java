@@ -20,7 +20,11 @@ public class ElementRepository {
 			kmcgroupchevronicon = null, kmcgroupname = null, kmcidgroup = null, kmcidchatdesc = null, kmc3dots = null,
 			kmc3dotoptions = null, kmcmanageclose = null, kmcmembername = null, kmcmuteslots = null,
 			kmcactiveusericon = null, kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null,
-			kmcfirstactiveuser = null, kmcactivebackground = null, kmdiscussion = null,kmplaceholder=null,kmsearchsuggestions=null;
+			kmcfirstactiveuser = null, kmcactivebackground = null, kmdiscussion = null,kmplaceholder=null,kmsearchsuggestions=null,
+			kwplusicon=null,kwcreatenew=null,kwjoinexisting=null,kworkplaceholder=null,kwdefaulworkspace=null,kwdrheader=null,
+			kworkspaces=null,kwdrgeneral=null,kworkspacename=null,kwleft3dots=null,kwsleft3dotoptions=null,kwyesDeletepopup=null,
+			kwproceed2delete=null,kwdeletewsname=null, kwproceedDelete=null;
+	
 
 	public void repoIOS() {
 
@@ -88,8 +92,24 @@ public class ElementRepository {
 		kmcactivebackground = "//div[@class='userDetails active']";
 		kmplaceholder="//input[@class='searchInput fullWidth']"; // will remove
 		kmsearchsuggestions="//div[@class='p-menuitem-link']//div[@class='heroText']//*[text()='";
-
+		
 		kmdiscussion = "//div[@class='krDropDownMenu']//*[text()='Create a Discussion Room']";
+		
+		kwplusicon="//span[@id='ws-plus-button']";
+		kwcreatenew="//div[@id='ws-plus-cont']//li[text()='Create New']";
+		kwjoinexisting="//div[@id='ws-plus-cont']//li[text()='Join Existing']";
+		kworkplaceholder="//input[@placeholder='Workspace or board']";
+		kwdefaulworkspace="//span[@id='ws-header-name']";
+		kwdrheader="//div[@class='_header']//*[text()='Discussion Rooms']";
+		kwdrgeneral="//div[@class='userNameDiv'][text()='General']";
+		kworkspaces="//span[@class='p-menuitem-text ws-name-ellipsis']";
+		kworkspacename="//span[@class='p-menuitem-text ws-name-ellipsis'][text()='";
+		kwleft3dots="/../..//span[@class='p-icon right kr-ellipsis']";
+		kwsleft3dotoptions="//div[@class='ws-plus-cont']//li[text()='";
+		kwyesDeletepopup="//*[text()='Yes, Delete Workspace']";
+		kwproceed2delete="kwproceed2delete";
+		kwdeletewsname="//input[@class='deleteCnfInput ']";
+		kwproceedDelete="//*[text()='Proceed to Delete']";
 
 	}
 

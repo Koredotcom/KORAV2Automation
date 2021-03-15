@@ -19,6 +19,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
@@ -887,6 +888,7 @@ public class PageBase extends DriverSetUp {
 
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+				remoteDriver.findElement(By.xpath(locator)).click();
 				remoteDriver.findElement(By.xpath(locator)).clear();
 				remoteDriver.findElement(By.xpath(locator)).sendKeys(cred);
 				break;
@@ -895,6 +897,40 @@ public class PageBase extends DriverSetUp {
 			test.log(LogStatus.PASS, " Entered " + cred + " in " + elementName);
 		} catch (Exception exc) {
 
+			test.log(LogStatus.FAIL,
+					"Enter text failed on" + elementName + " ".toString() + test.addScreenCapture(takeScreenShot()));
+			throw new Exception(exc + " Exception on Verified webelement");
+
+		}
+
+	}
+	public void clearAndenterText(String locator, String cred, String elementName) throws Exception {
+		try {
+			switch (DriverSetUp.propsMap.get("tool")) {
+			case "Appium":
+
+				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+				appiumDriver.findElement(By.xpath(locator)).click();
+				WebElement mele = remoteDriver.findElement(By.xpath(locator));
+				mele.sendKeys(Keys.CONTROL + "a");
+				mele.sendKeys(Keys.DELETE);
+				appiumDriver.findElement(By.xpath(locator)).sendKeys(cred);
+				break;
+			case "Selenium":
+
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
+				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+				remoteDriver.findElement(By.xpath(locator)).click();
+				WebElement ele = remoteDriver.findElement(By.xpath(locator));
+				ele.sendKeys(Keys.CONTROL + "a");
+				ele.sendKeys(Keys.DELETE);
+				remoteDriver.findElement(By.xpath(locator)).sendKeys(cred);
+				test.log(LogStatus.PASS, "Entered as " + cred + " in " + elementName+" ".toString() + test.addScreenCapture(takeScreenShot()));
+				break;
+			}
+
+		} catch (Exception exc) {
 			test.log(LogStatus.FAIL,
 					"Enter text failed on" + elementName + " ".toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc + " Exception on Verified webelement");
@@ -1310,6 +1346,40 @@ public class PageBase extends DriverSetUp {
 		scrollObject.put("element", elementID);
 		scrollObject.put("direction", "down");
 		appiumDriver.executeScript("mobile:scroll", scrollObject);
+	}
+	
+	/**
+	 * 
+	 * @param actual : Actual String to compare with expected
+	 * @param expected : Expected String to compare with actual
+	 * @throws Exception
+	 */
+	public void compareActualExpected(String actual, String expected, String message) throws Exception{
+		if (actual.equalsIgnoreCase(expected)){
+		test.log(LogStatus.PASS, "Actual "+message+actual+", Expected "+message+expected+" <b> both are same as expected<b>".toString()
+				+ test.addScreenCapture(takeScreenShot()));
+		}else {
+			test.log(LogStatus.FAIL, "Actual "+message+actual+", Expected "+message+expected+" <b> both are not different <b>".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param actual : Actual boolean to compare with expected
+	 * @param expected : Expected boolean to compare with actual
+	 * @throws Exception
+	 */
+	public void compareActualExpected(boolean actual, boolean expected, String message) throws Exception{
+		if (actual==expected){
+		test.log(LogStatus.PASS, "Expected "+message+actual+" --> "+message+expected+"".toString()
+				+ test.addScreenCapture(takeScreenShot()));
+		}else {
+			test.log(LogStatus.FAIL,  message+actual+" --> "+message+expected+"".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}
+		
 	}
 
 }

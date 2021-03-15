@@ -1,5 +1,6 @@
 package com.org.kore.web.pages;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -105,7 +106,7 @@ public class CPCommonFunctions extends PageBase {
 			System.out.println("It has only one window");
 		}
 	}
-
+	
 	public String getFirstChar(String input) {
 		char first = input.charAt(0);
 		String myStr = Character.toString(first);

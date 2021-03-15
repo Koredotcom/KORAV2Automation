@@ -66,5 +66,9 @@
 		"kmmuted":"Muted",
 		"kmunread":"Unread",
 		"expectedmuteslots":"15 mins, 30 mins, 45 mins, 1 hour, 5 hours, 8 hours, 12 hours"
+	},
+	"WSTESTDATA": {
+		"workspaces":"Workspaces",
+		"workspacename": "AutomationWorkspace"
 	}
 }
