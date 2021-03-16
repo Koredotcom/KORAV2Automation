@@ -73,6 +73,12 @@ public class KoraWorkspacesPage extends PageBase {
 			return updatedws;
 	}
 	
+	public void selectDefaultDR() throws Exception {
+		click(er.kwdrgeneral, "Default DR i.e. General DR ");
+		test.log(LogStatus.PASS,
+				"Selected default discussion room (General) from workspaces");
+	}
+	
 	// for now not using
 	public void selectWorkspace(String workspacetobeselected) throws Exception {
 			boolean flag = false;
@@ -90,7 +96,7 @@ public class KoraWorkspacesPage extends PageBase {
 			if (!flag) {
 				System.out.println(workspacetobeselected + " ws was not selected");
 				test.log(LogStatus.FAIL,
-						workspacetobeselected + "  option not selected or it is not available in the options".toString()
+						workspacetobeselected + "  ws is not selected or it is not available in the list".toString()
 								+ test.addScreenCapture(takeScreenShot()));
 				System.out.println("Reached FailXXXXXXXX "+workspacetobeselected+" is not available on the Dom for top header menu");
 			}
@@ -138,6 +144,40 @@ public class KoraWorkspacesPage extends PageBase {
 			test.log(LogStatus.FAIL, "Unale to select " + operation
 					+ " from 3 dots .. Seems element got updated".toString() + test.addScreenCapture(takeScreenShot()));
 		}
+	}
+	
+	/**
+	 * 
+	 * @param actual : Actual String to compare with expected
+	 * @param expected : Expected String to compare with actual
+	 * @throws Exception
+	 */
+	public void compareActualExpected(String actual, String expected, String message) throws Exception{
+		if (actual.equalsIgnoreCase(expected)){
+		test.log(LogStatus.PASS, "Actual "+message+actual+", Expected "+message+expected+" <b> both are same as expected<b>".toString()
+				+ test.addScreenCapture(takeScreenShot()));
+		}else {
+			test.log(LogStatus.FAIL, "Actual "+message+actual+", Expected "+message+expected+" <b> both are not different <b>".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param actual : Actual boolean to compare with expected
+	 * @param expected : Expected boolean to compare with actual
+	 * @throws Exception
+	 */
+	public void compareActualExpected(boolean actual, boolean expected, String message) throws Exception{
+		if (actual==expected){
+		test.log(LogStatus.PASS, "Expected "+message+actual+" --> "+message+expected+"".toString()
+				+ test.addScreenCapture(takeScreenShot()));
+		}else {
+			test.log(LogStatus.FAIL,  message+actual+" --> "+message+expected+"".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}
+		
 	}
 	
 }

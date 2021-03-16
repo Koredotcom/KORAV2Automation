@@ -69,6 +69,8 @@
 	},
 	"WSTESTDATA": {
 		"workspaces":"Workspaces",
-		"workspacename": "AutomationWorkspace"
+		"workspacename123": "Automation123",
+		"workspacename8": "Automation8",
+		"workspacename910": "Automation910"
 	}
 }

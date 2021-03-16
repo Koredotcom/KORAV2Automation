@@ -14,7 +14,7 @@ public class ElementRepository {
 	public String ko365 = null, koenteremail = null, kousernext = null, kuser = null, kloginnext = null, konext = null,
 			kpwd = null, kosignin = null, kstaysignin = null, ksignwithgoogle = null, ksignwithgooglepage = null,
 			knext = null, kchoosetext = null, kselectaccount = null, kallow = null, klogout = null, klogoutyes = null,
-			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null,klogo=null, kmcleftmenu = null,
+			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null,klogo=null,kcomposebar=null, kmcleftmenu = null,
 			kmcplusicon = null, kmchat = null, kmcomposebar = null, kmcrecent = null, kmcenterparticipant = null,
 			kmcloseconversation = null, kmcsuggestnames = null, kmcsuggestmailids = null, kmcprofileicon = null,
 			kmcgroupchevronicon = null, kmcgroupname = null, kmcidgroup = null, kmcidchatdesc = null, kmc3dots = null,
@@ -23,7 +23,7 @@ public class ElementRepository {
 			kmcfirstactiveuser = null, kmcactivebackground = null, kmdiscussion = null,kmplaceholder=null,kmsearchsuggestions=null,
 			kwplusicon=null,kwcreatenew=null,kwjoinexisting=null,kworkplaceholder=null,kwdefaulworkspace=null,kwdrheader=null,
 			kworkspaces=null,kwdrgeneral=null,kworkspacename=null,kwleft3dots=null,kwsleft3dotoptions=null,kwyesDeletepopup=null,
-			kwproceed2delete=null,kwdeletewsname=null, kwproceedDelete=null;
+			kwproceed2delete=null,kwdeletewsname=null, kwproceedDelete=null,kwcomposebar=null;
 	
 
 	public void repoIOS() {
@@ -64,6 +64,7 @@ public class ElementRepository {
 		kheadermenu = "//span[@class='menuTabs']/a";
 		ksinglquote = "']";
 		klogo="//span[@class='logoSpan']";
+		kcomposebar="//div[contains(@placeholder,'Type your')]";
 
 		kmcleftmenu = "//span[@class='p-menuitem-text']";
 		kmcplusicon = "//span[@class='p-icon kr-plus']";
@@ -102,7 +103,7 @@ public class ElementRepository {
 		kwdefaulworkspace="//span[@id='ws-header-name']";
 		kwdrheader="//div[@class='_header']//*[text()='Discussion Rooms']";
 		kwdrgeneral="//div[@class='userNameDiv'][text()='General']";
-		kworkspaces="//span[@class='p-menuitem-text ws-name-ellipsis']";
+		kworkspaces="//ul[@class='p-menu-list p-reset']//div[text() = 'Filter By Workspaces']/../..//span[@class='p-menuitem-text ws-name-ellipsis']";
 		kworkspacename="//span[@class='p-menuitem-text ws-name-ellipsis'][text()='";
 		kwleft3dots="/../..//span[@class='p-icon right kr-ellipsis']";
 		kwsleft3dotoptions="//div[@class='ws-plus-cont']//li[text()='";
@@ -110,6 +111,7 @@ public class ElementRepository {
 		kwproceed2delete="kwproceed2delete";
 		kwdeletewsname="//input[@class='deleteCnfInput ']";
 		kwproceedDelete="//*[text()='Proceed to Delete']";
+		kwcomposebar = "//div[@placeholder='Type your post']";
 
 	}
 

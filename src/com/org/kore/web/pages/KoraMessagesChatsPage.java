@@ -215,7 +215,7 @@ public class KoraMessagesChatsPage extends PageBase {
 	public String enterYourMessageAs(String enterthistext) throws Exception {
 		String chatheadername = null;
 		try {
-			WebElement compose = remoteDriver.findElement(By.xpath(er.kmcomposebar));
+			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
 			compose.sendKeys(enterthistext, Keys.ENTER);
 			Thread.sleep(4000);
 			chatheadername = getText("//div[@class='chatHeader']//span");
@@ -663,7 +663,7 @@ public class KoraMessagesChatsPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void visibilityOfComposeBar(boolean display) throws Exception {
-		boolean displayed = cf.elementIsDisplayed(er.kmcomposebar, "xpath");
+		boolean displayed = cf.elementIsDisplayed(er.kcomposebar, "xpath");
 		if (display) {
 			if (displayed) {
 				test.log(LogStatus.PASS,
