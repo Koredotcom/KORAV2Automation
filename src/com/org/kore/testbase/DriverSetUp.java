@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -26,6 +27,7 @@ import com.org.kore.utilities.ExtentReportUtility;
 import com.org.kore.utilities.PropertyLoader;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -38,6 +40,11 @@ public class DriverSetUp {
 	public static String s;
 	public static String reportFolder = "";
 	static Map extentTestMap = new HashMap();
+
+	static int passcount = 0;
+	static int failcount = 0;
+	static int totaltc = 0;
+	static int skipcount = 0;
 
 	public AppiumDriver appiumDriver;
 	public RemoteWebDriver remoteDriver;
@@ -119,7 +126,7 @@ public class DriverSetUp {
 
 			UtilityMap = fu.jsonRead("UTILITIES");
 			testdataMap = fu.jsonRead("TESTDATA");
-			drdataMap= fu.jsonRead("WSTESTDATA");
+			drdataMap = fu.jsonRead("WSTESTDATA");
 
 			switch (App) {
 
@@ -166,64 +173,77 @@ public class DriverSetUp {
 		}
 	}
 
-	// @AfterMethod
 	@AfterTest
 	public void flush() {
-		System.out.println("Executes only once after all the TC's");
+		// System.out.println("Executes only once after all the TC's");
+		System.out.println("Total executed test cases are " + totaltc);
 		extent.flush();
 	}
-	
-	/*@AfterMethod
-	public void afterMethod(){
-		System.out.println("Executes after every test case");
-	}*/
-	
+
+	@AfterMethod // TODO
+	protected void afterMethod(ITestResult result) {
+		LogStatus status = test.getRunStatus();
+		String mystatus = status.toString();
+		if (mystatus.equalsIgnoreCase("pass")) {
+			passcount++;
+		} else if (mystatus.equalsIgnoreCase("fail")) {
+			failcount++;
+		} else {
+			skipcount++;
+		}
+		totaltc = passcount + failcount+skipcount;
+		System.out.println("PASS TC's are :::::: "+passcount);
+		System.out.println("FAIL TC's are :::::: "+failcount);
+		System.out.println("SKIP TC's are :::::: "+failcount);
+		System.out.println("Total TC's are :::::: "+totaltc);
+	}
 
 	@AfterSuite
-	public void closeConnections() throws Exception{
+	public void closeConnections() throws Exception {
 		File htmlFile = null;
-		try{
-		Path result = null;
-
-		String dir= System.getProperty("user.dir");
-		
-		htmlFile = new File(ExtentReportUtility.s);
-		System.out.println("____ This is my original path :____ " + htmlFile);
-		String test=htmlFile.toString();
-		
-		String finalpath;
-		finalpath = new File(dir+"/JenkinsReport/TestReport.html").getPath();
-		finalpath.toString();
-
-		File htmlaftercopy = new File(finalpath);
-		
 		try {
-			result = Files.copy(Paths.get(test), Paths.get(finalpath).resolveSibling("TestReport.html"),
-		              StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-			System.out.println("Exception while moving file: " + e.getMessage());
-		}
-		if (result != null) {
-			System.out.println("File moved successfully.");
-			System.out.println("____ This is my updated path :____ " + htmlaftercopy);
-			
+			Path result = null;
+
+			String dir = System.getProperty("user.dir");
+
+			htmlFile = new File(ExtentReportUtility.s);
+			System.out.println("____ This is my original path :____ " + htmlFile);
+			String test = htmlFile.toString();
+
+			String finalpath;
+			finalpath = new File(dir + "/JenkinsReport/TestReport.html").getPath();
+			finalpath.toString();
+
+			File htmlaftercopy = new File(finalpath);
+
+			try {
+				result = Files.copy(Paths.get(test), Paths.get(finalpath).resolveSibling("TestReport.html"),
+						StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+				System.out.println("Exception while moving file: " + e.getMessage());
+			}
+			if (result != null) {
+				System.out.println("File moved successfully.");
+				System.out.println("____ This is my updated path :____ " + htmlaftercopy);
+
+				Desktop.getDesktop().browse(htmlFile.toURI());
+
+			} else {
+				System.out.println("File movement failed.");
+			}
+
+		} catch (Exception e) {
 			Desktop.getDesktop().browse(htmlFile.toURI());
-			
-		} else {
-			System.out.println("File movement failed.");
 		}
-		
-	}catch(Exception e){
-		Desktop.getDesktop().browse(htmlFile.toURI());
 	}
-	}
-	
-	/*@AfterSuite  // This is working original before moving the report to other location
-	public void closeConnections() throws IOException {
-		// stopServer();
-		File htmlFile = new File(ExtentReportUtility.s);
-		System.out.println("_______________This is my latest report_________________" + htmlFile);
-		Desktop.getDesktop().browse(htmlFile.toURI());
-	}*/
+
+	/*
+	 * @AfterSuite // This is working original before moving the report to other
+	 * location public void closeConnections() throws IOException { //
+	 * stopServer(); File htmlFile = new File(ExtentReportUtility.s);
+	 * System.out.
+	 * println("_______________This is my latest report_________________" +
+	 * htmlFile); Desktop.getDesktop().browse(htmlFile.toURI()); }
+	 */
 
 }

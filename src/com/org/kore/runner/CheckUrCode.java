@@ -14,44 +14,38 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.testng.ITestResult;
+
+import com.relevantcodes.extentreports.LogStatus;
+
 public class CheckUrCode {
 
 	static ArrayList<String> expectedValetNamesList = new ArrayList<String>();
+	
+	static int passcount =0;
+	static int failcount =0;
+	static int othercount =0;
+	static int totalcount =0;
 
-	public static void main(String[] a) throws ParseException {
-		// getFirstChar();
-		// stringsplit();
-		/*totalGroupParticipants();
-		String sample1 = "wwe.sds@cl.com,sdsd.dssds@xcxc.com,dsd.sd@df.com";
-		String sample2 = "sdsd.dds@dd.com,";
-		generateListFromStrings(sample1, sample2);*/
+	public static void main(String[] a) throws Exception {
+		//	copyReportFile();
+
+	}
+
+
+	protected static void afterMethod(String value) throws Exception {
 		
-//		moveReportFile("C:/Users/Jayakrishna.Dandru/git/KORAV2Automation/ReportGenerator/HtmlReport_2021-03-02-11-48-26/Screenshots/TestReport.html",
-		//	 "C:/Users/Jayakrishna.Dandru/git/KORAV2Automation/ReportGenerator/JenkinsReport/TestReport.html");
-		
-		//	moveReportFile("C:/Users/Jayakrishna.Dandru/Desktop/Copy/File1/TestReport.html",
-		//			 "C:/Users/Jayakrishna.Dandru/Desktop/Copy/File2/TestReport.html");
-			
-			copyReportFile();
-
+		/*if(value.equalsIgnoreCase("pass")){
+			passcount++;
+		}else if (value.equalsIgnoreCase("fail")){
+			failcount++;
+		}else {
+			othercount++;
+		}
+		totalcount=passcount+failcount+othercount;*/
 	}
-
-	/*public static void moveReportFile(String src, String dest) {
-	Path result = null;
-	try {
-	//	result = Files.move(Paths.get(src), Paths.get(dest));
-		result = Files.copy(Paths.get(src), Paths.get(dest));
-	} catch (IOException e) {
-		System.out.println("Exception while moving file: " + e.getMessage());
-	}
-	if (result != null) {
-		System.out.println("File moved successfully.");
-	} else {
-		System.out.println("File movement failed.");
-	}
-}*/
-
-
+	
 public static void copyReportFile() {
 	Path result = null;
 	

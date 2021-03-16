@@ -69,8 +69,11 @@
 	},
 	"WSTESTDATA": {
 		"workspaces":"Workspaces",
+		"messages":"Messages",
 		"workspacename123": "Automation123",
+		"workspaceauto": "AutoWorkspace",
 		"workspacename8": "Automation8",
-		"workspacename910": "Automation910"
+		"workspacename910": "Automation910",
+		"workspacemems": "hana@koraqa1.com"
 	}
 }

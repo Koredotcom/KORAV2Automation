@@ -14,17 +14,19 @@ public class ElementRepository {
 	public String ko365 = null, koenteremail = null, kousernext = null, kuser = null, kloginnext = null, konext = null,
 			kpwd = null, kosignin = null, kstaysignin = null, ksignwithgoogle = null, ksignwithgooglepage = null,
 			knext = null, kchoosetext = null, kselectaccount = null, kallow = null, klogout = null, klogoutyes = null,
-			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null,klogo=null,kcomposebar=null, kmcleftmenu = null,
-			kmcplusicon = null, kmchat = null, kmcomposebar = null, kmcrecent = null, kmcenterparticipant = null,
-			kmcloseconversation = null, kmcsuggestnames = null, kmcsuggestmailids = null, kmcprofileicon = null,
-			kmcgroupchevronicon = null, kmcgroupname = null, kmcidgroup = null, kmcidchatdesc = null, kmc3dots = null,
-			kmc3dotoptions = null, kmcmanageclose = null, kmcmembername = null, kmcmuteslots = null,
-			kmcactiveusericon = null, kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null,
-			kmcfirstactiveuser = null, kmcactivebackground = null, kmdiscussion = null,kmplaceholder=null,kmsearchsuggestions=null,
-			kwplusicon=null,kwcreatenew=null,kwjoinexisting=null,kworkplaceholder=null,kwdefaulworkspace=null,kwdrheader=null,
-			kworkspaces=null,kwdrgeneral=null,kworkspacename=null,kwleft3dots=null,kwsleft3dotoptions=null,kwyesDeletepopup=null,
-			kwproceed2delete=null,kwdeletewsname=null, kwproceedDelete=null,kwcomposebar=null;
-	
+			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null, klogo = null, kcomposebar = null,
+			kmcleftmenu = null, kmcplusicon = null, kmchat = null, kmcomposebar = null, kmcrecent = null,
+			kmcenterparticipant = null, kmcloseconversation = null, kmcsuggestnames = null, kmcsuggestmailids = null,
+			kmcprofileicon = null, kmcgroupchevronicon = null, kmcgroupname = null, kmcidgroup = null,
+			kmcidchatdesc = null, kmc3dots = null, kmc3dotoptions = null, kmcmanageclose = null, kmcmembername = null,
+			kmcmuteslots = null, kmcactiveusericon = null, kmcrightchaticon = null, kmcatmentionusernames = null,
+			kmcmessagebubbles = null, kmcfirstactiveuser = null, kmcactivebackground = null, kmdiscussion = null,
+			kmplaceholder = null, kmsearchsuggestions = null, kwplusicon = null, kwcreatenew = null,
+			kwjoinexisting = null, kworkplaceholder = null, kwdefaulworkspace = null, kwdrheader = null,
+			kworkspaces = null, kwdrgeneral = null, kworkspacename = null, kwleft3dots = null,
+			kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null, kwdeletewsname = null,
+			kwproceedDelete = null, kwcomposebar = null, kwinvite = null, kwsearchandaddpeople = null,
+			kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null, kwmemslist = null;
 
 	public void repoIOS() {
 
@@ -63,8 +65,8 @@ public class ElementRepository {
 		ktext = "//*[text()='";
 		kheadermenu = "//span[@class='menuTabs']/a";
 		ksinglquote = "']";
-		klogo="//span[@class='logoSpan']";
-		kcomposebar="//div[contains(@placeholder,'Type your')]";
+		klogo = "//span[@class='logoSpan']";
+		kcomposebar = "//div[contains(@placeholder,'Type your')]";
 
 		kmcleftmenu = "//span[@class='p-menuitem-text']";
 		kmcplusicon = "//span[@class='p-icon kr-plus']";
@@ -91,27 +93,34 @@ public class ElementRepository {
 		kmcmessagebubbles = "//div[@class='sendBubble messageBubble saveMsg']";
 		kmcfirstactiveuser = "//div[@class='userDetails active']//div[@class='userNameDiv']";
 		kmcactivebackground = "//div[@class='userDetails active']";
-		kmplaceholder="//input[@class='searchInput fullWidth']"; // will remove
-		kmsearchsuggestions="//div[@class='p-menuitem-link']//div[@class='heroText']//*[text()='";
-		
+		kmplaceholder = "//input[@class='searchInput fullWidth']"; // will
+																	// remove
+		kmsearchsuggestions = "//div[@class='p-menuitem-link']//div[@class='heroText']//*[text()='";
+
 		kmdiscussion = "//div[@class='krDropDownMenu']//*[text()='Create a Discussion Room']";
-		
-		kwplusicon="//span[@id='ws-plus-button']";
-		kwcreatenew="//div[@id='ws-plus-cont']//li[text()='Create New']";
-		kwjoinexisting="//div[@id='ws-plus-cont']//li[text()='Join Existing']";
-		kworkplaceholder="//input[@placeholder='Workspace or board']";
-		kwdefaulworkspace="//span[@id='ws-header-name']";
-		kwdrheader="//div[@class='_header']//*[text()='Discussion Rooms']";
-		kwdrgeneral="//div[@class='userNameDiv'][text()='General']";
-		kworkspaces="//ul[@class='p-menu-list p-reset']//div[text() = 'Filter By Workspaces']/../..//span[@class='p-menuitem-text ws-name-ellipsis']";
-		kworkspacename="//span[@class='p-menuitem-text ws-name-ellipsis'][text()='";
-		kwleft3dots="/../..//span[@class='p-icon right kr-ellipsis']";
-		kwsleft3dotoptions="//div[@class='ws-plus-cont']//li[text()='";
-		kwyesDeletepopup="//*[text()='Yes, Delete Workspace']";
-		kwproceed2delete="kwproceed2delete";
-		kwdeletewsname="//input[@class='deleteCnfInput ']";
-		kwproceedDelete="//*[text()='Proceed to Delete']";
+
+		kwplusicon = "//span[@id='ws-plus-button']";
+		kwcreatenew = "//div[@id='ws-plus-cont']//li[text()='Create New']";
+		kwjoinexisting = "//div[@id='ws-plus-cont']//li[text()='Join Existing']";
+		kworkplaceholder = "//input[@placeholder='Workspace or board']";
+		kwdefaulworkspace = "//span[@id='ws-header-name']";
+		kwdrheader = "//div[@class='_header']//*[text()='Discussion Rooms']";
+		kwdrgeneral = "//div[@class='userNameDiv'][text()='General']";
+		kworkspaces = "//ul[@class='p-menu-list p-reset']//div[text() = 'Filter By Workspaces']/../..//span[@class='p-menuitem-text ws-name-ellipsis']";
+		kworkspacename = "//span[@class='p-menuitem-text ws-name-ellipsis'][text()='";
+		kwleft3dots = "/../..//span[@class='p-icon right kr-ellipsis']";
+		kwsleft3dotoptions = "//div[@class='ws-plus-cont']//li[text()='";
+		kwyesDeletepopup = "//*[text()='Yes, Delete Workspace']";
+		kwproceed2delete = "kwproceed2delete";
+		kwdeletewsname = "//input[@class='deleteCnfInput ']";
+		kwproceedDelete = "//*[text()='Proceed to Delete']";
 		kwcomposebar = "//div[@placeholder='Type your post']";
+		kwinvite = "//div[@class='zoomValue invite'][text() = 'Invite']";
+		kwsearchandaddpeople = "//input[@placeholder='Search and add people']";
+		kwsuggestedmailids = "//div[@class='member-item-main']//div[@class='member-item-email']";
+		kwinviteclose = "//button[@aria-label='Close']";
+		kwsendinvitation = "//*[text()='Send Invitation']";
+		kwmemslist = "//div[@class='userEmail']";
 
 	}
 

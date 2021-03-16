@@ -46,7 +46,7 @@ public class MessagesDR extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void MDR_TC1_TC2_TC3_TC65_createNewWorkspaceAndDelete() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -70,6 +70,33 @@ public class MessagesDR extends DriverSetUp {
 	}
 	
 	@Test(enabled = true)
+	public void MDR_TC4_TC5_inviteMembersToWorkspaceAndManage() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
+			String workspaceauto = DriverSetUp.drdataMap.get("workspaceauto");
+			String invitemems = DriverSetUp.testdataMap.get("workspacemems");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korausername, korapassword);
+			korahomepage.selectMenuOption(Workspaces);
+			koraworkspacepage.createNewWorkspaceAs(workspaceauto);
+			koraworkspacepage.workspaceDirectInvite(invitemems);
+			koraworkspacepage.clickOnWorkspace3Dots(workspaceauto);
+			koraworkspacepage.operationsFromWS3Dots(workspaceauto,"Manage");
+			koramessagespage.clickOn("Members", true);
+			koraworkspacepage.validateRecentInvites(invitemems);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to invite members to workspace");
+		}
+	}
+	
+	@Test(enabled = false)
 	public void MDR_TC8_filterByWorkspace() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -78,22 +105,26 @@ public class MessagesDR extends DriverSetUp {
 
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
+			String Messages = DriverSetUp.drdataMap.get("messages");
 			String workspacename = DriverSetUp.drdataMap.get("workspacename8");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.createNewWorkspaceAs(workspacename);
-			korahomepage.selectMenuOption(Workspaces);
+			korahomepage.selectMenuOption(Messages);
 			koraworkspacepage.selectWorkspace(workspacename);
 			String wsname=koramessagespage.enterYourMessageAs("My post in "+workspacename);
 			koraworkspacepage.compareActualExpected(wsname, "General", "Default selected workspace is : ");
+			korahomepage.selectMenuOption(Workspaces);
+			koraworkspacepage.clickOnWorkspace3Dots(workspacename);
+			koraworkspacepage.operationsFromWS3Dots(workspacename,"Delete");
 			
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate create new group conversation flow");
+			test.log(LogStatus.FAIL, "Failed to validate from filter y workspace");
 		}
 	}
 	
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void MDR_TC9_TC10_DefaultDRAndTimeline() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
