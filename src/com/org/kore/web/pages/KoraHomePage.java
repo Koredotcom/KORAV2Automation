@@ -56,13 +56,14 @@ public class KoraHomePage extends PageBase {
 			test.log(LogStatus.FAIL,
 					menuoption + "  option not selected or it is not available in the options".toString()
 							+ test.addScreenCapture(takeScreenShot()));
-			System.out.println("Reached FailXXXXXXXX "+menuoption+" is not available on the Dom for top header menu");
+			System.out
+					.println("Reached FailXXXXXXXX " + menuoption + " is not available on the Dom for top header menu");
 		}
 	}
-	
+
 	/**
 	 * @param menuoption
-	 *            To select left menu options by passing menu text 
+	 *            To select left menu options by passing menu text
 	 * @throws Exception
 	 */
 
@@ -76,23 +77,36 @@ public class KoraHomePage extends PageBase {
 				e.click();
 				System.out.println(menuoption + " option got selected");
 				Thread.sleep(1000);
-				test.log(LogStatus.PASS, "Selected <b>"+menuoption+" </b>option from left menu".toString() + test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.PASS, "Selected <b>" + menuoption + " </b>option from left menu".toString()
+						+ test.addScreenCapture(takeScreenShot()));
 				break;
 			}
 		}
-			if(menuoption.equals("All Messages"))
-				menuoption="Search Messages";
-			if(elementIsDisplayed("//*[contains (@placeholder, '"+menuoption+"')]", "xpath")){
-			test.log(LogStatus.PASS, "Searchbox place holder contains "+menuoption);
-			}else {
-				test.log(LogStatus.FAIL, "Searchbox place holder doesnot contains "+menuoption);
-			}
+		if (menuoption.equals("All Messages"))
+			menuoption = "Search Messages";
+		if (elementIsDisplayed("//*[contains (@placeholder, '" + menuoption + "')]", "xpath")) {
+			test.log(LogStatus.PASS, "Searchbox place holder contains " + menuoption);
+		} else {
+			test.log(LogStatus.FAIL, "Searchbox place holder doesnot contains " + menuoption);
+		}
 		if (!flag) {
 			System.out.println(menuoption + " option was not selected");
 			test.log(LogStatus.FAIL,
 					menuoption + "  option not selected or it is not available in the left nav options".toString()
 							+ test.addScreenCapture(takeScreenShot()));
-			System.out.println("Reached FailXXXXXXXX "+menuoption+" is not available on the Dom for left nav");
+			System.out.println("Reached FailXXXXXXXX " + menuoption + " is not available on the Dom for left nav");
+		}
+	}
+
+	public void getActiveOptionFromLeftNav(String menuoption) throws Exception {
+		try {
+			String selectedoption = getText(er.kleftactiveoption);
+			test.log(LogStatus.WARNING, "Current active left nav is <b>" + selectedoption + "</b>".toString()+
+					test.addScreenCapture(takeScreenShot()));
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"Messages left nav is not available in the current screen, check the flow and validate again to get default selected option"
+							.toString() + test.addScreenCapture(takeScreenShot()));
 		}
 	}
 

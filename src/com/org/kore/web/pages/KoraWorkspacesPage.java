@@ -36,12 +36,12 @@ public class KoraWorkspacesPage extends PageBase {
 			click(er.kwplusicon, "Plus icon in workspace ");
 			click(er.kwcreatenew, "Create new workspace ");
 			click(er.kworkplaceholder, "Placeholder Workspace or board");
+			Thread.sleep(2000);
 			workspacename = getText(er.kwdefaulworkspace);
 			if (workspacename.contains("Workspace")) {
 				test.log(LogStatus.PASS, "Default workspace created as " + workspacename + " ".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 			} else {
-
 				test.log(LogStatus.FAIL, "Default workspace is not as expected i.e. " + workspacename + " ".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 			}
@@ -66,6 +66,7 @@ public class KoraWorkspacesPage extends PageBase {
 		String updatedws = null;
 		click(er.kwplusicon, "Plus icon in workspace ");
 		click(er.kwcreatenew, "Create new workspace ");
+		Thread.sleep(2000);
 		clearAndenterText(er.kwdefaulworkspace, createas, " New Workspace");
 		click(er.kworkplaceholder, "Placeholder Workspace or board");
 		updatedws = getText(er.kwdefaulworkspace);
@@ -104,6 +105,7 @@ public class KoraWorkspacesPage extends PageBase {
 
 	public void clickOnWorkspace3Dots(String workspacename) throws Exception {
 		try {
+			Thread.sleep(1000);
 			moveToElement(er.kworkspacename + workspacename + er.ksinglquote, "xpath");
 			click(er.kworkspacename + workspacename + er.ksinglquote, workspacename + " Workspace ");
 			click(er.kworkspacename + workspacename + er.ksinglquote + er.kwleft3dots, "3 dots");
@@ -149,8 +151,8 @@ public class KoraWorkspacesPage extends PageBase {
 	 */
 	public void select(String participant) throws Exception {
 		enterText(er.kwsearchandaddpeople, participant, "xpath", "Member name");
-		Thread.sleep(1000);
-		waitTillappear(er.kwsuggestedmailids, "xpath", "Suggested emails");
+		Thread.sleep(2000);
+		// waitTillappear(er.kwsuggestedmailids, "xpath", "Suggested emails");
 		List<WebElement> mailid = remoteDriver.findElements(By.xpath(er.kwsuggestedmailids));
 		for (WebElement e : mailid) {
 			e.getText().trim();
@@ -201,13 +203,21 @@ public class KoraWorkspacesPage extends PageBase {
 				compareActualExpected(act, "Workspace Name", "Placeholder for delete textbox is : ");
 				clearAndenterText(er.kwdeletewsname, workspacename, "Placeholder to proceed with deletion");
 				click(er.kwproceedDelete, "Proceed to Delete Workspace popup");
+				Thread.sleep(1000);
 				test.log(LogStatus.PASS,
 						workspacename + " Deleted Successfully".toString() + test.addScreenCapture(takeScreenShot()));
 				break;
 
+			case "Manage":
+				System.out.println("In ws Manage");
+				click(er.kwsleft3dotoptions + operation + er.ksinglquote, "Manage");
+				Thread.sleep(1000);
+				test.log(LogStatus.PASS, workspacename + "Navigated to Manage Workspace ".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+				break;
+
 			default:
-				test.log(LogStatus.FAIL,
-						"Please provided valid on hover action i.e. , should be match with case value");
+				test.log(LogStatus.FAIL, "Please provided valid on operation  i.e. , should be match with case value");
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unale to select " + operation

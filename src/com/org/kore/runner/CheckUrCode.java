@@ -1,6 +1,9 @@
 package com.org.kore.runner;
 
+import java.awt.Desktop;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,71 +25,71 @@ import com.relevantcodes.extentreports.LogStatus;
 public class CheckUrCode {
 
 	static ArrayList<String> expectedValetNamesList = new ArrayList<String>();
-	
-	static int passcount =0;
-	static int failcount =0;
-	static int othercount =0;
-	static int totalcount =0;
+
+	static int passcount = 0;
+	static int failcount = 0;
+	static int othercount = 0;
+	static int totalcount = 0;
 
 	public static void main(String[] a) throws Exception {
-		//	copyReportFile();
+		// copyReportFile();
 
-	}
+		int tcount = 100;
 
-
-	protected static void afterMethod(String value) throws Exception {
+		File f = new File("source.html");
+		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		bw.write("<html><head><style>table {font-family: arial, sans-serif; border-collapse: collapse;width: 30%;}td, th {border: 1px solid #dddddd;text-align: center;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head>");
 		
-		/*if(value.equalsIgnoreCase("pass")){
-			passcount++;
-		}else if (value.equalsIgnoreCase("fail")){
-			failcount++;
-		}else {
-			othercount++;
+		bw.write("<body><h2>Work Assist Automation Execution Report</h2>");
+		bw.write(
+				"<table><tr><th>Status</th> <th>Count</th></tr><tr><td>PASS</td><td>"+tcount+"</td></tr><tr><td>FAIL</td><td>5</td></tr><tr><td>TOTAL</td><td>15</td></tr>");
+		bw.write("<table></table>");
+		bw.write("</table></body></html>");
+		bw.close();
+		Desktop.getDesktop().browse(f.toURI());
+	}
+
+	public static void copyReportFile() {
+		Path result = null;
+
+		String dir = System.getProperty("user.dir");
+		System.out.println(dir);
+
+		String source;
+		source = new File(dir + "/ReportGenerator/HtmlReport_2021-03-02-15-41-10/TestReport.html").getPath();
+		source.toString();
+
+		String finalpath;
+		finalpath = new File(dir + "/ReportGenerator/JenkinsReport/TestReport.html").getPath();
+		finalpath.toString();
+
+		/*
+		 * String source; source = new
+		 * File("C:/Users/Jayakrishna.Dandru/Desktop/Copy/File1/TestReport.html"
+		 * ).getPath(); source.toString();
+		 * 
+		 * String finalpath; finalpath = new
+		 * File("C:/Users/Jayakrishna.Dandru/Desktop/Copy/File2/TestReport.html"
+		 * ).getPath(); finalpath.toString();
+		 */
+		try {
+			// result = Files.move(Paths.get(src), Paths.get(dest));
+			result = Files.copy(Paths.get(source), Paths.get(finalpath));
+		} catch (IOException e) {
+			System.out.println("Exception while moving file: " + e.getMessage());
 		}
-		totalcount=passcount+failcount+othercount;*/
+		if (result != null) {
+			System.out.println("File moved successfully.");
+		} else {
+			System.out.println("File movement failed.");
+		}
 	}
-	
-public static void copyReportFile() {
-	Path result = null;
-	
-	String dir= System.getProperty("user.dir");
-	System.out.println(dir);
-	
-	String source;
-	source = new File(dir+"/ReportGenerator/HtmlReport_2021-03-02-15-41-10/TestReport.html").getPath();
-	source.toString();
-	
-	String finalpath;
-	finalpath = new File(dir+"/ReportGenerator/JenkinsReport/TestReport.html").getPath();
-	finalpath.toString();
-	
-	/*String source;
-	source = new File("C:/Users/Jayakrishna.Dandru/Desktop/Copy/File1/TestReport.html").getPath();
-	source.toString();
-	
-	String finalpath;
-	finalpath = new File("C:/Users/Jayakrishna.Dandru/Desktop/Copy/File2/TestReport.html").getPath();
-	finalpath.toString();*/
-	try {
-	//	result = Files.move(Paths.get(src), Paths.get(dest));
-		result = Files.copy(Paths.get(source), Paths.get(finalpath));
-	} catch (IOException e) {
-		System.out.println("Exception while moving file: " + e.getMessage());
+
+	private static void copyFileUsingJava7Files(File source, File dest) throws IOException {
+
+		Files.copy(source.toPath(), dest.toPath());
 	}
-	if (result != null) {
-		System.out.println("File moved successfully.");
-	} else {
-		System.out.println("File movement failed.");
-	}
-}
 
-
-private static void copyFileUsingJava7Files(File source, File dest) throws IOException {
-	
-    Files.copy(source.toPath(), dest.toPath());
-}
-
-	
 	public static void getFirstChar() {
 		String name = "Jaya";
 		char first = name.charAt(0);

@@ -15,7 +15,7 @@ public class ElementRepository {
 			kpwd = null, kosignin = null, kstaysignin = null, ksignwithgoogle = null, ksignwithgooglepage = null,
 			knext = null, kchoosetext = null, kselectaccount = null, kallow = null, klogout = null, klogoutyes = null,
 			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null, klogo = null, kcomposebar = null,
-			kmcleftmenu = null, kmcplusicon = null, kmchat = null, kmcomposebar = null, kmcrecent = null,
+			kleftactiveoption=null,kmcleftmenu = null, kmcplusicon = null, kmchat = null, kmcomposebar = null, kmcrecent = null,
 			kmcenterparticipant = null, kmcloseconversation = null, kmcsuggestnames = null, kmcsuggestmailids = null,
 			kmcprofileicon = null, kmcgroupchevronicon = null, kmcgroupname = null, kmcidgroup = null,
 			kmcidchatdesc = null, kmc3dots = null, kmc3dotoptions = null, kmcmanageclose = null, kmcmembername = null,
@@ -67,6 +67,7 @@ public class ElementRepository {
 		ksinglquote = "']";
 		klogo = "//span[@class='logoSpan']";
 		kcomposebar = "//div[contains(@placeholder,'Type your')]";
+		kleftactiveoption="//li[@class='active p-menuitem']//span[@class='p-menuitem-text']";
 
 		kmcleftmenu = "//span[@class='p-menuitem-text']";
 		kmcplusicon = "//span[@class='p-icon kr-plus']";

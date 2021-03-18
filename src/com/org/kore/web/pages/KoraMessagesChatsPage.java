@@ -230,6 +230,17 @@ public class KoraMessagesChatsPage extends PageBase {
 		return chatheadername;
 	}
 
+	public String getChatHeaderName() throws Exception {
+		String chatheadername = null;
+		try {
+			chatheadername = getText("//div[@class='chatHeader']//span");
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"After creating workspace when user navigates to Messages, chat header is not displaying".toString() + test.addScreenCapture(takeScreenShot()));
+		}
+		return chatheadername;
+	}
+	
 	public String getFirstActiveUser(String expecteduser, boolean check) throws Exception {
 		String activeuser = null;
 		try {

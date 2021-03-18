@@ -1,7 +1,9 @@
 package com.org.kore.testbase;
 
 import java.awt.Desktop;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -191,11 +193,28 @@ public class DriverSetUp {
 		} else {
 			skipcount++;
 		}
-		totaltc = passcount + failcount+skipcount;
-		System.out.println("PASS TC's are :::::: "+passcount);
-		System.out.println("FAIL TC's are :::::: "+failcount);
-		System.out.println("SKIP TC's are :::::: "+failcount);
-		System.out.println("Total TC's are :::::: "+totaltc);
+		totaltc = passcount + failcount + skipcount;
+		System.out.println("PASS TC's are :::::: " + passcount);
+		System.out.println("FAIL TC's are :::::: " + failcount);
+		System.out.println("SKIP/WARNING TC's are :::::: " + skipcount);
+		System.out.println("Total TC's are :::::: " + totaltc);
+	}
+
+	public void customReport() throws Exception {
+		File f = new File("source.html");
+		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		bw.write(
+				"<html><head><style>table {font-family: arial, sans-serif; border-collapse: collapse;width: 30%;}td, th {border: 1px solid #dddddd;text-align: center;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head>");
+
+		bw.write("<body><h2>Work Assist Automation Execution Report</h2>");
+		bw.write("<table><tr><th>Status</th> <th>Count</th></tr><tr><td>PASS</td><td>" + passcount
+				+ "</td></tr><tr><td>FAIL</td><td>" + failcount + "</td></tr><tr><td>TOTAL</td><td>" + totaltc
+				+ "</td></tr>");
+		bw.write("<table></table>");
+		bw.write("</table></body></html>");
+		bw.close();
+		Desktop.getDesktop().browse(f.toURI());
+
 	}
 
 	@AfterSuite
@@ -203,19 +222,14 @@ public class DriverSetUp {
 		File htmlFile = null;
 		try {
 			Path result = null;
-
 			String dir = System.getProperty("user.dir");
-
 			htmlFile = new File(ExtentReportUtility.s);
 			System.out.println("____ This is my original path :____ " + htmlFile);
 			String test = htmlFile.toString();
-
 			String finalpath;
 			finalpath = new File(dir + "/JenkinsReport/TestReport.html").getPath();
 			finalpath.toString();
-
 			File htmlaftercopy = new File(finalpath);
-
 			try {
 				result = Files.copy(Paths.get(test), Paths.get(finalpath).resolveSibling("TestReport.html"),
 						StandardCopyOption.REPLACE_EXISTING);
