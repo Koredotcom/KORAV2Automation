@@ -15,18 +15,19 @@ public class ElementRepository {
 			kpwd = null, kosignin = null, kstaysignin = null, ksignwithgoogle = null, ksignwithgooglepage = null,
 			knext = null, kchoosetext = null, kselectaccount = null, kallow = null, klogout = null, klogoutyes = null,
 			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null, klogo = null, kcomposebar = null,
-			kleftactiveoption=null,kmcleftmenu = null, kmcplusicon = null, kmchat = null, kmcomposebar = null, kmcrecent = null,
-			kmcenterparticipant = null, kmcloseconversation = null, kmcsuggestnames = null, kmcsuggestmailids = null,
-			kmcprofileicon = null, kmcgroupchevronicon = null, kmcgroupname = null, kmcidgroup = null,
-			kmcidchatdesc = null, kmc3dots = null, kmc3dotoptions = null, kmcmanageclose = null, kmcmembername = null,
-			kmcmuteslots = null, kmcactiveusericon = null, kmcrightchaticon = null, kmcatmentionusernames = null,
-			kmcmessagebubbles = null, kmcfirstactiveuser = null, kmcactivebackground = null, kmdiscussion = null,
-			kmplaceholder = null, kmsearchsuggestions = null, kwplusicon = null, kwcreatenew = null,
-			kwjoinexisting = null, kworkplaceholder = null, kwdefaulworkspace = null, kwdrheader = null,
-			kworkspaces = null, kwdrgeneral = null, kworkspacename = null, kwleft3dots = null,
-			kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null, kwdeletewsname = null,
-			kwproceedDelete = null, kwcomposebar = null, kwinvite = null, kwsearchandaddpeople = null,
-			kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null, kwmemslist = null;
+			kleftactiveoption = null, kattachment = null, kmcleftmenu = null, kmcplusicon = null, kmchat = null,
+			kmcomposebar = null, kmcrecent = null, kmcenterparticipant = null, kmcloseconversation = null,
+			kmcsuggestnames = null, kmcsuggestmailids = null, kmcprofileicon = null, kmcgroupchevronicon = null,
+			kmcgroupname = null, kmcidgroup = null, kmcidchatdesc = null, kmc3dots = null, kmc3dotoptions = null,
+			kmcmanageclose = null, kmcmembername = null, kmcmuteslots = null, kmcactiveusericon = null,
+			kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null, kmcfirstactiveuser = null,
+			kmcactivebackground = null, kmdiscussion = null, kmplaceholder = null, kmsearchsuggestions = null,
+			kwplusicon = null, kwcreatenew = null, kwjoinexisting = null, kworkplaceholder = null,
+			kwdefaulworkspace = null, kwdrheader = null, kworkspaces = null, kwdrgeneral = null, kworkspacename = null,
+			kwleft3dots = null, kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null,
+			kwdeletewsname = null, kwproceedDelete = null, kwcomposebar = null, kwinvite = null,
+			kwsearchandaddpeople = null, kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null,
+			kwmemslist = null;
 
 	public void repoIOS() {
 
@@ -67,7 +68,8 @@ public class ElementRepository {
 		ksinglquote = "']";
 		klogo = "//span[@class='logoSpan']";
 		kcomposebar = "//div[contains(@placeholder,'Type your')]";
-		kleftactiveoption="//li[@class='active p-menuitem']//span[@class='p-menuitem-text']";
+		kleftactiveoption = "//li[@class='active p-menuitem']//span[@class='p-menuitem-text']";
+		kattachment = "//i[@class='p-icon kr-discussion-attachment emojiBtn']";
 
 		kmcleftmenu = "//span[@class='p-menuitem-text']";
 		kmcplusicon = "//span[@class='p-icon kr-plus']";

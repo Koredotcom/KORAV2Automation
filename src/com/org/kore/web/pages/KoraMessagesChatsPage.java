@@ -220,16 +220,16 @@ public class KoraMessagesChatsPage extends PageBase {
 			Thread.sleep(4000);
 			chatheadername = getText("//div[@class='chatHeader']//span");
 			test.log(LogStatus.INFO,
-					"Entered message as " + enterthistext + " ".toString() + test.addScreenCapture(takeScreenShot()));
+					"In<b> "+chatheadername+" </b>Entered message as " + enterthistext + " ".toString() + test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"Compose bar or Chat header name is Missing ".toString() + test.addScreenCapture(takeScreenShot()));
+					"Compose bar or Chat header name elements might got updated ".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 		return chatheadername;
 	}
-
+	
 	public String getChatHeaderName() throws Exception {
 		String chatheadername = null;
 		try {

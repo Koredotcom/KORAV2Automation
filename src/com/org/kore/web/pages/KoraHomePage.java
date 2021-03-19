@@ -3,7 +3,9 @@ package com.org.kore.web.pages;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.org.kore.element.repository.ElementRepository;
@@ -107,6 +109,38 @@ public class KoraHomePage extends PageBase {
 			test.log(LogStatus.FAIL,
 					"Messages left nav is not available in the current screen, check the flow and validate again to get default selected option"
 							.toString() + test.addScreenCapture(takeScreenShot()));
+		}
+	}
+	
+	/**
+	 * 
+	 * @param autoitfilepath
+	 *            : Provide the path of compiled code of auto it
+	 * @param typeoffile
+	 *            : It is just for reporting purpose
+	 * @throws Exception
+	 */
+	public void fileUploadfrom(String autoitfilepath, boolean imagewithtext, String message) throws Exception {
+		try {
+			click(er.kattachment, "Attachment");
+			Thread.sleep(3000);
+			System.out.println("About to run auto it to upload : " + message);
+			Runtime.getRuntime().exec(autoitfilepath);
+			Thread.sleep(2000);
+			waitUntilDissapear("//div[@class='small-Loader loading-screen']", "xpath", "Choose your account type");
+			moveToElement(er.kcomposebar, "xpath");
+			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
+			if(imagewithtext)
+			compose.sendKeys(message,Keys.ENTER);
+			compose.sendKeys(Keys.ENTER);
+			test.log(LogStatus.PASS,
+					"Uploaded " + message + " successfully".toString() + test.addScreenCapture(takeScreenShot()));
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"Failed to upload " + message
+							+ " file. It is either because of attachment element or Auto IT ".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
 

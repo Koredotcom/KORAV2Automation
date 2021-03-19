@@ -27,7 +27,8 @@
 		"macchromeDriverPath": "Drivers/chromedriver",
 		"winchromeDriverPath": "Drivers/chromedriver.exe",
 		"fireFoxDriverPath": "Drivers/geckodriver",
-		"edgeDriverPath": "Drivers/MicrosoftWebDriver.exe"
+		"edgeDriverPath": "Drivers/MicrosoftWebDriver.exe",
+		"twombpngautoexe":"/FileAttachments/AutoItCompiles/twombpng.exe"
 	},
 	"TESTDATAgmail": {
 		"messages":"Messages",
