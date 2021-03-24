@@ -45,7 +45,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		directory = System.getProperty("user.dir");
 	}
 
-	@Test(enabled = true, priority = 4)
+	@Test(enabled = true, priority = 19)
 	public void MC_uploadFileBelow25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -54,18 +54,81 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
-			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String recepientuser = DriverSetUp.UtilityMap.get("recepientuser");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-			String insertimage = DriverSetUp.UtilityMap.get("twombpngautoexe");
-			String twombpng=directory + insertimage;
+			
+			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
+			String doc=directory + insertdoc;
+			
+			String insertmp4 = DriverSetUp.UtilityMap.get("mp4exe");
+			String mp4=directory + insertmp4;
+			
+			String insertpdf = DriverSetUp.UtilityMap.get("pdfexe");
+			String pdf=directory + insertpdf;
+			
+			String insertxlsx = DriverSetUp.UtilityMap.get("xlsxexe");
+			String xlsx=directory + insertxlsx;
+			
+			String insertpng = DriverSetUp.UtilityMap.get("pngexe");
+			String png=directory + insertpng;
+			
+			String insertzip = DriverSetUp.UtilityMap.get("zipexe");
+			String zip=directory + insertzip;
 			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption(Messages);
-			koramessagespage.startNewConversationWith(newparticipants, true);
+			koramessagespage.startNewConversationWith(recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
-			korahomepage.fileUploadfrom(twombpng,false, "png file");
-			korahomepage.fileUploadfrom(twombpng,true, "png file");
+			
+			korahomepage.fileUploadfrom(doc,true, "doc file");
+			korahomepage.fileUploadfrom(mp4,true, "mp4 file");
+			korahomepage.fileUploadfrom(pdf,true, "pdf file");
+			korahomepage.fileUploadfrom(xlsx,true, "xlsx file");
+			korahomepage.fileUploadfrom(png,true, "png file");
+			korahomepage.fileUploadfrom(zip,true, "zip file");
+			
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to insert image for 1to1 conversation");
+		}
+	}
+	
+	@Test(enabled = true, priority = 20)
+	public void MC_uploadFileabove25MB() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String recepientuser = DriverSetUp.UtilityMap.get("recepientuser");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			
+			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
+			String doc=directory + insertdoc;
+			
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to insert image for 1to1 conversation");
+		}
+	}
+	
+	@Test(enabled = true, priority = 21)
+	public void MC_uploadMultipleFiles() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String recepientuser = DriverSetUp.UtilityMap.get("recepientuser");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			
+			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
+			String doc=directory + insertdoc;
 			
 			extent.endTest(test);
 		} catch (Exception e) {

@@ -28,7 +28,13 @@
 		"winchromeDriverPath": "Drivers/chromedriver.exe",
 		"fireFoxDriverPath": "Drivers/geckodriver",
 		"edgeDriverPath": "Drivers/MicrosoftWebDriver.exe",
-		"twombpngautoexe":"/FileAttachments/AutoItCompiles/twombpng.exe"
+		"recepientuser":"hana@koraqa1.com",
+		"docexe":"/FileAttachments/AutoItCompiles/jattachdocxfile.exe",
+		"mp4exe":"/FileAttachments/AutoItCompiles/jattachmp4.exe",
+		"pdfexe":"/FileAttachments/AutoItCompiles/jattachpdffile.exe",
+		"xlsxexe":"/FileAttachments/AutoItCompiles/jattachxlsxfile.exe",
+		"pngexe":"/FileAttachments/AutoItCompiles/jpngfile.exe",
+		"zipexe":"/FileAttachments/AutoItCompiles/jzipfile.exe"
 	},
 	"TESTDATAgmail": {
 		"messages":"Messages",

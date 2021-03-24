@@ -116,23 +116,27 @@ public class KoraHomePage extends PageBase {
 	 * 
 	 * @param autoitfilepath
 	 *            : Provide the path of compiled code of auto it
-	 * @param typeoffile
-	 *            : It is just for reporting purpose
+	 * @param imagewithtext
+	 *            : if it is true, attachment will go with a message, else only attachment will be sent alone
+	 * @param message
+	 * 			  : THis message will be used for reporting purpose as well as for message with attachment
 	 * @throws Exception
 	 */
 	public void fileUploadfrom(String autoitfilepath, boolean imagewithtext, String message) throws Exception {
 		try {
 			click(er.kattachment, "Attachment");
-			Thread.sleep(3000);
+			click(er.kmattachfromplus, "Attach from + icon");
+			Thread.sleep(2000);
 			System.out.println("About to run auto it to upload : " + message);
 			Runtime.getRuntime().exec(autoitfilepath);
 			Thread.sleep(2000);
-			waitUntilDissapear("//div[@class='small-Loader loading-screen']", "xpath", "Choose your account type");
+			waitUntilDissapear("//div[@class='small-Loader loading-screen']", "xpath", "Loading indicator");
 			moveToElement(er.kcomposebar, "xpath");
 			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
 			if(imagewithtext)
 			compose.sendKeys(message,Keys.ENTER);
 			compose.sendKeys(Keys.ENTER);
+			Thread.sleep(2000);
 			test.log(LogStatus.PASS,
 					"Uploaded " + message + " successfully".toString() + test.addScreenCapture(takeScreenShot()));
 

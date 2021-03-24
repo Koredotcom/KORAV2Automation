@@ -22,12 +22,12 @@ public class ElementRepository {
 			kmcmanageclose = null, kmcmembername = null, kmcmuteslots = null, kmcactiveusericon = null,
 			kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null, kmcfirstactiveuser = null,
 			kmcactivebackground = null, kmdiscussion = null, kmplaceholder = null, kmsearchsuggestions = null,
-			kwplusicon = null, kwcreatenew = null, kwjoinexisting = null, kworkplaceholder = null,
-			kwdefaulworkspace = null, kwdrheader = null, kworkspaces = null, kwdrgeneral = null, kworkspacename = null,
-			kwleft3dots = null, kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null,
-			kwdeletewsname = null, kwproceedDelete = null, kwcomposebar = null, kwinvite = null,
-			kwsearchandaddpeople = null, kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null,
-			kwmemslist = null;
+			kmattachfromplus = null, kwplusicon = null, kwcreatenew = null, kwjoinexisting = null,
+			kworkplaceholder = null, kwdefaulworkspace = null, kwdrheader = null, kworkspaces = null,
+			kwdrgeneral = null, kworkspacename = null, kwleft3dots = null, kwsleft3dotoptions = null,
+			kwyesDeletepopup = null, kwproceed2delete = null, kwdeletewsname = null, kwproceedDelete = null,
+			kwcomposebar = null, kwinvite = null, kwsearchandaddpeople = null, kwsuggestedmailids = null,
+			kwinviteclose = null, kwsendinvitation = null, kwmemslist = null;
 
 	public void repoIOS() {
 
@@ -96,10 +96,9 @@ public class ElementRepository {
 		kmcmessagebubbles = "//div[@class='sendBubble messageBubble saveMsg']";
 		kmcfirstactiveuser = "//div[@class='userDetails active']//div[@class='userNameDiv']";
 		kmcactivebackground = "//div[@class='userDetails active']";
-		kmplaceholder = "//input[@class='searchInput fullWidth']"; // will
-																	// remove
+		kmplaceholder = "//input[@class='searchInput fullWidth']";
 		kmsearchsuggestions = "//div[@class='p-menuitem-link']//div[@class='heroText']//*[text()='";
-
+		kmattachfromplus = "//span[@class='addIcon kr-plus']";
 		kmdiscussion = "//div[@class='krDropDownMenu']//*[text()='Create a Discussion Room']";
 
 		kwplusicon = "//span[@id='ws-plus-button']";

@@ -45,7 +45,7 @@ public class MessagesDR extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 1)
+	@Test(enabled = true, priority = 23)
 	public void MDR_TC1_TC2_TC3_TC65_createNewWorkspaceAndDelete() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -58,17 +58,17 @@ public class MessagesDR extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korausername, korapassword);
-			/*korahomepage.selectMenuOption(Workspaces);
+			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.createNewWorkspaceAndCheckDefault(workspacename);
 			koraworkspacepage.clickOnWorkspace3Dots(workspacename);
-			koraworkspacepage.operationsFromWS3Dots(workspacename, "Delete");*/
+			koraworkspacepage.operationsFromWS3Dots(workspacename, "Delete");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate create new workspace and validations");
 		}
 	}
 
-/*	@Test(enabled = true, priority = 2)
+/*	@Test(enabled = true, priority = 24)
 	public void MDR_TC4_TC5_inviteMembersToWorkspaceAndManage() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -96,7 +96,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 3)
+	@Test(enabled = true, priority = 25)
 	public void MDR_TC8_filterByWorkspace() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -127,7 +127,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	/*@Test(enabled = true, priority = 4)
+	/*@Test(enabled = true, priority = 26)
 	public void MDR_TC9_TC10_DefaultDRAndTimeline() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
