@@ -123,24 +123,39 @@ public class PageBase extends DriverSetUp {
 			if (browser.equalsIgnoreCase("chrome")) {
 
 				System.out.println("In ChromeDriver");
-				System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("winchromeDriverPath"));
+				if (System.getProperty("os.name").contains("Mac OS")) {
+					System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("macchromeDriverPath"));
+					ChromeOptions options = new ChromeOptions();
+					options.addArguments("user-data-dir=/path/to/your/custom/profile");
+					options.addArguments("--profile-directory=Default");
+					options.addArguments("--whitelisted-ips");
+					options.addArguments("--disable-plugins-discovery");
+					options.addArguments("--disable-extensions");
+					options.addArguments("--test-type");
+					options.addArguments("start-maximized");
+					options.setExperimentalOption("useAutomationExtension", false);
+					options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+					remoteDriver = new ChromeDriver();
+					System.out.println("chrome started");
+				} else {
+					System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("winchromeDriverPath"));
+					ChromeOptions options = new ChromeOptions();
+					options.addArguments("user-data-dir=/path/to/your/custom/profile");
+					options.addArguments("--profile-directory=Default");
+					options.addArguments("--whitelisted-ips");
+					options.addArguments("--disable-plugins-discovery");
+					options.addArguments("--disable-extensions");
+					options.addArguments("--test-type");
+					options.addArguments("start-maximized");
+					options.setExperimentalOption("useAutomationExtension", false);
+					options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 
-				ChromeOptions options = new ChromeOptions();
-				// options.addArguments("user-data-dir=/path/to/your/custom/profile");
-				options.addArguments("--profile-directory=Default");
-				options.addArguments("--whitelisted-ips");
-				options.addArguments("--disable-plugins-discovery");
-				options.addArguments("--disable-extensions");
-				options.addArguments("--test-type");
-				options.addArguments("start-maximized");
-				options.setExperimentalOption("useAutomationExtension", false);
-				options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-
-				DesiredCapabilities cap = DesiredCapabilities.chrome();
-				cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-				cap.setCapability(ChromeOptions.CAPABILITY, options);
-				remoteDriver = new ChromeDriver(cap);
-				System.out.println("chrome started");
+					DesiredCapabilities cap = DesiredCapabilities.chrome();
+					cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+					cap.setCapability(ChromeOptions.CAPABILITY, options);
+					remoteDriver = new ChromeDriver(cap);
+					System.out.println("chrome started");
+				}
 
 			} else if (browser.equalsIgnoreCase("firefox")) {
 				System.out.println("firefox started");
@@ -904,6 +919,7 @@ public class PageBase extends DriverSetUp {
 		}
 
 	}
+
 	public void clearAndenterText(String locator, String cred, String elementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
@@ -926,7 +942,8 @@ public class PageBase extends DriverSetUp {
 				ele.sendKeys(Keys.CONTROL + "a");
 				ele.sendKeys(Keys.DELETE);
 				remoteDriver.findElement(By.xpath(locator)).sendKeys(cred);
-				test.log(LogStatus.PASS, "Entered as " + cred + " in " + elementName+" ".toString() + test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.PASS, "Entered as " + cred + " in " + elementName + " ".toString()
+						+ test.addScreenCapture(takeScreenShot()));
 				break;
 			}
 
@@ -1347,5 +1364,5 @@ public class PageBase extends DriverSetUp {
 		scrollObject.put("direction", "down");
 		appiumDriver.executeScript("mobile:scroll", scrollObject);
 	}
-	
+
 }

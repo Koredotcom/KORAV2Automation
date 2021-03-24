@@ -5,7 +5,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.org.kore.element.repository.ElementRepository;
@@ -103,47 +102,67 @@ public class KoraHomePage extends PageBase {
 	public void getActiveOptionFromLeftNav(String menuoption) throws Exception {
 		try {
 			String selectedoption = getText(er.kleftactiveoption);
-			test.log(LogStatus.WARNING, "Current active left nav is <b>" + selectedoption + "</b>".toString()+
-					test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.WARNING, "Current active left nav is <b>" + selectedoption + "</b>".toString()
+					+ test.addScreenCapture(takeScreenShot()));
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
 					"Messages left nav is not available in the current screen, check the flow and validate again to get default selected option"
 							.toString() + test.addScreenCapture(takeScreenShot()));
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param autoitfilepath
 	 *            : Provide the path of compiled code of auto it
 	 * @param imagewithtext
-	 *            : if it is true, attachment will go with a message, else only attachment will be sent alone
+	 *            : if it is true, attachment will go with a message, else only
+	 *            attachment will be sent alone
 	 * @param message
-	 * 			  : THis message will be used for reporting purpose as well as for message with attachment
+	 *            : THis message will be used for reporting purpose as well as
+	 *            for message with attachment
 	 * @throws Exception
 	 */
-	public void fileUploadfrom(String autoitfilepath, boolean imagewithtext, String message) throws Exception {
+	public void uploadfilesfromAttachment(String autoitfilepath, boolean imagewithtext, String message)
+			throws Exception {
+		boolean loading = false;
+		int counter = 0;
 		try {
 			click(er.kattachment, "Attachment");
-			click(er.kmattachfromplus, "Attach from + icon");
 			Thread.sleep(2000);
 			System.out.println("About to run auto it to upload : " + message);
 			Runtime.getRuntime().exec(autoitfilepath);
+			Thread.sleep(5000);
+			do {
+				loading = remoteDriver.findElements(By.xpath("//div[@class='small-Loader loading-screen']")).size() > 0;
+				if (loading) {
+					Thread.sleep(2000);
+					counter++;
+				}
+			} while ((loading) || (counter > 30));
 			Thread.sleep(2000);
-			waitUntilDissapear("//div[@class='small-Loader loading-screen']", "xpath", "Loading indicator");
+			// waitUntilDissapear("//div[@class='small-Loader loading-screen']",
+			// "xpath", "Loading indicator");
 			moveToElement(er.kcomposebar, "xpath");
 			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
-			if(imagewithtext)
-			compose.sendKeys(message,Keys.ENTER);
+			if (imagewithtext)
+				compose.sendKeys(message, Keys.ENTER);
 			compose.sendKeys(Keys.ENTER);
 			Thread.sleep(2000);
-			test.log(LogStatus.PASS,
-					"Uploaded " + message + " successfully".toString() + test.addScreenCapture(takeScreenShot()));
+			if (counter >= 30)
+				test.log(LogStatus.FAIL,
+						"Unable to uploaded <b>" + message
+								+ "</b> or it is taking more than a minute to upload".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.WARNING,
+					"Below screenshot requires human eye to check user interface hence TC marked as Warning");
+			test.log(LogStatus.WARNING, "Uploaded <b>" + message + "</b> successfully".toString()
+					+ test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
 					"Failed to upload " + message
-							+ " file. It is either because of attachment element or Auto IT ".toString()
+							+ ". It is either because of attachment element or Auto IT ".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 		}
 	}

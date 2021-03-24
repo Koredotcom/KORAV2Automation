@@ -68,7 +68,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-/*	@Test(enabled = true, priority = 24)
+	@Test(enabled = true, priority = 24)
 	public void MDR_TC4_TC5_inviteMembersToWorkspaceAndManage() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -127,7 +127,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	/*@Test(enabled = true, priority = 26)
+	@Test(enabled = true, priority = 26)
 	public void MDR_TC9_TC10_DefaultDRAndTimeline() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -151,6 +151,61 @@ public class MessagesDR extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate default DR and Timeline (General name might got changed)");
 		}
-	}*/
+	}
+	
+	/*
+	* Discussion Room : Check the recipient/member is able to like and comment the same post
+	* @To Do
+	*/
+	@Test(enabled = false, priority = 27)
+	public void MDR_TC11_likeCommentToAPost() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String workspacename = DriverSetUp.drdataMap.get("workspacename8");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Workspaces);
+
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
+		}
+	}
+	
+	/*
+	*TC12 ::Discussion Room ::Check whether user is able to see the list of options, when user tap on 3 dots option in right panel beside the room name.
+	*TC13 :: Discussion Room :: Verify the list of options displayed from 3 dots from middle view
+	*@To Do
+	*/
+	@Test(enabled = true, priority = 28)
+	public void MDR_TC12_13_verifyListof3DotOptions() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String workspacename = DriverSetUp.drdataMap.get("workspacename8");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("Discussion Rooms");
+			koramessagespage.goToGroupAndPerform("General", true, "3dots");
+			// Check whether dispalyed rooms are Discussion Rooms and not the
+			// message
+
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
+		}
+	}
 
 }

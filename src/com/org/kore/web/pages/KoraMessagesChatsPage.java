@@ -1101,7 +1101,4 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	}
 
-	// -------- Above methodss are form KoraManageConversationPage 11-03-2021 -
-	// 17:00 to 17:30 Commit ---------//
-
 }

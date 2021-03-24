@@ -1,0 +1,6 @@
+ControlFocus ( "Open", "", "Edit1")
+ControlSetText ( "Open", "", "Edit1", "C:\Users\Jayakrishna.Dandru\git\KORAV2Automation\FileAttachments\")
+Sleep(2000)
+ControlFocus ( "Open", "", "DirectUIHWND2")
+Send("^a")
+ControlClick ("Open", "", "Button1")

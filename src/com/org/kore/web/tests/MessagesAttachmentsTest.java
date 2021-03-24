@@ -46,7 +46,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 19)
-	public void MC_uploadFileBelow25MB() throws Exception {
+	public void MC_TC11_TC30_uploadFileBelow25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -59,19 +59,14 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			
 			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
 			String doc=directory + insertdoc;
-			
 			String insertmp4 = DriverSetUp.UtilityMap.get("mp4exe");
 			String mp4=directory + insertmp4;
-			
 			String insertpdf = DriverSetUp.UtilityMap.get("pdfexe");
 			String pdf=directory + insertpdf;
-			
 			String insertxlsx = DriverSetUp.UtilityMap.get("xlsxexe");
 			String xlsx=directory + insertxlsx;
-			
 			String insertpng = DriverSetUp.UtilityMap.get("pngexe");
 			String png=directory + insertpng;
-			
 			String insertzip = DriverSetUp.UtilityMap.get("zipexe");
 			String zip=directory + insertzip;
 			
@@ -80,21 +75,46 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
-			
-			korahomepage.fileUploadfrom(doc,true, "doc file");
-			korahomepage.fileUploadfrom(mp4,true, "mp4 file");
-			korahomepage.fileUploadfrom(pdf,true, "pdf file");
-			korahomepage.fileUploadfrom(xlsx,true, "xlsx file");
-			korahomepage.fileUploadfrom(png,true, "png file");
-			korahomepage.fileUploadfrom(zip,true, "zip file");
+			korahomepage.uploadfilesfromAttachment(doc,true, "doc file");
+			korahomepage.uploadfilesfromAttachment(mp4,true, "mp4 file");
+			korahomepage.uploadfilesfromAttachment(pdf,true, "pdf file");
+			korahomepage.uploadfilesfromAttachment(xlsx,true, "xlsx file");
+			korahomepage.uploadfilesfromAttachment(png,true, "png file");
+			korahomepage.uploadfilesfromAttachment(zip,true, "zip file");
 			
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to insert image for 1to1 conversation");
+			test.log(LogStatus.FAIL, "Failed to attach different file formats for 1to1 conversation");
 		}
 	}
 	
 	@Test(enabled = true, priority = 20)
+	public void MC_TC31_uploadMultipleFiles() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String recepientuser = DriverSetUp.UtilityMap.get("recepientuser");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			String allfileexe = DriverSetUp.UtilityMap.get("allfilesexe");
+			String allfiles=directory + allfileexe;
+			
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Messages);
+			koramessagespage.startNewConversationWith(recepientuser, true);
+			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			korahomepage.uploadfilesfromAttachment(allfiles,true, "Multiple file formats");
+			
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to attach multiple files for 1to1 conversation");
+		}
+	}
+
+	@Test(enabled = false, priority = 21)
 	public void MC_uploadFileabove25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -106,29 +126,15 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			String recepientuser = DriverSetUp.UtilityMap.get("recepientuser");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			
+			// need to add file which is having more than 25 mb
 			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
-			String doc=directory + insertdoc;
+			String allfiles=directory + insertdoc;
 			
-			extent.endTest(test);
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to insert image for 1to1 conversation");
-		}
-	}
-	
-	@Test(enabled = true, priority = 21)
-	public void MC_uploadMultipleFiles() throws Exception {
-		try {
-			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_Messages_Chats");
-			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			
-			String url = DriverSetUp.propsMap.get("weburl");
-			String Messages = DriverSetUp.testdataMap.get("messages");
-			String recepientuser = DriverSetUp.UtilityMap.get("recepientuser");
-			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-			
-			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
-			String doc=directory + insertdoc;
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Messages);
+			koramessagespage.startNewConversationWith(recepientuser, true);
+			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			korahomepage.uploadfilesfromAttachment(allfiles,true, "Beyond 25 MB file");
 			
 			extent.endTest(test);
 		} catch (Exception e) {

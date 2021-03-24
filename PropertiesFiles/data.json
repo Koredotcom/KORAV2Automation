@@ -34,7 +34,8 @@
 		"pdfexe":"/FileAttachments/AutoItCompiles/jattachpdffile.exe",
 		"xlsxexe":"/FileAttachments/AutoItCompiles/jattachxlsxfile.exe",
 		"pngexe":"/FileAttachments/AutoItCompiles/jpngfile.exe",
-		"zipexe":"/FileAttachments/AutoItCompiles/jzipfile.exe"
+		"zipexe":"/FileAttachments/AutoItCompiles/jzipfile.exe",
+		"allfilesexe":"/FileAttachments/AutoItCompiles/jallfiles.exe"
 	},
 	"TESTDATAgmail": {
 		"messages":"Messages",
@@ -81,6 +82,8 @@
 		"workspaceauto": "AutoWorkspace",
 		"workspacename8": "Automation8",
 		"workspacename910": "Automation910",
-		"workspacemems": "hana@koraqa1.com"
+		"workspacemems": "hana@koraqa1.com",
+		"wexpected3dotoptionsmiddle":"",
+		"wexpected3dotoptionsright":""
 	}
 }
