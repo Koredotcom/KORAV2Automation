@@ -219,28 +219,29 @@ public class KoraMessagesChatsPage extends PageBase {
 			compose.sendKeys(enterthistext, Keys.ENTER);
 			Thread.sleep(4000);
 			chatheadername = getText("//div[@class='chatHeader']//span");
-			test.log(LogStatus.INFO,
-					"In<b> "+chatheadername+" </b>Entered message as " + enterthistext + " ".toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.INFO, "In<b> " + chatheadername + " </b>Entered message as " + enterthistext
+					+ " ".toString() + test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL,
-					"Compose bar or Chat header name elements might got updated ".toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL, "Compose bar or Chat header name elements might got updated ".toString()
+					+ test.addScreenCapture(takeScreenShot()));
 		}
 
 		return chatheadername;
 	}
-	
+
 	public String getChatHeaderName() throws Exception {
 		String chatheadername = null;
 		try {
 			chatheadername = getText("//div[@class='chatHeader']//span");
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"After creating workspace when user navigates to Messages, chat header is not displaying".toString() + test.addScreenCapture(takeScreenShot()));
+					"After creating workspace when user navigates to Messages, chat header is not displaying".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 		}
 		return chatheadername;
 	}
-	
+
 	public String getFirstActiveUser(String expecteduser, boolean check) throws Exception {
 		String activeuser = null;
 		try {
@@ -410,7 +411,8 @@ public class KoraMessagesChatsPage extends PageBase {
 				switch (action.trim()) {
 				case "Star":
 					System.out.println("In Star");
-					// moveToElement(er.kmcidgroup + groupname +
+					// moveToElement(//div[@class='userNameDiv'][text()=' +
+					// groupname +
 					// "']/../../../..//span[@title='Star']", "xpath");
 					Thread.sleep(1000);
 					moveToElement(
@@ -485,9 +487,11 @@ public class KoraMessagesChatsPage extends PageBase {
 
 					break;
 				case "3dots":
-					moveToElement(er.kmcidgroup + groupname + "']/.././../../.." + er.kmc3dots, "xpath");
+					System.out.println("In 3 dots");
+					// click(er.klogo, "Work Assist Image");
+					moveToElement(er.kmcidgroup + groupname + "']/../../../../.." + er.kmc3dots, "xpath");
 					Thread.sleep(1000);
-					click(er.kmcidgroup + groupname + "']/.././../../.." + er.kmc3dots, "3dots");
+					click(er.kmcidgroup + groupname + "']/../../../../.." + er.kmc3dots, "3dots");
 					Thread.sleep(1000);
 					break;
 				default:
@@ -579,19 +583,35 @@ public class KoraMessagesChatsPage extends PageBase {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param typeofConv
 	 *            : it says 3dot option validation is for group or one to one
 	 * @param expectedoptions
 	 *            : Getting actual options from testdata json file
-	 * @throws IOException
+	 * @param Windowpostion
+	 *            : Dot operations on middle panel and right panel
+	 * @throws Exception
 	 */
-	public void optionsDisplayedOn3Dots(String typeofConv, String expectedoptions) throws IOException {
+	public void optionsDisplayedOn3Dots(String typeofConv, String expectedoptions, String windowpanel)
+			throws Exception {
+		List<WebElement> options = null;
+		if (windowpanel.contains("right")) {
+			String headername = getChatHeaderName();
+			moveToElement(er.kdrc3dotoptionsRightPanel + headername
+					+ "']/../../../../..//I[@class='p-icon _choI kr-ellipsis']", "xpath");
+			click(er.kdrc3dotoptionsRightPanel + headername
+					+ "']/../../../../..//I[@class='p-icon _choI kr-ellipsis']", "xpath");
+			
+			options = remoteDriver.findElements(By.xpath(er.kdrc3dotoptionsRightPanelOptions));
+
+		} else {
+			options = remoteDriver.findElements(By.xpath(er.kmc3dotoptions));
+		}
 		String[] exp = cf.convertStringstoArray(expectedoptions);
 		int i = 0;
 		boolean check = false;
 		try {
-			List<WebElement> options = remoteDriver.findElements(By.xpath(er.kmc3dotoptions));
+			options = remoteDriver.findElements(By.xpath(er.kmc3dotoptions));
 			if (options.size() > 0) {
 				for (WebElement ele : options) {
 					String act = ele.getText();
@@ -1097,6 +1117,83 @@ public class KoraMessagesChatsPage extends PageBase {
 			click(er.kmcmanageclose, "Close");
 			test.log(LogStatus.FAIL,
 					"Faled to Remove Members of the group".toString() + test.addScreenCapture(takeScreenShot()));
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param message
+	 *            : On hover actions will perform on this particular message
+	 * @param action
+	 *            : Action to be performed after on hover
+	 * @throws Exception
+	 *             : Throws exception if fails
+	 */
+	public void goToMessageAndPerformActionsAs(String message, String action, String subaction) throws Exception {
+		WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
+		try {
+			moveToElement(er.kmmessages + message + er.ksinglquote, "xpath");
+			Thread.sleep(1000);
+			moveToElement(er.kmmessagehoveroptiontitles + action + er.ksinglquote, "xpath");
+			test.log(LogStatus.PASS, "For <b>" + message + "</b> on hover options displayed and focus moved to <b>"
+					+ action + "</b> as per below screenshot ".toString() + test.addScreenCapture(takeScreenShot()));
+			moveToElement(er.kmmessages + message + er.ksinglquote, "xpath");
+			Thread.sleep(1000);
+			switch (action.trim()) {
+			case "Reactions":
+				System.out.println("In Reactions");
+				click(er.kmmessagehoveroptiontitles + action + er.ksinglquote, action + " on message hover");
+				Thread.sleep(1000);
+				break;
+
+			case "Reply Back":
+				System.out.println("In Reply back");
+				click(er.kmmessagehoverreplyback, action + " on message hover");
+				Thread.sleep(1000);
+				compose.click();
+				test.log(LogStatus.PASS, "Selected Reply back option from the hover".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+				compose.sendKeys("It is Reply", Keys.ENTER);
+				test.log(LogStatus.WARNING, "Replied successfully. Please check the UI with human eye".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+				break;
+
+			case "Reminder":
+				System.out.println("In Reminder");
+				click(er.kmmessagehoveroptiontitles + action + er.ksinglquote, action + " on message hover");
+				Thread.sleep(1000);
+				break;
+
+			case "Forward":
+				System.out.println("In Forward");
+				click(er.kmmessagehoveroptiontitles + action + er.ksinglquote, action + " on message hover");
+				Thread.sleep(1000);
+				break;
+
+			case "More":
+				System.out.println("In More i.e. 3dots");
+				click(er.kmmessagehover3dots, action + " on message hover");
+				Thread.sleep(1000);
+				click(er.kmmessagehovermorecopy, "xpath");
+				compose.click();
+				test.log(LogStatus.PASS, "Text copied successfully and about to paste the same ".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+				click("//span[text()='Paste']", "Paste option on compose bar");
+				compose.sendKeys(Keys.ENTER);
+				test.log(LogStatus.PASS,
+						"Same text pasted successfully".toString() + test.addScreenCapture(takeScreenShot()));
+				break;
+
+			default:
+				test.log(LogStatus.FAIL,
+						"Please provided valid on hover action i.e. , option should be match with case value");
+			}
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"For a message either onhover options title is not displaying or failed to perform <b> " + action
+							+ "</b> Action".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 	}

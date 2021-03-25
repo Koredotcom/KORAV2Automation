@@ -98,7 +98,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
-			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expected3dotoptions);
+			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expected3dotoptions,"middle");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate 3 dot options for a group");

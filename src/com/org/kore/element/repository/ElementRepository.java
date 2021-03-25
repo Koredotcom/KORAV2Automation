@@ -22,12 +22,14 @@ public class ElementRepository {
 			kmcmanageclose = null, kmcmembername = null, kmcmuteslots = null, kmcactiveusericon = null,
 			kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null, kmcfirstactiveuser = null,
 			kmcactivebackground = null, kmdiscussion = null, kmplaceholder = null, kmsearchsuggestions = null,
-			kmattachfromplus = null, kwplusicon = null, kwcreatenew = null, kwjoinexisting = null,
-			kworkplaceholder = null, kwdefaulworkspace = null, kwdrheader = null, kworkspaces = null,
-			kwdrgeneral = null, kworkspacename = null, kwleft3dots = null, kwsleft3dotoptions = null,
-			kwyesDeletepopup = null, kwproceed2delete = null, kwdeletewsname = null, kwproceedDelete = null,
-			kwcomposebar = null, kwinvite = null, kwsearchandaddpeople = null, kwsuggestedmailids = null,
-			kwinviteclose = null, kwsendinvitation = null, kwmemslist = null;
+			kmattachfromplus = null, kmmessages = null, kmmessagehoveroptiontitles = null, kmmessagehover3dots = null,
+			kmmessagehoverreplyback = null, kmmessagehovermorecopy = null, kwplusicon = null, kwcreatenew = null,
+			kwjoinexisting = null, kworkplaceholder = null, kwdefaulworkspace = null, kwdrheader = null,
+			kworkspaces = null, kwdrgeneral = null, kworkspacename = null, kwleft3dots = null,
+			kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null, kwdeletewsname = null,
+			kwproceedDelete = null, kwcomposebar = null, kwinvite = null, kwsearchandaddpeople = null,
+			kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null, kwmemslist = null,
+			kdrcidgroup = null, kdrc3dotoptionsRightPanel = null, kdrc3dotoptionsRightPanelOptions = null;
 
 	public void repoIOS() {
 
@@ -85,8 +87,8 @@ public class ElementRepository {
 		kmcgroupname = "//input[@placeholder='Group Name']";
 		kmcidgroup = "//div[@class='userNameDiv'][text()='";
 		kmcidchatdesc = "']/../../..//div[@class='userChatDEsc']";
-		kmc3dots = "//div[@class='_content']/i[@class='icon __i kr-ellipsis  ']";
-		kmc3dotoptions = "//div[@class='krDropDownMenu active  ']//div";
+		kmc3dots = "//div[contains(@class,'_content')]/i[contains(@class, 'icon __i kr-ellipsis')]";
+		kmc3dotoptions = "//div[contains(@class, 'krDropDownMenu')]//div";
 		kmcmanageclose = "//button[@aria-label='Close']";
 		kmcmembername = "//span[text()='Member']/../../..//div[@class='emailUi']";
 		kmcmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD overflow']//li[@class='dorpDownBoxLI']";
@@ -99,6 +101,11 @@ public class ElementRepository {
 		kmplaceholder = "//input[@class='searchInput fullWidth']";
 		kmsearchsuggestions = "//div[@class='p-menuitem-link']//div[@class='heroText']//*[text()='";
 		kmattachfromplus = "//span[@class='addIcon kr-plus']";
+		kmmessages = "//span[@class='msgText ']//span[text()='";
+		kmmessagehoveroptiontitles = "//div[@class='msgCntrlBar']/i[@title='";
+		kmmessagehover3dots = "//div[@class='msgCntrlBar']//i[@class='icon kr-ellipsis']";
+		kmmessagehoverreplyback = "//div[@class='msgCntrlBar']//i[@class='icon replyButton']";
+		kmmessagehovermorecopy = "//ul[@Class='msgOptions']//span[text()='Copy']";
 		kmdiscussion = "//div[@class='krDropDownMenu']//*[text()='Create a Discussion Room']";
 
 		kwplusicon = "//span[@id='ws-plus-button']";
@@ -123,6 +130,10 @@ public class ElementRepository {
 		kwinviteclose = "//button[@aria-label='Close']";
 		kwsendinvitation = "//*[text()='Send Invitation']";
 		kwmemslist = "//div[@class='userEmail']";
+
+		kdrcidgroup = "//div[@class='userNameDiv drUserNameDiv'][text()='";
+		kdrc3dotoptionsRightPanel = "//div[@class='chatHeader']//span[text()='";
+		kdrc3dotoptionsRightPanelOptions = "//div[contains(@class, 'krDropDownMenu chatHeaderOptions')]//div";
 
 	}
 

@@ -65,7 +65,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	/*@Test(enabled = true, priority = 2)
+	@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -106,7 +106,7 @@ public class Messages121Test extends DriverSetUp {
 			koramessagespage.getActiveLabelBackgroundColor(expbgclr);
 			koramessagespage.userProfileIconValidation(user);
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
-			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions);
+			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions,"middle");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
@@ -124,8 +124,10 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			String msgtocopy = DriverSetUp.testdataMap.get("msgforcopy");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
@@ -135,12 +137,12 @@ public class Messages121Test extends DriverSetUp {
 			korahomepage.clickOn("Delete", true);
 			koramessagespage.getFirstActiveUser(user, false);
 			koramessagespage.startNewConversationWith(newparticipants, true);
-			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			user = koramessagespage.enterYourMessageAs(msgtocopy);
 			koramessagespage.getFirstActiveUser(user, true);
+			koramessagespage.goToMessageAndPerformActionsAs(msgtocopy, "More", "Copy");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
 		}
-	}*/
-	
+	}
 }

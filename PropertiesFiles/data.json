@@ -60,7 +60,8 @@
 		"messages":"Messages",
 		"checkmatchwith": "D",
 		"oneparticipant": "alexander@koraqa1.com",
-		"onetoonechat": "Hi Danny... Ignore_Automationmessage",
+		"onetoonechat": "Hi... Ignore_Automationmessage",
+		"msgforcopy":"Hello Copy Me",
 		"groupname": "AutomationGroup",
 		"renamegroupto":"AutomationGroupRenamed",
 		"groupparticipants": "alexander@koraqa1.com,ab@koraqa1.com,james@koraqa1.com,hana@koraqa1.com",
@@ -83,7 +84,8 @@
 		"workspacename8": "Automation8",
 		"workspacename910": "Automation910",
 		"workspacemems": "hana@koraqa1.com",
-		"wexpected3dotoptionsmiddle":"",
-		"wexpected3dotoptionsright":""
+		"wexpected3dotoptionsmiddle":"Get Email, Get Link, Delete Discussion",
+		"wexpected3dotoptionsright":"Star Room, Mute, Mark as unread, View Files, Copy Email Address, Get Link, Manage Room"
+		
 	}
 }
