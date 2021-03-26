@@ -21,8 +21,11 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 	KoraHomePage korahomepage;
 	KoraMessagesChatsPage koramessagespage;
 
-	String korausername;
-	String korapassword;
+	String korajusername;
+	String korajpassword;
+	
+	String korahusername;
+	String korahpassword;
 
 	public MessagesOnHoverGroupIcons() throws Exception {
 		super();
@@ -37,8 +40,11 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 
-		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
-		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
+		korajusername = dr.getValue("KORAV2", "KoraV2james", "Jusername");
+		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Jpassword");
+		
+		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Husername");
+		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Hpassword");
 
 	}
 
@@ -54,9 +60,9 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korausername, korapassword);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
-			koramessagespage.getAndValidateGroupIcons(groupname, true, korausername);
+			koramessagespage.getAndValidateGroupIcons(groupname, true, korajusername);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
@@ -76,7 +82,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			koramessagespage.getOnHoverParticipantsCount(groupname, korausername);
+			koramessagespage.getOnHoverParticipantsCount(groupname, korajusername);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate on hover participants count");

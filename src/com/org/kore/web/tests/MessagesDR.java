@@ -25,8 +25,11 @@ public class MessagesDR extends DriverSetUp {
 	KoraWorkspacesPage koraworkspacepage;
 	KoraMessagesDRPage koramessagedrpage;
 
-	String korausername;
-	String korapassword;
+	String korajusername;
+	String korajpassword;
+	
+	String korahusername;
+	String korahpassword;
 
 	public MessagesDR() throws Exception {
 		super();
@@ -43,8 +46,11 @@ public class MessagesDR extends DriverSetUp {
 		koraworkspacepage = new KoraWorkspacesPage(remoteDriver);
 		koramessagedrpage = new KoraMessagesDRPage(remoteDriver);
 
-		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
-		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
+		korajusername = dr.getValue("KORAV2", "KoraV2james", "Jusername");
+		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Jpassword");
+		
+		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Husername");
+		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Hpassword");
 
 	}
 
@@ -60,7 +66,7 @@ public class MessagesDR extends DriverSetUp {
 			String workspacename = DriverSetUp.drdataMap.get("workspacename123");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korausername, korapassword);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.createNewWorkspaceAndCheckDefault(workspacename);
 			koraworkspacepage.clickOnWorkspace3Dots(workspacename);
@@ -112,7 +118,7 @@ public class MessagesDR extends DriverSetUp {
 			String workspacename = DriverSetUp.drdataMap.get("workspacename8");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korausername, korapassword);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.createNewWorkspaceAs(workspacename);
 			korahomepage.selectMenuOption(Messages);
@@ -146,7 +152,7 @@ public class MessagesDR extends DriverSetUp {
 			koraworkspacepage.createNewWorkspaceAs(workspacename);
 			koraworkspacepage.selectDefaultDR();
 			koramessagespage.visibilityOfComposeBar(true);
-			koramessagespage.verifyGroupCreationTimeline(korausername);
+			koramessagespage.verifyGroupCreationTimeline(korajusername);
 			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.clickOnWorkspace3Dots(workspacename);
 			koraworkspacepage.operationsFromWS3Dots(workspacename, "Delete");
@@ -162,6 +168,7 @@ public class MessagesDR extends DriverSetUp {
 	 * 
 	 * @To Do
 	 */
+	 
 	@Test(enabled = false, priority = 27)
 	public void MDR_TC11_likeCommentToAPost() throws Exception {
 		try {

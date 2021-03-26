@@ -21,8 +21,11 @@ public class MessagesGroupNameTest extends DriverSetUp {
 	KoraHomePage korahomepage;
 	KoraMessagesChatsPage koramessagespage;
 
-	String korausername;
-	String korapassword;
+	String korajusername;
+	String korajpassword;
+	
+	String korahusername;
+	String korahpassword;
 
 	public MessagesGroupNameTest() throws Exception {
 		super();
@@ -37,8 +40,11 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 
-		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
-		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
+		korajusername = dr.getValue("KORAV2", "KoraV2james", "Jusername");
+		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Jpassword");
+		
+		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Husername");
+		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Hpassword");
 
 	}
 
@@ -56,11 +62,11 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			String grouptext = DriverSetUp.testdataMap.get("groupchat");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korausername, korapassword);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			groupname = koramessagespage.enterYourMessageAs(grouptext);
-			koramessagespage.verifyGroupCreationTimeline(korausername);
+			koramessagespage.verifyGroupCreationTimeline(korajusername);
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
 			koramessagespage.removeParticipantsAndClose();
@@ -97,7 +103,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			koramessagespage.createGroupAs(groupname);
 			koramessagespage.enterYourMessageAs(grouptext);
-			koramessagespage.verifyGroupCreationTimeline(korausername);
+			koramessagespage.verifyGroupCreationTimeline(korajusername);
 			koramessagespage.getGroupTimestamp(groupname);
 			extent.endTest(test);
 		} catch (Exception e) {

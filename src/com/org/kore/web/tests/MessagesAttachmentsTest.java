@@ -21,8 +21,11 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 	KoraHomePage korahomepage;
 	KoraMessagesChatsPage koramessagespage;
 
-	String korausername;
-	String korapassword;
+	String korajusername;
+	String korajpassword;
+	
+	String korahusername;
+	String korahpassword;
 
 	static String user = null;
 	static String directory =null;
@@ -40,8 +43,12 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 
-		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
-		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
+		korajusername = dr.getValue("KORAV2", "KoraV2james", "Jusername");
+		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Jpassword");
+		
+		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Husername");
+		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Hpassword");
+		
 		directory = System.getProperty("user.dir");
 	}
 
@@ -71,8 +78,9 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			String zip=directory + insertzip;
 			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korausername, korapassword);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			korahomepage.uploadfilesfromAttachment(doc,true, "doc file");
@@ -104,6 +112,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			korahomepage.uploadfilesfromAttachment(allfiles,true, "Multiple file formats");

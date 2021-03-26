@@ -21,8 +21,11 @@ public class Messages121Test extends DriverSetUp {
 	KoraHomePage korahomepage;
 	KoraMessagesChatsPage koramessagespage;
 
-	String korausername;
-	String korapassword;
+	String korajusername;
+	String korajpassword;
+	
+	String korahusername;
+	String korahpassword;
 
 	static String user = null;
 
@@ -39,8 +42,11 @@ public class Messages121Test extends DriverSetUp {
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 
-		korausername = dr.getValue("KORAV2", "KoraV2Web", "Username");
-		korapassword = dr.getValue("KORAV2", "KoraV2Web", "Password");
+		korajusername = dr.getValue("KORAV2", "KoraV2james", "Jusername");
+		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Jpassword");
+		
+		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Husername");
+		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Hpassword");
 	}
 
 	@Test(enabled = true, priority = 1)
@@ -54,7 +60,7 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korausername, korapassword);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.messagesScreenValidations();
@@ -65,7 +71,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 2)
+	/*@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -127,8 +133,8 @@ public class Messages121Test extends DriverSetUp {
 			String msgtocopy = DriverSetUp.testdataMap.get("msgforcopy");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korausername, korapassword);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			koramessagespage.getFirstActiveUser(user, true);
@@ -144,5 +150,5 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
 		}
-	}
+	}*/
 }

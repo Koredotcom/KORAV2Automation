@@ -132,17 +132,15 @@ public class KoraHomePage extends PageBase {
 			Thread.sleep(2000);
 			System.out.println("About to run auto it to upload : " + message);
 			Runtime.getRuntime().exec(autoitfilepath);
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			do {
 				loading = remoteDriver.findElements(By.xpath("//div[@class='small-Loader loading-screen']")).size() > 0;
 				if (loading) {
-					Thread.sleep(2000);
+					Thread.sleep(1000);
 					counter++;
 				}
 			} while ((loading) || (counter > 30));
-			Thread.sleep(2000);
-			// waitUntilDissapear("//div[@class='small-Loader loading-screen']",
-			// "xpath", "Loading indicator");
+			Thread.sleep(1000);
 			moveToElement(er.kcomposebar, "xpath");
 			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
 			if (imagewithtext)
