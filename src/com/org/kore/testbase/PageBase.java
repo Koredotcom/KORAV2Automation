@@ -1243,17 +1243,17 @@ public class PageBase extends DriverSetUp {
 
 	}
 
-	public boolean elementIsDisplayedByXpath(String id, String ElementName) throws Exception {
+	public boolean elementIsDisplayedByXpath(String xpath, String ElementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
 
 			case "Appium":
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(id)));
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 				break;
 			case "Selenium":
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 15, 500);
-				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(id)));
+				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 				break;
 			}
 			return true;

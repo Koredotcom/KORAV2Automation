@@ -23,7 +23,7 @@ public class Messages121Test extends DriverSetUp {
 
 	String korajusername;
 	String korajpassword;
-	
+
 	String korahusername;
 	String korahpassword;
 
@@ -42,11 +42,11 @@ public class Messages121Test extends DriverSetUp {
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 
-		korajusername = dr.getValue("KORAV2", "KoraV2james", "Jusername");
-		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Jpassword");
-		
-		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Husername");
-		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Hpassword");
+		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
+		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
+
+		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Username");
+		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 	}
 
 	@Test(enabled = true, priority = 1)
@@ -71,17 +71,15 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	/*@Test(enabled = true, priority = 2)
+	@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.checkMatchesWith(checkmatch);
@@ -90,21 +88,18 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate user suggestion validation");
 		}
 	}
-
 	@Test(enabled = true, priority = 3)
 	public void MC_TC8_TC9_TC24_OneToOneConv_3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 			String expbgclr= DriverSetUp.testdataMap.get("expectedlabelbackground");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith(newparticipants, true);
@@ -118,20 +113,17 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
 		}
 	}
-
 	@Test(enabled = true, priority = 4)
 	public void MC_TC12_DeleteAndCheckActiveParticipant() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			String msgtocopy = DriverSetUp.testdataMap.get("msgforcopy");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectLeftMenuOption("All Messages");
@@ -150,5 +142,31 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
 		}
-	}*/
+	}
+
+	@Test(enabled = true, priority = 5)
+	public void MC_TC28_TC29_ValidateChevronIconFor1ParticipantAndSendLongText() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonlongtext = "Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend";
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
+			koramessagespage.startNewConversationWith(newparticipants, true);
+			koramessagespage.verifyDisplayOfChevronIcon(false);
+			user = koramessagespage.enterYourMessageAs(onetoonlongtext);
+			test.log(LogStatus.WARNING, "verify the above screenshot with long text");
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
+		}
+	}
 }

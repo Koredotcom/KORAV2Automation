@@ -46,11 +46,11 @@ public class MessagesDR extends DriverSetUp {
 		koraworkspacepage = new KoraWorkspacesPage(remoteDriver);
 		koramessagedrpage = new KoraMessagesDRPage(remoteDriver);
 
-		korajusername = dr.getValue("KORAV2", "KoraV2james", "Jusername");
-		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Jpassword");
+		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
+		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
 		
-		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Husername");
-		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Hpassword");
+		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Username");
+		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 
 	}
 

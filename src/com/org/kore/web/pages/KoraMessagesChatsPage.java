@@ -938,7 +938,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					timelines.add(e.getText());
 				}
 				test.log(LogStatus.INFO, "Timeline displayed as " + timelines);
-				test.log(LogStatus.INFO, "Cross check the time lines from below screenshot".toString()
+				test.log(LogStatus.WARNING, "Cross check the time lines from below screenshot".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 			} else {
 				test.log(LogStatus.FAIL, typeofAmend + " timeline was not updated in the group".toString()
@@ -1195,6 +1195,22 @@ public class KoraMessagesChatsPage extends PageBase {
 					"For a message either onhover options title is not displaying or failed to perform <b> " + action
 							+ "</b> Action".toString() + test.addScreenCapture(takeScreenShot()));
 		}
+
+	}
+	
+	public boolean verifyDisplayOfChevronIcon(boolean expvisibility) throws Exception {
+		boolean elementdisplayed = false;
+		elementdisplayed = remoteDriver.findElements(By.xpath("//span[@class='kr-down_arrowBox'][contains(@style,'visibility: visible')]")).size() > 0;
+		if (expvisibility == elementdisplayed) {
+			test.log(LogStatus.PASS, "For one participant Chevron icon (To enter Groupname) is not displayed".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		} else {
+			test.log(LogStatus.FAIL,
+					"Even for one participant Chevron icon (To enter Groupname) is getting displayed".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+		}
+
+		return elementdisplayed;
 
 	}
 

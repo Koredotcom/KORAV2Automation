@@ -40,15 +40,15 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 
-		korajusername = dr.getValue("KORAV2", "KoraV2james", "Jusername");
-		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Jpassword");
+		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
+		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
 		
-		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Husername");
-		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Hpassword");
+		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Username");
+		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 
 	}
 
-	@Test(enabled = true, priority = 5)
+	@Test(enabled = true, priority = 6)
 	public void MC_TC13_createAndDeleteGroupWithNoName() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -85,7 +85,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 6)
+	@Test(enabled = true, priority = 7)
 	public void MC_TC14_TC15_TC16_TC20_TC21_createNewGroupConversation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -111,7 +111,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 7)
+	@Test(enabled = true, priority = 8)
 	public void MC_TC17_TC18_TC19_addMemberToGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -136,7 +136,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 8)
+	@Test(enabled = true, priority = 9)
 	public void MC_TC17_renameExistingGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -163,7 +163,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 9)
+	@Test(enabled = true, priority = 10)
 	public void MC_TC17_removeParticipantsFromGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -187,7 +187,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 10)
+	@Test(enabled = true, priority = 11)
 	public void MC_TC25_TC26_clearChatHistory() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -210,7 +210,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 11)
+	@Test(enabled = true, priority = 12)
 	public void MC_TC_27_deleteConversation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())

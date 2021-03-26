@@ -40,15 +40,15 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 
-		korajusername = dr.getValue("KORAV2", "KoraV2james", "Jusername");
-		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Jpassword");
+		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
+		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
 		
-		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Husername");
-		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Hpassword");
+		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Username");
+		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 
 	}
 
-	@Test(enabled = true, priority = 12)
+	@Test(enabled = true, priority = 13)
 	public void MC_TC41_koraFirstGroupIconValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -69,7 +69,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 13)
+	@Test(enabled = true, priority = 14)
 	public void MC_TC35_koraOnHoverParticipantsValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -89,7 +89,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 14)
+	@Test(enabled = true, priority = 15)
 	public void MC_TC23_koraGroupChat3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -111,7 +111,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 15)
+	@Test(enabled = true, priority = 16)
 	public void MC_TC_22_TC_39_TC_40_koraMuteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -137,7 +137,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 16)
+	@Test(enabled = true, priority = 17)
 	public void MC_TC_22_TC_36_validateStarredChats() throws Exception {
 		
 		try {
@@ -167,7 +167,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 17)
+	@Test(enabled = true, priority = 18)
 	public void MC_TC_22_TC_38_validateUnreadChats() throws Exception {
 		
 		try {
@@ -195,7 +195,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 18)
+	@Test(enabled = true, priority = 19)
 	public void MC_TC44_koraAtmentionUsers() throws Exception {
 		
 		try {

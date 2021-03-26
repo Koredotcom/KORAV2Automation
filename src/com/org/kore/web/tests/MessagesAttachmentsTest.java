@@ -43,16 +43,16 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 
-		korajusername = dr.getValue("KORAV2", "KoraV2james", "Jusername");
-		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Jpassword");
+		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
+		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
 		
-		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Husername");
-		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Hpassword");
+		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Username");
+		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 		
 		directory = System.getProperty("user.dir");
 	}
 
-	@Test(enabled = true, priority = 19)
+	@Test(enabled = true, priority = 20)
 	public void MC_TC11_TC30_uploadFileBelow25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -96,7 +96,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 20)
+	@Test(enabled = true, priority = 21)
 	public void MC_TC31_uploadMultipleFiles() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -123,7 +123,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = false, priority = 21)
+	@Test(enabled = false, priority = 22)
 	public void MC_uploadFileabove25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
