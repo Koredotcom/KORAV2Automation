@@ -49,7 +49,7 @@ public class Messages121Test extends DriverSetUp {
 		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 	}
 
-	@Test(enabled = true, priority = 1)
+		@Test(enabled = true, priority = 1)
 	public void MC_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -145,7 +145,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 5)
-	public void MC_TC28_TC29_ValidateChevronIconFor1ParticipantAndSendLongText() throws Exception {
+	public void MC_TC28_TC29_TC43_ValidateChevronIconFor1ParticipantAndSendLongText() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -157,16 +157,35 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonlongtext = "Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend";
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			koramessagespage.verifyDisplayOfChevronIcon(false);
 			user = koramessagespage.enterYourMessageAs(onetoonlongtext);
-			test.log(LogStatus.WARNING, "verify the above screenshot with long text");
+			koramessagespage.validateLongTextReadMoreTruncation();
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
+			test.log(LogStatus.FAIL, "Failed to validate long text");
+		}
+	}
+	
+	@Test(enabled = true, priority = 6)
+	public void MC_TC10_enterTextWithEmoji() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
+			koramessagespage.enterYourEmojiWithText(true, " Hi Sending with emoji ");
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Emojis with text");
 		}
 	}
 }

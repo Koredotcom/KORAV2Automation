@@ -48,7 +48,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 6)
+	@Test(enabled = true, priority = 7)
 	public void MC_TC13_createAndDeleteGroupWithNoName() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -64,6 +64,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			groupname = koramessagespage.enterYourMessageAs(grouptext);
 			koramessagespage.verifyGroupCreationTimeline(korajusername);
@@ -85,7 +86,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 7)
+	@Test(enabled = true, priority = 8)
 	public void MC_TC14_TC15_TC16_TC20_TC21_createNewGroupConversation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -100,6 +101,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			koramessagespage.createGroupAs(groupname);
 			koramessagespage.enterYourMessageAs(grouptext);
@@ -111,7 +113,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 8)
+	@Test(enabled = true, priority = 9)
 	public void MC_TC17_TC18_TC19_addMemberToGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -125,6 +127,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
 			koramessagespage.manageConversationValidations();
@@ -136,7 +139,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 9)
+	@Test(enabled = true, priority = 10)
 	public void MC_TC17_renameExistingGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -151,6 +154,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
 			updatedname = koramessagespage.renameGroupAndClose(renameto);
@@ -163,7 +167,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 10)
+	@Test(enabled = true, priority = 11)
 	public void MC_TC17_removeParticipantsFromGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -176,6 +180,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
 			koramessagespage.removeParticipantsAndClose();
@@ -187,7 +192,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 11)
+	@Test(enabled = true, priority = 12)
 	public void MC_TC25_TC26_clearChatHistory() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -200,6 +205,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Clear Conversation History");
 			koramessagespage.checkEmptyScreen();
@@ -210,7 +216,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 12)
+	@Test(enabled = true, priority = 13)
 	public void MC_TC_27_deleteConversation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -223,6 +229,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Leave Conversation");
 			koramessagespage.clickOn("Leave Conversation", true);

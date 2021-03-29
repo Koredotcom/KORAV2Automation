@@ -1248,11 +1248,11 @@ public class PageBase extends DriverSetUp {
 			switch (DriverSetUp.propsMap.get("tool")) {
 
 			case "Appium":
-				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
+				WebDriverWait wait = new WebDriverWait(appiumDriver, 10, 500);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 15, 500);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 5, 500);
 				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 				break;
 			}

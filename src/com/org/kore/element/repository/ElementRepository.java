@@ -23,13 +23,14 @@ public class ElementRepository {
 			kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null, kmcfirstactiveuser = null,
 			kmcactivebackground = null, kmdiscussion = null, kmplaceholder = null, kmsearchsuggestions = null,
 			kmattachfromplus = null, kmmessages = null, kmmessagehoveroptiontitles = null, kmmessagehover3dots = null,
-			kmmessagehoverreplyback = null, kmmessagehovermorecopy = null, kwplusicon = null, kwcreatenew = null,
-			kwjoinexisting = null, kworkplaceholder = null, kwdefaulworkspace = null, kwdrheader = null,
-			kworkspaces = null, kwdrgeneral = null, kworkspacename = null, kwleft3dots = null,
-			kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null, kwdeletewsname = null,
-			kwproceedDelete = null, kwcomposebar = null, kwinvite = null, kwsearchandaddpeople = null,
-			kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null, kwmemslist = null,
-			kdrcidgroup = null, kdrc3dotoptionsRightPanel = null, kdrc3dotoptionsRightPanelOptions = null;
+			kmmessagehoverreplyback = null, kmmessagehovermorecopy = null, kmlongtextreadmore = null, kmreadmore = null,
+			kmreadless = null, kmemoji=null, kmsmiley=null,kwplusicon = null, kwcreatenew = null, kwjoinexisting = null, kworkplaceholder = null,
+			kwdefaulworkspace = null, kwdrheader = null, kworkspaces = null, kwdrgeneral = null, kworkspacename = null,
+			kwleft3dots = null, kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null,
+			kwdeletewsname = null, kwproceedDelete = null, kwcomposebar = null, kwinvite = null,
+			kwsearchandaddpeople = null, kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null,
+			kwmemslist = null, kdrcidgroup = null, kdrc3dotoptionsRightPanel = null,
+			kdrc3dotoptionsRightPanelOptions = null;
 
 	public void repoIOS() {
 
@@ -106,6 +107,11 @@ public class ElementRepository {
 		kmmessagehover3dots = "//div[@class='msgCntrlBar']//i[@class='icon kr-ellipsis']";
 		kmmessagehoverreplyback = "//div[@class='msgCntrlBar']//i[@class='icon replyButton']";
 		kmmessagehovermorecopy = "//ul[@Class='msgOptions']//span[text()='Copy']";
+		kmlongtextreadmore = "//span[@class='readMoreText'][text()='Read more']/..//span[@class='truncateText']";
+		kmreadmore = "//span[@class='readMoreText'][text()='Read more'][contains(@style,'cursor: pointer;')]";
+		kmreadless = "//span[@class='readMoreText'][text()='Read less'][contains(@style,'cursor: pointer;')]";
+		kmemoji = "//div[@class='emojiIconCntr']";
+		kmsmiley="//ul[@class='icons']//li[3]";
 		kmdiscussion = "//div[@class='krDropDownMenu']//*[text()='Create a Discussion Room']";
 
 		kwplusicon = "//span[@id='ws-plus-button']";

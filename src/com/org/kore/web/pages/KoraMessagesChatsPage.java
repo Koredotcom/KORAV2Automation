@@ -229,6 +229,29 @@ public class KoraMessagesChatsPage extends PageBase {
 
 		return chatheadername;
 	}
+	
+	/**
+	 * @param enterthistext
+	 *            : Mentioned text from here will be send as a message
+	 * @throws Exception
+	 */
+	public void enterYourEmojiWithText(boolean withtext, String enterthistext) throws Exception {
+		try {
+			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
+			click(er.kmemoji, "Emoji");
+			test.log(LogStatus.WARNING, "Emojis displayed, requires human eye to check the UI from the below screenshot" .toString() + test.addScreenCapture(takeScreenShot()));
+			click(er.kmsmiley, "Smiley Emoju");
+			if (withtext)
+				compose.sendKeys(enterthistext, Keys.ENTER);
+			compose.sendKeys(Keys.ENTER);
+			Thread.sleep(2000);
+			test.log(LogStatus.WARNING, "After sending the emoji emoji popup should get disappear" .toString() + test.addScreenCapture(takeScreenShot()));
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Emoji's paths might have changed".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}
+
+	}
 
 	public String getChatHeaderName() throws Exception {
 		String chatheadername = null;
@@ -599,9 +622,9 @@ public class KoraMessagesChatsPage extends PageBase {
 			String headername = getChatHeaderName();
 			moveToElement(er.kdrc3dotoptionsRightPanel + headername
 					+ "']/../../../../..//I[@class='p-icon _choI kr-ellipsis']", "xpath");
-			click(er.kdrc3dotoptionsRightPanel + headername
-					+ "']/../../../../..//I[@class='p-icon _choI kr-ellipsis']", "xpath");
-			
+			click(er.kdrc3dotoptionsRightPanel + headername + "']/../../../../..//I[@class='p-icon _choI kr-ellipsis']",
+					"xpath");
+
 			options = remoteDriver.findElements(By.xpath(er.kdrc3dotoptionsRightPanelOptions));
 
 		} else {
@@ -1197,10 +1220,12 @@ public class KoraMessagesChatsPage extends PageBase {
 		}
 
 	}
-	
+
 	public boolean verifyDisplayOfChevronIcon(boolean expvisibility) throws Exception {
 		boolean elementdisplayed = false;
-		elementdisplayed = remoteDriver.findElements(By.xpath("//span[@class='kr-down_arrowBox'][contains(@style,'visibility: visible')]")).size() > 0;
+		elementdisplayed = remoteDriver
+				.findElements(By.xpath("//span[@class='kr-down_arrowBox'][contains(@style,'visibility: visible')]"))
+				.size() > 0;
 		if (expvisibility == elementdisplayed) {
 			test.log(LogStatus.PASS, "For one participant Chevron icon (To enter Groupname) is not displayed".toString()
 					+ test.addScreenCapture(takeScreenShot()));
@@ -1214,4 +1239,31 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	}
 
+	public void validateLongTextReadMoreTruncation() throws Exception {
+		try {
+			boolean elementdisplayed = remoteDriver.findElements(By.xpath(er.kmlongtextreadmore)).size() > 0;
+			if (elementdisplayed) {
+				moveToElement(er.kmreadmore, "xpath");
+				test.log(LogStatus.PASS, "For<b> Read more </b>cursor type displayed as Hand icon");
+				test.log(LogStatus.PASS,
+						"For long text, text got truncated and Read more text got displayed as below".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+				click(er.kmreadmore, "Read more on long text message");
+				moveToElement(er.kmreadless, "xpath");
+				test.log(LogStatus.PASS, "For<b> Read less </b>cursor type displayed as Hand icon");
+				test.log(LogStatus.PASS, "On click of Read more, Read less was displayed as below".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+				click(er.kmreadless, "Read less on long text message");
+
+			} else {
+				test.log(LogStatus.FAIL,
+						"For long text, Read more , text truncation or Hand icon on Read more text is not getting displayed"
+								.toString() + test.addScreenCapture(takeScreenShot()));
+			}
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Hand icon is not displaying either on Read more or Read less".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}
+	}
 }

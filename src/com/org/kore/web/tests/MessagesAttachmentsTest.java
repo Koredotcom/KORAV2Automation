@@ -52,7 +52,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		directory = System.getProperty("user.dir");
 	}
 
-	@Test(enabled = true, priority = 20)
+	@Test(enabled = true, priority = 21)
 	public void MC_TC11_TC30_uploadFileBelow25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -96,7 +96,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 21)
+	@Test(enabled = true, priority = 22)
 	public void MC_TC31_uploadMultipleFiles() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -117,13 +117,14 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			korahomepage.uploadfilesfromAttachment(allfiles,true, "Multiple file formats");
 			
+			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to attach multiple files for 1to1 conversation");
 		}
 	}
 
-	@Test(enabled = false, priority = 22)
+	@Test(enabled = false)
 	public void MC_uploadFileabove25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
