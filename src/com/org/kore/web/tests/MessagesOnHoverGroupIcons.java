@@ -62,7 +62,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.getAndValidateGroupIcons(groupname, true, korajusername);
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -83,7 +83,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.getOnHoverParticipantsCount(groupname, korajusername);
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -105,7 +105,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expected3dotoptions,"middle");
 			extent.endTest(test);
@@ -128,10 +128,10 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "Mute");
 			koramessagespage.validateAndSelectMuteSlots(muteslots, true);
-			korahomepage.selectLeftMenuOption("Muted");
+			korahomepage.selectTopLeftMenuOption("Muted");
 			koramessagespage.searchAndSelectFrom("Muted", groupname, true);
 			koramessagespage.goToGroupAndPerform(groupname, true, "UnMute");
 			extent.endTest(test);
@@ -157,11 +157,11 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			koramessagespage.goToGroupAndPerform(user, true, "Star");
-			korahomepage.selectLeftMenuOption(Starred);
+			korahomepage.selectTopLeftMenuOption(Starred);
 			koramessagespage.searchAndSelectFrom(Starred, user, true);
 			koramessagespage.goToGroupAndPerform(user, true, "Unstar");
 			extent.endTest(test);
@@ -186,11 +186,11 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			koramessagespage.goToGroupAndPerform(user, true, "Unread");
-			korahomepage.selectLeftMenuOption("Unread");
+			korahomepage.selectTopLeftMenuOption("Unread");
 			koramessagespage.goToGroupAndPerform(user, false, "na");
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -212,7 +212,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, false, "NA");
 			int totalparticipants=koramessagespage.profileAvtarCount();
 			koramessagespage.atMentionValidation(totalparticipants,false,"NA");

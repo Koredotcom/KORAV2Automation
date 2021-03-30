@@ -64,7 +64,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			groupname = koramessagespage.enterYourMessageAs(grouptext);
 			koramessagespage.verifyGroupCreationTimeline(korajusername);
@@ -101,7 +101,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			koramessagespage.createGroupAs(groupname);
 			koramessagespage.enterYourMessageAs(grouptext);
@@ -127,7 +127,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
 			koramessagespage.manageConversationValidations();
@@ -154,7 +154,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
 			updatedname = koramessagespage.renameGroupAndClose(renameto);
@@ -180,7 +180,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
 			koramessagespage.removeParticipantsAndClose();
@@ -205,7 +205,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Clear Conversation History");
 			koramessagespage.checkEmptyScreen();
@@ -229,7 +229,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Leave Conversation");
 			koramessagespage.clickOn("Leave Conversation", true);

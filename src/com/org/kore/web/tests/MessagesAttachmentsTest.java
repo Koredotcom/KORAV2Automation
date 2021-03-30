@@ -80,7 +80,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			korahomepage.uploadfilesfromAttachment(doc,true, "doc file");
@@ -112,7 +112,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			korahomepage.uploadfilesfromAttachment(allfiles,true, "Multiple file formats");

@@ -15,7 +15,7 @@ public class ElementRepository {
 			kpwd = null, kosignin = null, kstaysignin = null, ksignwithgoogle = null, ksignwithgooglepage = null,
 			knext = null, kchoosetext = null, kselectaccount = null, kallow = null, klogout = null, klogoutyes = null,
 			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null, klogo = null, kcomposebar = null,
-			kleftactiveoption = null, kattachment = null, kmcleftmenu = null, kmcplusicon = null, kmchat = null,
+			kleftactiveoption = null, kattachment = null, kuserprofileicon=null,kmctopleftmenu = null,kmbottonleftmenu=null, kmcplusicon = null, kmchat = null,
 			kmcomposebar = null, kmcrecent = null, kmcenterparticipant = null, kmcloseconversation = null,
 			kmcsuggestnames = null, kmcsuggestmailids = null, kmcprofileicon = null, kmcgroupchevronicon = null,
 			kmcgroupname = null, kmcidgroup = null, kmcidchatdesc = null, kmc3dots = null, kmc3dotoptions = null,
@@ -24,13 +24,13 @@ public class ElementRepository {
 			kmcactivebackground = null, kmdiscussion = null, kmplaceholder = null, kmsearchsuggestions = null,
 			kmattachfromplus = null, kmmessages = null, kmmessagehoveroptiontitles = null, kmmessagehover3dots = null,
 			kmmessagehoverreplyback = null, kmmessagehovermorecopy = null, kmlongtextreadmore = null, kmreadmore = null,
-			kmreadless = null, kmemoji=null, kmsmiley=null,kwplusicon = null, kwcreatenew = null, kwjoinexisting = null, kworkplaceholder = null,
+			kmreadless = null, kmemoji=null, kmsmiley=null,kwfilterbyws=null,kwplusicon = null, kwcreatenew = null, kwjoinexisting = null, kworkplaceholder = null,
 			kwdefaulworkspace = null, kwdrheader = null, kworkspaces = null, kwdrgeneral = null, kworkspacename = null,
 			kwleft3dots = null, kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null,
 			kwdeletewsname = null, kwproceedDelete = null, kwcomposebar = null, kwinvite = null,
 			kwsearchandaddpeople = null, kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null,
 			kwmemslist = null, kdrcidgroup = null, kdrc3dotoptionsRightPanel = null,
-			kdrc3dotoptionsRightPanelOptions = null;
+			kdrc3dotoptionsRightPanelOptions = null,kdrpostname0=null,kdrpostname1=null;
 
 	public void repoIOS() {
 
@@ -63,7 +63,7 @@ public class ElementRepository {
 		knext = "//div[@class='VfPpkd-RLmnJb']";
 		kselectaccount = "//div[@class='qQWzTd']";
 		kallow = "//span[text()='Allow']";
-		klogout = "//i[@class='p-icon pi pi-power-off']";
+		klogout = "//i[@class='p-icon pi pi-power-off'] | //i[@class='icon kr-leaveDiscussion'] |//i[@class='icon kr-shutdown']";
 		klogoutyes = "//span[text()='Yes']";
 		khistory = "//span[@class='loadHistory']";
 		ktext = "//*[text()='";
@@ -73,8 +73,10 @@ public class ElementRepository {
 		kcomposebar = "//div[contains(@placeholder,'Type your')]";
 		kleftactiveoption = "//li[@class='active p-menuitem']//span[@class='p-menuitem-text']";
 		kattachment = "//i[@class='p-icon kr-discussion-attachment emojiBtn']";
+		kuserprofileicon="//div[@class='userIntial']";
 
-		kmcleftmenu = "//span[@class='p-menuitem-text']";
+		kmctopleftmenu = "//span[@class='p-menuitem-text']";
+		kmbottonleftmenu ="//div[contains(@class,'p-menuitem-link')]//span[@class='p-menuitem-text ws-name-ellipsis']";
 		kmcplusicon = "//span[@class='p-icon kr-plus']";
 		kmchat = "//div[@class='krDropDownMenu']//*[text()='Crete a new Chat']";
 		kmcomposebar = "//div[@placeholder='Type your message']";
@@ -114,6 +116,7 @@ public class ElementRepository {
 		kmsmiley="//ul[@class='icons']//li[3]";
 		kmdiscussion = "//div[@class='krDropDownMenu']//*[text()='Create a Discussion Room']";
 
+		kwfilterbyws="//div[text()='Filter By Workspaces']";
 		kwplusicon = "//span[@id='ws-plus-button']";
 		kwcreatenew = "//div[@id='ws-plus-cont']//li[text()='Create New']";
 		kwjoinexisting = "//div[@id='ws-plus-cont']//li[text()='Join Existing']";
@@ -140,6 +143,8 @@ public class ElementRepository {
 		kdrcidgroup = "//div[@class='userNameDiv drUserNameDiv'][text()='";
 		kdrc3dotoptionsRightPanel = "//div[@class='chatHeader']//span[text()='";
 		kdrc3dotoptionsRightPanelOptions = "//div[contains(@class, 'krDropDownMenu chatHeaderOptions')]//div";
+		kdrpostname0="//p[@class='chatUserTitle']/span[text()='";
+		kdrpostname1="']/../../../../../..//div[@class='dicussionPostMessage']/span[@class='truncateText' and text()='";
 
 	}
 

@@ -1,5 +1,7 @@
 package com.org.kore.web.tests;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -62,7 +64,24 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			remoteDriver.get("chrome://settings/clearBrowserData");
+			Thread.sleep(5000);
+			try {
+				
+				JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
+				String clickcleardata = "document.querySelector('body > settings-ui')"
+						+ ".click()";
+				js.executeScript(clickcleardata);
+				
+				
+			} catch (Exception e) {
+				System.out.println("In catch");
+				e.printStackTrace();
+			}
+			
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.messagesScreenValidations();
 			koramessagespage.checkDefaultFocus_Recents();
 			extent.endTest(test);
@@ -71,7 +90,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 2)
+	/*@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -126,7 +145,7 @@ public class Messages121Test extends DriverSetUp {
 			String msgtocopy = DriverSetUp.testdataMap.get("msgforcopy");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			koramessagespage.getFirstActiveUser(user, true);
@@ -158,7 +177,7 @@ public class Messages121Test extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith(newparticipants, true);
 			koramessagespage.verifyDisplayOfChevronIcon(false);
 			user = koramessagespage.enterYourMessageAs(onetoonlongtext);
@@ -181,11 +200,11 @@ public class Messages121Test extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectLeftMenuOption("All Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.enterYourEmojiWithText(true, " Hi Sending with emoji ");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Emojis with text");
 		}
-	}
+	}*/
 }

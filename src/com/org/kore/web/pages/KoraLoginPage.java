@@ -70,17 +70,27 @@ public class KoraLoginPage extends PageBase {
 
 	}
 
-	public void logout() throws Exception {
+	/*public void logout() throws Exception {
 		click(er.klogout, "Logout");
 		click(er.klogoutyes, "Logout Confirmation Popup Yes");
 		test.log(LogStatus.PASS, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
 		waitTillappear(er.ko365, "xpath", "Choose ur account type");
 		click(er.ko365, "Select Microsoft option");
 
+	}*/
+	
+	public void logoutandreLogin(boolean relogin, String userName,String password) throws Exception {		
+		click(er.kuserprofileicon, "Click on User profile icon");
+		click(er.klogout, "Logout");
+		click(er.klogoutyes, "Logout Confirmation Popup Yes");
+		test.log(LogStatus.PASS, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
+		waitTillappear(er.ko365, "xpath", "Choose ur account type");
+		if(relogin)
+			signInWithO365(userName, password);		
 	}
 
 	public void loginToKora(String url, String userName, String password) throws Exception {
 		cf.launchSite(url);
-		// signInWithO365(userName, password);
+		signInWithO365(userName, password);
 	}
 }

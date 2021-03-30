@@ -38,10 +38,10 @@ public class KoraHomePage extends PageBase {
 
 	public void selectMenuOption(String menuoption) throws Exception {
 		boolean flag = false;
-		waitTillappear(er.kheadermenu, "xpath", "Top header");
-		System.out.println("Header menu displayed");
-		Thread.sleep(5000);
-		List<WebElement> Menulist = remoteDriver.findElements(By.xpath(er.kheadermenu));
+	//	waitTillappear(er.kheadermenu, "xpath", "Top header");
+	//	System.out.println("Header menu displayed");
+	//	Thread.sleep(5000);
+		List<WebElement> Menulist = remoteDriver.findElements(By.xpath("//span[@class='menuTabs']/a"));
 		for (WebElement e : Menulist) {
 			if (e.getText().trim().equalsIgnoreCase(menuoption)) {
 				flag = true;
@@ -68,10 +68,10 @@ public class KoraHomePage extends PageBase {
 	 * @throws Exception
 	 */
 
-	public void selectLeftMenuOption(String menuoption) throws Exception {
+	public void selectTopLeftMenuOption(String menuoption) throws Exception {
 		boolean flag = false;
 		waitTillappear(er.kheadermenu, "xpath", "Top header");
-		List<WebElement> Menulist = remoteDriver.findElements(By.xpath(er.kmcleftmenu));
+		List<WebElement> Menulist = remoteDriver.findElements(By.xpath(er.kmctopleftmenu));
 		for (WebElement e : Menulist) {
 			if (e.getText().trim().equalsIgnoreCase(menuoption)) {
 				flag = true;
@@ -98,6 +98,37 @@ public class KoraHomePage extends PageBase {
 			System.out.println("Reached FailXXXXXXXX " + menuoption + " is not available on the Dom for left nav");
 		}
 	}
+	
+	/**
+	 * @param menuoption
+	 *            To select bottom left menu workspace
+	 */
+
+	public void selectBottomLeftMenuWorkSpace(String leftmenuworkspace) throws Exception {
+		boolean flag = false;
+		waitTillappear(er.kwfilterbyws, "xpath", "Left bottom header");
+		List<WebElement> Menulist = remoteDriver.findElements(By.xpath(er.kmbottonleftmenu));
+		for (WebElement e : Menulist) {
+			if (e.getText().trim().equalsIgnoreCase(leftmenuworkspace)) {
+				flag = true;
+				e.click();
+				System.out.println(leftmenuworkspace + " Workspace got selected");
+				Thread.sleep(1000);
+				test.log(LogStatus.PASS, "Selected <b>" + leftmenuworkspace + " </b>option from left menu".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+				break;
+			}
+		}
+		if (!flag) {
+			System.out.println(leftmenuworkspace + " Workspace was not selected");
+			test.log(LogStatus.FAIL,
+					leftmenuworkspace + "  Workspace not selected or it is not available from the workspaces list".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+			System.out
+					.println("Reached FailXXXXXXXX " + leftmenuworkspace + " workspace is not available on the Dom for top header menu");
+		}
+	}
+		
 
 	public void getActiveOptionFromLeftNav(String menuoption) throws Exception {
 		try {
