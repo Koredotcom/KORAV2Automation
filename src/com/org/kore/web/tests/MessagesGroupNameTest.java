@@ -65,7 +65,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith(newparticipants, true);
+			koramessagespage.startNewConversationWith("Chat",newparticipants, true);
 			groupname = koramessagespage.enterYourMessageAs(grouptext);
 			koramessagespage.verifyGroupCreationTimeline(korajusername);
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
@@ -102,7 +102,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith(newparticipants, true);
+			koramessagespage.startNewConversationWith("chat",newparticipants, true);
 			koramessagespage.createGroupAs(groupname);
 			koramessagespage.enterYourMessageAs(grouptext);
 			koramessagespage.verifyGroupCreationTimeline(korajusername);

@@ -54,7 +54,7 @@ public class MessagesDR extends DriverSetUp {
 
 	}
 
-	/*@Test(enabled = true, priority = 23)
+	@Test(enabled = true, priority = 23)
 	public void MDR_TC1_TC2_TC3_TC65_createNewWorkspaceAndDelete() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -160,7 +160,7 @@ public class MessagesDR extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate default DR and Timeline (General name might got changed)");
 		}
-	}*/
+	}
 
 	/*
 	 * Discussion Room : Check the recipient/member is able to like and comment
@@ -186,14 +186,15 @@ public class MessagesDR extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);									
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");								
-			String postingmessage =koramessagespage.enterYourMessageAs(drpost);
+			koramessagespage.enterYourMessageAs(drpost);
 
-			koraloginpage.logoutandreLogin(true, korahusername, korahpassword);			
+			koraloginpage.logoutAndReLogin(true,url, korahusername, korahpassword);			
 
+			koraloginpage.loginToKora(url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
-			koramessagedrpage.perfromreactionsonPost(standarddrname, postingmessage, "Like", false);					
+			koramessagedrpage.perfromreactionsonPost(standarddrname, drpost, "Like", false);					
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
@@ -247,17 +248,18 @@ public class MessagesDR extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			String url = DriverSetUp.propsMap.get("weburl");			
 			String Messages = DriverSetUp.drdataMap.get("messages");
-			String Workspaces = DriverSetUp.drdataMap.get("workspacesDND");
+			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
+			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);			
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectBottomLeftMenuWorkSpace(Workspaces);			
-			koramessagedrpage.goToGroupAndPerforminWSDR("DoNotDeleteDRAuto", false, "");
+			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);			
+			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
 			String validationelmenets[]={"Star","Mute", "Read"};			
 			for(String value: validationelmenets )
 			{
-				koramessagedrpage.verifytheoptionsonDRandperfromAction("DoNotDeleteDRAuto",value,"SelectNOT");					
+				koramessagedrpage.verifytheoptionsonDRandperfromAction(standarddrname,value,"SelectNOT");					
 			}																			
 			extent.endTest(test);
 		} catch (Exception e) {

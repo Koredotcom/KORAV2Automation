@@ -1354,6 +1354,24 @@ public class PageBase extends DriverSetUp {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clearChromeCache () throws Exception{
+		try{
+		remoteDriver.get("chrome://settings/clearBrowserData");
+		Thread.sleep(3000);
+			
+			JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
+			String clickcleardata = "document.querySelector('body > settings-ui').shadowRoot.querySelector('#main').shadowRoot.querySelector('settings-basic-page').shadowRoot.querySelector('settings-section > settings-privacy-page').shadowRoot.querySelector('settings-clear-browsing-data-dialog').shadowRoot.querySelectorAll('cr-button')[1]"
+					+ ".click()";
+			js.executeScript(clickcleardata);
+			test.log(LogStatus.INFO, " Browser cache cleared successfully");
+			
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, e + "Failed to clear the cache so your test case may faill to login with other user with in the same session".toString() +  test.addScreenCapture(takeScreenShot()));
+			System.out.println("In catch");
+			e.printStackTrace();
+		}
+	}
 
 	public void scrollDown() {
 

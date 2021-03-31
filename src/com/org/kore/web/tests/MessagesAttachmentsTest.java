@@ -81,7 +81,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith(recepientuser, true);
+			koramessagespage.startNewConversationWith("chat",recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			korahomepage.uploadfilesfromAttachment(doc,true, "doc file");
 			korahomepage.uploadfilesfromAttachment(mp4,true, "mp4 file");
@@ -113,7 +113,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith(recepientuser, true);
+			koramessagespage.startNewConversationWith("chat",recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			korahomepage.uploadfilesfromAttachment(allfiles,true, "Multiple file formats");
 			
@@ -142,7 +142,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
-			koramessagespage.startNewConversationWith(recepientuser, true);
+			koramessagespage.startNewConversationWith("chat",recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			korahomepage.uploadfilesfromAttachment(allfiles,true, "Beyond 25 MB file");
 			

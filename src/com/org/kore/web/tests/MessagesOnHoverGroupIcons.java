@@ -158,7 +158,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith(newparticipants, true);
+			koramessagespage.startNewConversationWith("chat",newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			koramessagespage.goToGroupAndPerform(user, true, "Star");
 			korahomepage.selectTopLeftMenuOption(Starred);
@@ -187,7 +187,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith(newparticipants, true);
+			koramessagespage.startNewConversationWith("chat",newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			koramessagespage.goToGroupAndPerform(user, true, "Unread");
 			korahomepage.selectTopLeftMenuOption("Unread");

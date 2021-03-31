@@ -64,23 +64,7 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
-			remoteDriver.get("chrome://settings/clearBrowserData");
-			Thread.sleep(5000);
-			try {
-				
-				JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
-				String clickcleardata = "document.querySelector('body > settings-ui')"
-						+ ".click()";
-				js.executeScript(clickcleardata);
-				
-				
-			} catch (Exception e) {
-				System.out.println("In catch");
-				e.printStackTrace();
-			}
-			
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
-			
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.messagesScreenValidations();
 			koramessagespage.checkDefaultFocus_Recents();
@@ -90,7 +74,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	/*@Test(enabled = true, priority = 2)
+	@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -120,8 +104,9 @@ public class Messages121Test extends DriverSetUp {
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 			String expbgclr= DriverSetUp.testdataMap.get("expectedlabelbackground");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
-			koramessagespage.startNewConversationWith(newparticipants, true);
+			koramessagespage.startNewConversationWith("chat",newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			koramessagespage.getActiveLabelBackgroundColor(expbgclr);
 			koramessagespage.userProfileIconValidation(user);
@@ -146,14 +131,14 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith(newparticipants, true);
+			koramessagespage.startNewConversationWith("chat",newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			koramessagespage.getFirstActiveUser(user, true);
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Delete Conversation");
 			korahomepage.clickOn("Delete", true);
 			koramessagespage.getFirstActiveUser(user, false);
-			koramessagespage.startNewConversationWith(newparticipants, true);
+			koramessagespage.startNewConversationWith("chat",newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(msgtocopy);
 			koramessagespage.getFirstActiveUser(user, true);
 			koramessagespage.goToMessageAndPerformActionsAs(msgtocopy, "More", "Copy");
@@ -178,7 +163,7 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith(newparticipants, true);
+			koramessagespage.startNewConversationWith("chat",newparticipants, true);
 			koramessagespage.verifyDisplayOfChevronIcon(false);
 			user = koramessagespage.enterYourMessageAs(onetoonlongtext);
 			koramessagespage.validateLongTextReadMoreTruncation();
@@ -206,5 +191,5 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Emojis with text");
 		}
-	}*/
+	}
 }

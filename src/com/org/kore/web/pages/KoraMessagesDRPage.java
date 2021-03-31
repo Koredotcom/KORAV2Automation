@@ -140,6 +140,14 @@ public class KoraMessagesDRPage extends PageBase {
 		}
 
 	}
+	
+	public void validateDROnhoverOptions(){
+		String validationelmenets[]={"Star","Mute", "Read"};			
+		for(String value: validationelmenets )
+		{
+		//	koramessagedrpage.verifytheoptionsonDRandperfromAction("DoNotDeleteDRAuto",value,"SelectNOT");					
+		}
+	}
 
 	/**
 	 * @param worksapce :: Workspace name

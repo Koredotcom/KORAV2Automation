@@ -52,11 +52,12 @@ public class KoraMessagesChatsPage extends PageBase {
 	 *            : this should be either chat or discussion
 	 * @throws Exception
 	 */
-	public void newChatOrDiscussion(String userchoice) throws Exception {
-		click(er.kmcplusicon, "New Conversation");
-		if (userchoice.equalsIgnoreCase("chat")) {
-			click(er.kmchat, "Create a new Chat");
-		} else if (userchoice.equalsIgnoreCase("discussion")) {
+	public void newChatOrDiscussion(String conversationorDR) throws Exception {
+		click(er.kmcplusicon, "Plus icon to start new"+conversationorDR);
+		
+		if (conversationorDR.toLowerCase().contains("chat")) {
+			click(er.kmconv, "Create a new Chat");
+		} else if (conversationorDR.toLowerCase().contains("discussion")) {
 			click(er.kmdiscussion, "Create a Discussion Room");
 		} else {
 			test.log(LogStatus.FAIL, "Please provide valid userchaoice after clicking on + icon".toString()
@@ -66,7 +67,6 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	public void checkDefaultFocus_Recents() throws Exception {
 		try {
-			// click(er.kmplusicon, "New Conversation");
 			newChatOrDiscussion("chat");
 			Thread.sleep(1500);
 			List<WebElement> recents = remoteDriver.findElements(By.xpath(er.kmcrecent));
@@ -141,12 +141,11 @@ public class KoraMessagesChatsPage extends PageBase {
 	 * @throws Exception
 	 *             : Fail, when unable to select the provided participant
 	 */
-	public void startNewConversationWith(String participantlist, boolean plusicon) throws Exception {
+	public void startNewConversationWith(String conversationorDR, String participantlist, boolean plusicon) throws Exception {
 
 		try {
 			if (plusicon)
-				// click(er.kmplusicon, "New Conversation");
-				newChatOrDiscussion("chat");
+				newChatOrDiscussion(conversationorDR);
 			click(er.kmcenterparticipant, "Enter participant name");
 			if (participantlist.contains(",")) {
 				String result[] = participantlist.trim().split("\\s*,\\s*");
@@ -742,13 +741,6 @@ public class KoraMessagesChatsPage extends PageBase {
 		}
 	}
 
-	public void createGroupAndSendMessageAs(String participants, boolean plusicon, String groupname, String groupText)
-			throws Exception {
-		startNewConversationWith(participants, true);
-		createGroupAs(groupname);
-		enterYourMessageAs(groupText);
-	}
-
 	/**
 	 * 
 	 * @param groupname
@@ -1024,7 +1016,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		try {
 			clickOn("Members", false);
 			clickOn("Add Participants", true);
-			startNewConversationWith(memberstoadd, false);
+			startNewConversationWith("chat",memberstoadd, false);
 			clickOn("Done", false);
 			validateRecentAddedParticipants(memberstoadd);
 			click(er.kmcmanageclose, "Close button");
