@@ -11,7 +11,7 @@
 			<class name="com.org.kore.web.tests.MessagesOnHoverGroupIcons" />
 			<class name="com.org.kore.web.tests.MessagesAttachmentsTest" /> 
 			<class name="com.org.kore.web.tests.MessagesDR" /> -->
-			<class name="com.org.kore.web.tests.MessagesDR" />
+			<class name="com.org.kore.web.tests.Messages121Test" />
 
 		</classes>
 	</test> <!-- Sequential Tests -->

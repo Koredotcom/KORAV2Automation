@@ -118,7 +118,6 @@ public class MessagesDR extends DriverSetUp {
 			String workspacename = DriverSetUp.drdataMap.get("workspacename8");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.createNewWorkspaceAs(workspacename);
 			korahomepage.selectMenuOption(Messages);
@@ -162,12 +161,6 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	/*
-	 * Discussion Room : Check the recipient/member is able to like and comment
-	 * the same post
-	 * 
-	 * @To Do
-	 */
 
 	@Test(enabled = true, priority = 27)
 	public void MDR_TC11_likeCommentToAPost() throws Exception {
@@ -182,7 +175,6 @@ public class MessagesDR extends DriverSetUp {
 			String drpost = DriverSetUp.drdataMap.get("drpost");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);									
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");								
@@ -201,12 +193,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	/**
-	 * TC12 ::Discussion Room ::Check whether user is able to see the list of
-	 * options, when user tap on 3 dots option in right panel beside the room
-	 * name. TC13 :: Discussion Room :: Verify the list of options displayed
-	 * from 3 dots from middle view
-	 */
+	
 	@Test(enabled = true, priority = 28)
 	public void MDR_TC12_13_TC30_validating3DotOptionsFromMidAndRightPanels() throws Exception {
 		try {
@@ -234,11 +221,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 	
-	/**
-	 * TC24 :: Check when user onhover the cursor on any room below options are displaying.
-	 * 1. Star / Unstar 2. Mute3. Un-read / Read and If applicable - Badget count.
-	 * @throws Exception
-	 */
+	
 
 	@Test(enabled = true, priority = 29)
 	public void MDR_TC24_Posthoveroptions() throws Exception {
@@ -252,7 +235,6 @@ public class MessagesDR extends DriverSetUp {
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);			
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");

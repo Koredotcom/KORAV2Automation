@@ -69,15 +69,6 @@ public class KoraLoginPage extends PageBase {
 				+ test.addScreenCapture(takeScreenShot()));
 
 	}
-
-	/*public void logout() throws Exception {
-		click(er.klogout, "Logout");
-		click(er.klogoutyes, "Logout Confirmation Popup Yes");
-		test.log(LogStatus.PASS, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
-		waitTillappear(er.ko365, "xpath", "Choose ur account type");
-		click(er.ko365, "Select Microsoft option");
-
-	}*/
 	
 	public void logoutAndReLogin(boolean relogin,String url, String userName,String password) throws Exception {		
 		click(er.kuserprofileicon, "Click on User profile icon");

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -216,8 +217,8 @@ public class DriverSetUp {
 		Desktop.getDesktop().browse(f.toURI());
 
 	}
-
-	@AfterSuite
+	
+/*	@AfterSuite
 	public void closeConnections() throws Exception {
 		File htmlFile = null;
 		try {
@@ -249,15 +250,16 @@ public class DriverSetUp {
 		} catch (Exception e) {
 			Desktop.getDesktop().browse(htmlFile.toURI());
 		}
-	}
+	}*/
 
-	/*
-	 * @AfterSuite // This is working original before moving the report to other
-	 * location public void closeConnections() throws IOException { //
-	 * stopServer(); File htmlFile = new File(ExtentReportUtility.s);
-	 * System.out.
-	 * println("_______________This is my latest report_________________" +
-	 * htmlFile); Desktop.getDesktop().browse(htmlFile.toURI()); }
-	 */
+	
+	@AfterSuite // This is working original before moving the report to other location
+	public void closeConnections() throws IOException { //
+	// stopServer(); 
+	 File htmlFile = new File(ExtentReportUtility.s);
+	  System.out.println("_______________This is my latest report_________________" +
+	  htmlFile); Desktop.getDesktop().browse(htmlFile.toURI());
+	  }
+	 
 
 }
