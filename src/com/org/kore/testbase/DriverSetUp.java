@@ -3,6 +3,8 @@ package com.org.kore.testbase;
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +14,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -202,7 +206,7 @@ public class DriverSetUp {
 	}
 
 	public void customReport() throws Exception {
-		File f = new File("source.html");
+		File f = new File("ConsolidatedReport.html");
 		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
 		bw.write(
 				"<html><head><style>table {font-family: arial, sans-serif; border-collapse: collapse;width: 30%;}td, th {border: 1px solid #dddddd;text-align: center;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head>");
@@ -253,13 +257,56 @@ public class DriverSetUp {
 	}*/
 
 	
-	@AfterSuite // This is working original before moving the report to other location
-	public void closeConnections() throws IOException { //
-	// stopServer(); 
-	 File htmlFile = new File(ExtentReportUtility.s);
-	  System.out.println("_______________This is my latest report_________________" +
-	  htmlFile); Desktop.getDesktop().browse(htmlFile.toURI());
+	static public void zipFolder(String srcFolder, String destZipFile) throws Exception {
+	    ZipOutputStream zip = null;
+	    FileOutputStream fileWriter = null;
+	    fileWriter = new FileOutputStream(destZipFile);
+	    zip = new ZipOutputStream(fileWriter);
+	    addFolderToZip("", srcFolder, zip);
+	    zip.flush();
+	    zip.close();
 	  }
-	 
+	
+	 static private void addFileToZip(String path, String srcFile, ZipOutputStream zip)
+		      throws Exception {
+		    File folder = new File(srcFile);
+		    if (folder.isDirectory()) {
+		      addFolderToZip(path, srcFile, zip);
+		    } else {
+		      byte[] buf = new byte[1024];
+		      int len;
+		      FileInputStream in = new FileInputStream(srcFile);
+		      zip.putNextEntry(new ZipEntry(path + "/" + folder.getName()));
+		      while ((len = in.read(buf)) > 0) {
+		        zip.write(buf, 0, len);
+		      }
+		    }
+		  }
+	
+	 static private void addFolderToZip(String path, String srcFolder, ZipOutputStream zip)
+		      throws Exception {
+		    File folder = new File(srcFolder);
 
+		    for (String fileName : folder.list()) {
+		      if (path.equals("")) {
+		        addFileToZip(folder.getName(), srcFolder + "/" + fileName, zip);
+		      } else {
+		        addFileToZip(path + "/" + folder.getName(), srcFolder + "/" +   fileName, zip);
+		      }
+		    }
+		  }
+	
+	@AfterSuite // This is working, before moving the report to other location
+	public void closeConnections() throws Exception { //
+		String dir = System.getProperty("user.dir");
+		// stopServer();
+		File htmlFile = new File(ExtentReportUtility.s);
+		System.out.println("_______________This is my latest report_________________" + htmlFile);
+		Desktop.getDesktop().browse(htmlFile.toURI());
+		// To zip the structure and to share it with team via Jenkins Job
+		zipFolder(dir + "/ReportGenerator/WorkAssistReport", dir + "/ReportGenerator/WorkAssistReport.zip");
+		// High level customized report
+		customReport();
+
+	}
 }

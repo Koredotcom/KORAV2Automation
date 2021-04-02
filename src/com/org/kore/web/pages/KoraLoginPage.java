@@ -82,6 +82,12 @@ public class KoraLoginPage extends PageBase {
 		}
 	}
 
+	public String getUserDetails() throws Exception {		
+		click(er.kuserprofileicon, "Click on User profile icon");		
+		String username=getText(er.kuserProfileUserName).trim();		
+		return username;
+	}
+	
 	public void loginToKora(String url, String userName, String password) throws Exception {
 		cf.launchSite(url);
 		signInWithO365(userName, password);

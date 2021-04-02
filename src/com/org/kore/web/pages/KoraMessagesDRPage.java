@@ -17,10 +17,12 @@ import com.relevantcodes.extentreports.LogStatus;
 public class KoraMessagesDRPage extends PageBase {
 	CPCommonFunctions cf;
 	ElementRepository er = DriverSetUp.er;
+	KoraMessagesChatsPage kmsgsnchatpage;
 
 	public KoraMessagesDRPage(RemoteWebDriver remoteWebDriver) {
 		super(remoteWebDriver);
 		cf = new CPCommonFunctions(remoteWebDriver);
+		kmsgsnchatpage= new KoraMessagesChatsPage(remoteWebDriver);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -394,6 +396,80 @@ public class KoraMessagesDRPage extends PageBase {
 					+ "</b>... Seems element got updated ".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
+	}
+	
+
+/**
+ * When user want to Create DR from messages either from All messages or Discussion room.  
+ * @param workspacename 
+ * @param NewDRname
+ * @param participantlist
+ * @param AccessType
+ * @throws Exception
+ */
+	
+	public void createDRwithAccessTypefromMessages(String workspacename,String NewDRname, String participantlist,String AccessType) throws Exception {
+		try {			
+			click(er.kmcplusicon, "Plus icon to start new Dsicussion Room");
+			if(getAttributeValue(er.kdSearchboxinmsgnDR, "placeholder").equalsIgnoreCase("Search Messages")) 
+			click(er.kmdiscussion, "Create a Discussion Room");
+												
+			click(er.kdselectworkspace, "Clicking on Select workspace ");
+			click(er.kdtoggleicontoselectWS , "Clicking on  breadcrumb");
+			click("//span[@class='hamMenuWSName' and text()='"+workspacename+"']", "Selecting Workspace  "+workspacename);							
+			click(er.kddiscussionTitle, "Clicking on Discussion Room title ");
+			enterText(er.kddiscussionTitle, NewDRname, "Discussion Room Title as "+NewDRname);
+			moveToElement(er.kmcenterparticipant, "xpath");
+			click(er.kmcenterparticipant, "Enter participant name");
+			System.out.println("participantlist-----"+participantlist);
+			if (participantlist.contains(",")) {
+				String result[] = participantlist.trim().split("\\s*,\\s*");
+				for (String part : result) {
+					System.out.println(part);
+					kmsgsnchatpage.select(part);
+
+				}
+			} else {
+				kmsgsnchatpage.select(participantlist);
+			}
+			Thread.sleep(2000);
+
+			System.out.println("------------ Selecting Access Type -------");
+			
+			click(er.kdrsettings, "Clicking on Setting icon in Right Side panel While creating DR");		
+			//Validating  Everyone at No workspace is displayed and its on or Off
+			if(cf.elementIsDisplayed(er.kdeveryoneAtnoWorkspace, "xpath"))
+			{	
+				test.log(LogStatus.INFO,  " Everyone at No workspace option dispalyed");
+			}			
+			// Validating whether by default participants are having Post only Access by default			
+			if(cf.getText(er.kddefaultAccessto).trim().equals("Post Only"))
+			{
+				test.log(LogStatus.PASS,  " By Default Discussion Room participants will have Post Only access");
+			}else {
+				test.log(LogStatus.FAIL,  " By Default Discussion Room participants are having "+cf.getText("//i[@class='icon kr-tick']/..//span[@class='Name']").trim() + " Instead of Post Only access");
+			}
+			if(!AccessType.equals("Post Only"))
+			{
+				if(AccessType.equals("Full Access"))
+				{
+					click("//span[@class='Name' and text()='"+AccessType+"']", "Clicking on Access Type "+AccessType);
+				}else if(AccessType.equals("Comment Only"))
+				{
+					click("//span[@class='Name' and text()='"+AccessType+"']", "Clicking on Access Type "+AccessType);
+				}else {
+					test.log(LogStatus.FAIL, " User must provide access Type while creating a DR other than Default value ");	
+				}
+			}		
+			click(er.kdrsettings, "Clicking on Setting icon in Right Side panel After creating DR and Setting Access Type");
+			System.out.println("----- Entering Data to Disucssion Room ---");
+			click(er.kcomposebar, "Clicking on Compose Bar");		
+			kmsgsnchatpage.enterYourMessageAs("New Created Discusion Room By me");											
+			
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
+
+		}
 	}
 
 }

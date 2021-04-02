@@ -15,22 +15,26 @@ public class ElementRepository {
 			kpwd = null, kosignin = null, kstaysignin = null, ksignwithgoogle = null, ksignwithgooglepage = null,
 			knext = null, kchoosetext = null, kselectaccount = null, kallow = null, klogout = null, klogoutyes = null,
 			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null, klogo = null, kcomposebar = null,
-			kleftactiveoption = null, kattachment = null, kuserprofileicon=null,kmctopleftmenu = null,kmbottonleftmenu=null, kmcplusicon = null, kmconv = null,
-			kmcomposebar = null, kmcrecent = null, kmcenterparticipant = null, kmcloseconversation = null,
-			kmcsuggestnames = null, kmcsuggestmailids = null, kmcprofileicon = null, kmcgroupchevronicon = null,
-			kmcgroupname = null, kmcidgroup = null, kmcidchatdesc = null, kmc3dots = null, kmc3dotoptions = null,
-			kmcmanageclose = null, kmcmembername = null, kmcmuteslots = null, kmcactiveusericon = null,
-			kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null, kmcfirstactiveuser = null,
-			kmcactivebackground = null, kmdiscussion = null, kmplaceholder = null, kmsearchsuggestions = null,
-			kmattachfromplus = null, kmmessages = null, kmmessagehoveroptiontitles = null, kmmessagehover3dots = null,
-			kmmessagehoverreplyback = null, kmmessagehovermorecopy = null, kmlongtextreadmore = null, kmreadmore = null,
-			kmreadless = null, kmemoji=null, kmsmiley=null,kwfilterbyws=null,kwplusicon = null, kwcreatenew = null, kwjoinexisting = null, kworkplaceholder = null,
-			kwdefaulworkspace = null, kwdrheader = null, kworkspaces = null, kwdrgeneral = null, kworkspacename = null,
-			kwleft3dots = null, kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null,
-			kwdeletewsname = null, kwproceedDelete = null, kwcomposebar = null, kwinvite = null,
-			kwsearchandaddpeople = null, kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null,
-			kwmemslist = null, kdrcidgroup = null, kdrc3dotoptionsRightPanel = null,
-			kdrc3dotoptionsRightPanelOptions = null,kdrpostname0=null,kdrpostname1=null;
+			kleftactiveoption = null, kattachment = null, kuserprofileicon = null, kmctopleftmenu = null,
+			kmbottonleftmenu = null, kmcplusicon = null, kmconv = null, kmcomposebar = null, kmcrecent = null,
+			kmcenterparticipant = null, kmcloseconversation = null, kmcsuggestnames = null, kmcsuggestmailids = null,
+			kmcprofileicon = null, kmcgroupchevronicon = null, kmcgroupname = null, kmcidgroup = null,
+			kmcidchatdesc = null, kmc3dots = null, kmc3dotoptions = null, kmcmanageclose = null, kmcmembername = null,
+			kmcmuteslots = null, kmcactiveusericon = null, kmcrightchaticon = null, kmcatmentionusernames = null,
+			kmcmessagebubbles = null, kmcfirstactiveuser = null, kmcactivebackground = null, kmdiscussion = null,
+			kmplaceholder = null, kmsearchsuggestions = null, kmattachfromplus = null, kmmessages = null,
+			kmmessagehoveroptiontitles = null, kmmessagehover3dots = null, kmmessagehoverreplyback = null,
+			kmmessagehovermorecopy = null, kmlongtextreadmore = null, kmreadmore = null, kmreadless = null,
+			kmemoji = null, kmsmiley = null, kwfilterbyws = null, kwplusicon = null, kwcreatenew = null,
+			kwjoinexisting = null, kworkplaceholder = null, kwdefaulworkspace = null, kwdrheader = null,
+			kworkspaces = null, kwdrgeneral = null, kworkspacename = null, kwleft3dots = null,
+			kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null, kwdeletewsname = null,
+			kwproceedDelete = null, kwcomposebar = null, kwinvite = null, kwsearchandaddpeople = null,
+			kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null, kwmemslist = null,
+			kdrcidgroup = null, kdrc3dotoptionsRightPanel = null, kdrc3dotoptionsRightPanelOptions = null,
+			kdrpostname0 = null, kdrpostname1 = null, kdrsettings = null, kdeveryoneAtnoWorkspace = null,
+			kdselectworkspace = null, kdtoggleicontoselectWS = null, kddiscussionTitle = null, kddefaultAccessto = null,
+			kdSearchboxinmsgnDR = null, kuserProfileUserName = null;
 
 	public void repoIOS() {
 
@@ -73,15 +77,15 @@ public class ElementRepository {
 		kcomposebar = "//div[contains(@placeholder,'Type your')]";
 		kleftactiveoption = "//li[@class='active p-menuitem']//span[@class='p-menuitem-text']";
 		kattachment = "//i[@class='p-icon kr-discussion-attachment emojiBtn']";
-		kuserprofileicon="//div[@class='userIntial']";
+		kuserprofileicon = "//div[@class='userIntial']";
 
 		kmctopleftmenu = "//span[@class='p-menuitem-text']";
-		kmbottonleftmenu ="//div[contains(@class,'p-menuitem-link')]//span[@class='p-menuitem-text ws-name-ellipsis']";
+		kmbottonleftmenu = "//div[contains(@class,'p-menuitem-link')]//span[@class='p-menuitem-text ws-name-ellipsis']";
 		kmcplusicon = "//span[@class='p-icon kr-plus']";
 		kmconv = "//div[@class='krDropDownMenu']//div[text() = 'New Conversation']";
 		kmcomposebar = "//div[@placeholder='Type your message']";
 		kmcrecent = "//span[@class='recenText']";
-		kmcenterparticipant ="//input[@placeholder='Enter participant name'] | //input[@placeholder='Add Participants'] | //input[@placeholder='Add people']";
+		kmcenterparticipant = "//input[@placeholder='Enter participant name'] | //input[@placeholder='Add Participants'] | //input[@placeholder='Add people']";
 		kmcloseconversation = "//span[@class='kr-closeBox']";
 		kmcsuggestnames = "//div[@class='p-clearfix userDetailBox']/div[@class='userDetail']";
 		kmcsuggestmailids = "//div[@class='p-clearfix userDetailBox']//div[@class='userEmailId']";
@@ -113,10 +117,10 @@ public class ElementRepository {
 		kmreadmore = "//span[@class='readMoreText'][text()='Read more'][contains(@style,'cursor: pointer;')]";
 		kmreadless = "//span[@class='readMoreText'][text()='Read less'][contains(@style,'cursor: pointer;')]";
 		kmemoji = "//div[@class='emojiIconCntr']";
-		kmsmiley="//ul[@class='icons']//li[3]";
+		kmsmiley = "//ul[@class='icons']//li[3]";
 		kmdiscussion = "//div[@class='krDropDownMenu']//div[text() = 'New Discussion Room']";
 
-		kwfilterbyws="//div[text()='Filter By Workspaces']";
+		kwfilterbyws = "//div[text()='Filter By Workspaces']";
 		kwplusicon = "//span[@id='ws-plus-button']";
 		kwcreatenew = "//div[@id='ws-plus-cont']//li[text()='Create New']";
 		kwjoinexisting = "//div[@id='ws-plus-cont']//li[text()='Join Existing']";
@@ -143,8 +147,16 @@ public class ElementRepository {
 		kdrcidgroup = "//div[@class='userNameDiv drUserNameDiv'][text()='";
 		kdrc3dotoptionsRightPanel = "//div[@class='chatHeader']//span[text()='";
 		kdrc3dotoptionsRightPanelOptions = "//div[contains(@class, 'krDropDownMenu chatHeaderOptions')]//div";
-		kdrpostname0="//p[@class='chatUserTitle']/span[text()='";
-		kdrpostname1="']/../../../../../..//div[@class='dicussionPostMessage']/span[@class='truncateText' and text()='";
+		kdrpostname0 = "//p[@class='chatUserTitle']/span[text()='";
+		kdrpostname1 = "']/../../../../../..//div[@class='dicussionPostMessage']/span[@class='truncateText' and text()='";
+		kdrsettings = "//span[@id='my']//i[contains(@class,'icon kr-settings')]";
+		kdeveryoneAtnoWorkspace = "//span[@class='ddNoteMsg']";
+		kdselectworkspace = "//span[text()='Select Workspace']";
+		kdtoggleicontoselectWS = "//i[@class='toggleIcon kr-ptburgerMenu']";
+		kddiscussionTitle = "//input[@id='discussionTitle']";
+		kddefaultAccessto = "//i[@class='icon kr-tick']/..//span[@class='Name']";
+		kdSearchboxinmsgnDR = "//input[@class='searchInput']";
+		kuserProfileUserName = "//div[@class='userProfile']/.//span[@class='userName']";
 
 	}
 

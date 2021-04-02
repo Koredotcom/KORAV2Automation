@@ -173,20 +173,28 @@ public class MessagesDR extends DriverSetUp {
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String drpost = DriverSetUp.drdataMap.get("drpost");
-
+			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			String postingUserName=koraloginpage.getUserDetails();
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);									
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");								
 			koramessagespage.enterYourMessageAs(drpost);
 
 			koraloginpage.logoutAndReLogin(true,url, korahusername, korahpassword);			
-
-			koraloginpage.loginToKora(url, korahusername, korahpassword);
+			String ReactingUserName=koraloginpage.getUserDetails();
 			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);
-			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
-			koramessagedrpage.perfromreactionsonPost(standarddrname, drpost, "Like", false);					
+			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);			
+//			koramessagedrpage.perfromreactionsonPost(standarddrname, drpost, "Like", false);			
+			koramessagedrpage.perfromreactionsonPost(standarddrname, drpost, "", true);		
+			
+			//re login  with User1 and validate comment and Reaction is appiled /effected  of User 2 
+			//  //span[@class='truncateText' and text()='Hi']/../..//span[@class='name']
+			
+			
+			
+			// Reaction
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
@@ -244,6 +252,38 @@ public class MessagesDR extends DriverSetUp {
 				koramessagedrpage.verifytheoptionsonDRandperfromAction(standarddrname,value,"SelectNOT");					
 			}																			
 			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
+		}
+	}
+	
+	/**
+	 * "Create a discussion room from All messages/Discussion room and add user with > Post only (Default post will be given)"
+	 * @throws Exception
+	 */
+	@Test(enabled = true, priority = 29)
+	public void MDR_TC37_CreatenewDRwithDifferentAccessTypes() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");	
+			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
+			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
+			String randomDRName= DriverSetUp.drdataMap.get("randomDRname");
+						
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			korahomepage.selectMenuOption(Messages);					
+			korahomepage.selectTopLeftMenuOption("All Messages");
+//			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,randomDRName,newparticipants,"Comment Only");			
+			korahomepage.selectBottomLeftMenuWorkSpace("DoNotDeleteWSAuto");
+			koramessagedrpage.goToGroupAndPerforminWSDR(randomDRName, true, "Star");			
+			extent.endTest(test);
+			
+//	?? Discussion Room from Let side Workspace
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
 		}

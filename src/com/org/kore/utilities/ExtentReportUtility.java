@@ -18,10 +18,6 @@ public class ExtentReportUtility extends DriverSetUp {
 public synchronized static ExtentReports getReporter(ExtentReports extent) throws Exception {
 		
 		if (extent == null) {
-		//	SimpleDateFormat sdfDateReport = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");// dd/MM/yyyy
-		//	Date now = new Date();
-		//	reportFolder = "HtmlReport_" + sdfDateReport.format(now);
-			
 			try {
 				String dir = System.getProperty("user.dir");
 				File index = new File(dir+"/ReportGenerator");
@@ -29,10 +25,8 @@ public synchronized static ExtentReports getReporter(ExtentReports extent) throw
 				FileUtils.forceDelete(new File(ind));
 				reportFolder = "WorkAssistReport";
 			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("$$$$ Yet to concentrate more in this area to avoid failures here $$$$");
+				System.out.println(" In folder to Remove here $$$$ Yet to concentrate more in this area to avoid failures here $$$$");
 			}
-			
 			s = new File("ReportGenerator/" + reportFolder + "/TestReport.html").getPath();
 			extent = new ExtentReports(s, true, Locale.ENGLISH);
 			extent.addSystemInfo("Environment", "UAT");
@@ -41,5 +35,21 @@ public synchronized static ExtentReports getReporter(ExtentReports extent) throw
 
 		return extent;
 	}
-	
+
 }
+
+// To get the report with date and time
+/*public synchronized static ExtentReports getReporter(ExtentReports extent) {
+	if (extent == null) {
+		SimpleDateFormat sdfDateReport = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");// dd/MM/yyyy
+		Date now = new Date();
+		reportFolder = "HtmlReport_" + sdfDateReport.format(now);
+		s = new File("ReportGenerator/" + reportFolder + "/TestReport.html").getPath();
+		extent = new ExtentReports(s, true, Locale.ENGLISH);
+		extent.addSystemInfo("Environment", "UAT");
+		extent.assignProject("Kore Application");
+
+	}
+
+	return extent;
+}*/

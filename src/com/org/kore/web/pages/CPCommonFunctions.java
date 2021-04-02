@@ -41,6 +41,7 @@ public class CPCommonFunctions extends PageBase {
 			appiumDriver.get(url);
 		} else if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Selenium")) {
 			remoteDriver.get(url);
+			remoteDriver.get(url);
 			remoteDriver.manage().window().maximize();
 			System.out.println("Launched");
 		}

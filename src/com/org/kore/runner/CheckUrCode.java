@@ -33,20 +33,8 @@ public class CheckUrCode {
 
 	public static void main(String[] a) throws Exception {
 		// copyReportFile();
-
-		int tcount = 100;
-
-		File f = new File("source.html");
-		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-		bw.write("<html><head><style>table {font-family: arial, sans-serif; border-collapse: collapse;width: 30%;}td, th {border: 1px solid #dddddd;text-align: center;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head>");
+		// createHTML();
 		
-		bw.write("<body><h2>Work Assist Automation Execution Report</h2>");
-		bw.write(
-				"<table><tr><th>Status</th> <th>Count</th></tr><tr><td>PASS</td><td>"+tcount+"</td></tr><tr><td>FAIL</td><td>5</td></tr><tr><td>TOTAL</td><td>15</td></tr>");
-		bw.write("<table></table>");
-		bw.write("</table></body></html>");
-		bw.close();
-		Desktop.getDesktop().browse(f.toURI());
 	}
 
 	public static void copyReportFile() {
@@ -223,6 +211,22 @@ public class CheckUrCode {
 
 		}
 
+	}
+	
+	public static void createHTML() throws Exception{
+		int tcount = 100;
+
+		File f = new File("source.html");
+		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		bw.write("<html><head><style>table {font-family: arial, sans-serif; border-collapse: collapse;width: 30%;}td, th {border: 1px solid #dddddd;text-align: center;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head>");
+		
+		bw.write("<body><h2>Work Assist Automation Execution Report</h2>");
+		bw.write(
+				"<table><tr><th>Status</th> <th>Count</th></tr><tr><td>PASS</td><td>"+tcount+"</td></tr><tr><td>FAIL</td><td>5</td></tr><tr><td>TOTAL</td><td>15</td></tr>");
+		bw.write("<table></table>");
+		bw.write("</table></body></html>");
+		bw.close();
+		Desktop.getDesktop().browse(f.toURI());
 	}
 
 }

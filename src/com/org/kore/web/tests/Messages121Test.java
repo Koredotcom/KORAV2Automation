@@ -101,7 +101,6 @@ public class Messages121Test extends DriverSetUp {
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 			String expbgclr= DriverSetUp.testdataMap.get("expectedlabelbackground");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);

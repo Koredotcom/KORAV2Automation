@@ -71,6 +71,7 @@ public class KoraHomePage extends PageBase {
 	public void selectTopLeftMenuOption(String menuoption) throws Exception {
 		boolean flag = false;
 		waitTillappear(er.kheadermenu, "xpath", "Top header");
+		WebElement ele= remoteDriver.findElement(By.xpath(er.kmctopleftmenu));
 		List<WebElement> Menulist = remoteDriver.findElements(By.xpath(er.kmctopleftmenu));
 		for (WebElement e : Menulist) {
 			if (e.getText().trim().equalsIgnoreCase(menuoption)) {

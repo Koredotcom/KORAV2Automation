@@ -88,6 +88,10 @@
 		"wexpected3dotoptionsright": "Star Room, Mute, Mark as unread, View Files, Copy Email Address, Get Link, Manage Room",
 		"standardworkspace":"DoNotDeleteWSAuto",
 		"standarddr":"DoNotDeleteDRAuto",
-		"drpost": "Hi... Ignore_AutomationPostwsDR717"
+		"drpost": "Hi... Ignore_AutomationPostwsDR123",
+		"oneparticipant": "hana@koraqa1.com",
+		"randomDRname": "RuntimeDr222",
+		"commentonaPost":"Automation Comment"
+    
 	}
 }
