@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.org.kore.element.repository.ElementRepository;
@@ -39,9 +40,21 @@ public class CPCommonFunctions extends PageBase {
 		if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Appium")) {
 			appiumDriver.get(url);
 		} else if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Selenium")) {
-			remoteDriver.get(url);
-			remoteDriver.get(url);
+			remoteDriver.get(url);			
 			remoteDriver.manage().window().maximize();
+			JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
+			String result = js.executeScript("return document.readyState").toString();
+			int waitincreamental=1;
+			doloop: do {
+				try {
+					Thread.sleep(6000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				waitincreamental++;
+				if(result.equals("complete"))
+					break doloop;
+			}while(waitincreamental <10||!result.equals("complete"));			
 			System.out.println("Launched");
 		}
 

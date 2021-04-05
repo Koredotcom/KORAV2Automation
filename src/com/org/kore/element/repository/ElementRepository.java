@@ -34,7 +34,7 @@ public class ElementRepository {
 			kdrcidgroup = null, kdrc3dotoptionsRightPanel = null, kdrc3dotoptionsRightPanelOptions = null,
 			kdrpostname0 = null, kdrpostname1 = null, kdrsettings = null, kdeveryoneAtnoWorkspace = null,
 			kdselectworkspace = null, kdtoggleicontoselectWS = null, kddiscussionTitle = null, kddefaultAccessto = null,
-			kdSearchboxinmsgnDR = null, kuserProfileUserName = null;
+			kdSearchboxinmsgnDR = null, kuserProfileUserName = null,kmdmsgordiscroom=null,kdeditpost=null,kdeditpostcomposebar=null;
 
 	public void repoIOS() {
 
@@ -157,6 +157,9 @@ public class ElementRepository {
 		kddefaultAccessto = "//i[@class='icon kr-tick']/..//span[@class='Name']";
 		kdSearchboxinmsgnDR = "//input[@class='searchInput']";
 		kuserProfileUserName = "//div[@class='userProfile']/.//span[@class='userName']";
+		kmdmsgordiscroom="//div[contains(@class,'userNameDiv') and text()='";
+		kdeditpost="//i[@class='icon kr-amend-edit']";
+		kdeditpostcomposebar="//div[@class='p-dialog p-component editPostModalPopup']//.//div[@id='discInput']";  
 
 	}
 

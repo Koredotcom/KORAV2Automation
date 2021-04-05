@@ -1,5 +1,6 @@
 package com.org.kore.web.pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.org.kore.element.repository.ElementRepository;
@@ -64,6 +65,20 @@ public class KoraLoginPage extends PageBase {
 		test.log(LogStatus.INFO, "Password entered successfully");
 		click(er.kosignin, "Signin");
 		click(er.kstaysignin, "Stay Signin");
+		JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
+		String result = js.executeScript("return document.readyState").toString();
+		int waitincreamental=1;
+		doloop: do {
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			waitincreamental++;
+			if(result.equals("complete"))
+				break doloop;
+		}while(waitincreamental <10||!result.equals("complete"));		
 		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName + " ".toString()
 				+ test.addScreenCapture(takeScreenShot()));
 

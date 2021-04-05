@@ -9,23 +9,25 @@ import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * 
- * @author Jay
+ * @author Ramana
  * @Description : All the functions related to Messages discussion room page
  *
  */
+
 
 public class KoraMessagesDRPage extends PageBase {
 	CPCommonFunctions cf;
 	ElementRepository er = DriverSetUp.er;
 	KoraMessagesChatsPage kmsgsnchatpage;
+	KoraHomePage korahomepage;
 
 	public KoraMessagesDRPage(RemoteWebDriver remoteWebDriver) {
 		super(remoteWebDriver);
 		cf = new CPCommonFunctions(remoteWebDriver);
 		kmsgsnchatpage= new KoraMessagesChatsPage(remoteWebDriver);
-		// TODO Auto-generated constructor stub
+		korahomepage = new KoraHomePage(remoteWebDriver);
 	}
-	
+
 	/**
 	 * 
 	 * @param workspaceName : User have to provide workspace name 
@@ -142,12 +144,12 @@ public class KoraMessagesDRPage extends PageBase {
 		}
 
 	}
-	
+
 	public void validateDROnhoverOptions(){
 		String validationelmenets[]={"Star","Mute", "Read"};			
 		for(String value: validationelmenets )
 		{
-		//	koramessagedrpage.verifytheoptionsonDRandperfromAction("DoNotDeleteDRAuto",value,"SelectNOT");					
+			//	koramessagedrpage.verifytheoptionsonDRandperfromAction("DoNotDeleteDRAuto",value,"SelectNOT");					
 		}
 	}
 
@@ -160,14 +162,14 @@ public class KoraMessagesDRPage extends PageBase {
 	 * @param threedots :: More options (i.e. edit, forward, reminder,post info, delete...
 	 * @throws Exception
 	 */	
-	public void perfromreactionsonPost(String discRoom, String post, String reaction, boolean comment) throws Exception {
+	public void perfromreactionsonPost(String discRoom, String post, String reaction, boolean comment, String commenttext) throws Exception {
 		try {
-
-			moveToElement(er.kdrpostname0+discRoom+er.kdrpostname1+post+er.ksinglquote,"xpath");
-			click(er.kdrpostname0+ discRoom + er.kdrpostname1+ post+ er.ksinglquote, "Click on post ");
-
+			System.out.println("-----------method ::--perfromreactionsonPost-------------------------------");
 			if(!comment)
 			{
+				moveToElement(er.kdrpostname0+discRoom+er.kdrpostname1+post+er.ksinglquote,"xpath");
+				click(er.kdrpostname0+ discRoom + er.kdrpostname1+ post+ er.ksinglquote, "Click on post ");
+				Thread.sleep(3000);
 				switch (reaction.trim().toUpperCase()) {
 				case "LIKE":
 					System.out.println("performing like reaction");
@@ -214,7 +216,7 @@ public class KoraMessagesDRPage extends PageBase {
 					break;
 
 				case "ANGRY":
-					System.out.println("performing dislike reaction");
+					System.out.println("performing Angry reaction");
 					moveToElement(
 							er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//div[@class='reactionIcons']/i[5]",	"xpath");
 					Thread.sleep(1000);
@@ -225,11 +227,11 @@ public class KoraMessagesDRPage extends PageBase {
 					break;
 
 				case "MORE":
-					System.out.println("performing dislike reaction");
+					System.out.println("performing More reaction");
 					moveToElement(
-							er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[@class='icon __i kr-ellipsis']",	"xpath");
+							er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]","xpath");
 					Thread.sleep(1000);
-					click(er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[@class='icon __i kr-ellipsis']",
+					click(er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",
 							"Comment on a post");								
 					test.log(LogStatus.PASS, post + "Clicking on more options on post  ".toString()  + test.addScreenCapture(takeScreenShot()));
 
@@ -238,17 +240,21 @@ public class KoraMessagesDRPage extends PageBase {
 					test.log(LogStatus.FAIL,
 							"Please provided valid on hover action i.e. , should be match with case value");
 				}	
+				Thread.sleep(2000);
 			}
 
 			if(comment) {
-				System.out.println("performing dislike reaction");
+				System.out.println("performing Comments on POST "+post);
+				moveToElement(er.kdrpostname0+discRoom+er.kdrpostname1+post+er.ksinglquote,"xpath");
+				//				click(er.kdrpostname0+ discRoom + er.kdrpostname1+ post+ er.ksinglquote, "Click on post ");
+				Thread.sleep(3000);
 				moveToElement(
 						er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[@class='icon __i kr-comment']",	"xpath");
 				Thread.sleep(1000);
 				click(er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[@class='icon __i kr-comment']",
 						"Comment on a post");
 				Thread.sleep(1000);
-				enterText(er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../../..//div[@id='discInput']", comment+"\n", "xpath", "Comment on post");
+				enterText(er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../../..//div[@id='discInput']", commenttext+"\n", "xpath", "Comment on post");
 				test.log(LogStatus.PASS, post + " post was commented with  ".toString() + test.addScreenCapture(takeScreenShot()));
 
 			}
@@ -311,7 +317,7 @@ public class KoraMessagesDRPage extends PageBase {
 				break;
 				//i[contains(@class,'icon __i kr-audio')]
 
-				
+
 			case "MUTE":
 				System.out.println("In MUTE");
 				moveToElement(
@@ -331,7 +337,7 @@ public class KoraMessagesDRPage extends PageBase {
 
 			case "UNMUTE":
 				System.out.println("In UNMUTE");
-				
+
 				moveToElement(er.kdrcidgroup + discussionRoomName + "']/../../../..//i[@class='icon __i kr-mute']",
 						"xpath");
 				Thread.sleep(1000);
@@ -397,26 +403,29 @@ public class KoraMessagesDRPage extends PageBase {
 		}
 
 	}
-	
 
-/**
- * When user want to Create DR from messages either from All messages or Discussion room.  
- * @param workspacename 
- * @param NewDRname
- * @param participantlist
- * @param AccessType
- * @throws Exception
- */
-	
+
+	/**
+	 * When user want to Create DR from messages either from All messages or Discussion room.  
+	 * @param workspacename 
+	 * @param NewDRname
+	 * @param participantlist
+	 * @param AccessType
+	 * @throws Exception
+	 */
+
 	public void createDRwithAccessTypefromMessages(String workspacename,String NewDRname, String participantlist,String AccessType) throws Exception {
 		try {			
 			click(er.kmcplusicon, "Plus icon to start new Dsicussion Room");
 			if(getAttributeValue(er.kdSearchboxinmsgnDR, "placeholder").equalsIgnoreCase("Search Messages")) 
-			click(er.kmdiscussion, "Create a Discussion Room");
-												
-			click(er.kdselectworkspace, "Clicking on Select workspace ");
-			click(er.kdtoggleicontoselectWS , "Clicking on  breadcrumb");
-			click("//span[@class='hamMenuWSName' and text()='"+workspacename+"']", "Selecting Workspace  "+workspacename);							
+				click(er.kmdiscussion, "Create a Discussion Room");
+
+			if(cf.elementIsDisplayed(er.kdselectworkspace, "xpath"))
+			{
+				click(er.kdselectworkspace, "Clicking on Select workspace ");
+				click(er.kdtoggleicontoselectWS , "Clicking on  breadcrumb");
+				click("//span[@class='hamMenuWSName' and text()='"+workspacename+"']", "Selecting Workspace  "+workspacename);
+			}
 			click(er.kddiscussionTitle, "Clicking on Discussion Room title ");
 			enterText(er.kddiscussionTitle, NewDRname, "Discussion Room Title as "+NewDRname);
 			moveToElement(er.kmcenterparticipant, "xpath");
@@ -435,7 +444,7 @@ public class KoraMessagesDRPage extends PageBase {
 			Thread.sleep(2000);
 
 			System.out.println("------------ Selecting Access Type -------");
-			
+
 			click(er.kdrsettings, "Clicking on Setting icon in Right Side panel While creating DR");		
 			//Validating  Everyone at No workspace is displayed and its on or Off
 			if(cf.elementIsDisplayed(er.kdeveryoneAtnoWorkspace, "xpath"))
@@ -465,11 +474,99 @@ public class KoraMessagesDRPage extends PageBase {
 			System.out.println("----- Entering Data to Disucssion Room ---");
 			click(er.kcomposebar, "Clicking on Compose Bar");		
 			kmsgsnchatpage.enterYourMessageAs("New Created Discusion Room By me");											
-			
+
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
 
 		}
 	}
+	/*** 
+	 * @param discRoom ::On Which discussion room we are doing operations 
+	 * @param post :: post where comments or Reactions took place
+	 * @param Whoreacted :: User who reacted/ commented to post
+	 * @param commenttext :: commented text  
+	 * @throws Exception
+	 */
+	public void validatingreactionsandCommentsonPost(String discRoom, String post, String Whoreacted, String commenttext) throws Exception {
+		try {
 
+			String element= er.kdrpostname0+discRoom+er.kdrpostname1;
+			moveToElement(element+post+er.ksinglquote,"xpath");						
+			if(!commenttext.equals("") || !commenttext.equals(null))
+			{
+				click(element+post+er.ksinglquote+"/../..//*[contains(@class,'icon kr-comment')]", "Click on post ");
+				Thread.sleep(2000);				
+				String actualuserwhocommented =getText(element+commenttext+ er.ksinglquote+"/../..//span[@class='name']");
+				if(Whoreacted.equalsIgnoreCase(actualuserwhocommented))
+				{
+					test.log(LogStatus.PASS,  "Comment on post successfully applied with right User".toString() +test.addScreenCapture(takeScreenShot()));				
+				}else {
+					test.log(LogStatus.FAIL,  "Comment on post NOT Applied".toString() +test.addScreenCapture(takeScreenShot()));
+				}
+			}
+			if(!Whoreacted.equals("") || !Whoreacted.equals(null))
+			{
+				moveToElement(element+post+er.ksinglquote+"/../..//div[@class='postReaction']/div[1]","xpath");
+				click(element+post+er.ksinglquote+"/../..//div[@class='postReaction']/div[1]","Clicking on Ractions");
+				Thread.sleep(2000);
+				String actualuserwhoreacted=getText(element+post+er.ksinglquote+"/../..//div[@class='postReaction']/div[3]/div[2]/div[1]/div[2]/span[1]");
+				if(Whoreacted.equalsIgnoreCase(actualuserwhoreacted))
+				{
+					test.log(LogStatus.PASS,  "Reaction on post successfully applied with right User".toString() +test.addScreenCapture(takeScreenShot()));				
+				}else {
+					test.log(LogStatus.FAIL,  "Reaction on post NOT Applied".toString() +test.addScreenCapture(takeScreenShot()));
+				}
+			}			
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate reactions and Comments on a Post");
+
+		}	
+	}
+
+	public void valdiatedeletedMsgorDR(String chatordiscroomname) throws InterruptedException, Exception	
+	{
+		try {
+			System.out.println("------------ Moving To Element ----------");			
+			moveToElement(er.kmdmsgordiscroom+chatordiscroomname+er.ksinglquote,"xpath");
+			click(er.kmdmsgordiscroom+chatordiscroomname+er.ksinglquote, "chatordiscroomname");			
+			test.log(LogStatus.FAIL,  "Even after Deleteing Discussion room still we are able to see the Discussion Room in Messages / DR Room ".toString() +test.addScreenCapture(takeScreenShot()));
+		}
+		catch(Exception e)
+		{
+			test.log(LogStatus.PASS,  "After Deleting Discussion room We are not able to see the DR in messages/ DR Room ".toString() +test.addScreenCapture(takeScreenShot()));
+		}
+	}
+
+	public void EditingPostinDiscussionRoom(String discRoom, String post, String editingPost) throws Exception	
+	{		
+		try {
+			System.out.println("------------ Moving To Post ----------");			
+			moveToElement(er.kdrpostname0+discRoom+er.kdrpostname1+post+er.ksinglquote,"xpath");
+			click(er.kdrpostname0+ discRoom + er.kdrpostname1+ post+ er.ksinglquote, "Click on post ");
+			Thread.sleep(5000);
+			moveToElement(
+					er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",	"xpath");			
+			click(er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",
+					"Comment on a post");								
+			test.log(LogStatus.PASS, post + "Clicking on more options on post  ".toString()  + test.addScreenCapture(takeScreenShot()));
+			Thread.sleep(5000);			
+			click(er.kdeditpost, "Editing post");
+			Thread.sleep(5000);
+			enterText("//div[@class='composeBarAndFooterActions']/div[text()='"+post+"']", editingPost, "EditPost Compose Bar");
+			korahomepage.clickOn("Save", true);
+			Thread.sleep(5000);
+			System.out.println(getAttributeValue(er.kdrpostname0+discRoom+er.kdrpostname1+post+er.ksinglquote, "text"));
+			if(getAttributeValue(er.kdrpostname0+discRoom+er.kdrpostname1+post+er.ksinglquote,"text").equals(editingPost))
+			{
+				test.log(LogStatus.PASS, post + "Post Edited Successfully  ".toString()  + test.addScreenCapture(takeScreenShot()));
+			}else
+			{
+				test.log(LogStatus.FAIL, post + " FAILED to Edit Post ".toString()  + test.addScreenCapture(takeScreenShot()));
+			}
+		}
+		catch(Exception e)
+		{
+			test.log(LogStatus.FAIL,  "We are not able to perfrom POST EDIT operation ".toString() +test.addScreenCapture(takeScreenShot()));
+		}
+	}
 }

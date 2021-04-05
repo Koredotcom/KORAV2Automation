@@ -1,11 +1,16 @@
 package com.org.kore.web.pages;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.org.kore.element.repository.ElementRepository;
 import com.org.kore.testbase.DriverSetUp;
@@ -206,11 +211,39 @@ public class KoraHomePage extends PageBase {
 	 * @throws Exception
 	 */
 	public void clickOn(String option, boolean screenshot) throws Exception {
-
 		click(er.ktext + option + "']", option + " option");
 		if (screenshot)
 			test.log(LogStatus.PASS, "Clicked on " + option, test.addScreenCapture(takeScreenShot()));
 
+	}
+	
+	public void refreshpage() throws Exception {
+		try {
+		remoteDriver.navigate().refresh();		
+		JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
+		String result = js.executeScript("return document.readyState").toString();
+		int waitincreamental=1;
+		doloop: do {
+			Thread.sleep(6000);
+			waitincreamental++;
+			if(result.equals("complete"))
+				break doloop;
+
+		}while(waitincreamental <10||!result.equals("complete"));
+		}catch(Exception e)
+		{
+			System.out.println("---------- Refresh Page -----");
+			e.printStackTrace();
+		}
+	}
+  
+  public String runtimehhmmss()
+	{
+		String TimeinHHMMSS = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+		Date date = new Date();  
+		TimeinHHMMSS= formatter.format(date).replaceAll(":", "").substring(11).trim();
+		return TimeinHHMMSS;
 	}
 
 }
