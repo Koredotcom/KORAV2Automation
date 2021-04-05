@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.org.kore.element.repository.ElementRepository;
@@ -43,6 +44,7 @@ public class CPCommonFunctions extends PageBase {
 			remoteDriver.get(url);
 			remoteDriver.get(url);
 			remoteDriver.manage().window().maximize();
+			((JavascriptExecutor) remoteDriver).executeScript("window.resizeTo(1936, 1056)");
 			System.out.println("Launched");
 		}
 
