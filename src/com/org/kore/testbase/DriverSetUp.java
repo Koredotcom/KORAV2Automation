@@ -110,7 +110,6 @@ public class DriverSetUp {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	@BeforeClass

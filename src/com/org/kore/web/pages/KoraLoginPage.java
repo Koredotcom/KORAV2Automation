@@ -47,7 +47,6 @@ public class KoraLoginPage extends PageBase {
 		Thread.sleep(3000);
 		test.log(LogStatus.PASS, "Kora User logged in successfully as : " + userName + " ".toString()
 				+ test.addScreenCapture(takeScreenShot()));
-
 	}
 
 	/**

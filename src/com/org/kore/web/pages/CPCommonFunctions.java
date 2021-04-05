@@ -125,6 +125,5 @@ public class CPCommonFunctions extends PageBase {
 		list.add(input[1]);
 		list.add(input[2]);
 		return list;
-
 	}
 }

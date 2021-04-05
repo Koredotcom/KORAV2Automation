@@ -150,7 +150,6 @@ public class PageBase extends DriverSetUp {
 					options.addArguments("--window-size=1280,1024");
 					options.setExperimentalOption("useAutomationExtension", false);
 					options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-
 					DesiredCapabilities cap = DesiredCapabilities.chrome();
 					cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 					cap.setCapability(ChromeOptions.CAPABILITY, options);
