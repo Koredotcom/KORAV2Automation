@@ -12,6 +12,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.org.kore.testbase.DriverSetUp;
 import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 
 public class ExtentReportUtility extends DriverSetUp {
 
@@ -30,7 +31,8 @@ public synchronized static ExtentReports getReporter(ExtentReports extent) throw
 			s = new File("ReportGenerator/" + reportFolder + "/TestReport.html").getPath();
 			extent = new ExtentReports(s, true, Locale.ENGLISH);
 			extent.addSystemInfo("Environment", "UAT");
-			extent.assignProject("Kore Application");
+			extent.addSystemInfo("Application", "KORA WORK ASSIST");
+			extent.assignProject("KORA WORK ASSIST");
 		}
 
 		return extent;

@@ -63,7 +63,7 @@ public class Messages121Test extends DriverSetUp {
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.messagesScreenValidations();
+			//koramessagespage.messagesScreenValidations();
 			koramessagespage.checkDefaultFocus_Recents();
 			extent.endTest(test);
 		} catch (Exception e) {

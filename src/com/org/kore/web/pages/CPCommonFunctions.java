@@ -1,6 +1,5 @@
 package com.org.kore.web.pages;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -9,7 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.org.kore.element.repository.ElementRepository;
@@ -44,7 +42,6 @@ public class CPCommonFunctions extends PageBase {
 			remoteDriver.get(url);
 			remoteDriver.get(url);
 			remoteDriver.manage().window().maximize();
-			((JavascriptExecutor) remoteDriver).executeScript("window.resizeTo(1936, 1056)");
 			System.out.println("Launched");
 		}
 
@@ -110,24 +107,24 @@ public class CPCommonFunctions extends PageBase {
 			System.out.println("It has only one window");
 		}
 	}
-	
+
 	public String getFirstChar(String input) {
 		char first = input.charAt(0);
 		String myStr = Character.toString(first);
 		return myStr;
 	}
-	
-	public String[] convertStringstoArray(String actual){
-	String str[] = actual.split(",");
-	return str;
+
+	public String[] convertStringstoArray(String actual) {
+		String str[] = actual.split(",");
+		return str;
 	}
-	
-	//Yet to implement based on the need
-	public List<String> generateListFromStrings(String... input){
-		 List<String> list = new ArrayList<String>();
-		 list.add(input[1]);
-		 list.add(input[2]);
+
+	// Yet to implement based on the need
+	public List<String> generateListFromStrings(String... input) {
+		List<String> list = new ArrayList<String>();
+		list.add(input[1]);
+		list.add(input[2]);
 		return list;
-		
+
 	}
 }
