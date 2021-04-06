@@ -78,9 +78,9 @@ public class KoraLoginPage extends PageBase {
 			waitincreamental++;
 			if(result.equals("complete"))
 				break doloop;
-		}while(waitincreamental <10||!result.equals("complete"));		
-		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName + " ".toString()
-				+ test.addScreenCapture(takeScreenShot()));
+		}while(waitincreamental <10||!result.equals("complete"));
+		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName);
+				/*+ " ".toString()+ test.addScreenCapture(takeScreenShot()));*/
 
 	}
 	

@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.org.kore.testbase.DriverSetUp;
+import com.org.kore.testbase.PageBase;
 import com.org.kore.web.pages.KoraHomePage;
 import com.org.kore.web.pages.KoraLoginPage;
 import com.org.kore.web.pages.KoraMessagesChatsPage;
@@ -24,6 +25,7 @@ public class MessagesDR extends DriverSetUp {
 	KoraMessagesChatsPage koramessagespage;
 	KoraWorkspacesPage koraworkspacepage;
 	KoraMessagesDRPage koramessagedrpage;
+	PageBase pagebase;
 
 	String korajusername;
 	String korajpassword;
@@ -45,6 +47,7 @@ public class MessagesDR extends DriverSetUp {
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 		koraworkspacepage = new KoraWorkspacesPage(remoteDriver);
 		koramessagedrpage = new KoraMessagesDRPage(remoteDriver);
+		pagebase = new PageBase(remoteDriver);
 
 		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
 		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
@@ -177,7 +180,6 @@ public class MessagesDR extends DriverSetUp {
 			String drcomment = DriverSetUp.drdataMap.get("drcomment");			
 						
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);									
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");								
@@ -272,7 +274,6 @@ public class MessagesDR extends DriverSetUp {
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");			
 						
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			
 			//To Create DR from All messages and Discussion Room 			 
@@ -307,19 +308,26 @@ public class MessagesDR extends DriverSetUp {
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			String url = DriverSetUp.propsMap.get("weburl");
-			String Messages = DriverSetUp.drdataMap.get("messages");				
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
-			String randomDRName= DriverSetUp.drdataMap.get("randomDRname");
+			//String randomDRName= DriverSetUp.drdataMap.get("randomDRname");
 						
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			// Yet to check the impact of creating object for Pagebase
+			pagebase.clearChromeCache();
 			koraloginpage.loginToKora(url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);			 			 
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); //  Discussion Rooms || All Messages								
-			koramessagedrpage.goToGroupAndPerforminWSDR("Ac02", true, "3dots");
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); //  Discussion Rooms || All Messages
+			String exeTimeHMS1=korahomepage.runtimehhmmss();
+			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,"random"+exeTimeHMS1,newparticipants,"Comment Only");
+			korahomepage.refreshpage();
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); //  Discussion Rooms || All Messages
+			koramessagedrpage.goToGroupAndPerforminWSDR("random"+exeTimeHMS1, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Delete Discussion");
 			korahomepage.clickOn("Delete", true);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");						
-			koramessagedrpage.valdiatedeletedMsgorDR("Ac02");				
+			koramessagedrpage.valdiatedeletedMsgorDR("random"+exeTimeHMS1);				
 			extent.endTest(test);			
 			
 		} catch (Exception e) {			
@@ -328,10 +336,10 @@ public class MessagesDR extends DriverSetUp {
 	}
 	
 	/**
-	 *  INC ____TC_56 Editing a post in Discussion Room 
+	 *  Editing a post in Discussion Room Also validates Edit,Forward,Reminder,Post Info,Delete options displayed in 3 dots to a post
 	 */
 	@Test(enabled = true, priority = 32)
-	public void MDR_TC56_EditaPost() throws Exception {
+	public void MDR_TC53_TC56_EditaPost() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
@@ -339,17 +347,44 @@ public class MessagesDR extends DriverSetUp {
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");				
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
-			String randomDRName= DriverSetUp.drdataMap.get("randomDRname");
-						
+			String standarddrname= DriverSetUp.drdataMap.get("standarddr");
+			String expWDpost3dotoptions = DriverSetUp.drdataMap
+					.get("drexpected3dotsforPostinrightpanel");
+
 			test.log(LogStatus.INFO, "Navigation url :" + url);			
-			koraloginpage.loginToKora(url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);			
-			korahomepage.selectBottomLeftMenuWorkSpace("DoNotDeleteWSAuto");			
-			koramessagedrpage.EditingPostinDiscussionRoom("DRDelete","Hello","Editing Post");
-			extent.endTest(test);			
-			
+			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);		
+			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
+			koramessagedrpage.EditingPostinDiscussionRoom(standarddrname,"Post for Editing","Editing Post",expWDpost3dotoptions);
+			extent.endTest(test);												
 		} catch (Exception e) {			
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
+		}
+	}
+	
+	/**
+	 * 	 At   Mentions in posts users should display the users who are part of the room
+	 */
+	@Test(enabled = true, priority = 33)
+	public void MDR_TC59_atmentionUsersinDr() throws Exception {
+
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");			
+			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
+						
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
+			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");						
+			koramessagedrpage.atMentionValidationinDR();
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
 		}
 	}
 

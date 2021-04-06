@@ -53,7 +53,8 @@ public class KoraHomePage extends PageBase {
 				e.click();
 				System.out.println(menuoption + " option got selected");
 				Thread.sleep(1000);
-				test.log(LogStatus.PASS, menuoption + " selected".toString() + test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.PASS, menuoption + " selected");
+						/*.toString() + test.addScreenCapture(takeScreenShot()));*/
 				break;
 			}
 		}
@@ -244,6 +245,24 @@ public class KoraHomePage extends PageBase {
 		Date date = new Date();  
 		TimeinHHMMSS= formatter.format(date).replaceAll(":", "").substring(11).trim();
 		return TimeinHHMMSS;
+	}
+  
+  public void waittillpageload()
+	{
+		JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
+		String result = js.executeScript("return document.readyState").toString();
+		int waitincreamental=1;
+		doloop: do {
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			waitincreamental++;
+			if(result.equals("complete"))
+				break doloop;
+		}while(waitincreamental <10||!result.equals("complete"));
 	}
 
 }

@@ -257,8 +257,6 @@ public class DriverSetUp {
 			String replaceto = "<link href='http:";
 			String hsAfterreplace = htmlasstring.replace(find, replaceto);
 			System.out.println("_______________ HTML as String After Replacing https to http _______________");
-			System.out.println(hsAfterreplace);
-
 			File mitigatedhtml = new File("source.html");
 			BufferedWriter bw = new BufferedWriter(new FileWriter(mitigatedhtml));
 			bw.write(hsAfterreplace);

@@ -1,5 +1,10 @@
 package com.org.kore.web.pages;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.org.kore.element.repository.ElementRepository;
@@ -18,13 +23,13 @@ import com.relevantcodes.extentreports.LogStatus;
 public class KoraMessagesDRPage extends PageBase {
 	CPCommonFunctions cf;
 	ElementRepository er = DriverSetUp.er;
-	KoraMessagesChatsPage kmsgsnchatpage;
+	KoraMessagesChatsPage koramessagespage;
 	KoraHomePage korahomepage;
 
 	public KoraMessagesDRPage(RemoteWebDriver remoteWebDriver) {
 		super(remoteWebDriver);
 		cf = new CPCommonFunctions(remoteWebDriver);
-		kmsgsnchatpage= new KoraMessagesChatsPage(remoteWebDriver);
+		koramessagespage= new KoraMessagesChatsPage(remoteWebDriver);
 		korahomepage = new KoraHomePage(remoteWebDriver);
 	}
 
@@ -435,11 +440,11 @@ public class KoraMessagesDRPage extends PageBase {
 				String result[] = participantlist.trim().split("\\s*,\\s*");
 				for (String part : result) {
 					System.out.println(part);
-					kmsgsnchatpage.select(part);
+					koramessagespage.select(part);
 
 				}
 			} else {
-				kmsgsnchatpage.select(participantlist);
+				koramessagespage.select(participantlist);
 			}
 			Thread.sleep(2000);
 
@@ -473,7 +478,7 @@ public class KoraMessagesDRPage extends PageBase {
 			click(er.kdrsettings, "Clicking on Setting icon in Right Side panel After creating DR and Setting Access Type");
 			System.out.println("----- Entering Data to Disucssion Room ---");
 			click(er.kcomposebar, "Clicking on Compose Bar");		
-			kmsgsnchatpage.enterYourMessageAs("New Created Discusion Room By me");											
+			koramessagespage.enterYourMessageAs("New Created Discusion Room By me");											
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
@@ -537,36 +542,52 @@ public class KoraMessagesDRPage extends PageBase {
 		}
 	}
 
-	public void EditingPostinDiscussionRoom(String discRoom, String post, String editingPost) throws Exception	
+	public void EditingPostinDiscussionRoom(String discRoom, String post, String editingPost, String dotOptions) throws Exception	
 	{		
-		try {
-			System.out.println("------------ Moving To Post ----------");			
+		try {					
+			System.out.println("------------Eneter data to post---------------");
+			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
+			compose.sendKeys(post, Keys.ENTER);
+			Thread.sleep(4000);						
 			moveToElement(er.kdrpostname0+discRoom+er.kdrpostname1+post+er.ksinglquote,"xpath");
 			click(er.kdrpostname0+ discRoom + er.kdrpostname1+ post+ er.ksinglquote, "Click on post ");
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			moveToElement(
 					er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",	"xpath");			
 			click(er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",
 					"Comment on a post");								
-			test.log(LogStatus.PASS, post + "Clicking on more options on post  ".toString()  + test.addScreenCapture(takeScreenShot()));
-			Thread.sleep(5000);			
-			click(er.kdeditpost, "Editing post");
-			Thread.sleep(5000);
-			enterText("//div[@class='composeBarAndFooterActions']/div[text()='"+post+"']", editingPost, "EditPost Compose Bar");
+			test.log(LogStatus.PASS, post + "Clicking on more options on post  ".toString()  + test.addScreenCapture(takeScreenShot()));			
+			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", dotOptions,"middlePanel");
+			System.out.println("------------------- Edit a post ------------");
+			click(er.kdeditpost, "Editing post");	
+			Thread.sleep(2000);
+			enterText(er.kdeditpostcomposebar, editingPost, post+" post is Editing with "+editingPost);
 			korahomepage.clickOn("Save", true);
-			Thread.sleep(5000);
-			System.out.println(getAttributeValue(er.kdrpostname0+discRoom+er.kdrpostname1+post+er.ksinglquote, "text"));
-			if(getAttributeValue(er.kdrpostname0+discRoom+er.kdrpostname1+post+er.ksinglquote,"text").equals(editingPost))
-			{
-				test.log(LogStatus.PASS, post + "Post Edited Successfully  ".toString()  + test.addScreenCapture(takeScreenShot()));
-			}else
-			{
-				test.log(LogStatus.FAIL, post + " FAILED to Edit Post ".toString()  + test.addScreenCapture(takeScreenShot()));
-			}
+			korahomepage.waittillpageload();				
+			moveToElement(er.kdrpostname0+discRoom+er.kdrpostname1+editingPost+er.ksinglquote,"xpath");
+			click(er.kdrpostname0+ discRoom + er.kdrpostname1+ editingPost+ er.ksinglquote, "Click on post ");
+			test.log(LogStatus.PASS, post + " Post Edited Successfully  with ".toString()+ editingPost + test.addScreenCapture(takeScreenShot()));
 		}
 		catch(Exception e)
 		{
-			test.log(LogStatus.FAIL,  "We are not able to perfrom POST EDIT operation ".toString() +test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL, post + " FAILED to Edit Post ".toString()  + test.addScreenCapture(takeScreenShot()));
 		}
 	}
+	
+	public void atMentionValidationinDR() throws Exception
+	{
+		enterText(er.kmcomposebar, "@", "xpath", "Type your message");
+		Thread.sleep(2000);
+		List<WebElement> atmentionusers = remoteDriver.findElements(By.xpath(er.kmcatmentionusernames));		
+		if (atmentionusers.size()>0) {
+			test.log(LogStatus.WARNING,
+					"@ mention showing the particiapants in list "
+							.toString() + test.addScreenCapture(takeScreenShot()));
+		} else {			
+			test.log(LogStatus.FAIL,  " @ Mention not Showing any Participants ".toString() + test.addScreenCapture(takeScreenShot()));
+		}	
+	}
+	
+
+	
 }

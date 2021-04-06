@@ -159,7 +159,7 @@ public class ElementRepository {
 		kuserProfileUserName = "//div[@class='userProfile']/.//span[@class='userName']";
 		kmdmsgordiscroom="//div[contains(@class,'userNameDiv') and text()='";
 		kdeditpost="//i[@class='icon kr-amend-edit']";
-		kdeditpostcomposebar="//div[@class='p-dialog p-component editPostModalPopup']//.//div[@id='discInput']";  
+		kdeditpostcomposebar="//div[@class='p-dialog-titlebar']/following::div[@id='discInput'][1]";  
 
 	}
 

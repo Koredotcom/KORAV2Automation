@@ -126,7 +126,7 @@ public class PageBase extends DriverSetUp {
 				if (System.getProperty("os.name").contains("Mac OS")) {
 					System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("macchromeDriverPath"));
 					ChromeOptions options = new ChromeOptions();
-					options.addArguments("user-data-dir=/path/to/your/custom/profile");
+					// options.addArguments("user-data-dir=/path/to/your/custom/profile");
 					options.addArguments("--profile-directory=Default");
 					options.addArguments("--whitelisted-ips");
 					options.addArguments("--disable-plugins-discovery");
