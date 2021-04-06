@@ -147,7 +147,6 @@ public class PageBase extends DriverSetUp {
 					options.addArguments("--disable-extensions");
 					options.addArguments("--test-type");
 					options.addArguments("start-maximized");
-					options.addArguments("--window-size=1280,1024");
 					options.setExperimentalOption("useAutomationExtension", false);
 					options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 					DesiredCapabilities cap = DesiredCapabilities.chrome();

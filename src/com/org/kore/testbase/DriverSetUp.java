@@ -1,23 +1,19 @@
 package com.org.kore.testbase;
 
 import java.awt.Desktop;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -204,6 +200,75 @@ public class DriverSetUp {
 		System.out.println("Total TC's are :::::: " + totaltc);
 	}
 
+	static public void zipFolder(String srcFolder, String destZipFile) throws Exception {
+		try {
+			ZipOutputStream zip = null;
+			FileOutputStream fileWriter = null;
+			fileWriter = new FileOutputStream(destZipFile);
+			zip = new ZipOutputStream(fileWriter);
+			addFolderToZip("", srcFolder, zip);
+			zip.flush();
+			zip.close();
+		} catch (Exception e) {
+			System.out.println("Fail to zip the report folder");
+		}
+	}
+
+	static private void addFileToZip(String path, String srcFile, ZipOutputStream zip) throws Exception {
+		File folder = new File(srcFile);
+		if (folder.isDirectory()) {
+			addFolderToZip(path, srcFile, zip);
+		} else {
+			byte[] buf = new byte[1024];
+			int len;
+			FileInputStream in = new FileInputStream(srcFile);
+			zip.putNextEntry(new ZipEntry(path + "/" + folder.getName()));
+			while ((len = in.read(buf)) > 0) {
+				zip.write(buf, 0, len);
+			}
+		}
+	}
+
+	static private void addFolderToZip(String path, String srcFolder, ZipOutputStream zip) throws Exception {
+		File folder = new File(srcFolder);
+
+		for (String fileName : folder.list()) {
+			if (path.equals("")) {
+				addFileToZip(folder.getName(), srcFolder + "/" + fileName, zip);
+			} else {
+				addFileToZip(path + "/" + folder.getName(), srcFolder + "/" + fileName, zip);
+			}
+		}
+	}
+
+	public void mitigateHTML(File htmlfilepath) throws Exception {
+		StringBuilder html = new StringBuilder();
+		FileReader freader = new FileReader(htmlfilepath);
+		try {
+			BufferedReader breader = new BufferedReader(freader);
+			String val;
+			while ((val = breader.readLine()) != null) {
+				html.append(val);
+			}
+			String htmlasstring = html.toString();
+			breader.close();
+			System.out.println("_______________ HTML as String B4 Replacing Https _______________");
+			String find = "<link href='https:";
+			String replaceto = "<link href='http:";
+			String hsAfterreplace = htmlasstring.replace(find, replaceto);
+			System.out.println("_______________ HTML as String After Replacing https to http _______________");
+			System.out.println(hsAfterreplace);
+
+			File mitigatedhtml = new File("source.html");
+			BufferedWriter bw = new BufferedWriter(new FileWriter(mitigatedhtml));
+			bw.write(hsAfterreplace);
+			bw.close();
+		} catch (Exception ex) {
+			System.out.println("Html file not found to convert into string");
+			System.out.println(ex.getMessage());
+		}
+	}
+	
 	public void customReport() throws Exception {
 		File f = new File("ConsolidatedReport.html");
 		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
@@ -221,7 +286,37 @@ public class DriverSetUp {
 
 	}
 	
-/*	@AfterSuite
+	@AfterSuite // This is working, before moving the report to other location
+	public void closeConnections() throws Exception {
+		try {
+			String dir = System.getProperty("user.dir");
+			// stopServer();
+			File htmlFile = new File(ExtentReportUtility.s);
+			System.out.println("_______________ Original report path_______________" + htmlFile);
+			mitigateHTML(htmlFile);
+			Desktop.getDesktop().browse(htmlFile.toURI());
+			zipFolder(dir + "/ReportGenerator/WorkAssistReport", dir + "/ReportGenerator/WorkAssistReport.zip");
+
+		} catch (Exception e) {
+			System.out.println("End");
+		}
+	}
+
+	/*@AfterSuite // This is working, before moving the report to other location
+	public void closeConnections() throws Exception { //
+		String dir = System.getProperty("user.dir");
+		// stopServer();
+		File htmlFile = new File(ExtentReportUtility.s);
+		System.out.println("_______________This is my latest report_________________" + htmlFile);
+		Desktop.getDesktop().browse(htmlFile.toURI());
+		// To zip the structure and to share it with team via Jenkins Job
+		zipFolder(dir + "/ReportGenerator/WorkAssistReport", dir + "/ReportGenerator/WorkAssistReport.zip");
+		// High level customized report
+		customReport();
+
+	}*/
+	
+	/*	@AfterSuite
 	public void closeConnections() throws Exception {
 		File htmlFile = null;
 		try {
@@ -255,57 +350,4 @@ public class DriverSetUp {
 		}
 	}*/
 
-	
-	static public void zipFolder(String srcFolder, String destZipFile) throws Exception {
-	    ZipOutputStream zip = null;
-	    FileOutputStream fileWriter = null;
-	    fileWriter = new FileOutputStream(destZipFile);
-	    zip = new ZipOutputStream(fileWriter);
-	    addFolderToZip("", srcFolder, zip);
-	    zip.flush();
-	    zip.close();
-	  }
-	
-	 static private void addFileToZip(String path, String srcFile, ZipOutputStream zip)
-		      throws Exception {
-		    File folder = new File(srcFile);
-		    if (folder.isDirectory()) {
-		      addFolderToZip(path, srcFile, zip);
-		    } else {
-		      byte[] buf = new byte[1024];
-		      int len;
-		      FileInputStream in = new FileInputStream(srcFile);
-		      zip.putNextEntry(new ZipEntry(path + "/" + folder.getName()));
-		      while ((len = in.read(buf)) > 0) {
-		        zip.write(buf, 0, len);
-		      }
-		    }
-		  }
-	
-	 static private void addFolderToZip(String path, String srcFolder, ZipOutputStream zip)
-		      throws Exception {
-		    File folder = new File(srcFolder);
-
-		    for (String fileName : folder.list()) {
-		      if (path.equals("")) {
-		        addFileToZip(folder.getName(), srcFolder + "/" + fileName, zip);
-		      } else {
-		        addFileToZip(path + "/" + folder.getName(), srcFolder + "/" +   fileName, zip);
-		      }
-		    }
-		  }
-	
-	@AfterSuite // This is working, before moving the report to other location
-	public void closeConnections() throws Exception { //
-		String dir = System.getProperty("user.dir");
-		// stopServer();
-		File htmlFile = new File(ExtentReportUtility.s);
-		System.out.println("_______________This is my latest report_________________" + htmlFile);
-		Desktop.getDesktop().browse(htmlFile.toURI());
-		// To zip the structure and to share it with team via Jenkins Job
-		zipFolder(dir + "/ReportGenerator/WorkAssistReport", dir + "/ReportGenerator/WorkAssistReport.zip");
-		// High level customized report
-		customReport();
-
-	}
 }
