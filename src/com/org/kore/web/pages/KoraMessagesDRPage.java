@@ -283,7 +283,7 @@ public class KoraMessagesDRPage extends PageBase {
 			throws Exception {
 
 		try {
-			//			if (check) {
+
 			switch (actionon.trim().toUpperCase()) {
 			case "STAR":
 				System.out.println("In Star");
@@ -551,16 +551,17 @@ public class KoraMessagesDRPage extends PageBase {
 			Thread.sleep(4000);						
 			moveToElement(er.kdrpostname0+discRoom+er.kdrpostname1+post+er.ksinglquote,"xpath");
 			click(er.kdrpostname0+ discRoom + er.kdrpostname1+ post+ er.ksinglquote, "Click on post ");
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			moveToElement(
 					er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",	"xpath");			
 			click(er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",
-					"Comment on a post");								
+					"Click on 3dits options to ");								
 			test.log(LogStatus.PASS, post + "Clicking on more options on post  ".toString()  + test.addScreenCapture(takeScreenShot()));			
-			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", dotOptions,"middlePanel");
+			korahomepage.waittillpageload();
+			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", dotOptions,"post3dots");
 			System.out.println("------------------- Edit a post ------------");
 			click(er.kdeditpost, "Editing post");	
-			Thread.sleep(2000);
+			korahomepage.waittillpageload();
 			enterText(er.kdeditpostcomposebar, editingPost, post+" post is Editing with "+editingPost);
 			korahomepage.clickOn("Save", true);
 			korahomepage.waittillpageload();				
@@ -576,7 +577,9 @@ public class KoraMessagesDRPage extends PageBase {
 	
 	public void atMentionValidationinDR() throws Exception
 	{
-		enterText(er.kmcomposebar, "@", "xpath", "Type your message");
+		moveToElement(er.kwcomposebar, "xpath");
+		Thread.sleep(2000);
+		enterText(er.kwcomposebar, "@", "xpath", "Type your message");
 		Thread.sleep(2000);
 		List<WebElement> atmentionusers = remoteDriver.findElements(By.xpath(er.kmcatmentionusernames));		
 		if (atmentionusers.size()>0) {

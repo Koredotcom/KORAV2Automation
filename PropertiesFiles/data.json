@@ -2,13 +2,13 @@
 	"QA": {
 		"browser": "chrome",
 		"weburls": "https://developer.servicenow.com/dev.do#!/home",
-		"weburl": "https://koraqa.kora.ai/",
+		"weburl": "https://workassist-qa.kore.ai/",
 		"tool": "Selenium"
 	},
 	"Dev": {
 		"browser": "chrome",
 		"weburls": "https://developer.servicenow.com/dev.do#!/home",
-		"weburl": "https://qa1-app.kora.ai/",
+		"weburl": "https://koraqa.kora.ai/",
 		"tool": "Selenium"
 	},
 	"IOSNATIVE": {
@@ -74,7 +74,7 @@
 		"kmstarred": "Starred",
 		"kmmuted": "Muted",
 		"kmunread": "Unread",
-		"expectedmuteslots": "15 mins, 30 mins, 45 mins, 1 hour, 5 hours, 8 hours, 12 hours"
+		"expectedmuteslots": "4 hours, 1 day, 1 week, Until turned off"
 	},
 	"WSTESTDATA": {
 		"workspaces": "Workspaces",
@@ -85,14 +85,14 @@
 		"workspacename910": "Automation910",
 		"workspacemems": "hana@koraqa1.com",
 		"wexpected3dotoptionsmiddle": "Get Email, Get Link, Delete Discussion",
-		"wexpected3dotoptionsright": "Star Room, Mute, Mark as unread, View Files, Copy Email Address, Get Link, Manage Room",
+		"wexpected3dotoptionsright": "Star, Mute, Mark as unread, View Files, Copy Email Address, Get Link, Manage Room",
 		"standardworkspace":"DoNotDeleteWSAuto",
 		"standarddr":"DoNotDeleteDRAuto",
 		"drpost": "Hi... Ignore_AutomationPostwsDR112233",
 		"oneparticipant": "hana@koraqa1.com",
 		"randomDRname": "RuntimeDr333",
 		"commentonaPost":"Automation Comment",
-		"drcomment": "comment on a post"
-    
+		"drcomment": "comment on a post",
+		"drexpected3dotsforPostinrightpanel": "Edit, Forward, Reminder, Post Info, Delete"
 	}
 }

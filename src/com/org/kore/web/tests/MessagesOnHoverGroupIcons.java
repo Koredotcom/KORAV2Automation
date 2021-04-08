@@ -106,6 +106,8 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagespage.goToGroupAndPerform(groupname, false, "NA");
+			koramessagespage.enterYourMessageAs("Sending Group Message");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expected3dotoptions,"middle");
 			extent.endTest(test);

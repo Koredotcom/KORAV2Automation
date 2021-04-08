@@ -46,6 +46,7 @@ public class DriverSetUp {
 
 	static int passcount = 0;
 	static int failcount = 0;
+	static int warncount = 0;
 	static int totaltc = 0;
 	static int skipcount = 0;
 
@@ -190,12 +191,15 @@ public class DriverSetUp {
 			passcount++;
 		} else if (mystatus.equalsIgnoreCase("fail")) {
 			failcount++;
+		} else if (mystatus.equalsIgnoreCase("warning")) {
+			warncount++;
 		} else {
 			skipcount++;
 		}
-		totaltc = passcount + failcount + skipcount;
+		totaltc = passcount + failcount + warncount + skipcount;
 		System.out.println("PASS TC's are :::::: " + passcount);
 		System.out.println("FAIL TC's are :::::: " + failcount);
+		System.out.println("WARNING TC's are :::::: " + warncount);
 		System.out.println("SKIP/WARNING TC's are :::::: " + skipcount);
 		System.out.println("Total TC's are :::::: " + totaltc);
 	}
@@ -275,7 +279,7 @@ public class DriverSetUp {
 
 		bw.write("<body><h2>Work Assist Automation Execution Report</h2>");
 		bw.write("<table><tr><th>Status</th> <th>Count</th></tr><tr><td>PASS</td><td>" + passcount
-				+ "</td></tr><tr><td>FAIL</td><td>" + failcount + "</td></tr><tr><td>TOTAL</td><td>" + totaltc
+				+ "</td></tr><tr><td>FAIL</td><td>" + failcount + "</td></tr><tr><td>WARNING</td><td>" + warncount + "</td></tr><tr><td>TOTAL</td><td>" + totaltc
 				+ "</td></tr>");
 		bw.write("<table></table>");
 		bw.write("</table></body></html>");
@@ -294,7 +298,7 @@ public class DriverSetUp {
 			mitigateHTML(htmlFile);
 			Desktop.getDesktop().browse(htmlFile.toURI());
 			zipFolder(dir + "/ReportGenerator/WorkAssistReport", dir + "/ReportGenerator/WorkAssistReport.zip");
-
+			customReport();
 		} catch (Exception e) {
 			System.out.println("End");
 		}

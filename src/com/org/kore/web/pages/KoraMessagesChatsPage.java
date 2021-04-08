@@ -256,6 +256,11 @@ public class KoraMessagesChatsPage extends PageBase {
 		String chatheadername = null;
 		try {
 			chatheadername = getText("//div[@class='chatHeader']//span");
+			if (chatheadername.equalsIgnoreCase("and NaN others")){
+				test.log(LogStatus.FAIL,
+						"Displayed invalid group name as and NaN others".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
 					"After creating workspace when user navigates to Messages, chat header is not displaying".toString()
@@ -401,10 +406,10 @@ public class KoraMessagesChatsPage extends PageBase {
 	 */
 	public void getGroupTimestamp(String groupname) throws Exception {
 		try {
-			String timestamp = getText(er.kmcidgroup + groupname + "']/..//span[@class='dayTime']");
+			String timestamp = getText(er.kmcidgroup + groupname + "']/../..//span[@class='dayTime']");
 			test.log(LogStatus.INFO, "For " + groupname + " Timestamp displayed as : <b>" + timestamp + "</b>");
 			List<WebElement> ele = remoteDriver.findElements(By.xpath(
-					"//div[@class='userDetails active']//div[@class='userNameDiv'][text()='AutomationGroup']/../..//div[@class='userChatDEsc']//span"));
+					"//div[@class='userDetails active']//div[@class='userNameDiv'][text()='AutomationGroup']/../../..//div[@class='userChatDEsc']//span"));
 			for (WebElement e : ele) {
 				e.getText();
 				test.log(LogStatus.INFO,
@@ -510,11 +515,17 @@ public class KoraMessagesChatsPage extends PageBase {
 					break;
 				case "3dots":
 					System.out.println("In 3 dots");
-					// click(er.klogo, "Work Assist Image");
 					moveToElement(er.kmcidgroup + groupname + "']/../../../../.." + er.kmc3dots, "xpath");
 					Thread.sleep(1000);
 					click(er.kmcidgroup + groupname + "']/../../../../.." + er.kmc3dots, "3dots");
 					Thread.sleep(1000);
+					break;
+				case "DeleteGroup":
+					Thread.sleep(1000);
+					click("//i[@class='icon __i right kr-delete']","Delete Group");
+					test.log(LogStatus.PASS,
+							groupname + " Deleted Successfully");
+					clickOn("Delete", true);
 					break;
 				default:
 					test.log(LogStatus.FAIL,
@@ -703,7 +714,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			}
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Found incorrect elements in check empty screen".toString()
+			test.log(LogStatus.FAIL, "How about, Let’s start with just a hello? is not displayed in empty screen validation".toString()
 					+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
@@ -760,11 +771,12 @@ public class KoraMessagesChatsPage extends PageBase {
 			String val = count.get(2);
 			int i = Integer.parseInt(val);
 			System.out.println(i = i + 2);
-			moveToElement(er.kmcidgroup + groupname
-					+ "']/../../..//div[@class='avatarDiv']//span[@class='nameAvatar chatAvatar']", "xpath");
 			Thread.sleep(2000);
+			moveToElement(er.kmcidgroup + groupname
+					+ "']/../../../..//div[@class='avatarDiv']//span[@class='nameAvatar chatAvatar']", "xpath");
 			List<WebElement> totalparticipants = remoteDriver
-					.findElements(By.xpath(er.kmcidgroup + groupname + "']/../../..//div[@class='userPopupUi']"));
+					.findElements(By.xpath(er.kmcidgroup + groupname + "']/../../../..//div[@class='userPopupUi']"));
+			groupparticipants=totalparticipants.size();
 			if (i == totalparticipants.size()) {
 				test.log(LogStatus.PASS,
 						"Three group icouns count matching with the total participants from group Onhover");
@@ -772,7 +784,7 @@ public class KoraMessagesChatsPage extends PageBase {
 						+ " ".toString() + test.addScreenCapture(takeScreenShot()));
 			} else {
 				test.log(LogStatus.FAIL,
-						"On Hover participants are not available".toString() + test.addScreenCapture(takeScreenShot()));
+						"On Hover participants size<b>"+groupparticipants+"</b>is not maching with Total Group Participants<b>"+i+"</b> ".toString() + test.addScreenCapture(takeScreenShot()));
 			}
 
 		} catch (Exception e) {
@@ -799,7 +811,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		ArrayList<String> allicons = new ArrayList<>();
 		try {
 			List<WebElement> profileicons = remoteDriver.findElements(By.xpath(er.kmcidgroup + groupname
-					+ "']/../../..//div[@class='avatarDiv']//span[@class='nameAvatar triple']//span"));
+					+ "']/../../../..//div[@class='avatarDiv']//span[@class='nameAvatar triple']//span"));
 			for (WebElement e : profileicons) {
 				value = e.getText();
 				allicons.add(value);
@@ -903,7 +915,6 @@ public class KoraMessagesChatsPage extends PageBase {
 			moveToElement("//div[@class='threadCreationInfo']//div[@class='userInitial']", "xpath");
 			String userinitial = getText("//div[@class='threadCreationInfo']//div[@class='userInitial']");
 			String usernameforgroup = getText("//div[@class='threadCreationInfo']//span[@class='userName']");
-			String creationdate = getText("//div[@class='threadCreationInfo']//span[@class='creationDate']");
 			String firstchar = cf.getFirstChar(usernameforgroup);
 
 			if (usernameforgroup.startsWith("You"))
@@ -912,7 +923,6 @@ public class KoraMessagesChatsPage extends PageBase {
 				test.log(LogStatus.FAIL,
 						"Group timeline name displayed as : " + currentuser + "<b> It should be displayed as you</b>");
 			test.log(LogStatus.INFO, "Group timeline name displayed as : " + usernameforgroup);
-			test.log(LogStatus.INFO, "Group timeline date and time displayed as : " + creationdate);
 			if (firstchar.equalsIgnoreCase(userinitial)) {
 				test.log(LogStatus.PASS, "User initial matches with the first character of the user".toString()
 						+ test.addScreenCapture(takeScreenShot()));
@@ -920,10 +930,12 @@ public class KoraMessagesChatsPage extends PageBase {
 				test.log(LogStatus.FAIL, "Initial displayed as :" + userinitial + " but, expected inital is :<b>"
 						+ firstchar + "</b>".toString() + test.addScreenCapture(takeScreenShot()));
 			}
+			String creationdate = getText("//div[@class='threadCreationInfo']//span[@class='creationDate']");
+			test.log(LogStatus.INFO, "Group timeline date and time displayed as : " + creationdate);
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL,
-					"Group creation time line is not displaying".toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.WARNING,
+					"Group creation time line creation time field got updated from date to Day".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 	}
 
@@ -1120,7 +1132,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					clickOn("Member", false);
 					String name = getText(er.kmcmembername);
 					clickOn("Remove", false);
-					clickOn("Delete", false);
+					click(er.kmremoveparticipantpopup, "Participant Remove from manage pop up");
 					test.log(LogStatus.INFO, "Removed : " + name);
 					Thread.sleep(500);
 				}
@@ -1240,7 +1252,9 @@ public class KoraMessagesChatsPage extends PageBase {
 				test.log(LogStatus.PASS,
 						"For long text, text got truncated and Read more text got displayed as below".toString()
 								+ test.addScreenCapture(takeScreenShot()));
+				moveToElement(er.kmreadmore, "xpath");
 				click(er.kmreadmore, "Read more on long text message");
+				Thread.sleep(1000);
 				moveToElement(er.kmreadless, "xpath");
 				test.log(LogStatus.PASS, "For<b> Read less </b>cursor type displayed as Hand icon");
 				test.log(LogStatus.PASS, "On click of Read more, Read less was displayed as below".toString()
