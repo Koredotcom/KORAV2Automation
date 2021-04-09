@@ -99,7 +99,7 @@ public class ElementRepository {
 		kmc3dotoptions = "//div[contains(@class, 'krDropDownMenu')]//div";
 		kmcmanageclose = "//button[@aria-label='Close']";
 		kmcmembername = "//span[text()='Member']/../../..//div[@class='emailUi']";
-		kmcmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD overflow']//li[@class='dorpDownBoxLI']";
+		kmcmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD']//li[@class='dorpDownBoxLI']";
 		kmcactiveusericon = "//div[@class='userDetails active']//span[@class='nameAvatar single']";
 		kmcrightchaticon = "//span[@class='chatUserIcon']";
 		kmcatmentionusernames = "//table[@class='mentionDialogBoxTable']//span[@class='mentionFullName']";

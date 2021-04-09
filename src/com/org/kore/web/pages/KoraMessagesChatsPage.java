@@ -374,12 +374,13 @@ public class KoraMessagesChatsPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void atMentionValidation(int groupcount, boolean select, String selectuser) throws Exception {
+		int witheveryone=groupcount+1;
 		enterText(er.kmcomposebar, "@", "xpath", "Type your message");
 		List<WebElement> atmentionusers = remoteDriver.findElements(By.xpath(er.kmcatmentionusernames));
 		int atsize = atmentionusers.size();
-		if (groupcount == atmentionusers.size()) {
+		if (witheveryone == atsize) {
 			test.log(LogStatus.PASS,
-					"Total participants count and @ mention users count is matchng including Everyone option "
+					"Total participants count and @ mention users count is matchng including Everyone option i.e. "+atsize+" "
 							.toString() + test.addScreenCapture(takeScreenShot()));
 		} else {
 			test.log(LogStatus.FAIL, "Total participants<b> " + groupcount + "</b> count and @ mention users<b> "
@@ -543,7 +544,8 @@ public class KoraMessagesChatsPage extends PageBase {
 		boolean actuserdisplay = false;
 		if (searchfrom.equals("All Messages"))
 			searchfrom = "Search Messages";
-		enterText("//*[contains (@placeholder, '" + searchfrom + "')]", searchwith, "Search from " + searchfrom);
+		enterText("//*[contains (@placeholder, 'Search')]", searchwith, "Search from " + searchfrom);
+	//	enterText("//*[contains (@placeholder, '" + searchfrom + "')]", searchwith, "Search from " + searchfrom);
 		Thread.sleep(1000);
 		actuserdisplay = elementIsDisplayed(er.kmsearchsuggestions + searchwith + er.ksinglquote, "xpath");
 		if (expuserdisplay) {
@@ -592,7 +594,6 @@ public class KoraMessagesChatsPage extends PageBase {
 			for (WebElement ele : options) {
 				Thread.sleep(500);
 				String act = ele.getText();
-				System.out.println("From applicaton:" + act);
 				check = exp[i].trim().equals(act);
 				if (check) {
 					test.log(LogStatus.PASS, "Expected option : " + exp[i] + " --> Displayed option : " + act);
@@ -603,6 +604,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			}
 			test.log(LogStatus.INFO, "Mute slots".toString() + test.addScreenCapture(takeScreenShot()));
 			if (select) {
+				System.out.println("Selecting mute slot i.e. " + options.get(0).getText());
 				options.get(0).click();
 				test.log(LogStatus.PASS, "Selected a slot and Muted the thread");
 			}
@@ -784,7 +786,7 @@ public class KoraMessagesChatsPage extends PageBase {
 						+ " ".toString() + test.addScreenCapture(takeScreenShot()));
 			} else {
 				test.log(LogStatus.FAIL,
-						"On Hover participants size<b>"+groupparticipants+"</b>is not maching with Total Group Participants<b>"+i+"</b> ".toString() + test.addScreenCapture(takeScreenShot()));
+						"On Hover participants size <b> "+groupparticipants+" </b> is not maching with Total Group Participants <b>"+i+" </b> ".toString() + test.addScreenCapture(takeScreenShot()));
 			}
 
 		} catch (Exception e) {
@@ -889,8 +891,8 @@ public class KoraMessagesChatsPage extends PageBase {
 		try {
 			List<WebElement> msgs = remoteDriver.findElements(By.xpath("//div[@class='bodyMsg ']"));
 			int i = msgs.size();
-			moveToElement("//div[@class='bodyMsg '][" + i + "]", "xpath");
 			try {
+				moveToElement("//div[@class='bodyMsg '][" + i + "]", "xpath");
 				lastmessagefrom = getText("//div[@class='bodyMsg '][" + i + "]//div[@class='nameTime']");
 				test.log(LogStatus.INFO,
 						"In <b>" + groupname + " </b> group, last message was from : " + lastmessagefrom);
