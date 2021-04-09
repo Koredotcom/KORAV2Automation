@@ -63,7 +63,6 @@ public class Messages121Test extends DriverSetUp {
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			// koramessagespage.messagesScreenValidations();
 			koramessagespage.checkDefaultFocus_Recents();
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -71,7 +70,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-		@Test(enabled = true, priority = 2)
+		/*	@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -113,7 +112,7 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
 		}
 	}
-	/*@Test(enabled = true, priority = 4)
+	@Test(enabled = true, priority = 4)
 	public void MC_TC12_DeleteAndCheckActiveParticipant() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -142,7 +141,7 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
 		}
-	}*/
+	}
 
 	@Test(enabled = true, priority = 5)
 	public void MC_TC28_TC29_TC43_ValidateChevronIconFor1ParticipantAndSendLongText() throws Exception {
@@ -187,5 +186,5 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Emojis with text");
 		}
-	}
+	}*/
 }
