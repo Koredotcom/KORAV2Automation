@@ -98,14 +98,14 @@ public class KoraHomePage extends PageBase {
 	//		test.log(LogStatus.PASS, "Searchbox place holder contains " + menuoption);
 		} else {
 			test.log(LogStatus.FAIL, "Searchbox place holder doesnot contains " + menuoption);
-		}
+		}*/
 		if (!flag) {
 			System.out.println(menuoption + " option was not selected");
 			test.log(LogStatus.FAIL,
 					menuoption + "  option not selected or it is not available in the left nav options".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 			System.out.println("Reached FailXXXXXXXX " + menuoption + " is not available on the Dom for left nav");
-		}*/
+		}
 	}
 	
 	/**
