@@ -31,6 +31,7 @@ public class KoraMessagesDRPage extends PageBase {
 		cf = new CPCommonFunctions(remoteWebDriver);
 		koramessagespage= new KoraMessagesChatsPage(remoteWebDriver);
 		korahomepage = new KoraHomePage(remoteWebDriver);
+
 	}
 
 	/**
@@ -553,7 +554,7 @@ public class KoraMessagesDRPage extends PageBase {
 			click(er.kdrpostname0+ discRoom + er.kdrpostname1+ post+ er.ksinglquote, "Click on post ");
 			Thread.sleep(4000);
 			moveToElement(
-					er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",	"xpath");			
+					er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]","xpath");			
 			click(er.kdrpostname0 + discRoom+er.kdrpostname1+post+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",
 					"Click on 3dits options to ");								
 			test.log(LogStatus.PASS, post + "Clicking on more options on post  ".toString()  + test.addScreenCapture(takeScreenShot()));			
@@ -574,7 +575,7 @@ public class KoraMessagesDRPage extends PageBase {
 			test.log(LogStatus.FAIL, post + " FAILED to Edit Post ".toString()  + test.addScreenCapture(takeScreenShot()));
 		}
 	}
-	
+
 	public void atMentionValidationinDR() throws Exception
 	{
 		moveToElement(er.kwcomposebar, "xpath");
@@ -585,12 +586,125 @@ public class KoraMessagesDRPage extends PageBase {
 		if (atmentionusers.size()>0) {
 			test.log(LogStatus.WARNING,
 					"@ mention showing the particiapants in list "
-							.toString() + test.addScreenCapture(takeScreenShot()));
+					.toString() + test.addScreenCapture(takeScreenShot()));
 		} else {			
 			test.log(LogStatus.FAIL,  " @ Mention not Showing any Participants ".toString() + test.addScreenCapture(takeScreenShot()));
 		}	
 	}
-	
 
-	
+
+	public void movetoaPostandClickon3dots(String discRoom,String posttoforward,boolean threedots) throws Exception
+	{
+		moveToElement(er.kdrpostname0+discRoom+er.kdrpostname1+posttoforward+er.ksinglquote,"xpath");
+		click(er.kdrpostname0+ discRoom + er.kdrpostname1+ posttoforward+ er.ksinglquote, "Click on post ");
+		Thread.sleep(3000);
+		if(threedots)
+		{
+			click(er.kdrpostname0 + discRoom+er.kdrpostname1+posttoforward+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",
+					"Click on 3dits options to ");
+			Thread.sleep(3000);
+		}
+	}	
+
+	/**
+	 * @param newconversation  if it is new conversation we have to provide members list else Discussion Room 
+	 * @param discussionRoom   Discussion room or Group Conversation
+	 * @param Searchwith  search with either name,groupname or Discussion room name 
+	 */
+	public void forwardPosttonewconvorexisting(String post,String newconversation, String discRoomorConversationName,String Searchwith)
+	{		
+		try {			
+			click(er.kdforwardpost, "selecting forwarding  post");
+			waitTillappear(er.kdfowradpostWindow, "xpath","Forward post window");
+			/**  For New Conversation */
+			if(!newconversation.equalsIgnoreCase("NA") )
+			{		
+				click(er.kdstartnewconversation, " Click on Start New conversation");
+				if (newconversation.contains(",")) {
+					String result[] = newconversation.trim().split("\\s*,\\s*");
+					for (String part : result) {
+						System.out.println("Addinting memebr"+part);				
+						waitTillappear(er.kdselectpeopleinnewconv, "xpath", "New Conversation Window");
+						enterText(er.kdselectpeopleinnewconv, part, "xpath", "Participant name");						
+						Thread.sleep(1000);
+						waitTillappear(er.kmcsuggestmailids, "xpath", "Suggested emails");						
+						click(er.kdemailaddresstoselect+part+er.ksinglquote, "Participant Email Address");
+						test.log(LogStatus.INFO, part + "is selected");						
+					}
+					test.log(LogStatus.INFO, newconversation + "is selected");
+				} else {
+					System.out.println("Addinting memebr"+newconversation);						
+					enterText(er.kdselectpeopleinnewconv, newconversation, "xpath", "Participant name");						
+					Thread.sleep(1000);
+					waitTillappear(er.kmcsuggestmailids, "xpath", "Suggested emails");						
+					click(er.kdemailaddresstoselect+newconversation+er.ksinglquote, "Participant Email Address");
+					test.log(LogStatus.INFO, newconversation + "is selected");
+				}
+
+				test.log(LogStatus.PASS, "Partcipants are selected in new conversation window"+ test.addScreenCapture(takeScreenShot()));
+				click(er.kdcreatenforwardpost, "click on  Create & Forward");
+				test.log(LogStatus.PASS, "Created andnforwarded "+ test.addScreenCapture(takeScreenShot()));
+				Thread.sleep(3000);
+				korahomepage.selectTopLeftMenuOption("All Messages");				
+				test.log(LogStatus.PASS, "Forwarded post is applied to selected group/emails"+ test.addScreenCapture(takeScreenShot()));
+
+			}
+			/**  For existing one to one messages or Discussion room  or group conversation */
+			else if(!discRoomorConversationName.equalsIgnoreCase("NA"))
+			{	
+				moveToElement(er.kdfrwrdpostConversationname+discRoomorConversationName+er.ksinglquote,"xpath");			
+				click(er.kdfrwrdpostConversationname+discRoomorConversationName+er.ksinglquote+"/../../../..//button[@class='sendBtn']", "Clicking to Forward a post");
+				Thread.sleep(2000);
+				if(remoteDriver.getPageSource().contains("Post forwarded successfully."))
+				{
+					test.log(LogStatus.PASS, "Post forwarded successfully. message disaplyed after post being forwarded"+ test.addScreenCapture(takeScreenShot()));
+				}else {
+					test.log(LogStatus.FAIL, "Failed to validate Post forwarded successfully. message after post being forwarded" );
+				}				
+				click(er.kdfowradpostWindowclose, "Clicking to close forward post window");
+
+				/**  Validate whether post is being forwarded  or not */	
+				korahomepage.refreshpage();
+				korahomepage.selectTopLeftMenuOption("All Messages");
+				Thread.sleep(2000);
+				moveToElement(er.kmdmsgordiscroom+discRoomorConversationName+er.ksinglquote,"");
+				movetoaPostandClickon3dots(discRoomorConversationName,post,false);
+				System.out.println(er.kdrpostname0+discRoomorConversationName+er.kdrpostname1+post+er.ksinglquote+"/../..//i[@class='p-icon kr-return']");
+				elementIsDisplayed(er.kdrpostname0+discRoomorConversationName+er.kdrpostname1+post+er.ksinglquote+"/../..//i[@class='p-icon kr-return']","xpath");							
+
+			}
+			else if(!Searchwith.equalsIgnoreCase("NA"))
+			{
+				enterText(er.kdsearchbarinforwardpost, Searchwith, "Search people, chats & rooms in Forward post " );
+				Thread.sleep(4000);
+				List<WebElement> searchresults = remoteDriver.findElements(By.xpath(er.kdsearchresultsforwardpost));
+				if(searchresults.size()>1)
+				{					
+					click(er.kdrsearchresultsfirstsenditem, "Clicking to close forward post window");
+					Thread.sleep(2000);
+					if(remoteDriver.getPageSource().contains("Post forwarded successfully."))
+					{
+						test.log(LogStatus.PASS, "Post forwarded successfully. message disaplyed after post being forwarded"+ test.addScreenCapture(takeScreenShot()));
+						click(er.kdfowradpostWindowclose, "Clicking to close forward post window");																
+						korahomepage.selectTopLeftMenuOption("All Messages");
+						Thread.sleep(2000);
+						test.log(LogStatus.PASS, "Forwarded post is applied to Searched group/emails"+ test.addScreenCapture(takeScreenShot()));
+					}else {
+						test.log(LogStatus.FAIL, "Failed to validate Post forwarded successfully. message after post being forwarded" );
+					}														
+				}else {
+					test.log(LogStatus.FAIL, "In Forward post 'people, chats & rooms' in Forward post didn't fetch any results " +test.addScreenCapture(takeScreenShot()));					
+				}									
+			}else {
+
+				test.log(LogStatus.WARNING, "Please select either newconversation or Discussion Room or One one to messages to forward post");
+			}
+
+
+		}catch(Exception e)
+		{
+			test.log(LogStatus.FAIL, "Forward post to new conversation or Group or Discussion room at line number");
+		}
+	}
+
 }

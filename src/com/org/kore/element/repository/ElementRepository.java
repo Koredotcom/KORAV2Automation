@@ -17,24 +17,28 @@ public class ElementRepository {
 			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null, klogo = null, kcomposebar = null,
 			kleftactiveoption = null, kattachment = null, kuserprofileicon = null, kmctopleftmenu = null,
 			kmbottonleftmenu = null, kmcplusicon = null, kmconv = null, kmcomposebar = null, kmcrecent = null,
-			kmremoveparticipantpopup=null,kmcenterparticipant = null, kmcloseconversation = null, kmcsuggestnames = null, kmcsuggestmailids = null,
-			kmcprofileicon = null, kmcgroupchevronicon = null, kmcgroupname = null, kmcidgroup = null,
-			kmcidchatdesc = null, kmc3dots = null, kmc3dotoptions = null, kmcmanageclose = null, kmcmembername = null,
-			kmcmuteslots = null, kmcactiveusericon = null, kmcrightchaticon = null, kmcatmentionusernames = null,
-			kmcmessagebubbles = null, kmcfirstactiveuser = null, kmcactivebackground = null, kmdiscussion = null,
-			kmplaceholder = null, kmsearchsuggestions = null, kmattachfromplus = null, kmmessages = null,
-			kmmessagehoveroptiontitles = null, kmmessagehover3dots = null, kmmessagehoverreplyback = null,
-			kmmessagehovermorecopy = null, kmlongtextreadmore = null, kmreadmore = null, kmreadless = null,
-			kmemoji = null, kmsmiley = null, kwfilterbyws = null, kwplusicon = null, kwcreatenew = null,
-			kwjoinexisting = null, kworkplaceholder = null, kwdefaulworkspace = null, kwdrheader = null,
-			kworkspaces = null, kwdrgeneral = null, kworkspacename = null, kwleft3dots = null,
+			kmremoveparticipantpopup = null, kmcenterparticipant = null, kmcloseconversation = null,
+			kmcsuggestnames = null, kmcsuggestmailids = null, kmcprofileicon = null, kmcgroupchevronicon = null,
+			kmcgroupname = null, kmcidgroup = null, kmcidchatdesc = null, kmc3dots = null, kmc3dotoptions = null,
+			kmcmanageclose = null, kmcmembername = null, kmcmuteslots = null, kmcactiveusericon = null,
+			kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null, kmcfirstactiveuser = null,
+			kmcactivebackground = null, kmdiscussion = null, kmplaceholder = null, kmsearchsuggestions = null,
+			kmattachfromplus = null, kmmessages = null, kmmessagehoveroptiontitles = null, kmmessagehover3dots = null,
+			kmmessagehoverreplyback = null, kmmessagehovermorecopy = null, kmlongtextreadmore = null, kmreadmore = null,
+			kmreadless = null, kmemoji = null, kmsmiley = null, kwfilterbyws = null, kwplusicon = null,
+			kwcreatenew = null, kwjoinexisting = null, kworkplaceholder = null, kwdefaulworkspace = null,
+			kwdrheader = null, kworkspaces = null, kwdrgeneral = null, kworkspacename = null, kwleft3dots = null,
 			kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null, kwdeletewsname = null,
 			kwproceedDelete = null, kwcomposebar = null, kwinvite = null, kwsearchandaddpeople = null,
 			kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null, kwmemslist = null,
 			kdrcidgroup = null, kdrc3dotoptionsRightPanel = null, kdrc3dotoptionsRightPanelOptions = null,
 			kdrpostname0 = null, kdrpostname1 = null, kdrsettings = null, kdeveryoneAtnoWorkspace = null,
 			kdselectworkspace = null, kdtoggleicontoselectWS = null, kddiscussionTitle = null, kddefaultAccessto = null,
-			kdSearchboxinmsgnDR = null, kuserProfileUserName = null,kmdmsgordiscroom=null,kdeditpost=null,kdeditpostcomposebar=null;
+			kdSearchboxinmsgnDR = null, kuserProfileUserName = null, kmdmsgordiscroom = null, kdeditpost = null,
+			kdeditpostcomposebar = null, kdforwardpost = null, kdfowradpostWindow = null,
+			kdfrwrdpostConversationname = null, kdfowradpostWindowclose = null, kdstartnewconversation = null,
+			kdselectpeopleinnewconv = null, kdemailaddresstoselect = null, kdcreatenforwardpost = null,
+			kdsearchbarinforwardpost = null, kdsearchresultsforwardpost = null, kdrsearchresultsfirstsenditem = null;;
 
 	public void repoIOS() {
 
@@ -79,7 +83,7 @@ public class ElementRepository {
 		kattachment = "//i[@class='p-icon kr-discussion-attachment emojiBtn']";
 		kuserprofileicon = "//div[@class='userIntial']";
 
-		kmremoveparticipantpopup="//span[@class='p-button-text p-c'][text() = 'Remove']";
+		kmremoveparticipantpopup = "//span[@class='p-button-text p-c'][text() = 'Remove']";
 		kmctopleftmenu = "//span[@class='p-menuitem-text']";
 		kmbottonleftmenu = "//div[contains(@class,'p-menuitem-link')]//span[@class='p-menuitem-text ws-name-ellipsis']";
 		kmcplusicon = "//span[@class='p-icon kr-plus']";
@@ -158,9 +162,20 @@ public class ElementRepository {
 		kddefaultAccessto = "//i[@class='icon kr-tick']/..//span[@class='Name']";
 		kdSearchboxinmsgnDR = "//input[@class='searchInput']";
 		kuserProfileUserName = "//div[@class='userProfile']/.//span[@class='userName']";
-		kmdmsgordiscroom="//div[contains(@class,'userNameDiv') and text()='";
-		kdeditpost="//i[@class='icon kr-amend-edit']";
-		kdeditpostcomposebar="//div[@class='p-dialog-titlebar']/following::div[@id='discInput'][1]";  
+		kmdmsgordiscroom = "//div[contains(@class,'userNameDiv') and text()='";
+		kdeditpost = "//i[@class='icon kr-amend-edit']";
+		kdeditpostcomposebar = "//div[@class='p-dialog-titlebar']/following::div[@id='discInput'][1]";
+		kdforwardpost = "//i[@class='icon kr-return']";
+		kdfowradpostWindow = "//div[@class='p-dialog p-component ForwardPostAndMsgModal p-dialog-enter-done']/div[1]/span[1]/span[text()='Forward Post']";
+		kdfrwrdpostConversationname = "//div[@class='discussionRoomTitle']/div[@class='heroText' and text()='";
+		kdfowradpostWindowclose = "//span[@class='p-dialog-titlebar-close-icon pi pi-times']";
+		kdstartnewconversation = "//span[text()='Start a new conversation']";
+		kdselectpeopleinnewconv = "//input[contains(@placeholder,'Type and select people')]";
+		kdemailaddresstoselect = "//div[@class='userEmailId' and text()='";
+		kdcreatenforwardpost = "//button[@class='p-button kr-primary-btn' and text()='Create & Forward']";
+		kdsearchbarinforwardpost = "//input[@class='searchInput' and @placeholder='Search people, chats & rooms']";
+		kdsearchresultsforwardpost = "//div[@class='existingThreadList']/ul";
+		kdrsearchresultsfirstsenditem = "//div[@class='existingThreadList']/ul[1]/li[1]/div[2]/button";
 
 	}
 

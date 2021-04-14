@@ -25,7 +25,7 @@ public class MessagesDR extends DriverSetUp {
 	KoraMessagesChatsPage koramessagespage;
 	KoraWorkspacesPage koraworkspacepage;
 	KoraMessagesDRPage koramessagedrpage;
-	PageBase pagebase;
+//	PageBase pagebase;
 
 	String korajusername;
 	String korajpassword;
@@ -47,7 +47,7 @@ public class MessagesDR extends DriverSetUp {
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
 		koraworkspacepage = new KoraWorkspacesPage(remoteDriver);
 		koramessagedrpage = new KoraMessagesDRPage(remoteDriver);
-		pagebase = new PageBase(remoteDriver);
+	//	pagebase = new PageBase(remoteDriver);
 
 		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
 		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
@@ -58,7 +58,7 @@ public class MessagesDR extends DriverSetUp {
 	}
 
 	
-	@Test(enabled = true, priority = 23)
+	/*@Test(enabled = true, priority = 23)
 	public void MDR_TC1_TC2_TC3_TC65_createNewWorkspaceAndDelete() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -137,7 +137,7 @@ public class MessagesDR extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
 		}
-	}
+	}*/
 
 	@Test(enabled = true, priority = 26)
 	public void MDR_TC9_TC10_DefaultDRAndTimeline() throws Exception {
@@ -380,6 +380,43 @@ public class MessagesDR extends DriverSetUp {
 				korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
 				koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");						
 				koramessagedrpage.atMentionValidationinDR();
+				extent.endTest(test);
+			} catch (Exception e) {
+				test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
+			}
+		}
+		
+		/**
+		 * 	Forward post to new conversation , Existing and DR
+		 */
+		@Test(enabled = true, priority = 34)
+		public void MDR_TC_54_57_forwardPosttoToGroupdnDrandnewconv() throws Exception {
+	
+			try {
+				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+						.assignCategory("WorkAssist_Messages_Chats");
+				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+	
+				String url = DriverSetUp.propsMap.get("weburl");
+				String Messages = DriverSetUp.drdataMap.get("messages");			
+				String standarddrname = DriverSetUp.drdataMap.get("standarddr");
+				String expWDpost3dotoptions = DriverSetUp.drdataMap
+						.get("drexpected3dotsforPostinrightpanel");
+							
+				test.log(LogStatus.INFO, "Navigation url :" + url);
+				korahomepage.selectMenuOption(Messages);
+				korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
+				
+				String forwardtomemebers="prakash@koraqa1.com,dileep@koraqa1.com";
+				koramessagedrpage.goToGroupAndPerforminWSDR("random225437", false, "");
+				String post="forwardingpost"+korahomepage.runtimehhmmss();				
+				koramessagespage.enterYourMessageAs(post);				
+				koramessagedrpage.movetoaPostandClickon3dots("random225437",post,true);
+				koramessagedrpage.forwardPosttonewconvorexisting(post,forwardtomemebers,"NA","NA");//{post, newconversation,NA,NA}
+				koramessagedrpage.forwardPosttonewconvorexisting(post,"NA","random225414","NA"); //  {post, NA,Discussion Room,NA} //				
+				koramessagedrpage.forwardPosttonewconvorexisting(post,"NA","NA","dileep@koraqa1.com");//{post, NA,NA,"Searchwith"}
+				
+			
 				extent.endTest(test);
 			} catch (Exception e) {
 				test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");

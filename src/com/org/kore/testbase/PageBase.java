@@ -399,7 +399,7 @@ public class PageBase extends DriverSetUp {
 				break;
 			case "Selenium":
 
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 40, 500);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
 				if (locatorType.equalsIgnoreCase("xpath")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 				} else if (locatorType.equalsIgnoreCase("id")) {
