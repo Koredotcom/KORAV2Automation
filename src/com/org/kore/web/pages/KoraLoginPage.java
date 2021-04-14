@@ -58,12 +58,15 @@ public class KoraLoginPage extends PageBase {
 	 */
 	public void signInWithO365(String userName, String password) throws Exception {
 		waitTillappear(er.ko365, "xpath", "Choose ur account type");
+		test.log(LogStatus.PASS, "Type of accounts displayed to choose: ".toString()+ test.addScreenCapture(takeScreenShot()));
 		click(er.ko365, "Select Microsoft option");
 		enterText(er.koenteremail, userName, "xpath", "Enter Email");
+		test.log(LogStatus.PASS, "Entered username".toString()+ test.addScreenCapture(takeScreenShot()));
 		click(er.kousernext, "UsrNext");
 		enterText(er.kpwd, password, "xpath", "Password");
-		test.log(LogStatus.INFO, "Password entered successfully");
+		test.log(LogStatus.PASS, "Entered Password".toString()+ test.addScreenCapture(takeScreenShot()));
 		click(er.kosignin, "Signin");
+		test.log(LogStatus.PASS, "Selected Sign In".toString()+ test.addScreenCapture(takeScreenShot()));
 		click(er.kstaysignin, "Stay Signin");
 		JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
 		String result = js.executeScript("return document.readyState").toString();
