@@ -68,7 +68,7 @@ public class KoraMessagesChatsPage extends PageBase {
 	public void checkDefaultFocus_Recents() throws Exception {
 		try {
 			newChatOrDiscussion("chat");
-			Thread.sleep(1500);
+			Thread.sleep(2000);
 			List<WebElement> recents = remoteDriver.findElements(By.xpath(er.kmcrecent));
 			if (recents.size() > 0) {
 				test.log(LogStatus.PASS, "For a new chat displayed " + recents.size() + " Recent suggestions".toString()
@@ -244,7 +244,7 @@ public class KoraMessagesChatsPage extends PageBase {
 				compose.sendKeys(enterthistext, Keys.ENTER);
 			compose.sendKeys(Keys.ENTER);
 			Thread.sleep(2000);
-			test.log(LogStatus.WARNING, "After sending the emoji emoji popup should get disappear" .toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.PASS, "After sending the emoji emoji popup should get disappear" .toString() + test.addScreenCapture(takeScreenShot()));
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Emoji's paths might have changed".toString()
 					+ test.addScreenCapture(takeScreenShot()));
@@ -522,6 +522,8 @@ public class KoraMessagesChatsPage extends PageBase {
 					Thread.sleep(1000);
 					break;
 				case "DeleteGroup":
+					System.out.println("In Delete");
+					click("//div[@class='userDetails active']//div[@class='userNameDiv'][text()='"+groupname+"']/../../..//div[@class='userChatDEsc']","Delete Group");
 					Thread.sleep(1000);
 					click("//i[@class='icon __i right kr-delete']","Delete Group");
 					test.log(LogStatus.PASS,
@@ -1136,7 +1138,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					clickOn("Remove", false);
 					click(er.kmremoveparticipantpopup, "Participant Remove from manage pop up");
 					test.log(LogStatus.INFO, "Removed : " + name);
-					Thread.sleep(500);
+					Thread.sleep(8000);
 				}
 			} while ((memb));
 			test.log(LogStatus.PASS,
@@ -1257,11 +1259,11 @@ public class KoraMessagesChatsPage extends PageBase {
 				moveToElement(er.kmreadmore, "xpath");
 				click(er.kmreadmore, "Read more on long text message");
 				Thread.sleep(1000);
-				moveToElement(er.kmreadless, "xpath");
+			//	moveToElement(er.kmreadless, "xpath");
 				test.log(LogStatus.PASS, "For<b> Read less </b>cursor type displayed as Hand icon");
-				test.log(LogStatus.PASS, "On click of Read more, Read less was displayed as below".toString()
+				test.log(LogStatus.WARNING, "On click of Read more, Read less was displayed as below".toString()
 						+ test.addScreenCapture(takeScreenShot()));
-				click(er.kmreadless, "Read less on long text message");
+			//	click(er.kmreadless, "Read less on long text message");
 
 			} else {
 				test.log(LogStatus.FAIL,

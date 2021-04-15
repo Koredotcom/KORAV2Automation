@@ -67,7 +67,6 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("Chat",newparticipants, true);
 			groupname = koramessagespage.enterYourMessageAs(grouptext);
-		//	koramessagespage.verifyGroupCreationTimeline(korajusername);
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Conversation");
 			koramessagespage.removeParticipantsAndClose();
@@ -85,7 +84,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 8)
+	/*@Test(enabled = true, priority = 8)
 	public void MC_TC14_TC15_TC16_TC20_TC21_createNewGroupConversation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -237,6 +236,6 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate delete conversation flow");
 		}
-	}
+	}*/
 
 }

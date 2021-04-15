@@ -70,7 +70,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	/*	@Test(enabled = true, priority = 2)
+			/*@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -87,7 +87,7 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate user suggestion validation");
 		}
 	}
-		@Test(enabled = true, priority = 3)
+			@Test(enabled = true, priority = 3)
 	public void MC_TC8_TC9_TC24_OneToOneConv_3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -112,7 +112,7 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
 		}
 	}
-	@Test(enabled = true, priority = 4)
+	 @Test(enabled = true, priority = 4)
 	public void MC_TC12_DeleteAndCheckActiveParticipant() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -143,7 +143,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 5)
+		@Test(enabled = true, priority = 5)
 	public void MC_TC28_TC29_TC43_ValidateChevronIconFor1ParticipantAndSendLongText() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())

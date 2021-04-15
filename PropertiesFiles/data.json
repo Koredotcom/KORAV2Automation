@@ -2,13 +2,14 @@
 	"QA": {
 		"browser": "chrome",
 		"weburls": "https://developer.servicenow.com/dev.do#!/home",
-		"weburl": "https://workassist-qa.kore.ai/",
+		"weburl": "https://koraqa.kora.ai/",
 		"tool": "Selenium"
 	},
 	"Dev": {
 		"browser": "chrome",
 		"weburls": "https://developer.servicenow.com/dev.do#!/home",
 		"weburl": "https://koraqa.kora.ai/",
+		"webdev": "https://workassist-qa.kore.ai/s",
 		"tool": "Selenium"
 	},
 	"IOSNATIVE": {
