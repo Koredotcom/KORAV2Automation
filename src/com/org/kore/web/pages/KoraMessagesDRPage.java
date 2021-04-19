@@ -619,6 +619,7 @@ public class KoraMessagesDRPage extends PageBase {
 			/**  For New Conversation */
 			if(!newconversation.equalsIgnoreCase("NA") )
 			{		
+				System.out.println("------------------ NEW Conversation -------------------------");
 				click(er.kdstartnewconversation, " Click on Start New conversation");
 				if (newconversation.contains(",")) {
 					String result[] = newconversation.trim().split("\\s*,\\s*");
@@ -626,7 +627,7 @@ public class KoraMessagesDRPage extends PageBase {
 						System.out.println("Addinting memebr"+part);				
 						waitTillappear(er.kdselectpeopleinnewconv, "xpath", "New Conversation Window");
 						enterText(er.kdselectpeopleinnewconv, part, "xpath", "Participant name");						
-						Thread.sleep(1000);
+						Thread.sleep(5000);
 						waitTillappear(er.kmcsuggestmailids, "xpath", "Suggested emails");						
 						click(er.kdemailaddresstoselect+part+er.ksinglquote, "Participant Email Address");
 						test.log(LogStatus.INFO, part + "is selected");						
@@ -635,7 +636,7 @@ public class KoraMessagesDRPage extends PageBase {
 				} else {
 					System.out.println("Addinting memebr"+newconversation);						
 					enterText(er.kdselectpeopleinnewconv, newconversation, "xpath", "Participant name");						
-					Thread.sleep(1000);
+					Thread.sleep(5000);
 					waitTillappear(er.kmcsuggestmailids, "xpath", "Suggested emails");						
 					click(er.kdemailaddresstoselect+newconversation+er.ksinglquote, "Participant Email Address");
 					test.log(LogStatus.INFO, newconversation + "is selected");
@@ -643,15 +644,16 @@ public class KoraMessagesDRPage extends PageBase {
 
 				test.log(LogStatus.PASS, "Partcipants are selected in new conversation window"+ test.addScreenCapture(takeScreenShot()));
 				click(er.kdcreatenforwardpost, "click on  Create & Forward");
-				test.log(LogStatus.PASS, "Created andnforwarded "+ test.addScreenCapture(takeScreenShot()));
-				Thread.sleep(3000);
+				Thread.sleep(2000);
+				test.log(LogStatus.PASS, "Created andnforwarded "+ test.addScreenCapture(takeScreenShot()));				
 				korahomepage.selectTopLeftMenuOption("All Messages");				
 				test.log(LogStatus.PASS, "Forwarded post is applied to selected group/emails"+ test.addScreenCapture(takeScreenShot()));
 
 			}
 			/**  For existing one to one messages or Discussion room  or group conversation */
 			else if(!discRoomorConversationName.equalsIgnoreCase("NA"))
-			{	
+			{					
+				System.out.println("------------------ Discussion Room Name -------------------------");
 				moveToElement(er.kdfrwrdpostConversationname+discRoomorConversationName+er.ksinglquote,"xpath");			
 				click(er.kdfrwrdpostConversationname+discRoomorConversationName+er.ksinglquote+"/../../../..//button[@class='sendBtn']", "Clicking to Forward a post");
 				Thread.sleep(2000);
@@ -675,6 +677,7 @@ public class KoraMessagesDRPage extends PageBase {
 			}
 			else if(!Searchwith.equalsIgnoreCase("NA"))
 			{
+				System.out.println("-------------------- Search people, chats & rooms in Forward post  ----------");
 				enterText(er.kdsearchbarinforwardpost, Searchwith, "Search people, chats & rooms in Forward post " );
 				Thread.sleep(4000);
 				List<WebElement> searchresults = remoteDriver.findElements(By.xpath(er.kdsearchresultsforwardpost));
@@ -703,7 +706,7 @@ public class KoraMessagesDRPage extends PageBase {
 
 		}catch(Exception e)
 		{
-			test.log(LogStatus.FAIL, "Forward post to new conversation or Group or Discussion room at line number");
+			test.log(LogStatus.FAIL, "Forward post to new conversation or Group or Discussion room ");
 		}
 	}
 

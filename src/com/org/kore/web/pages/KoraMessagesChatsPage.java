@@ -53,8 +53,8 @@ public class KoraMessagesChatsPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void newChatOrDiscussion(String conversationorDR) throws Exception {
-		click(er.kmcplusicon, "Plus icon to start new"+conversationorDR);
-		
+		click(er.kmcplusicon, "Plus icon to start new" + conversationorDR);
+
 		if (conversationorDR.toLowerCase().contains("chat")) {
 			click(er.kmconv, "Create a new Chat");
 		} else if (conversationorDR.toLowerCase().contains("discussion")) {
@@ -141,7 +141,8 @@ public class KoraMessagesChatsPage extends PageBase {
 	 * @throws Exception
 	 *             : Fail, when unable to select the provided participant
 	 */
-	public void startNewConversationWith(String conversationorDR, String participantlist, boolean plusicon) throws Exception {
+	public void startNewConversationWith(String conversationorDR, String participantlist, boolean plusicon)
+			throws Exception {
 
 		try {
 			if (plusicon)
@@ -228,7 +229,7 @@ public class KoraMessagesChatsPage extends PageBase {
 
 		return chatheadername;
 	}
-	
+
 	/**
 	 * @param enterthistext
 	 *            : Mentioned text from here will be send as a message
@@ -238,16 +239,19 @@ public class KoraMessagesChatsPage extends PageBase {
 		try {
 			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
 			click(er.kmemoji, "Emoji");
-			test.log(LogStatus.WARNING, "Emojis displayed, requires human eye to check the UI from the below screenshot" .toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.WARNING,
+					"Emojis displayed, requires human eye to check the UI from the below screenshot".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 			click(er.kmsmiley, "Smiley Emoju");
 			if (withtext)
 				compose.sendKeys(enterthistext, Keys.ENTER);
 			compose.sendKeys(Keys.ENTER);
 			Thread.sleep(2000);
-			test.log(LogStatus.PASS, "After sending the emoji emoji popup should get disappear" .toString() + test.addScreenCapture(takeScreenShot()));
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Emoji's paths might have changed".toString()
+			test.log(LogStatus.PASS, "After sending the emoji emoji popup should get disappear".toString()
 					+ test.addScreenCapture(takeScreenShot()));
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"Emoji's paths might have changed".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 	}
@@ -256,10 +260,9 @@ public class KoraMessagesChatsPage extends PageBase {
 		String chatheadername = null;
 		try {
 			chatheadername = getText("//div[@class='chatHeader']//span");
-			if (chatheadername.equalsIgnoreCase("and NaN others")){
-				test.log(LogStatus.FAIL,
-						"Displayed invalid group name as and NaN others".toString()
-								+ test.addScreenCapture(takeScreenShot()));
+			if (chatheadername.equalsIgnoreCase("and NaN others")) {
+				test.log(LogStatus.FAIL, "Displayed invalid group name as and NaN others".toString()
+						+ test.addScreenCapture(takeScreenShot()));
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
@@ -374,14 +377,14 @@ public class KoraMessagesChatsPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void atMentionValidation(int groupcount, boolean select, String selectuser) throws Exception {
-		int witheveryone=groupcount+1;
+		int witheveryone = groupcount + 1;
 		enterText(er.kmcomposebar, "@", "xpath", "Type your message");
 		List<WebElement> atmentionusers = remoteDriver.findElements(By.xpath(er.kmcatmentionusernames));
 		int atsize = atmentionusers.size();
 		if (witheveryone == atsize) {
 			test.log(LogStatus.PASS,
-					"Total participants count and @ mention users count is matchng including Everyone option i.e. "+atsize+" "
-							.toString() + test.addScreenCapture(takeScreenShot()));
+					"Total participants count and @ mention users count is matchng including Everyone option i.e. "
+							+ atsize + " ".toString() + test.addScreenCapture(takeScreenShot()));
 		} else {
 			test.log(LogStatus.FAIL, "Total participants<b> " + groupcount + "</b> count and @ mention users<b> "
 					+ atsize + " </b>count got deviated".toString() + test.addScreenCapture(takeScreenShot()));
@@ -523,11 +526,11 @@ public class KoraMessagesChatsPage extends PageBase {
 					break;
 				case "DeleteGroup":
 					System.out.println("In Delete");
-					click("//div[@class='userDetails active']//div[@class='userNameDiv'][text()='"+groupname+"']/../../..//div[@class='userChatDEsc']","Delete Group");
+					click("//div[@class='userDetails active']//div[@class='userNameDiv'][text()='" + groupname
+							+ "']/../../..//div[@class='userChatDEsc']", "Delete Group");
 					Thread.sleep(1000);
-					click("//i[@class='icon __i right kr-delete']","Delete Group");
-					test.log(LogStatus.PASS,
-							groupname + " Deleted Successfully");
+					click("//i[@class='icon __i right kr-delete']", "Delete Group");
+					test.log(LogStatus.PASS, groupname + " Deleted Successfully");
 					clickOn("Delete", true);
 					break;
 				default:
@@ -547,7 +550,8 @@ public class KoraMessagesChatsPage extends PageBase {
 		if (searchfrom.equals("All Messages"))
 			searchfrom = "Search Messages";
 		enterText("//*[contains (@placeholder, 'Search')]", searchwith, "Search from " + searchfrom);
-	//	enterText("//*[contains (@placeholder, '" + searchfrom + "')]", searchwith, "Search from " + searchfrom);
+		// enterText("//*[contains (@placeholder, '" + searchfrom + "')]",
+		// searchwith, "Search from " + searchfrom);
 		Thread.sleep(1000);
 		actuserdisplay = elementIsDisplayed(er.kmsearchsuggestions + searchwith + er.ksinglquote, "xpath");
 		if (expuserdisplay) {
@@ -718,8 +722,9 @@ public class KoraMessagesChatsPage extends PageBase {
 			}
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "How about, Let’s start with just a hello? is not displayed in empty screen validation".toString()
-					+ test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL,
+					"How about, Let’s start with just a hello? is not displayed in empty screen validation".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
 
@@ -780,7 +785,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					+ "']/../../../..//div[@class='avatarDiv']//span[@class='nameAvatar chatAvatar']", "xpath");
 			List<WebElement> totalparticipants = remoteDriver
 					.findElements(By.xpath(er.kmcidgroup + groupname + "']/../../../..//div[@class='userPopupUi']"));
-			groupparticipants=totalparticipants.size();
+			groupparticipants = totalparticipants.size();
 			if (i == totalparticipants.size()) {
 				test.log(LogStatus.PASS,
 						"Three group icouns count matching with the total participants from group Onhover");
@@ -788,7 +793,9 @@ public class KoraMessagesChatsPage extends PageBase {
 						+ " ".toString() + test.addScreenCapture(takeScreenShot()));
 			} else {
 				test.log(LogStatus.FAIL,
-						"On Hover participants size <b> "+groupparticipants+" </b> is not maching with Total Group Participants <b>"+i+" </b> ".toString() + test.addScreenCapture(takeScreenShot()));
+						"On Hover participants size <b> " + groupparticipants
+								+ " </b> is not maching with Total Group Participants <b>" + i + " </b> ".toString()
+								+ test.addScreenCapture(takeScreenShot()));
 			}
 
 		} catch (Exception e) {
@@ -859,7 +866,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		String actfirstchar = getText(er.kmcactiveusericon);
 		moveToElement(er.kmcactiveusericon, "xpath");
 		Thread.sleep(2000);
-		String onhovericon = getText("//div[@class='circle']", "xpath");
+		String onhovericon = getText("//div[@class='userDetails active']//span[@class='nameAvatar single']", "xpath");
 
 		if (expfirstchar.equals(actfirstchar) && (expfirstchar.equals(onhovericon))) {
 			test.log(LogStatus.PASS,
@@ -939,7 +946,8 @@ public class KoraMessagesChatsPage extends PageBase {
 
 		} catch (Exception e) {
 			test.log(LogStatus.WARNING,
-					"Group creation time line creation time field got updated from date to Day".toString() + test.addScreenCapture(takeScreenShot()));
+					"Group creation time line creation time field got updated from date to Day".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
 
@@ -1032,7 +1040,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		try {
 			clickOn("Members", false);
 			clickOn("Add Participants", true);
-			startNewConversationWith("chat",memberstoadd, false);
+			startNewConversationWith("chat", memberstoadd, false);
 			clickOn("Done", false);
 			validateRecentAddedParticipants(memberstoadd);
 			click(er.kmcmanageclose, "Close button");
@@ -1259,11 +1267,11 @@ public class KoraMessagesChatsPage extends PageBase {
 				moveToElement(er.kmreadmore, "xpath");
 				click(er.kmreadmore, "Read more on long text message");
 				Thread.sleep(1000);
-			//	moveToElement(er.kmreadless, "xpath");
+				// moveToElement(er.kmreadless, "xpath");
 				test.log(LogStatus.PASS, "For<b> Read less </b>cursor type displayed as Hand icon");
 				test.log(LogStatus.WARNING, "On click of Read more, Read less was displayed as below".toString()
 						+ test.addScreenCapture(takeScreenShot()));
-			//	click(er.kmreadless, "Read less on long text message");
+				// click(er.kmreadless, "Read less on long text message");
 
 			} else {
 				test.log(LogStatus.FAIL,

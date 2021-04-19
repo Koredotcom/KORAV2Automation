@@ -140,13 +140,16 @@ public class PageBase extends DriverSetUp {
 				} else {
 					System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("winchromeDriverPath"));
 					ChromeOptions options = new ChromeOptions();
-					// options.addArguments("user-data-dir=/path/to/your/custom/profile");
+					options.addArguments("user-data-dir=/path/to/your/custom/profile");
 					options.addArguments("--profile-directory=Default");
 					options.addArguments("--whitelisted-ips");
 					options.addArguments("--disable-plugins-discovery");
 					options.addArguments("--disable-extensions");
 					options.addArguments("--test-type");
 					options.addArguments("start-maximized");
+					//options.addArguments("--start-fullscreen");
+					//options.addArguments("window-size=1366,657");
+					//options.addArguments("- chrome.exe --ash-host-window-bounds=800x500");
 					options.setExperimentalOption("useAutomationExtension", false);
 					options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 					DesiredCapabilities cap = DesiredCapabilities.chrome();

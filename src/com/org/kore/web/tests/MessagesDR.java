@@ -213,214 +213,221 @@ public class MessagesDR extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
-			String standarddiscroom = DriverSetUp.drdataMap.get("standarddr"); //??
-			String expWDRmiddle3dotoptions = DriverSetUp.drdataMap
-					.get("wexpected3dotoptionsmiddle");
-			String expWDRright3dotoptions = DriverSetUp.drdataMap
-					.get("wexpected3dotoptionsright");			
-			
-			test.log(LogStatus.INFO, "Navigation url :" + url);				
+			String standarddiscroom = DriverSetUp.drdataMap.get("standarddr"); // ??
+			String expWDRmiddle3dotoptions = DriverSetUp.drdataMap.get("wexpected3dotoptionsmiddle");
+			String expWDRright3dotoptions = DriverSetUp.drdataMap.get("wexpected3dotoptionsright");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.goToGroupAndPerforminWSDR(standarddiscroom, true, "3dots"); //??
-			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expWDRmiddle3dotoptions,
-					"middlePanel");
-			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expWDRright3dotoptions,
-					"rightPanel");
+			koramessagedrpage.goToGroupAndPerforminWSDR(standarddiscroom, true, "3dots"); // ??
+			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expWDRmiddle3dotoptions, "middlePanel");
+			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expWDRright3dotoptions, "rightPanel");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
 		}
 	}
 
+	@Test(enabled = true, priority = 29)
+	public void MDR_TC24_hoveronaDRandverifyoptions() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 
-		@Test(enabled = true, priority = 29)
-		public void MDR_TC24_hoveronaDRandverifyoptions() throws Exception {
-			try {
-				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-						.assignCategory("WorkAssist_DiscussionRooms");
-				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-				String url = DriverSetUp.propsMap.get("weburl");			
-				String Messages = DriverSetUp.drdataMap.get("messages");				
-				String standarddrname = DriverSetUp.drdataMap.get("standarddr");
-	
-				test.log(LogStatus.INFO, "Navigation url :" + url);				
-				korahomepage.selectMenuOption(Messages);
-				korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-				koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
-				String validationelmenets[]={"Star","Mute","UnRead"};			
-				for(String value: validationelmenets )
-				{
-					koramessagedrpage.verifytheoptionsonDRandperfromAction(standarddrname,value,"SelectNOT");					
-				}																			
-				extent.endTest(test);
-			} catch (Exception e) {
-				test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
+			String validationelmenets[] = { "Star", "Mute", "UnRead" };
+			for (String value : validationelmenets) {
+				koramessagedrpage.verifytheoptionsonDRandperfromAction(standarddrname, value, "SelectNOT");
 			}
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
 		}
+	}
 		
-		
-		/**
-		 * "Create a discussion room from All messages/Discussion room and add user with > Post only (Default post will be given)"
-		 * @throws Exception Pass
-		 */
-		@Test(enabled = true, priority = 30)
-		public void MDR_TC34_TC37_CreatenewDRwithDifferentAccessTypes() throws Exception {
-			try {
-				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-						.assignCategory("WorkAssist_DiscussionRooms");
-				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-				String url = DriverSetUp.propsMap.get("weburl");
-				String Messages = DriverSetUp.drdataMap.get("messages");	
-				String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
-				String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");			
-							
-				test.log(LogStatus.INFO, "Navigation url :" + url);				
-				korahomepage.selectMenuOption(Messages);
-				
-				//To Create DR from All messages and Discussion Room 			 
-				korahomepage.selectTopLeftMenuOption("All Messages"); //  Discussion Rooms || All Messages			
-				String exeTimeHMS1=korahomepage.runtimehhmmss();
-				koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,"random"+exeTimeHMS1,newparticipants,"Comment Only");
-				korahomepage.refreshpage();
-				korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);			
-				koramessagedrpage.goToGroupAndPerforminWSDR("random"+exeTimeHMS1, true, "Star");
-				
-				// To Create DR From Bottom Left Panel			 
-				String exeTimeHMS2=korahomepage.runtimehhmmss();
-				korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);
-				koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,"random"+exeTimeHMS2,newparticipants,"Full Access");
-				korahomepage.refreshpage();
-				korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);
-				koramessagedrpage.goToGroupAndPerforminWSDR("random"+exeTimeHMS2, true, "Star");			
-				extent.endTest(test);			
-	
-			} catch (Exception e) {
-				test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
-			}
-		}
-		
-		/**
-		 * TC_64Delete Discussion Room  with WorkSpace, without WorkSpace from Messages 
-		 * Updated
-		 */
-		@Test(enabled = true, priority = 31)
-		public void MDR_TC64_DeleteWorkSpacefromMessages() throws Exception {
-			try {
-				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-						.assignCategory("WorkAssist_DiscussionRooms");
-				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-				String url = DriverSetUp.propsMap.get("weburl");
-				String Messages = DriverSetUp.drdataMap.get("messages");
-				String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
-				String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
-							
-				test.log(LogStatus.INFO, "Navigation url :" + url);				
-				korahomepage.selectMenuOption(Messages);			 			 
-				korahomepage.selectTopLeftMenuOption("Discussion Rooms"); //  Discussion Rooms || All Messages
-				String exeTimeHMS1=korahomepage.runtimehhmmss();
-				koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,"random"+exeTimeHMS1,newparticipants,"Comment Only");				
-				korahomepage.selectTopLeftMenuOption("Discussion Rooms"); //  Discussion Rooms || All Messages
-				koramessagedrpage.goToGroupAndPerforminWSDR("random"+exeTimeHMS1, true, "3dots");
-				koramessagespage.operationsFrom3Dots("Delete Discussion");
-				korahomepage.clickOn("Delete", true);
-				korahomepage.selectTopLeftMenuOption("Discussion Rooms");						
-				koramessagedrpage.valdiatedeletedMsgorDR("random"+exeTimeHMS1);				
-				extent.endTest(test);			
-				
-			} catch (Exception e) {			
-				test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
-			}
-		}
-		
-		/**
-		 *  Editing a post in Discussion Room Also validates Edit,Forward,Reminder,Post Info,Delete options displayed in 3 dots to a post
-		 */
-		@Test(enabled = true, priority = 32)
-		public void MDR_TC53_TC56_EditaPost() throws Exception {
-			try {
-				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-						.assignCategory("WorkAssist_DiscussionRooms");
-				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-				String url = DriverSetUp.propsMap.get("weburl");
-				String Messages = DriverSetUp.drdataMap.get("messages");								
-				String standarddrname= DriverSetUp.drdataMap.get("standarddr");
-				String expWDpost3dotoptions = DriverSetUp.drdataMap
-						.get("drexpected3dotsforPostinrightpanel");
+	/**
+	 * "Create a discussion room from All messages/Discussion room and add user
+	 * with > Post only (Default post will be given)"
+	 * 
+	 * @throws Exception
+	 *             Pass
+	 */
+	@Test(enabled = true, priority = 30)
+	public void MDR_TC34_TC37_CreatenewDRwithDifferentAccessTypes() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
+			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
 
-				test.log(LogStatus.INFO, "Navigation url :" + url);					
-				korahomepage.selectMenuOption(Messages);			
-				korahomepage.selectTopLeftMenuOption("Discussion Rooms");		
-				koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
-				String exeTimeHMS1=korahomepage.runtimehhmmss();
-				koramessagedrpage.EditingPostinDiscussionRoom(standarddrname,"Post"+exeTimeHMS1,"Editing Post"+exeTimeHMS1,expWDpost3dotoptions);
-				extent.endTest(test);												
-			} catch (Exception e) {			
-				test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
-			}
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Messages);
+
+			// To Create DR from All messages and Discussion Room
+			// Discussion Rooms || All Messages
+			korahomepage.selectTopLeftMenuOption("All Messages"); 
+			String exeTimeHMS1 = korahomepage.runtimehhmmss();
+			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname, "random" + exeTimeHMS1,
+					newparticipants, "Comment Only");
+			korahomepage.refreshpage();
+			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);
+			koramessagedrpage.goToGroupAndPerforminWSDR("random" + exeTimeHMS1, true, "Star");
+
+			// To Create DR From Bottom Left Panel
+			String exeTimeHMS2 = korahomepage.runtimehhmmss();
+			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);
+			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname, "random" + exeTimeHMS2,
+					newparticipants, "Full Access");
+			korahomepage.refreshpage();
+			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);
+			koramessagedrpage.goToGroupAndPerforminWSDR("random" + exeTimeHMS2, true, "Star");
+			extent.endTest(test);
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
 		}
+	}
 		
-		/**
-		 * 	 At   Mentions in posts users should display the users who are part of the room
-		 */
-		@Test(enabled = true, priority = 33)
-		public void MDR_TC59_atmentionUsersinDr() throws Exception {
-	
-			try {
-				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-						.assignCategory("WorkAssist_Messages_Chats");
-				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-	
-				String url = DriverSetUp.propsMap.get("weburl");
-				String Messages = DriverSetUp.drdataMap.get("messages");			
-				String standarddrname = DriverSetUp.drdataMap.get("standarddr");
-							
-				test.log(LogStatus.INFO, "Navigation url :" + url);				
-				korahomepage.selectMenuOption(Messages);
-				korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
-				koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");						
-				koramessagedrpage.atMentionValidationinDR();
-				extent.endTest(test);
-			} catch (Exception e) {
-				test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
-			}
+	/**
+	 * TC_64Delete Discussion Room with WorkSpace, without WorkSpace from
+	 * Messages Updated
+	 */
+	@Test(enabled = true, priority = 31)
+	public void MDR_TC64_DeleteWorkSpacefromMessages() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
+			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Messages);
+			// Discussion Rooms || All Messages
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
+			String exeTimeHMS1 = korahomepage.runtimehhmmss();
+			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname, "random" + exeTimeHMS1,
+					newparticipants, "Comment Only");
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); // Discussion Rooms || All Messages
+			koramessagedrpage.goToGroupAndPerforminWSDR("random" + exeTimeHMS1, true, "3dots");
+			koramessagespage.operationsFrom3Dots("Delete Discussion");
+			korahomepage.clickOn("Delete", true);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			koramessagedrpage.valdiatedeletedMsgorDR("random" + exeTimeHMS1);
+			extent.endTest(test);
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
 		}
-		
-		/**
-		 * 	Forward post to new conversation , Existing and DR
-		 */
-		@Test(enabled = true, priority = 34)
-		public void MDR_TC_54_57_forwardPosttoToGroupdnDrandnewconv() throws Exception {
-	
-			try {
-				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-						.assignCategory("WorkAssist_Messages_Chats");
-				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-	
-				String url = DriverSetUp.propsMap.get("weburl");
-				String Messages = DriverSetUp.drdataMap.get("messages");			
-				String standarddrname = DriverSetUp.drdataMap.get("standarddr");
-				String expWDpost3dotoptions = DriverSetUp.drdataMap
-						.get("drexpected3dotsforPostinrightpanel");
-							
-				test.log(LogStatus.INFO, "Navigation url :" + url);
-				korahomepage.selectMenuOption(Messages);
-				korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
-				
-				String forwardtomemebers="prakash@koraqa1.com,dileep@koraqa1.com";
-				koramessagedrpage.goToGroupAndPerforminWSDR("random225437", false, "");
-				String post="forwardingpost"+korahomepage.runtimehhmmss();				
-				koramessagespage.enterYourMessageAs(post);				
-				koramessagedrpage.movetoaPostandClickon3dots("random225437",post,true);
-				koramessagedrpage.forwardPosttonewconvorexisting(post,forwardtomemebers,"NA","NA");//{post, newconversation,NA,NA}
-				koramessagedrpage.forwardPosttonewconvorexisting(post,"NA","random225414","NA"); //  {post, NA,Discussion Room,NA} //				
-				koramessagedrpage.forwardPosttonewconvorexisting(post,"NA","NA","dileep@koraqa1.com");//{post, NA,NA,"Searchwith"}
-				
-			
-				extent.endTest(test);
-			} catch (Exception e) {
-				test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
-			}
+	}
+
+	/**
+	 * Editing a post in Discussion Room Also validates
+	 * Edit,Forward,Reminder,Post Info,Delete options displayed in 3 dots to a
+	 * post
+	 */
+	@Test(enabled = true, priority = 32)
+	public void MDR_TC53_TC56_EditaPost() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
+			String expWDpost3dotoptions = DriverSetUp.drdataMap.get("drexpected3dotsforPostinrightpanel");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
+			String exeTimeHMS1 = korahomepage.runtimehhmmss();
+			koramessagedrpage.EditingPostinDiscussionRoom(standarddrname, "Post" + exeTimeHMS1,
+					"Editing Post" + exeTimeHMS1, expWDpost3dotoptions);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
 		}
+	}
+
+	/**
+	 * At Mentions in posts users should display the users who are part of the
+	 * room
+	 */
+	@Test(enabled = true, priority = 33)
+	public void MDR_TC59_atmentionUsersinDr() throws Exception {
+
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");
+			koramessagedrpage.atMentionValidationinDR();
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
+		}
+	}
+
+	/**
+	 * Forward post to new conversation , Existing and DR
+	 */
+	@Test(enabled = true, priority = 34)
+	public void MDR_TC_54_57_forwardPosttoToGroupdnDrandnewconv() throws Exception {
+
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
+			String expWDpost3dotoptions = DriverSetUp.drdataMap.get("drexpected3dotsforPostinrightpanel");
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+
+			String forwardtomemebers = "hana@koraqa1.com";
+			koramessagedrpage.goToGroupAndPerforminWSDR("DoNotDeleteDRAuto", false, "");
+			String post = "forwardingpost" + korahomepage.runtimehhmmss();
+			koramessagespage.enterYourMessageAs(post);
+			koramessagedrpage.movetoaPostandClickon3dots("DoNotDeleteDRAuto", post, true);
+			// {post, newconversation,NA,NA}
+			koramessagedrpage.forwardPosttonewconvorexisting(post, forwardtomemebers, "NA", "NA");
+			koramessagedrpage.movetoaPostandClickon3dots("DoNotDeleteDRAuto", post, true);
+			// {post, NA,Discussion Room,NA} //
+			koramessagedrpage.forwardPosttonewconvorexisting(post, "NA", "DRDelete", "NA");
+			koramessagedrpage.movetoaPostandClickon3dots("DoNotDeleteDRAuto", post, true);
+			// {post, NA,NA,"Searchwith"}
+			koramessagedrpage.forwardPosttonewconvorexisting(post, "NA", "NA", "dileep@koraqa1.com");
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
+		}
+	}
 
 }
