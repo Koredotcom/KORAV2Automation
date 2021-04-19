@@ -1259,7 +1259,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		try {
 			boolean elementdisplayed = remoteDriver.findElements(By.xpath(er.kmlongtextreadmore)).size() > 0;
 			if (elementdisplayed) {
-				moveToElement(er.kmreadmore, "xpath");
+				/*moveToElement(er.kmreadmore, "xpath");
 				test.log(LogStatus.PASS, "For<b> Read more </b>cursor type displayed as Hand icon");
 				test.log(LogStatus.PASS,
 						"For long text, text got truncated and Read more text got displayed as below".toString()
@@ -1267,15 +1267,12 @@ public class KoraMessagesChatsPage extends PageBase {
 				moveToElement(er.kmreadmore, "xpath");
 				click(er.kmreadmore, "Read more on long text message");
 				Thread.sleep(1000);
-				// moveToElement(er.kmreadless, "xpath");
-				test.log(LogStatus.PASS, "For<b> Read less </b>cursor type displayed as Hand icon");
-				test.log(LogStatus.WARNING, "On click of Read more, Read less was displayed as below".toString()
-						+ test.addScreenCapture(takeScreenShot()));
-				// click(er.kmreadless, "Read less on long text message");
+				// moveToElement(er.kmreadless, "xpath");*/	
+			test.log(LogStatus.FAIL, "For long text <b> Read more </b> option is getting displayed".toString()+ test.addScreenCapture(takeScreenShot()));
 
 			} else {
-				test.log(LogStatus.FAIL,
-						"For long text, Read more , text truncation or Hand icon on Read more text is not getting displayed"
+				test.log(LogStatus.PASS,
+						"For long text, Read moreis not getting displayed, which is expected"
 								.toString() + test.addScreenCapture(takeScreenShot()));
 			}
 

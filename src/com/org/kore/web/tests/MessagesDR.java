@@ -58,7 +58,7 @@ public class MessagesDR extends DriverSetUp {
 	}
 
 	
-	/*@Test(enabled = true, priority = 23)
+	@Test(enabled = true, priority = 23)
 	public void MDR_TC1_TC2_TC3_TC65_createNewWorkspaceAndDelete() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -137,7 +137,7 @@ public class MessagesDR extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
 		}
-	}*/
+	}
 
 	@Test(enabled = true, priority = 26)
 	public void MDR_TC9_TC10_DefaultDRAndTimeline() throws Exception {

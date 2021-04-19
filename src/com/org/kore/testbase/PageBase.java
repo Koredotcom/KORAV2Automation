@@ -140,7 +140,7 @@ public class PageBase extends DriverSetUp {
 				} else {
 					System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("winchromeDriverPath"));
 					ChromeOptions options = new ChromeOptions();
-					options.addArguments("user-data-dir=/path/to/your/custom/profile");
+					// options.addArguments("user-data-dir=/path/to/your/custom/profile");
 					options.addArguments("--profile-directory=Default");
 					options.addArguments("--whitelisted-ips");
 					options.addArguments("--disable-plugins-discovery");
@@ -936,13 +936,23 @@ public class PageBase extends DriverSetUp {
 				appiumDriver.findElement(By.xpath(locator)).sendKeys(cred);
 				break;
 			case "Selenium":
+				
 
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 				remoteDriver.findElement(By.xpath(locator)).click();
 				WebElement ele = remoteDriver.findElement(By.xpath(locator));
+				
+				String os = System.getProperty("os.name");
+				if (os.equals("WINDOWS")){
 				ele.sendKeys(Keys.CONTROL + "a");
 				ele.sendKeys(Keys.DELETE);
+				}else{
+				ele.sendKeys(Keys.COMMAND + "a");
+				ele.sendKeys(Keys.DELETE);
+				}
+				/*ele.sendKeys(Keys.CONTROL + "a");
+				ele.sendKeys(Keys.DELETE);*/
 				remoteDriver.findElement(By.xpath(locator)).sendKeys(cred);
 				test.log(LogStatus.PASS, "Entered as " + cred + " in " + elementName + " ".toString()
 						+ test.addScreenCapture(takeScreenShot()));
