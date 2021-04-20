@@ -1169,12 +1169,13 @@ public class KoraMessagesChatsPage extends PageBase {
 	 * @throws Exception
 	 *             : Throws exception if fails
 	 */
+	//span[@class='msgText ']//div[@class='send-message'][text()='Hello Copy Me']
 	public void goToMessageAndPerformActionsAs(String message, String action, String subaction) throws Exception {
 		WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
 		try {
 			moveToElement(er.kmmessages + message + er.ksinglquote, "xpath");
 			Thread.sleep(1000);
-			moveToElement(er.kmmessagehoveroptiontitles + action + er.ksinglquote, "xpath");
+			moveToElement(er.kmmessages + message + er.ksinglquote+"/.."+er.kmmessagehoveroptiontitles+subaction+ er.ksinglquote,"xpath");
 			test.log(LogStatus.PASS, "For <b>" + message + "</b> on hover options displayed and focus moved to <b>"
 					+ action + "</b> as per below screenshot ".toString() + test.addScreenCapture(takeScreenShot()));
 			moveToElement(er.kmmessages + message + er.ksinglquote, "xpath");
@@ -1214,14 +1215,17 @@ public class KoraMessagesChatsPage extends PageBase {
 				System.out.println("In More i.e. 3dots");
 				click(er.kmmessagehover3dots, action + " on message hover");
 				Thread.sleep(1000);
-				click(er.kmmessagehovermorecopy, "xpath");
+			//	click("//div[@class='msgCntrlBar _content']//div[text()='Copy']", "xpath");
+				click(er.kmmessagehovermorecopy+subaction+er.ksinglquote, "xpath");
 				compose.click();
-				test.log(LogStatus.PASS, "Text copied successfully and about to paste the same ".toString()
+				test.log(LogStatus.WARNING, "Text<b> "+subaction+" </b> action success".toString()
 						+ test.addScreenCapture(takeScreenShot()));
+				if (subaction.equalsIgnoreCase("Copy")){
 				click("//span[text()='Paste']", "Paste option on compose bar");
 				compose.sendKeys(Keys.ENTER);
 				test.log(LogStatus.PASS,
 						"Same text pasted successfully".toString() + test.addScreenCapture(takeScreenShot()));
+				}
 				break;
 
 			default:
@@ -1231,7 +1235,7 @@ public class KoraMessagesChatsPage extends PageBase {
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"For a message either onhover options title is not displaying or failed to perform <b> " + action
+					"Fora message either onhover options title is not displaying or failed to perform <b> " + action
 							+ "</b> Action".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 

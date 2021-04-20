@@ -113,11 +113,11 @@ public class ElementRepository {
 		kmplaceholder = "//input[@class='searchInput fullWidth']";
 		kmsearchsuggestions = "//div[@class='p-menuitem-link']//div[@class='heroText']//*[text()='";
 		kmattachfromplus = "//span[@class='addIcon kr-plus']";
-		kmmessages = "//span[@class='msgText ']//span[text()='";
-		kmmessagehoveroptiontitles = "//div[@class='msgCntrlBar']/i[@title='";
-		kmmessagehover3dots = "//div[@class='msgCntrlBar']//i[@class='icon kr-ellipsis']";
-		kmmessagehoverreplyback = "//div[@class='msgCntrlBar']//i[@class='icon replyButton']";
-		kmmessagehovermorecopy = "//ul[@Class='msgOptions']//span[text()='Copy']";
+		kmmessages = "//span[@class='msgText ']//div[@class='send-message'][text()='";
+		kmmessagehoveroptiontitles = "//div[@class='msgCntrlBar _content']/i[@title='";
+		kmmessagehover3dots = "//div[@class='msgCntrlBar _content']//i[contains(@class,'icon __i kr-ellipsis')]";
+		kmmessagehoverreplyback = "//div[@class='msgCntrlBar _content']//i[@class='icon __i kr-return replyButton']";
+		kmmessagehovermorecopy = "//div[@class='msgCntrlBar _content']//div[text()='Copy']";
 		kmlongtextreadmore = "//span[@class='readMoreText'][text()='Read more']/..//span[@class='truncateText']";
 		kmreadmore = "//span[@class='readMoreText'][text()='Read more'][contains(@style,'cursor: pointer;')]";
 		kmreadless = "//span[@class='readMoreText'][text()='Read less'][contains(@style,'cursor: pointer;')]";
