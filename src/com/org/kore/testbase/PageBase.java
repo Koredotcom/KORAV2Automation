@@ -153,6 +153,7 @@ public class PageBase extends DriverSetUp {
 					options.setExperimentalOption("useAutomationExtension", false);
 					options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 					DesiredCapabilities cap = DesiredCapabilities.chrome();
+					cap.setCapability("ignoreZoomSetting", true);
 					cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 					cap.setCapability(ChromeOptions.CAPABILITY, options);
 					remoteDriver = new ChromeDriver(cap);
