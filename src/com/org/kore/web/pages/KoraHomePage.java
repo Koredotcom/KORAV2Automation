@@ -44,6 +44,9 @@ public class KoraHomePage extends PageBase {
 	public void selectMenuOption(String menuoption) throws Exception {
 		boolean flag = false;
 		waitTillappear(er.kheadermenu, "xpath", "Top header");
+		waitTillappear(er.kheadermenu, "xpath", "Top header");
+		waitTillappear(er.kheadermenu, "xpath", "Top header");
+		waitTillappear(er.kheadermenu, "xpath", "Top header");
 		System.out.println("Header menu displayed");
 		Thread.sleep(2000);
 		List<WebElement> Menulist = remoteDriver.findElements(By.xpath("//span[@class='menuTabs']/a"));
