@@ -44,7 +44,7 @@ public class CPCommonFunctions extends PageBase {
 			remoteDriver.get(url);			
 	//		remoteDriver.manage().window().maximize();
 			
-			Dimension d = new Dimension(800,1400);
+			Dimension d = new Dimension(768,1366);
 			remoteDriver.manage().window().setSize(d);
 			System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
 			System.out.println("After maximize Window width is: " + remoteDriver.manage().window().getSize().getWidth());
