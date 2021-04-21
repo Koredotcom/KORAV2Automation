@@ -318,7 +318,8 @@ public class PageBase extends DriverSetUp {
 
 			}
 		} catch (Exception exc) {
-			test.log(LogStatus.FAIL, exc + "Exception on  Element not present",
+			System.out.println("Waited for 3 minutes to disappear //div[@class='lds-ring'] and to get Home screen loaded");
+			test.log(LogStatus.FAIL, "Exception on  Element to get disappear from the screen even after 180 secs",
 					exc.toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
@@ -424,7 +425,7 @@ public class PageBase extends DriverSetUp {
 			}
 
 		} catch (Exception exc) {
-			System.out.println("Failed to find " + locator);
+			System.out.println("Failed to find " + locator+" i.e."+ elementName);
 			test.log(LogStatus.FAIL,
 					elementName + " element is not displayed ".toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);

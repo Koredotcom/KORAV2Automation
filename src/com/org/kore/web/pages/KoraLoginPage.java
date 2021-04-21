@@ -63,12 +63,14 @@ public class KoraLoginPage extends PageBase {
 		enterText(er.koenteremail, userName, "xpath", "Enter Email");
 		test.log(LogStatus.PASS, "Entered username".toString()+ test.addScreenCapture(takeScreenShot()));
 		click(er.kousernext, "UsrNext");
+		waitTillappear(er.kosignin, "xpath", "Signin in Password");
 		enterText(er.kpwd, password, "xpath", "Password");
 		test.log(LogStatus.PASS, "Entered Password".toString()+ test.addScreenCapture(takeScreenShot()));
 		click(er.kosignin, "Signin");
 		test.log(LogStatus.PASS, "Selected Sign In".toString()+ test.addScreenCapture(takeScreenShot()));
 		click(er.kstaysignin, "Stay Signin");
-		JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
+		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
+		/*JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
 		String result = js.executeScript("return document.readyState").toString();
 		int waitincreamental=1;
 		doloop: do {
@@ -81,7 +83,7 @@ public class KoraLoginPage extends PageBase {
 			waitincreamental++;
 			if(result.equals("complete"))
 				break doloop;
-		}while(waitincreamental <10||!result.equals("complete"));
+		}while(waitincreamental <10||!result.equals("complete"));*/
 		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName);
 				/*+ " ".toString()+ test.addScreenCapture(takeScreenShot()));*/
 

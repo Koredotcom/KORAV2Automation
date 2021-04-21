@@ -36,12 +36,15 @@ public class CPCommonFunctions extends PageBase {
 	public static Statement sta;
 	public static ResultSet rs;
 
-	public void launchSite(String url) {
+	public void launchSite(String url) throws Exception {
 		if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Appium")) {
 			appiumDriver.get(url);
 		} else if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Selenium")) {
 			remoteDriver.get(url);			
 			remoteDriver.manage().window().maximize();
+			waitUntilDissapear("//div[@class='lds-ring']", "Loading Indicator to load init elements");
+			System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
+			System.out.println("After maximize Window width is: " + remoteDriver.manage().window().getSize().getWidth());
 			JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
 			String result = js.executeScript("return document.readyState").toString();
 			int waitincreamental=1;
