@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -41,7 +42,12 @@ public class CPCommonFunctions extends PageBase {
 			appiumDriver.get(url);
 		} else if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Selenium")) {
 			remoteDriver.get(url);			
-			remoteDriver.manage().window().maximize();
+	//		remoteDriver.manage().window().maximize();
+			
+			Dimension d = new Dimension(657,1280);
+			remoteDriver.manage().window().setSize(d);
+			System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
+			System.out.println("After maximize Window width is: " + remoteDriver.manage().window().getSize().getWidth());
 			test.log(LogStatus.PASS, test.addScreenCapture(takeScreenShot()));
 			/*waitUntilDissapear("//div[@class='lds-ring']", "Loading Indicator to load init elements");
 			System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
