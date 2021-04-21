@@ -61,9 +61,9 @@ public class Messages121Test extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
+			/*korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.checkDefaultFocus_Recents();
+			koramessagespage.checkDefaultFocus_Recents();*/
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
@@ -73,7 +73,7 @@ public class Messages121Test extends DriverSetUp {
 		/*	@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
-			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+			test = extent.startTest(Thread.cu	rrentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			String url = DriverSetUp.propsMap.get("weburl");
