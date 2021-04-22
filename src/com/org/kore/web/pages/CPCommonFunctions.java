@@ -36,8 +36,9 @@ public class CPCommonFunctions extends PageBase {
 	public static Connection conn = null;
 	public static Statement sta;
 	public static ResultSet rs;
-
-	public void launchSite(String url) throws Exception {
+	
+	public void launchOtherSite(String url) throws Exception {
+		url ="https://www.w3schools.com/";
 		if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Appium")) {
 			appiumDriver.get(url);
 		} else if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Selenium")) {
@@ -47,7 +48,23 @@ public class CPCommonFunctions extends PageBase {
 			remoteDriver.manage().window().setSize(d);*/
 			System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
 			System.out.println("After maximize Window width is: " + remoteDriver.manage().window().getSize().getWidth());
-			/*waitUntilDissapear("//div[@class='lds-ring']", "Loading Indicator to load init elements");*/
+			waitUntilDissapear("//div[@class='lds-ring']", "Loading Indicator to load init elements");
+					Thread.sleep(3000);
+			test.log(LogStatus.INFO, "Launched "+url+" Successfully".toString(),test.addScreenCapture(takeScreenShot()));
+			System.out.println("Launched");
+		}
+
+	}
+
+	public void launchSite(String url) throws Exception {
+		if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Appium")) {
+			appiumDriver.get(url);
+		} else if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Selenium")) {
+			remoteDriver.get(url);			
+			remoteDriver.manage().window().maximize();
+			System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
+			System.out.println("After maximize Window width is: " + remoteDriver.manage().window().getSize().getWidth());
+			waitUntilDissapear("//div[@class='lds-ring']", "Loading Indicator to load init elements");
 			JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
 			String result = js.executeScript("return document.readyState").toString();
 			int waitincreamental=1;

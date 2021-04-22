@@ -93,8 +93,12 @@ public class KoraLoginPage extends PageBase {
 		return username;
 	}
 	
+	public void launchw3(String url, String userName, String password) throws Exception {
+		cf.launchOtherSite(url);
+	}
+	
 	public void loginToKora(String url, String userName, String password) throws Exception {
 		cf.launchSite(url);
-		//signInWithO365(userName, password);
+		signInWithO365(userName, password);
 	}
 }
