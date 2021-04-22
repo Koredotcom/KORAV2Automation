@@ -2,7 +2,7 @@
 	"QA": {
 		"browser": "chrome",
 		"weburls": "https://developer.servicenow.com/dev.do#!/home",
-		"weburl": "https://www.thesaurus.com/",
+		"weburl": "https://workassist-dev.kore.ai/",
 		"tool": "Selenium"
 	},
 	"Dev": {

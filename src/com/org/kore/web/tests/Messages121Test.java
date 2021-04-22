@@ -61,9 +61,9 @@ public class Messages121Test extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
-			/*korahomepage.selectMenuOption(Messages);
+			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.checkDefaultFocus_Recents();*/
+			koramessagespage.checkDefaultFocus_Recents();
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
