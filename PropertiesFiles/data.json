@@ -2,7 +2,7 @@
 	"QA": {
 		"browser": "chrome",
 		"weburls": "https://developer.servicenow.com/dev.do#!/home",
-		"weburl": "https://workassist-dev.kore.ai/",
+		"weburl": "https://www.w3schools.com/howto/howto_css_example_website.asp",
 		"tool": "Selenium"
 	},
 	"Dev": {

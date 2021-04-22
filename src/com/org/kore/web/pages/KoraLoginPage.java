@@ -70,20 +70,6 @@ public class KoraLoginPage extends PageBase {
 		test.log(LogStatus.PASS, "Selected Sign In".toString()+ test.addScreenCapture(takeScreenShot()));
 		click(er.kstaysignin, "Stay Signin");
 		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
-		/*JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
-		String result = js.executeScript("return document.readyState").toString();
-		int waitincreamental=1;
-		doloop: do {
-			try {
-				Thread.sleep(6000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			waitincreamental++;
-			if(result.equals("complete"))
-				break doloop;
-		}while(waitincreamental <10||!result.equals("complete"));*/
 		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName);
 				/*+ " ".toString()+ test.addScreenCapture(takeScreenShot()));*/
 
@@ -109,6 +95,6 @@ public class KoraLoginPage extends PageBase {
 	
 	public void loginToKora(String url, String userName, String password) throws Exception {
 		cf.launchSite(url);
-		signInWithO365(userName, password);
+		//signInWithO365(userName, password);
 	}
 }

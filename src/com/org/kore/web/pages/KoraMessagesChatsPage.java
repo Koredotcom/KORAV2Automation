@@ -1285,4 +1285,22 @@ public class KoraMessagesChatsPage extends PageBase {
 					+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
+	
+	public void validateChatsAndDRS(boolean chats, boolean dr) throws Exception {
+		boolean onlychats = false;
+		boolean onlydrs = false;
+		
+		if (chats){
+			onlychats = remoteDriver.findElements(By.xpath("//div[@class='userDetails chat']"))
+					.size() > 0;
+		}else if (dr){
+			onlydrs = remoteDriver.findElements(By.xpath("//div[@class='userDetails discussion']"))
+					.size() > 0;
+		}else if (chats&&dr){
+			
+		}
+
+		
+		
+	}
 }

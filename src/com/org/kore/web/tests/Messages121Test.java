@@ -61,9 +61,9 @@ public class Messages121Test extends DriverSetUp {
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
+			/*korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.checkDefaultFocus_Recents();
+			koramessagespage.checkDefaultFocus_Recents();*/
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
@@ -187,5 +187,24 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Emojis with text");
 		}
-	}*/
+	}
+		@Test(enabled = true, priority = 6)
+		public void MC_TC38_checkChatsUnderChatsAndNotDRS() throws Exception {
+			try {
+				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+						.assignCategory("WorkAssist_Messages_Chats");
+				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+				String url = DriverSetUp.propsMap.get("weburl");
+				String Messages = DriverSetUp.testdataMap.get("messages");
+
+				test.log(LogStatus.INFO, "Navigation url :" + url);
+				korahomepage.selectMenuOption(Messages);
+				korahomepage.selectTopLeftMenuOption("Chats");
+				
+				extent.endTest(test);
+			} catch (Exception e) {
+				test.log(LogStatus.FAIL, "Failed to validate Emojis with text");
+			}
+		}*/
 }

@@ -47,10 +47,7 @@ public class CPCommonFunctions extends PageBase {
 			remoteDriver.manage().window().setSize(d);*/
 			System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
 			System.out.println("After maximize Window width is: " + remoteDriver.manage().window().getSize().getWidth());
-			test.log(LogStatus.PASS, test.addScreenCapture(takeScreenShot()));
-			waitUntilDissapear("//div[@class='lds-ring']", "Loading Indicator to load init elements");
-			System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
-			System.out.println("After maximize Window width is: " + remoteDriver.manage().window().getSize().getWidth());
+			/*waitUntilDissapear("//div[@class='lds-ring']", "Loading Indicator to load init elements");*/
 			JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
 			String result = js.executeScript("return document.readyState").toString();
 			int waitincreamental=1;
@@ -63,7 +60,8 @@ public class CPCommonFunctions extends PageBase {
 				waitincreamental++;
 				if(result.equals("complete"))
 					break doloop;
-			}while(waitincreamental <10||!result.equals("complete"));		
+			}while(waitincreamental <10||!result.equals("complete"));
+			test.log(LogStatus.INFO, test.addScreenCapture(takeScreenShot()));
 			System.out.println("Launched");
 		}
 
