@@ -312,15 +312,15 @@ public class PageBase extends DriverSetUp {
 				break;
 			case "Selenium":
 
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 180, 500);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 120, 500);
 				waitSelenium.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
 				break;
 
 			}
 		} catch (Exception exc) {
-			System.out.println("Waited for 3 minutes to disappear //div[@class='lds-ring'] and to get Home screen loaded");
-			test.log(LogStatus.FAIL, "Exception on  Element to get disappear from the screen even after 180 secs",
-					exc.toString() + test.addScreenCapture(takeScreenShot()));
+			System.out.println("Waited for 2 minutes to disappear //div[@class='lds-ring'] and to get Home screen loaded");
+			test.log(LogStatus.FAIL, "Exception on  Element to get disappear from the screen even after 120 secs"
+					.toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
 	}
