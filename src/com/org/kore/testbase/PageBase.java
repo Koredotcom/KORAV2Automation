@@ -150,8 +150,8 @@ public class PageBase extends DriverSetUp {
 					//options.addArguments("--start-fullscreen");
 					//options.addArguments("window-size=1366,657");
 					//options.addArguments("- chrome.exe --ash-host-window-bounds=800x500");
-					options.setExperimentalOption("useAutomationExtension", false);
-					options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+					//options.setExperimentalOption("useAutomationExtension", false);
+					//options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 					DesiredCapabilities cap = DesiredCapabilities.chrome();
 					cap.setCapability("ignoreZoomSetting", true);
 					cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
@@ -946,7 +946,7 @@ public class PageBase extends DriverSetUp {
 				WebElement ele = remoteDriver.findElement(By.xpath(locator));
 				
 				String os = System.getProperty("os.name");
-				if (os.equals("WINDOWS")){
+				if (os.equalsIgnoreCase("WINDOWS")){
 				ele.sendKeys(Keys.CONTROL + "a");
 				ele.sendKeys(Keys.DELETE);
 				}else{
@@ -1403,6 +1403,16 @@ public class PageBase extends DriverSetUp {
 		scrollObject.put("element", elementID);
 		scrollObject.put("direction", "down");
 		appiumDriver.executeScript("mobile:scroll", scrollObject);
+	}
+	
+	public void getCoordinates(String element) throws Exception {
+		WebElement ele = remoteDriver.findElement(By.xpath(element));
+		// Used points class to get x and y coordinates of element.
+		Point classname = ele.getLocation();
+		int xcordi = classname.getX();
+		System.out.println("Element's Position from left side" + xcordi + " pixels.");
+		int ycordi = classname.getY();
+		System.out.println("Element's Position from top" + ycordi + " pixels.");
 	}
 
 }

@@ -425,13 +425,15 @@ public class KoraMessagesDRPage extends PageBase {
 			click(er.kmcplusicon, "Plus icon to start new Dsicussion Room");
 			if(getAttributeValue(er.kdSearchboxinmsgnDR, "placeholder").equalsIgnoreCase("Search Messages")) 
 				click(er.kmdiscussion, "Create a Discussion Room");
-
-			if(cf.elementIsDisplayed(er.kdselectworkspace, "xpath"))
-			{
-				click(er.kdselectworkspace, "Clicking on Select workspace ");
-				click(er.kdtoggleicontoselectWS , "Clicking on  breadcrumb");
-				click("//span[@class='hamMenuWSName' and text()='"+workspacename+"']", "Selecting Workspace  "+workspacename);
+			if(!workspacename.contains("NA")) {
+				if(cf.elementIsDisplayed(er.kdselectworkspace, "xpath"))
+				{
+					click(er.kdselectworkspace, "Clicking on Select workspace ");
+					click(er.kdtoggleicontoselectWS , "Clicking on  breadcrumb");
+					click("//span[@class='hamMenuWSName' and text()='"+workspacename+"']", "Selecting Workspace  "+workspacename);
+				}
 			}
+
 			click(er.kddiscussionTitle, "Clicking on Discussion Room title ");
 			enterText(er.kddiscussionTitle, NewDRname, "Discussion Room Title as "+NewDRname);
 			moveToElement(er.kmcenterparticipant, "xpath");
@@ -450,7 +452,6 @@ public class KoraMessagesDRPage extends PageBase {
 			Thread.sleep(2000);
 
 			System.out.println("------------ Selecting Access Type -------");
-
 			click(er.kdrsettings, "Clicking on Setting icon in Right Side panel While creating DR");		
 			//Validating  Everyone at No workspace is displayed and its on or Off
 			if(cf.elementIsDisplayed(er.kdeveryoneAtnoWorkspace, "xpath"))
@@ -479,7 +480,7 @@ public class KoraMessagesDRPage extends PageBase {
 			click(er.kdrsettings, "Clicking on Setting icon in Right Side panel After creating DR and Setting Access Type");
 			System.out.println("----- Entering Data to Disucssion Room ---");
 			click(er.kcomposebar, "Clicking on Compose Bar");		
-			koramessagespage.enterYourMessageAs("New Created Discusion Room By me");											
+			koramessagespage.enterYourMessageAs("Newely Created Discusion Room "+NewDRname);											
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
@@ -594,7 +595,7 @@ public class KoraMessagesDRPage extends PageBase {
 
 
 	public void movetoaPostandClickon3dots(String discRoom,String posttoforward,boolean threedots) throws Exception
-	{
+	{		
 		moveToElement(er.kdrpostname0+discRoom+er.kdrpostname1+posttoforward+er.ksinglquote,"xpath");
 		click(er.kdrpostname0+ discRoom + er.kdrpostname1+ posttoforward+ er.ksinglquote, "Click on post ");
 		Thread.sleep(3000);
@@ -710,4 +711,54 @@ public class KoraMessagesDRPage extends PageBase {
 		}
 	}
 
+	public void selectoptionsfrom3dotsinRightPanelinDR(String discRoom, String Option) throws Exception
+	{		
+		moveToElement(er.kdrManageRoom3dots0+discRoom+er.kdrManageRoom3dots1,"xpath");
+		click(er.kdrManageRoom3dots0+discRoom+er.kdrManageRoom3dots1, "Click on 3 dots in Right Panel on DR ");
+		Thread.sleep(3000);
+		
+		/*{
+			click(er.kdrpostname0 + discRoom+er.kdrpostname1+posttoforward+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",
+					"Click on 3dits options to ");
+			Thread.sleep(3000);
+		}*/
+		
+		//  //*[text()='Mark as unread']/i
+		
+		// Click on Memebers
+		
+		//ul[@class='nav tab-header']/li[2]/div
+		
+		
+		// Members list 
+		//  //div[@class='membersCntrBody']/ul
+		
+		
+		//div[@class='memberDetails']/div[1]//div[contains(text(),'james@koraqa1.com')]
+		
+		
+		// to click on remove the person 
+		//div[@class='memberDetails']/div[1]//div[contains(text(),'hana@koraqa1.com')]/..//../div[@class='right']/div
+		
+		
+		//remove
+		//div[@class='userRoleDropDownMenu']/ul/li[@class='remove']
+		//span[@class='p-button-text p-c' and text()='Remove']
+		
+		// Adding additional people
+		
+		
+		//input[contains(@placeholder,'Type and select people')]
+		
+		
+		
+		
+//		kdfowradpostWindowclose
+		
+		
+		
+		
+		
+	}	
+	
 }

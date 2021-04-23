@@ -24,21 +24,22 @@ public class ElementRepository {
 			kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null, kmcfirstactiveuser = null,
 			kmcactivebackground = null, kmdiscussion = null, kmplaceholder = null, kmsearchsuggestions = null,
 			kmattachfromplus = null, kmmessages = null, kmmessagehoveroptiontitles = null, kmmessagehover3dots = null,
-			kmmessagehoverreplyback = null, kmmessagehovermorecopy = null, kmlongtextreadmore = null, kmreadmore = null,
-			kmreadless = null, kmemoji = null, kmsmiley = null, kwfilterbyws = null, kwplusicon = null,
-			kwcreatenew = null, kwjoinexisting = null, kworkplaceholder = null, kwdefaulworkspace = null,
-			kwdrheader = null, kworkspaces = null, kwdrgeneral = null, kworkspacename = null, kwleft3dots = null,
-			kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null, kwdeletewsname = null,
-			kwproceedDelete = null, kwcomposebar = null, kwinvite = null, kwsearchandaddpeople = null,
-			kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null, kwmemslist = null,
-			kdrcidgroup = null, kdrc3dotoptionsRightPanel = null, kdrc3dotoptionsRightPanelOptions = null,
-			kdrpostname0 = null, kdrpostname1 = null, kdrsettings = null, kdeveryoneAtnoWorkspace = null,
-			kdselectworkspace = null, kdtoggleicontoselectWS = null, kddiscussionTitle = null, kddefaultAccessto = null,
-			kdSearchboxinmsgnDR = null, kuserProfileUserName = null, kmdmsgordiscroom = null, kdeditpost = null,
-			kdeditpostcomposebar = null, kdforwardpost = null, kdfowradpostWindow = null,
-			kdfrwrdpostConversationname = null, kdfowradpostWindowclose = null, kdstartnewconversation = null,
-			kdselectpeopleinnewconv = null, kdemailaddresstoselect = null, kdcreatenforwardpost = null,
-			kdsearchbarinforwardpost = null, kdsearchresultsforwardpost = null, kdrsearchresultsfirstsenditem = null;;
+			kmmessagehoverreplyback = null, kmmessagehovermoreoptions = null, kmlongtextreadmore = null,
+			kmreadmore = null, kmreadless = null, kmemoji = null, kmsmiley = null, kwfilterbyws = null,
+			kwplusicon = null, kwcreatenew = null, kwjoinexisting = null, kworkplaceholder = null,
+			kwdefaulworkspace = null, kwdrheader = null, kworkspaces = null, kwdrgeneral = null, kworkspacename = null,
+			kwleft3dots = null, kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null,
+			kwdeletewsname = null, kwproceedDelete = null, kwcomposebar = null, kwinvite = null,
+			kwsearchandaddpeople = null, kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null,
+			kwmemslist = null, kdrcidgroup = null, kdrc3dotoptionsRightPanel = null,
+			kdrc3dotoptionsRightPanelOptions = null, kdrpostname0 = null, kdrpostname1 = null, kdrsettings = null,
+			kdeveryoneAtnoWorkspace = null, kdselectworkspace = null, kdtoggleicontoselectWS = null,
+			kddiscussionTitle = null, kddefaultAccessto = null, kdSearchboxinmsgnDR = null, kuserProfileUserName = null,
+			kmdmsgordiscroom = null, kdeditpost = null, kdeditpostcomposebar = null, kdforwardpost = null,
+			kdfowradpostWindow = null, kdfrwrdpostConversationname = null, kdfowradpostWindowclose = null,
+			kdstartnewconversation = null, kdselectpeopleinnewconv = null, kdemailaddresstoselect = null,
+			kdcreatenforwardpost = null, kdsearchbarinforwardpost = null, kdsearchresultsforwardpost = null,
+			kdrsearchresultsfirstsenditem = null, kdrManageRoom3dots0 = null, kdrManageRoom3dots1 = null;
 
 	public void repoIOS() {
 
@@ -104,7 +105,7 @@ public class ElementRepository {
 		kmcmanageclose = "//button[@aria-label='Close']";
 		kmcmembername = "//span[text()='Member']/../../..//div[@class='emailUi']";
 		kmcmuteslots = "//div[@class='dorpDownBoxMute msgThreadDD']//li[@class='dorpDownBoxLI']";
-		kmcactiveusericon = "//div[@class='userDetails active']//span[@class='nameAvatar single']";
+		kmcactiveusericon = "//div[@class='userDetails active chat']//span[@class='nameAvatar single']";
 		kmcrightchaticon = "//span[@class='chatUserIcon']";
 		kmcatmentionusernames = "//table[@class='mentionDialogBoxTable']//span[@class='mentionFullName']";
 		kmcmessagebubbles = "//div[@class='sendBubble messageBubble saveMsg']";
@@ -117,7 +118,7 @@ public class ElementRepository {
 		kmmessagehoveroptiontitles = "//div[@class='msgCntrlBar _content']/i[@title='";
 		kmmessagehover3dots = "//div[@class='msgCntrlBar _content']//i[contains(@class,'icon __i kr-ellipsis')]";
 		kmmessagehoverreplyback = "//div[@class='msgCntrlBar _content']//i[@class='icon __i kr-return replyButton']";
-		kmmessagehovermorecopy = "//div[@class='msgCntrlBar _content']//div[text()='Copy']";
+		kmmessagehovermoreoptions = "//div[@class='msgCntrlBar _content']//div[text()='";
 		kmlongtextreadmore = "//span[@class='readMoreText'][text()='Read more']/..//span[@class='truncateText']";
 		kmreadmore = "//span[@class='readMoreText'][text()='Read more'][contains(@style,'cursor: pointer;')]";
 		kmreadless = "//span[@class='readMoreText'][text()='Read less'][contains(@style,'cursor: pointer;')]";
@@ -153,7 +154,7 @@ public class ElementRepository {
 		kdrc3dotoptionsRightPanel = "//div[@class='chatHeader']//span[text()='";
 		kdrc3dotoptionsRightPanelOptions = "//div[contains(@class, 'krDropDownMenu chatHeaderOptions')]//div";
 		kdrpostname0 = "//p[@class='chatUserTitle']/span[text()='";
-		kdrpostname1 = "']/../../../../../..//div[@class='dicussionPostMessage']/span[@class='truncateText' and text()='";
+		kdrpostname1 = "']/../../../../../..//div[@class='dicussionPostMessage']/span[text()='";
 		kdrsettings = "//span[@id='my']//i[contains(@class,'icon kr-settings')]";
 		kdeveryoneAtnoWorkspace = "//span[@class='ddNoteMsg']";
 		kdselectworkspace = "//span[text()='Select Workspace']";
@@ -176,6 +177,8 @@ public class ElementRepository {
 		kdsearchbarinforwardpost = "//input[@class='searchInput' and @placeholder='Search people, chats & rooms']";
 		kdsearchresultsforwardpost = "//div[@class='existingThreadList']/ul";
 		kdrsearchresultsfirstsenditem = "//div[@class='existingThreadList']/ul[1]/li[1]/div[2]/button";
+		kdrManageRoom3dots0 = "//p[@class='chatUserTitle']/span[text()='";
+		kdrManageRoom3dots1 = "']/../../../../..//i[@class='p-icon _choI kr-ellipsis']";
 
 	}
 

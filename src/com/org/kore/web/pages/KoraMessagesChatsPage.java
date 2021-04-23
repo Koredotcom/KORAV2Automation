@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.org.kore.element.repository.ElementRepository;
@@ -297,7 +299,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		String actbckgclr = null;
 		try {
 			String cted = "rgba(231, 241, 255, 1)";
-			actbckgclr = remoteDriver.findElement(By.xpath("//div[@class='userDetails active']"))
+			actbckgclr = remoteDriver.findElement(By.xpath("//div[@class='userDetails active chat']"))
 					.getCssValue("background-color");
 			if (cted.equals(actbckgclr)) {
 				test.log(LogStatus.PASS, "Active thread highlighted in light color with RGBA values as : " + cted);
@@ -866,7 +868,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		String actfirstchar = getText(er.kmcactiveusericon);
 		moveToElement(er.kmcactiveusericon, "xpath");
 		Thread.sleep(2000);
-		String onhovericon = getText("//div[@class='userDetails active']//span[@class='nameAvatar single']", "xpath");
+		String onhovericon = getText(er.kmcactiveusericon, "xpath");
 
 		if (expfirstchar.equals(actfirstchar) && (expfirstchar.equals(onhovericon))) {
 			test.log(LogStatus.PASS,
@@ -1170,15 +1172,17 @@ public class KoraMessagesChatsPage extends PageBase {
 	 *             : Throws exception if fails
 	 */
 	//span[@class='msgText ']//div[@class='send-message'][text()='Hello Copy Me']
-	public void goToMessageAndPerformActionsAs(String message, String action, String subaction) throws Exception {
+	public void goToMessageAndPerformActionsAs(String user, String message, String action, String subaction)
+			throws Exception {
 		WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
 		try {
+			Thread.sleep(3000);
 			moveToElement(er.kmmessages + message + er.ksinglquote, "xpath");
 			Thread.sleep(1000);
-			moveToElement(er.kmmessages + message + er.ksinglquote+"/.."+er.kmmessagehoveroptiontitles+subaction+ er.ksinglquote,"xpath");
+			moveToElement(er.kmmessages + message + er.ksinglquote + "/.." + er.kmmessagehoveroptiontitles + action
+					+ er.ksinglquote, "xpath");
 			test.log(LogStatus.PASS, "For <b>" + message + "</b> on hover options displayed and focus moved to <b>"
 					+ action + "</b> as per below screenshot ".toString() + test.addScreenCapture(takeScreenShot()));
-			moveToElement(er.kmmessages + message + er.ksinglquote, "xpath");
 			Thread.sleep(1000);
 			switch (action.trim()) {
 			case "Reactions":
@@ -1212,20 +1216,37 @@ public class KoraMessagesChatsPage extends PageBase {
 				break;
 
 			case "More":
-				System.out.println("In More i.e. 3dots");
-				click(er.kmmessagehover3dots, action + " on message hover");
+				System.out.println("In messge on hover 3dots ");
+				click("//p[@class='chatUserTitle']/span[text()='" + user
+						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
+						+ "']/..//i[contains(@class,'icon __i kr-ellipsis')]", action + " on message hover");
 				Thread.sleep(1000);
-			//	click("//div[@class='msgCntrlBar _content']//div[text()='Copy']", "xpath");
-				click(er.kmmessagehovermorecopy+subaction+er.ksinglquote, "xpath");
-				compose.click();
-				test.log(LogStatus.WARNING, "Text<b> "+subaction+" </b> action success".toString()
+				click(er.kmmessagehovermoreoptions + subaction + er.ksinglquote, "xpath");
+				test.log(LogStatus.PASS, "Text<b> " + subaction + " </b> action success".toString()
 						+ test.addScreenCapture(takeScreenShot()));
-				if (subaction.equalsIgnoreCase("Copy")){
-				click("//span[text()='Paste']", "Paste option on compose bar");
-				compose.sendKeys(Keys.ENTER);
-				test.log(LogStatus.PASS,
-						"Same text pasted successfully".toString() + test.addScreenCapture(takeScreenShot()));
+				if (subaction.equalsIgnoreCase("Copy")) {
+					compose.click();
+					click("//span[text()='Paste']", "Paste option on compose bar");
+					compose.sendKeys(Keys.ENTER);
+					test.log(LogStatus.PASS,
+							"Same text pasted successfully".toString() + test.addScreenCapture(takeScreenShot()));
+				} else if (subaction.equalsIgnoreCase("Edit")) {
+					boolean editedonmessage = false;
+					compose.click();
+					compose.sendKeys("Edited", Keys.ENTER);
+					if (editedonmessage = remoteDriver.findElements(By
+							.xpath("//span[@class='editedText']//span[text() = 'Edited']/../../..//div[@class='send-message'][text() ='"
+									+ message + "Edited" + "']"))
+							.size() > 0) {
+						test.log(LogStatus.PASS,
+								"Text got edited".toString() + test.addScreenCapture(takeScreenShot()));
+					} else {
+						test.log(LogStatus.FAIL,
+								"Seems Text got edited butt, Edited water mark text is not available on top of the edited text"
+										.toString() + test.addScreenCapture(takeScreenShot()));
+					}
 				}
+
 				break;
 
 			default:
@@ -1287,20 +1308,44 @@ public class KoraMessagesChatsPage extends PageBase {
 	}
 	
 	public void validateChatsAndDRS(boolean chats, boolean dr) throws Exception {
+		try{
 		boolean onlychats = false;
 		boolean onlydrs = false;
 		
-		if (chats){
-			onlychats = remoteDriver.findElements(By.xpath("//div[@class='userDetails chat']"))
-					.size() > 0;
-		}else if (dr){
-			onlydrs = remoteDriver.findElements(By.xpath("//div[@class='userDetails discussion']"))
-					.size() > 0;
+		onlychats = remoteDriver.findElements(By.xpath("//div[@class='userDetails chat']"))
+				.size() > 0;
+		onlydrs = remoteDriver.findElements(By.xpath("//div[@class='userDetails discussion']"))
+						.size() > 0;
+		
+		if ((chats)&&(!dr)){
+			if ((chats&&onlychats)&&((chats&&(!onlydrs)))){
+				test.log(LogStatus.PASS, "Under chats, only chats are being displayed".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+			}else{
+				test.log(LogStatus.PASS, "Under chats, it displayes chats and DR's or instead of chats it dislayes DR's".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+			}
+		}else if ((!chats)&&(dr)){
+			if ((dr&&onlydrs)&&((dr&&(!onlychats)))){
+				test.log(LogStatus.PASS, "Under DR, only DR's are being displayed".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+			}else{
+				test.log(LogStatus.PASS, "Under DR, it displayes DR and chats or instead of DR it dislayes Chats".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+			}
+			
 		}else if (chats&&dr){
+			if (onlychats&&onlydrs){
+				test.log(LogStatus.PASS, "Under All messages, Displayed both chats and Dr's".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+			}else{
+				test.log(LogStatus.PASS, "Under All messages, Displayed either only chats nor only DR's but not both. It should display both".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+			}
 			
 		}
-
-		
-		
+	}catch (Exception e){
+		System.out.println("Retry");
+	}
 	}
 }

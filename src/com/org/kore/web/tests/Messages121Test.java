@@ -60,7 +60,7 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-		//	koraloginpage.launchw3(url, korajusername, korajpassword);
+			koraloginpage.launchw3(url, korajusername, korajpassword);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
@@ -71,10 +71,10 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-		/*	@Test(enabled = true, priority = 2)
+	/*	@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
-			test = extent.startTest(Thread.cu	rrentThread().getStackTrace()[1].getMethodName())
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -88,8 +88,8 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate user suggestion validation");
 		}
 	}
-			@Test(enabled = true, priority = 3)
-	public void MC_TC8_TC9_TC24_OneToOneConv_3dotOptions() throws Exception {
+		@Test(enabled = true, priority = 3)
+	public void MC_TC8_TC9_TC24_TC46_OneToOneConvEdit_3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -101,20 +101,24 @@ public class Messages121Test extends DriverSetUp {
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 			String expbgclr= DriverSetUp.testdataMap.get("expectedlabelbackground");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
-			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			String updatedstr=onetoonetext+korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
 			koramessagespage.getActiveLabelBackgroundColor(expbgclr);
 			koramessagespage.userProfileIconValidation(user);
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
 			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions,"middle");
+			koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr, "More", "Edit");
+			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
 		}
 	}
-			 @Test(enabled = true, priority = 4)
-	public void MC_TC12_DeleteAndCheckActiveParticipant() throws Exception {
+		@Test(enabled = true, priority = 4)
+	public void MC_TC12_TC34_TC35_DeleteAndCheckActiveParticipant_CopyNReplyback() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -128,17 +132,19 @@ public class Messages121Test extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
-			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			String updatedstr=onetoonetext+korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
 			koramessagespage.getFirstActiveUser(user, true);
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Delete Conversation");
 			korahomepage.clickOn("Delete", true);
 			koramessagespage.getFirstActiveUser(user, false);
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
-			user = koramessagespage.enterYourMessageAs(msgtocopy);
+			String updatedstr1=onetoonetext+korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr1);
 			koramessagespage.getFirstActiveUser(user, true);
-			koramessagespage.goToMessageAndPerformActionsAs(msgtocopy, "More", "Copy");
-			koramessagespage.goToMessageAndPerformActionsAs(msgtocopy, "Reply Back", "NA");
+			koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr1, "More", "Copy");
+			koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr1, "Reply Back", "NA");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
@@ -170,7 +176,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 6)
+		@Test(enabled = true, priority = 6)
 	public void MC_TC10_enterTextWithEmoji() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -189,8 +195,8 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate Emojis with text");
 		}
 	}
-		@Test(enabled = true, priority = 6)
-		public void MC_TC38_checkChatsUnderChatsAndNotDRS() throws Exception {
+		@Test(enabled = true, priority = 7)
+	public void MC_TC38_checkChatsDRSAndAllMessagesSections() throws Exception {
 			try {
 				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 						.assignCategory("WorkAssist_Messages_Chats");
@@ -202,10 +208,14 @@ public class Messages121Test extends DriverSetUp {
 				test.log(LogStatus.INFO, "Navigation url :" + url);
 				korahomepage.selectMenuOption(Messages);
 				korahomepage.selectTopLeftMenuOption("Chats");
-				
+				koramessagespage.validateChatsAndDRS(true,false);
+				korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+				koramessagespage.validateChatsAndDRS(false,true);
+				korahomepage.selectTopLeftMenuOption("All Messages");
+				koramessagespage.validateChatsAndDRS(true,true);
 				extent.endTest(test);
 			} catch (Exception e) {
-				test.log(LogStatus.FAIL, "Failed to validate Emojis with text");
+				test.log(LogStatus.FAIL, "Failed to validate Chats, DR's and All Message sections");
 			}
 		}*/
 }

@@ -46,7 +46,6 @@ public class KoraHomePage extends PageBase {
 		waitTillappear(er.kheadermenu, "xpath", "Top header");
 		waittillpageload();
 		System.out.println("Header menu displayed");
-		Thread.sleep(2000);
 		List<WebElement> Menulist = remoteDriver.findElements(By.xpath("//span[@class='menuTabs']/a"));
 		for (WebElement e : Menulist) {
 			if (e.getText().trim().equalsIgnoreCase(menuoption)) {
@@ -257,14 +256,14 @@ public class KoraHomePage extends PageBase {
 		int waitincreamental=1;
 		doloop: do {
 			try {
-				Thread.sleep(7000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			waitincreamental++;
 			if(result.equals("complete"))
 				break doloop;
-		}while(waitincreamental <10||!result.equals("complete"));
+		}while(waitincreamental <15||!result.equals("complete"));
 	}
 
 }
