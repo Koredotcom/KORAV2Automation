@@ -1,5 +1,6 @@
 package com.org.kore.web.tests;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -52,7 +53,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		directory = System.getProperty("user.dir");
 	}
 
-	@Test(enabled = true, priority = 21)
+	/*@Test(enabled = true, priority = 21)
 	public void MC_TC11_TC30_uploadFileBelow25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -94,10 +95,10 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to attach different file formats for 1to1 conversation");
 		}
-	}
+	}*/
 	
 	@Test(enabled = true, priority = 22)
-	public void MC_TC31_uploadMultipleFiles() throws Exception {
+	public void MC_TC31_TC49_uploadMultipleFilesAndView() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -110,15 +111,21 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			String allfileexe = DriverSetUp.UtilityMap.get("allfilesexe");
 			String allfiles=directory + allfileexe;
 			
+			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
+			String doc=directory + insertdoc;
+			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			
+			korahomepage.uploadfilesfromAttachment(doc,true, "doc file");
 			korahomepage.uploadfilesfromAttachment(allfiles,true, "Multiple file formats");
-			
-			
+			koramessagespage.selectOptionFromRightNav3Dots(user, "View Files");
 			extent.endTest(test);
+			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to attach multiple files for 1to1 conversation");
 		}
@@ -145,6 +152,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			koramessagespage.startNewConversationWith("chat",recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			korahomepage.uploadfilesfromAttachment(allfiles,true, "Beyond 25 MB file");
+			
 			
 			extent.endTest(test);
 		} catch (Exception e) {

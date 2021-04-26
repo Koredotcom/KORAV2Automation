@@ -1172,6 +1172,7 @@ public class KoraMessagesChatsPage extends PageBase {
 	 *             : Throws exception if fails
 	 */
 	//span[@class='msgText ']//div[@class='send-message'][text()='Hello Copy Me']
+	//span[@class='msgText ']//div[@class='send-message'][text()='Hello Copy Me']/..//div[@class='msgCntrlBar _content']/i[@title='
 	public void goToMessageAndPerformActionsAs(String user, String message, String action, String subaction)
 			throws Exception {
 		WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
@@ -1187,20 +1188,39 @@ public class KoraMessagesChatsPage extends PageBase {
 			switch (action.trim()) {
 			case "Reactions":
 				System.out.println("In Reactions");
-				click(er.kmmessagehoveroptiontitles + action + er.ksinglquote, action + " on message hover");
+				
+				click("//p[@class='chatUserTitle']/span[text()='" + user
+						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
+						+ "']/..//div[@class='msgCntrlBar _content']//i[@title='"+subaction+"']", action + " on message hover");
+				
+				String reactioncount=getText("//p[@class='chatUserTitle']/span[text()='" + user+"']/../../../../../..//div[@class='send-message' and text()='"+message+"']/..//div[@class='msgCntrlBar _content']/../../../..//div[@class='count']");
+				if (reactioncount.equals("1")){
+					test.log(LogStatus.WARNING, "Reaction count was 1".toString()
+							+ test.addScreenCapture(takeScreenShot()));	
+				}else {
+					test.log(LogStatus.WARNING, "Reaction count was not reflected".toString()
+							+ test.addScreenCapture(takeScreenShot()));	
+				}
+				
 				Thread.sleep(1000);
 				break;
 
 			case "Reply Back":
 				System.out.println("In Reply back");
-				click(er.kmmessagehoverreplyback, action + " on message hover");
+			//	click(er.kmmessagehoverreplyback, action + " on message hover");
+				click("//p[@class='chatUserTitle']/span[text()='" + user
+						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
+						+ "']/..//div[@class='msgCntrlBar _content']//i[@class='icon __i kr-return replyButton']", action + " on message hover");
 				Thread.sleep(1000);
 				compose.click();
 				test.log(LogStatus.PASS, "Selected Reply back option from the hover".toString()
 						+ test.addScreenCapture(takeScreenShot()));
-				compose.sendKeys("It is Reply", Keys.ENTER);
+				
+				if (subaction.contains("It is Reply")) {
+				compose.sendKeys(subaction, Keys.ENTER);
 				test.log(LogStatus.WARNING, "Replied successfully. Please check the UI with human eye".toString()
 						+ test.addScreenCapture(takeScreenShot()));
+				}
 				break;
 
 			case "Reminder":
@@ -1279,6 +1299,19 @@ public class KoraMessagesChatsPage extends PageBase {
 		return elementdisplayed;
 
 	}
+	
+	public void validateFromRecepientEnd(String initialtext, String replytext) throws Exception {
+			boolean elementdisplayed = remoteDriver.findElements(By.xpath("//div[@class='replyMessage replyMessageBubble']//div[@class='leftCol']//div[@class='replayBubbleText'][text() = '"+initialtext+"']/../../..//div[@class='send-message'][text() = '"+replytext+"'] ")).size() > 0;
+			if (elementdisplayed) {
+			test.log(LogStatus.PASS, "Displayed initial message as <b> "+initialtext+" </b> and the reply text displated as <b> "+replytext +" </b>");
+				
+			test.log(LogStatus.PASS, "Please check the reply back UI".toString()+ test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL,
+						"Either chat bar was not auto scrolled to the last message or Reply back functionality is not working"
+								.toString() + test.addScreenCapture(takeScreenShot()));
+			}
+	}
 
 	public void validateLongTextReadMoreTruncation() throws Exception {
 		try {
@@ -1347,5 +1380,47 @@ public class KoraMessagesChatsPage extends PageBase {
 	}catch (Exception e){
 		System.out.println("Retry");
 	}
+	}
+	
+
+	public void selectOptionFromRightNav3Dots(String user, String right3dotsoption) throws Exception {
+		click(er.kdrManageRoom3dots0+user+er.kdrManageRoom3dots1, "Right pane 3 dots");
+		boolean flag = false;
+		waitTillappear(er.kwfilterbyws, "xpath", "Left bottom header");
+		List<WebElement> Menulist = remoteDriver.findElements(By.xpath(er.kmright3dotoptions));
+		for (WebElement e : Menulist) {
+			if (e.getText().trim().equalsIgnoreCase(right3dotsoption)) {
+				flag = true;
+				e.click();
+				System.out.println(right3dotsoption + " Workspace got selected");
+				Thread.sleep(1000);
+				test.log(LogStatus.PASS, "Selected <b>" + right3dotsoption + " </b>option from left menu".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+				break;
+			}
+		}
+		if (!flag) {
+			System.out.println(right3dotsoption + " Workspace was not selected");
+			test.log(LogStatus.FAIL,
+					right3dotsoption + "  Workspace not selected or it is not available from the workspaces list".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+			System.out
+					.println("Reached FailXXXXXXXX " + right3dotsoption + " workspace is not available on the Dom for top header menu");
+		}
+		viewFiles();
+	}
+
+	public void viewFiles ()throws Exception {
+		
+		if(!elementIsDisplayed(er.kmviewfiles, "xpath"))
+			test.log(LogStatus.FAIL,
+					"For view files, View Files header is not displayed or there could be a change in element".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+		
+		test.log(LogStatus.WARNING,
+				"On click of view files, View Files header got displayed".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+		click("//div[@class='p-dialog-titlebar-icons']", "Close view files");
+		
 	}
 }

@@ -433,7 +433,6 @@ public class KoraMessagesDRPage extends PageBase {
 					click("//span[@class='hamMenuWSName' and text()='"+workspacename+"']", "Selecting Workspace  "+workspacename);
 				}
 			}
-
 			click(er.kddiscussionTitle, "Clicking on Discussion Room title ");
 			enterText(er.kddiscussionTitle, NewDRname, "Discussion Room Title as "+NewDRname);
 			moveToElement(er.kmcenterparticipant, "xpath");
@@ -479,8 +478,10 @@ public class KoraMessagesDRPage extends PageBase {
 			}		
 			click(er.kdrsettings, "Clicking on Setting icon in Right Side panel After creating DR and Setting Access Type");
 			System.out.println("----- Entering Data to Disucssion Room ---");
+			moveToElement(er.kcomposebar, "Moving to composebar");
 			click(er.kcomposebar, "Clicking on Compose Bar");		
 			koramessagespage.enterYourMessageAs("Newely Created Discusion Room "+NewDRname);											
+			korahomepage.waittillpageload();
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
@@ -532,15 +533,16 @@ public class KoraMessagesDRPage extends PageBase {
 
 	public void valdiatedeletedMsgorDR(String chatordiscroomname) throws InterruptedException, Exception	
 	{
+		Thread.sleep(5000);
 		try {
 			System.out.println("------------ Moving To Element ----------");			
 			moveToElement(er.kmdmsgordiscroom+chatordiscroomname+er.ksinglquote,"xpath");
 			click(er.kmdmsgordiscroom+chatordiscroomname+er.ksinglquote, "chatordiscroomname");			
-			test.log(LogStatus.FAIL,  "Even after Deleteing Discussion room still we are able to see the Discussion Room in Messages / DR Room ".toString() +test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.FAIL,  "Even after After Deleting/Starring/Muting/... Discussion room We are not able to see the Discussion Room in particular Section".toString() +test.addScreenCapture(takeScreenShot()));
 		}
 		catch(Exception e)
 		{
-			test.log(LogStatus.PASS,  "After Deleting Discussion room We are not able to see the DR in messages/ DR Room ".toString() +test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.PASS,  "After Deleting/Starring/Muting/... Discussion room We are not able to see the Discussion Room ".toString() +test.addScreenCapture(takeScreenShot()));
 		}
 	}
 
@@ -711,54 +713,105 @@ public class KoraMessagesDRPage extends PageBase {
 		}
 	}
 
-	public void selectoptionsfrom3dotsinRightPanelinDR(String discRoom, String Option) throws Exception
-	{		
-		moveToElement(er.kdrManageRoom3dots0+discRoom+er.kdrManageRoom3dots1,"xpath");
-		click(er.kdrManageRoom3dots0+discRoom+er.kdrManageRoom3dots1, "Click on 3 dots in Right Panel on DR ");
-		Thread.sleep(3000);
-		
-		/*{
-			click(er.kdrpostname0 + discRoom+er.kdrpostname1+posttoforward+er.ksinglquote+"/../..//i[contains(@class,'icon __i kr-ellipsis')]",
-					"Click on 3dits options to ");
-			Thread.sleep(3000);
-		}*/
-		
-		//  //*[text()='Mark as unread']/i
-		
-		// Click on Memebers
-		
-		//ul[@class='nav tab-header']/li[2]/div
-		
-		
-		// Members list 
-		//  //div[@class='membersCntrBody']/ul
-		
-		
-		//div[@class='memberDetails']/div[1]//div[contains(text(),'james@koraqa1.com')]
-		
-		
-		// to click on remove the person 
-		//div[@class='memberDetails']/div[1]//div[contains(text(),'hana@koraqa1.com')]/..//../div[@class='right']/div
-		
-		
-		//remove
-		//div[@class='userRoleDropDownMenu']/ul/li[@class='remove']
-		//span[@class='p-button-text p-c' and text()='Remove']
-		
-		// Adding additional people
-		
-		
-		//input[contains(@placeholder,'Type and select people')]
-		
-		
-		
-		
-//		kdfowradpostWindowclose
-		
-		
-		
-		
-		
-	}	
-	
+	/**
+	 * This Method will select options from 3 dots of Right side panle of DR..like Star, Mute.....
+	 * @param discRoom
+	 * @param Option
+	 * @param Muteminutes if User select mute then m
+	 * @throws Exception
+	 */
+	public void selectoptionsfrom3dotsinRightPanelinDR(String discRoom, String Option, String Muteminutes) throws Exception
+	{	
+		try {
+
+			moveToElement(er.kdrManageRoom3dots0+discRoom+er.kdrManageRoom3dots1,"xpath");
+			click(er.kdrManageRoom3dots0+discRoom+er.kdrManageRoom3dots1, "Click on 3 dots in Right Panel on DR ");
+			Thread.sleep(3000);			
+			/*** Clicking on Options in Right side 3 dots of a DR.....Star/Mute/Mark as unread/View Files/Copy Email Address/Get Link/Manage Room	 ***/
+
+			if(Option.equalsIgnoreCase("Mute")) {
+				click("//*[text()='"+Option+"']","xpath");
+				click("//*[text()='"+Muteminutes+"']","xpath");
+				test.log(LogStatus.PASS, "Mute action performed successfully on DR "+discRoom.toString()+ test.addScreenCapture(takeScreenShot()));
+			}else {
+				click("//*[text()='"+Option+"']","xpath");
+				test.log(LogStatus.PASS, Option.toString()+" action performed successfully on DR "+discRoom.toString()+ test.addScreenCapture(takeScreenShot()));
+			}
+			Thread.sleep(5000);
+		}catch(Exception e)
+		{
+			test.log(LogStatus.FAIL, "Failed to Perfrom 3Dots Actions on Discussion Room "+discRoom.toString()+test.addScreenCapture(takeScreenShot()) );
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Precondition:: User should be in Manage Room Section
+	 * This method will add / remove participants from Discussion Room 
+	 * @param discRoom
+	 * @param addpeople
+	 * @param removepeople
+	 * @throws Exception
+	 */
+	public void addandremovepeoplefromdiscussionRoom(String discRoom, String addpeople,String removepeople) throws Exception
+	{
+		try {
+			click(er.kwmanagedrMemebrs,"xpath");		
+			if(!addpeople.contains("N/A"))
+			{	
+				if (addpeople.contains(",")) {
+					String result[] = addpeople.trim().split("\\s*,\\s*");
+					for (String part : result) {
+						System.out.println(part);
+						enterText(er.kwaddpeopleplacehilder, part, "Adding "+part+" to discussion Room " +discRoom);			
+						waitTillappear("//span[text()='"+part+"']", "xpath", "Suggested email addres of "+part);					
+						click("//span[text()='"+part+"']", "Selecting email address "+part);
+						Thread.sleep(2000);
+						click(er.kwaddpeopleadinmember,"xpath");	
+						Thread.sleep(2000);			
+						test.log(LogStatus.PASS, "Added User to Memebrs list of Discussion Room"+ test.addScreenCapture(takeScreenShot()));
+					}
+				}
+				else {
+					enterText(er.kwaddpeopleplacehilder, addpeople, "Adding "+addpeople+" to discussion Room " +discRoom);			
+					waitTillappear("//span[text()='"+addpeople+"']", "xpath", "Suggested email addres of "+addpeople);					
+					click("//span[text()='"+addpeople+"']", "Selecting email address "+addpeople);
+					Thread.sleep(2000);
+					click(er.kwaddpeopleadinmember,"xpath");	
+					Thread.sleep(2000);			
+					test.log(LogStatus.PASS, "Added User to Memebrs list of Discussion Room"+ test.addScreenCapture(takeScreenShot()));
+				}
+
+			}
+			if(!removepeople.contains("N/A"))
+			{		
+				if (removepeople.contains(",")) {
+					String result[] = removepeople.trim().split("\\s*,\\s*");
+					for (String part : result) {
+						moveToElement(er.kwmemebrsinaDreamilaccess0+part+er.kwmemebrsinaDreamilaccess1, "xpath");
+						click(er.kwmemebrsinaDreamilaccess0+part+er.kwmemebrsinaDreamilaccess1, "clicking on Eamil access type");
+						Thread.sleep(2000);
+						click(er.kwremovingmemebrindr,"removing the particiapant "+part);
+						click(er.kwremovingmemebrindrconfirm,"Confirm removing the particiapant "+part);			
+						test.log(LogStatus.PASS, "Removing User from Memebrs list of Discussion Room"+ test.addScreenCapture(takeScreenShot()));
+					}
+				}else {
+					moveToElement(er.kwmemebrsinaDreamilaccess0+removepeople+er.kwmemebrsinaDreamilaccess1, "xpath");
+					click(er.kwmemebrsinaDreamilaccess0+removepeople+er.kwmemebrsinaDreamilaccess1, "clicking on Eamil access type");
+					Thread.sleep(2000);
+					click(er.kwremovingmemebrindr,"removing the particiapant "+removepeople);
+					click(er.kwremovingmemebrindrconfirm,"Confirm removing the particiapant "+removepeople);			
+					test.log(LogStatus.PASS, "Removing User from Memebrs list of Discussion Room"+ test.addScreenCapture(takeScreenShot()));
+				}										
+			}			
+			click(er.kdfowradpostWindowclose,"xpath");
+
+		}catch(Exception e)
+		{
+			test.log(LogStatus.FAIL, "Failed to Add/remove  User from Memebrs list of Discussion Room"+test.addScreenCapture(takeScreenShot()) );
+			e.printStackTrace();
+
+		}
+
+	}
+
 }

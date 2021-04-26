@@ -49,7 +49,7 @@ public class Messages121Test extends DriverSetUp {
 		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 	}
 
-		@Test(enabled = true, priority = 1)
+	/*	@Test(enabled = true, priority = 1)
 	public void MC_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -60,7 +60,7 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.launchw3(url, korajusername, korajpassword);
+		//	koraloginpage.launchw3(url, korajusername, korajpassword);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
@@ -71,7 +71,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	/*	@Test(enabled = true, priority = 2)
+		@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -118,7 +118,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 		@Test(enabled = true, priority = 4)
-	public void MC_TC12_TC34_TC35_DeleteAndCheckActiveParticipant_CopyNReplyback() throws Exception {
+	public void MC_TC12_TC34_TC35_DeleteAndCheckActiveParticipant_Copy() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -144,7 +144,6 @@ public class Messages121Test extends DriverSetUp {
 			user = koramessagespage.enterYourMessageAs(updatedstr1);
 			koramessagespage.getFirstActiveUser(user, true);
 			koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr1, "More", "Copy");
-			koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr1, "Reply Back", "NA");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
@@ -217,5 +216,71 @@ public class Messages121Test extends DriverSetUp {
 			} catch (Exception e) {
 				test.log(LogStatus.FAIL, "Failed to validate Chats, DR's and All Message sections");
 			}
+		}
+		
+		@Test(enabled = true, priority = 4)
+		public void MC_TC47_Replyback() throws Exception {
+			try {
+				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+						.assignCategory("WorkAssist_Messages_Chats");
+				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+				String url = DriverSetUp.propsMap.get("weburl");
+				String Messages = DriverSetUp.testdataMap.get("messages");
+				String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+				String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+				String msgtocopy = DriverSetUp.testdataMap.get("msgforcopy");
+				String replymsg="It is Reply";
+				test.log(LogStatus.INFO, "Navigation url :" + url);
+				
+				koraloginpage.loginToKora(url, korajusername, korajpassword);	
+				korahomepage.selectMenuOption(Messages);
+				korahomepage.selectTopLeftMenuOption("All Messages");
+				koramessagespage.startNewConversationWith("chat",newparticipants, true);
+				String updatedstr=onetoonetext+korahomepage.runtimehhmmss();
+				user = koramessagespage.enterYourMessageAs(updatedstr);
+				koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr, "Reply Back", replymsg);
+				koraloginpage.logoutAndReLogin(true,url, korahusername, korahpassword);	
+				korahomepage.selectTopLeftMenuOption("All Messages");
+				koramessagespage.goToGroupAndPerform("James Middleton", false, "NA");
+				koramessagespage.validateFromRecepientEnd(updatedstr,replymsg);
+				
+				extent.endTest(test);
+			} catch (Exception e) {
+				test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
+			}
 		}*/
+	
+	@Test(enabled = true, priority = 4)
+	public void MC_TC48_Reactions() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			String msgtocopy = DriverSetUp.testdataMap.get("msgforcopy");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
+			koraloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);	
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagespage.startNewConversationWith("chat",newparticipants, true);
+			String updatedstr=onetoonetext+korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
+			
+			koraloginpage.logoutAndReLogin(true,url, korahusername, korahpassword);	
+			koramessagespage.goToGroupAndPerform("James Middleton", false, "NA");
+			koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr, "Reactions", "Like");
+			
+			koraloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);	
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagespage.goToGroupAndPerform(user, false, "NA");
+			
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
+		}
+	}
 }

@@ -204,7 +204,8 @@ public class KoraHomePage extends PageBase {
 							+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
-
+	
+	
 	/**
 	 * 
 	 * @param option

@@ -430,7 +430,7 @@ public class MessagesDR extends DriverSetUp {
 	}
 	
 	@Test(enabled = true, priority = 35)
-	public void MDR_TC66_TC17_TC21_CreationofRoomwithoutWS() throws Exception {
+	public void MDR_TC66_TC17_TC21_CreationofRoomwithoutWS_MangeMembers_ValidatingDRinAllmessages() throws Exception {
 		try {
 			
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -446,17 +446,53 @@ public class MessagesDR extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages"); 
 			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();
-			//?? Add changes in method 
 			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime, newparticipants, "Post Only");			
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime, false, "");			
-			
-			 
+			Thread.sleep(4000);
+			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime, false, "");						
+			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(randomDrwithTime, "Manage Room","N/A");
+			koramessagedrpage.addandremovepeoplefromdiscussionRoom(randomDrwithTime,"alexander@koraqa1.com",newparticipants);		
 			extent.endTest(test);
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
 		}
 	}
+
+	@Test(enabled = true, priority = 36)
+	public void MDR_TC25_TC26_StarDrandMuteDrandvaldiation() throws Exception {
+		try {
+			
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String DNDStarANDOther = DriverSetUp.drdataMap.get("standarddrForOther");			
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 				
+			koramessagedrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");
+			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Star","N/A");
+			korahomepage.selectTopLeftMenuOption("Starred");
+			koramessagedrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");
+			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Unstar","N/A");			
+			koramessagedrpage.valdiatedeletedMsgorDR(DNDStarANDOther);
+			
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
+			koramessagedrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");
+			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Mute","4 hours");
+			korahomepage.selectTopLeftMenuOption("Muted");
+			koramessagedrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");			
+			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Unmute","");			
+			koramessagedrpage.valdiatedeletedMsgorDR(DNDStarANDOther);								
+			extent.endTest(test);
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
+		}
+	}	
 
 }
