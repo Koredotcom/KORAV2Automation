@@ -53,7 +53,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		directory = System.getProperty("user.dir");
 	}
 
-	/*@Test(enabled = true, priority = 21)
+	@Test(enabled = true, priority = 21)
 	public void MC_TC11_TC30_uploadFileBelow25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -95,7 +95,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to attach different file formats for 1to1 conversation");
 		}
-	}*/
+	}
 	
 	@Test(enabled = true, priority = 22)
 	public void MC_TC31_TC49_uploadMultipleFilesAndView() throws Exception {

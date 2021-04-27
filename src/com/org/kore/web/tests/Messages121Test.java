@@ -49,7 +49,7 @@ public class Messages121Test extends DriverSetUp {
 		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 	}
 
-	/*	@Test(enabled = true, priority = 1)
+		@Test(enabled = true, priority = 1)
 	public void MC_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -71,7 +71,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-		@Test(enabled = true, priority = 2)
+			@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -127,7 +127,6 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-			String msgtocopy = DriverSetUp.testdataMap.get("msgforcopy");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
@@ -228,7 +227,6 @@ public class Messages121Test extends DriverSetUp {
 				String Messages = DriverSetUp.testdataMap.get("messages");
 				String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 				String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-				String msgtocopy = DriverSetUp.testdataMap.get("msgforcopy");
 				String replymsg="It is Reply";
 				test.log(LogStatus.INFO, "Navigation url :" + url);
 				
@@ -248,7 +246,7 @@ public class Messages121Test extends DriverSetUp {
 			} catch (Exception e) {
 				test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
 			}
-		}*/
+		}
 	
 	@Test(enabled = true, priority = 9)
 	public void MC_TC48_Reactions() throws Exception {
@@ -295,21 +293,22 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			
-			koraloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);	
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
 			String updatedstr=onetoonetext+korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr);
+			koramessagespage.goToGroupAndPerform(user, false, "NA");
+			koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr, "More", "Forward");
+			koramessagespage.forwardPostOrValidation(true,user,updatedstr, newparticipants);
 			
 			koraloginpage.logoutAndReLogin(true,url, korahusername, korahpassword);	
-			koramessagespage.goToGroupAndPerform("James Middleton", false, "NA");
-			koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr, "Reactions", "Like");
-			
-			koraloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);	
+			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform(user, false, "NA");
-			
+			String hostuser ="James Middleton";
+			koramessagespage.goToGroupAndPerform(hostuser, false, "NA");
+			koramessagespage.forwardPostOrValidation(false,hostuser,updatedstr, newparticipants);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");

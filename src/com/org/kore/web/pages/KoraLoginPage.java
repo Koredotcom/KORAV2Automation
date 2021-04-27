@@ -58,45 +58,46 @@ public class KoraLoginPage extends PageBase {
 	 */
 	public void signInWithO365(String userName, String password) throws Exception {
 		waitTillappear(er.ko365, "xpath", "Choose ur account type");
-		test.log(LogStatus.PASS, "Type of accounts displayed to choose: ".toString()+ test.addScreenCapture(takeScreenShot()));
+		test.log(LogStatus.PASS,
+				"Type of accounts displayed to choose: ".toString() + test.addScreenCapture(takeScreenShot()));
 		click(er.ko365, "Select Microsoft option");
 		enterText(er.koenteremail, userName, "xpath", "Enter Email");
-		test.log(LogStatus.PASS, "Entered username".toString()+ test.addScreenCapture(takeScreenShot()));
+		test.log(LogStatus.PASS, "Entered username".toString() + test.addScreenCapture(takeScreenShot()));
 		click(er.kousernext, "UsrNext");
 		waitTillappear(er.kosignin, "xpath", "Signin in Password");
 		enterText(er.kpwd, password, "xpath", "Password");
-		test.log(LogStatus.PASS, "Entered Password".toString()+ test.addScreenCapture(takeScreenShot()));
+		test.log(LogStatus.PASS, "Entered Password".toString() + test.addScreenCapture(takeScreenShot()));
 		click(er.kosignin, "Signin");
-		test.log(LogStatus.PASS, "Selected Sign In".toString()+ test.addScreenCapture(takeScreenShot()));
+		test.log(LogStatus.PASS, "Selected Sign In".toString() + test.addScreenCapture(takeScreenShot()));
 		click(er.kstaysignin, "Stay Signin");
 		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
 		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName);
-				/*+ " ".toString()+ test.addScreenCapture(takeScreenShot()));*/
+		/* + " ".toString()+ test.addScreenCapture(takeScreenShot())); */
 
 	}
-	
-	public void logoutAndReLogin(boolean relogin,String url, String userName,String password) throws Exception {		
+
+	public void logoutAndReLogin(boolean relogin, String url, String userName, String password) throws Exception {
 		click(er.kuserprofileicon, "Click on User profile icon");
 		click(er.klogout, "Logout");
 		click(er.klogoutyes, "Logout Confirmation Popup Yes");
-		test.log(LogStatus.PASS, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
+		test.log(LogStatus.INFO, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
 		waitTillappear(er.ko365, "xpath", "Choose ur account type");
-		if(relogin){
+		if (relogin) {
 			clearChromeCache();
-			loginToKora(url,userName, password);	
+			loginToKora(url, userName, password);
 		}
 	}
 
-	public String getUserDetails() throws Exception {		
-		click(er.kuserprofileicon, "Click on User profile icon");		
-		String username=getText(er.kuserProfileUserName).trim();		
+	public String getUserDetails() throws Exception {
+		click(er.kuserprofileicon, "Click on User profile icon");
+		String username = getText(er.kuserProfileUserName).trim();
 		return username;
 	}
-	
+
 	public void launchw3(String url, String userName, String password) throws Exception {
 		cf.launchOtherSite(url);
 	}
-	
+
 	public void loginToKora(String url, String userName, String password) throws Exception {
 		cf.launchSite(url);
 		signInWithO365(userName, password);

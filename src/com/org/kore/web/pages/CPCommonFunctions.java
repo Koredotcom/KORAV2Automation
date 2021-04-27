@@ -70,14 +70,14 @@ public class CPCommonFunctions extends PageBase {
 			int waitincreamental=1;
 			doloop: do {
 				try {
-					Thread.sleep(6000);
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				waitincreamental++;
 				if(result.equals("complete"))
 					break doloop;
-			}while(waitincreamental <10||!result.equals("complete"));
+			}while(waitincreamental <30||!result.equals("complete"));
 			test.log(LogStatus.INFO, test.addScreenCapture(takeScreenShot()));
 			System.out.println("Launched");
 		}

@@ -94,7 +94,7 @@ public class ElementRepository {
 		kmconv = "//div[@class='krDropDownMenu']//div[text() = 'Chat']";
 		kmcomposebar = "//div[@placeholder='Type your message']";
 		kmcrecent = "//ul[@class='p-autocomplete-items p-autocomplete-list p-component p-reset']//li[@class='p-autocomplete-list-item']";
-		kmcenterparticipant = "//input[@placeholder='Enter participant name'] | //input[@placeholder='Add Participants'] | //input[@placeholder='Add people']";
+		kmcenterparticipant = "//input[@placeholder='Enter participant name'] | //input[@placeholder='Add Participants'] | //input[@placeholder='Add people']| //input[@placeholder='Type and select people']";
 		kmcloseconversation = "//span[@class='kr-closeBox']";
 		kmcsuggestnames = "//div[@class='p-clearfix userDetailBox']/div[@class='userDetail']";
 		kmcsuggestmailids = "//div[@class='p-clearfix userDetailBox']//div[@class='userEmailId']";
@@ -175,7 +175,7 @@ public class ElementRepository {
 		kdfowradpostWindow = "//div[@class='p-dialog p-component ForwardPostAndMsgModal p-dialog-enter-done']/div[1]/span[1]/span[text()='Forward Post']";
 		kdfrwrdpostConversationname = "//div[@class='discussionRoomTitle']/div[@class='heroText' and text()='";
 		kdfowradpostWindowclose = "//span[@class='p-dialog-titlebar-close-icon pi pi-times']";
-		kdstartnewconversation = "//span[text()='Start a new conversation']";
+		kdstartnewconversation = "//span[text()='Start a new Chat']";
 		kdselectpeopleinnewconv = "//input[contains(@placeholder,'Type and select people')]";
 		kdemailaddresstoselect = "//div[@class='userEmailId' and text()='";
 		kdcreatenforwardpost = "//button[@class='p-button kr-primary-btn' and text()='Create & Forward']";

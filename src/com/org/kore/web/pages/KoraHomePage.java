@@ -44,8 +44,8 @@ public class KoraHomePage extends PageBase {
 	public void selectMenuOption(String menuoption) throws Exception {
 		boolean flag = false;
 		boolean hmenu = false;
-		waitTillappear(er.kmctopleftmenu, "xpath", "Top header");
 		waittillpageload();
+		waitTillappear(er.klogo, "xpath", "Top left menu");
 		System.out.println("Post login screen displayed");
 		hmenu = remoteDriver.findElements(By.xpath("//span[@class='menuTabs']/a")).size() > 0;
 		if (hmenu) {

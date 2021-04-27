@@ -1384,7 +1384,7 @@ public class PageBase extends DriverSetUp {
 			String clickcleardata = "document.querySelector('body > settings-ui').shadowRoot.querySelector('#main').shadowRoot.querySelector('settings-basic-page').shadowRoot.querySelector('settings-section > settings-privacy-page').shadowRoot.querySelector('settings-clear-browsing-data-dialog').shadowRoot.querySelectorAll('cr-button')[1]"
 					+ ".click()";
 			js.executeScript(clickcleardata);
-			test.log(LogStatus.INFO, " Browser cache cleared successfully");
+			test.log(LogStatus.INFO, " Browser cache cleared successfully to login with different user with in the same session");
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,

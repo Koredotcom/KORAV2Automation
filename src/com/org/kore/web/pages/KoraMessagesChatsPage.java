@@ -173,6 +173,7 @@ public class KoraMessagesChatsPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void select(String participant) throws Exception {
+
 		enterText(er.kmcenterparticipant, participant, "xpath", "Participant name");
 		Thread.sleep(1000);
 		waitTillappear(er.kmcsuggestmailids, "xpath", "Suggested emails");
@@ -181,8 +182,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			e.getText().trim();
 			if (e.getText().trim().equalsIgnoreCase(participant)) {
 				e.click();
-				test.log(LogStatus.INFO, participant + " selected");
-				test.log(LogStatus.PASS, test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.INFO, "With search criteria displayed<b> "+participant+" </b> and got selected".toString() + test.addScreenCapture(takeScreenShot()));
 				break;
 			}
 		}
@@ -1171,11 +1171,14 @@ public class KoraMessagesChatsPage extends PageBase {
 	 * @throws Exception
 	 *             : Throws exception if fails
 	 */
-	//span[@class='msgText ']//div[@class='send-message'][text()='Hello Copy Me']
-	//span[@class='msgText ']//div[@class='send-message'][text()='Hello Copy Me']/..//div[@class='msgCntrlBar _content']/i[@title='
+	// span[@class='msgText ']//div[@class='send-message'][text()='Hello Copy
+	// Me']
+	// span[@class='msgText ']//div[@class='send-message'][text()='Hello Copy
+	// Me']/..//div[@class='msgCntrlBar _content']/i[@title='
 	public void goToMessageAndPerformActionsAs(String user, String message, String action, String subaction)
 			throws Exception {
 		WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
+		boolean messagemarkafteraction = false;
 		try {
 			Thread.sleep(3000);
 			moveToElement(er.kmmessages + message + er.ksinglquote, "xpath");
@@ -1188,49 +1191,48 @@ public class KoraMessagesChatsPage extends PageBase {
 			switch (action.trim()) {
 			case "Reactions":
 				System.out.println("In Reactions");
-				
+
 				click("//p[@class='chatUserTitle']/span[text()='" + user
 						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
-						+ "']/..//div[@class='msgCntrlBar _content']//i[@title='"+subaction+"']", action + " on message hover");
-				
-				String reactioncount=getText("//p[@class='chatUserTitle']/span[text()='" + user+"']/../../../../../..//div[@class='send-message' and text()='"+message+"']/..//div[@class='msgCntrlBar _content']/../../../..//div[@class='count']");
-				if (reactioncount.equals("1")){
-					test.log(LogStatus.WARNING, "Reaction count was 1".toString()
-							+ test.addScreenCapture(takeScreenShot()));	
-				}else {
-					test.log(LogStatus.WARNING, "Reaction count was not reflected".toString()
-							+ test.addScreenCapture(takeScreenShot()));	
+						+ "']/..//div[@class='msgCntrlBar _content']//i[@title='" + subaction + "']",
+						action + " on message hover");
+
+				String reactioncount = getText("//p[@class='chatUserTitle']/span[text()='" + user
+						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
+						+ "']/..//div[@class='msgCntrlBar _content']/../../../..//div[@class='count']");
+				if (reactioncount.equals("1")) {
+					test.log(LogStatus.WARNING,
+							"Reaction count was 1".toString() + test.addScreenCapture(takeScreenShot()));
+				} else {
+					test.log(LogStatus.WARNING,
+							"Reaction count was not reflected".toString() + test.addScreenCapture(takeScreenShot()));
 				}
-				
+
 				Thread.sleep(1000);
 				break;
 
 			case "Reply Back":
 				System.out.println("In Reply back");
-			//	click(er.kmmessagehoverreplyback, action + " on message hover");
+				// click(er.kmmessagehoverreplyback, action + " on message
+				// hover");
 				click("//p[@class='chatUserTitle']/span[text()='" + user
 						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
-						+ "']/..//div[@class='msgCntrlBar _content']//i[@class='icon __i kr-return replyButton']", action + " on message hover");
+						+ "']/..//div[@class='msgCntrlBar _content']//i[@class='icon __i kr-return replyButton']",
+						action + " on message hover");
 				Thread.sleep(1000);
 				compose.click();
 				test.log(LogStatus.PASS, "Selected Reply back option from the hover".toString()
 						+ test.addScreenCapture(takeScreenShot()));
-				
+
 				if (subaction.contains("It is Reply")) {
-				compose.sendKeys(subaction, Keys.ENTER);
-				test.log(LogStatus.WARNING, "Replied successfully. Please check the UI with human eye".toString()
-						+ test.addScreenCapture(takeScreenShot()));
+					compose.sendKeys(subaction, Keys.ENTER);
+					test.log(LogStatus.WARNING, "Replied successfully. Please check the UI with human eye".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 				}
 				break;
 
 			case "Reminder":
 				System.out.println("In Reminder");
-				click(er.kmmessagehoveroptiontitles + action + er.ksinglquote, action + " on message hover");
-				Thread.sleep(1000);
-				break;
-
-			case "Forward":
-				System.out.println("In Forward");
 				click(er.kmmessagehoveroptiontitles + action + er.ksinglquote, action + " on message hover");
 				Thread.sleep(1000);
 				break;
@@ -1242,7 +1244,7 @@ public class KoraMessagesChatsPage extends PageBase {
 						+ "']/..//i[contains(@class,'icon __i kr-ellipsis')]", action + " on message hover");
 				Thread.sleep(1000);
 				click(er.kmmessagehovermoreoptions + subaction + er.ksinglquote, "xpath");
-				test.log(LogStatus.PASS, "Text<b> " + subaction + " </b> action success".toString()
+				test.log(LogStatus.PASS, "Selected<b> " + subaction + " </b> option from message onhover 3 dots".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 				if (subaction.equalsIgnoreCase("Copy")) {
 					compose.click();
@@ -1251,12 +1253,12 @@ public class KoraMessagesChatsPage extends PageBase {
 					test.log(LogStatus.PASS,
 							"Same text pasted successfully".toString() + test.addScreenCapture(takeScreenShot()));
 				} else if (subaction.equalsIgnoreCase("Edit")) {
-					boolean editedonmessage = false;
 					compose.click();
 					compose.sendKeys("Edited", Keys.ENTER);
-					if (editedonmessage = remoteDriver.findElements(By
-							.xpath("//span[@class='editedText']//span[text() = 'Edited']/../../..//div[@class='send-message'][text() ='"
-									+ message + "Edited" + "']"))
+					if (messagemarkafteraction = remoteDriver
+							.findElements(By.xpath("//p[@class='chatUserTitle']/span[text()='" + user
+									+ "']/../../../../../..//div[@class='send-message' and text()='" + message
+									+ "']/..//span[text() = 'Forwarded'] "))
 							.size() > 0) {
 						test.log(LogStatus.PASS,
 								"Text got edited".toString() + test.addScreenCapture(takeScreenShot()));
@@ -1299,39 +1301,47 @@ public class KoraMessagesChatsPage extends PageBase {
 		return elementdisplayed;
 
 	}
-	
+
 	public void validateFromRecepientEnd(String initialtext, String replytext) throws Exception {
-			boolean elementdisplayed = remoteDriver.findElements(By.xpath("//div[@class='replyMessage replyMessageBubble']//div[@class='leftCol']//div[@class='replayBubbleText'][text() = '"+initialtext+"']/../../..//div[@class='send-message'][text() = '"+replytext+"'] ")).size() > 0;
-			if (elementdisplayed) {
-			test.log(LogStatus.PASS, "Displayed initial message as <b> "+initialtext+" </b> and the reply text displated as <b> "+replytext +" </b>");
-				
-			test.log(LogStatus.PASS, "Please check the reply back UI".toString()+ test.addScreenCapture(takeScreenShot()));
-			} else {
-				test.log(LogStatus.FAIL,
-						"Either chat bar was not auto scrolled to the last message or Reply back functionality is not working"
-								.toString() + test.addScreenCapture(takeScreenShot()));
-			}
+		boolean elementdisplayed = remoteDriver.findElements(By
+				.xpath("//div[@class='replyMessage replyMessageBubble']//div[@class='leftCol']//div[@class='replayBubbleText'][text() = '"
+						+ initialtext + "']/../../..//div[@class='send-message'][text() = '" + replytext + "'] "))
+				.size() > 0;
+		if (elementdisplayed) {
+			test.log(LogStatus.PASS, "Displayed initial message as <b> " + initialtext
+					+ " </b> and the reply text displated as <b> " + replytext + " </b>");
+
+			test.log(LogStatus.PASS,
+					"Please check the reply back UI".toString() + test.addScreenCapture(takeScreenShot()));
+		} else {
+			test.log(LogStatus.FAIL,
+					"Either chat bar was not auto scrolled to the last message or Reply back functionality is not working"
+							.toString() + test.addScreenCapture(takeScreenShot()));
+		}
 	}
 
 	public void validateLongTextReadMoreTruncation() throws Exception {
 		try {
 			boolean elementdisplayed = remoteDriver.findElements(By.xpath(er.kmlongtextreadmore)).size() > 0;
 			if (elementdisplayed) {
-				/*moveToElement(er.kmreadmore, "xpath");
-				test.log(LogStatus.PASS, "For<b> Read more </b>cursor type displayed as Hand icon");
-				test.log(LogStatus.PASS,
-						"For long text, text got truncated and Read more text got displayed as below".toString()
-								+ test.addScreenCapture(takeScreenShot()));
-				moveToElement(er.kmreadmore, "xpath");
-				click(er.kmreadmore, "Read more on long text message");
-				Thread.sleep(1000);
-				// moveToElement(er.kmreadless, "xpath");*/	
-			test.log(LogStatus.FAIL, "For long text <b> Read more </b> option is getting displayed".toString()+ test.addScreenCapture(takeScreenShot()));
+				/*
+				 * moveToElement(er.kmreadmore, "xpath");
+				 * test.log(LogStatus.PASS,
+				 * "For<b> Read more </b>cursor type displayed as Hand icon");
+				 * test.log(LogStatus.PASS,
+				 * "For long text, text got truncated and Read more text got displayed as below"
+				 * .toString() + test.addScreenCapture(takeScreenShot()));
+				 * moveToElement(er.kmreadmore, "xpath"); click(er.kmreadmore,
+				 * "Read more on long text message"); Thread.sleep(1000); //
+				 * moveToElement(er.kmreadless, "xpath");
+				 */
+				test.log(LogStatus.FAIL, "For long text <b> Read more </b> option is getting displayed".toString()
+						+ test.addScreenCapture(takeScreenShot()));
 
 			} else {
 				test.log(LogStatus.PASS,
-						"For long text, Read moreis not getting displayed, which is expected"
-								.toString() + test.addScreenCapture(takeScreenShot()));
+						"For long text, Read moreis not getting displayed, which is expected".toString()
+								+ test.addScreenCapture(takeScreenShot()));
 			}
 
 		} catch (Exception e) {
@@ -1339,52 +1349,52 @@ public class KoraMessagesChatsPage extends PageBase {
 					+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
-	
+
 	public void validateChatsAndDRS(boolean chats, boolean dr) throws Exception {
-		try{
-		boolean onlychats = false;
-		boolean onlydrs = false;
-		
-		onlychats = remoteDriver.findElements(By.xpath("//div[@class='userDetails chat']"))
-				.size() > 0;
-		onlydrs = remoteDriver.findElements(By.xpath("//div[@class='userDetails discussion']"))
-						.size() > 0;
-		
-		if ((chats)&&(!dr)){
-			if ((chats&&onlychats)&&((chats&&(!onlydrs)))){
-				test.log(LogStatus.PASS, "Under chats, only chats are being displayed".toString()
-						+ test.addScreenCapture(takeScreenShot()));
-			}else{
-				test.log(LogStatus.PASS, "Under chats, it displayes chats and DR's or instead of chats it dislayes DR's".toString()
-						+ test.addScreenCapture(takeScreenShot()));
+		try {
+			boolean onlychats = false;
+			boolean onlydrs = false;
+
+			onlychats = remoteDriver.findElements(By.xpath("//div[@class='userDetails chat']")).size() > 0;
+			onlydrs = remoteDriver.findElements(By.xpath("//div[@class='userDetails discussion']")).size() > 0;
+
+			if ((chats) && (!dr)) {
+				if ((chats && onlychats) && ((chats && (!onlydrs)))) {
+					test.log(LogStatus.PASS, "Under chats, only chats are being displayed".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+				} else {
+					test.log(LogStatus.PASS,
+							"Under chats, it displayes chats and DR's or instead of chats it dislayes DR's".toString()
+									+ test.addScreenCapture(takeScreenShot()));
+				}
+			} else if ((!chats) && (dr)) {
+				if ((dr && onlydrs) && ((dr && (!onlychats)))) {
+					test.log(LogStatus.PASS, "Under DR, only DR's are being displayed".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+				} else {
+					test.log(LogStatus.PASS,
+							"Under DR, it displayes DR and chats or instead of DR it dislayes Chats".toString()
+									+ test.addScreenCapture(takeScreenShot()));
+				}
+
+			} else if (chats && dr) {
+				if (onlychats && onlydrs) {
+					test.log(LogStatus.PASS, "Under All messages, Displayed both chats and Dr's".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+				} else {
+					test.log(LogStatus.PASS,
+							"Under All messages, Displayed either only chats nor only DR's but not both. It should display both"
+									.toString() + test.addScreenCapture(takeScreenShot()));
+				}
+
 			}
-		}else if ((!chats)&&(dr)){
-			if ((dr&&onlydrs)&&((dr&&(!onlychats)))){
-				test.log(LogStatus.PASS, "Under DR, only DR's are being displayed".toString()
-						+ test.addScreenCapture(takeScreenShot()));
-			}else{
-				test.log(LogStatus.PASS, "Under DR, it displayes DR and chats or instead of DR it dislayes Chats".toString()
-						+ test.addScreenCapture(takeScreenShot()));
-			}
-			
-		}else if (chats&&dr){
-			if (onlychats&&onlydrs){
-				test.log(LogStatus.PASS, "Under All messages, Displayed both chats and Dr's".toString()
-						+ test.addScreenCapture(takeScreenShot()));
-			}else{
-				test.log(LogStatus.PASS, "Under All messages, Displayed either only chats nor only DR's but not both. It should display both".toString()
-						+ test.addScreenCapture(takeScreenShot()));
-			}
-			
+		} catch (Exception e) {
+			System.out.println("Retry");
 		}
-	}catch (Exception e){
-		System.out.println("Retry");
 	}
-	}
-	
 
 	public void selectOptionFromRightNav3Dots(String user, String right3dotsoption) throws Exception {
-		click(er.kdrManageRoom3dots0+user+er.kdrManageRoom3dots1, "Right pane 3 dots");
+		click(er.kdrManageRoom3dots0 + user + er.kdrManageRoom3dots1, "Right pane 3 dots");
 		boolean flag = false;
 		waitTillappear(er.kwfilterbyws, "xpath", "Left bottom header");
 		List<WebElement> Menulist = remoteDriver.findElements(By.xpath(er.kmright3dotoptions));
@@ -1402,25 +1412,62 @@ public class KoraMessagesChatsPage extends PageBase {
 		if (!flag) {
 			System.out.println(right3dotsoption + " Workspace was not selected");
 			test.log(LogStatus.FAIL,
-					right3dotsoption + "  Workspace not selected or it is not available from the workspaces list".toString()
+					right3dotsoption
+							+ "  Workspace not selected or it is not available from the workspaces list".toString()
 							+ test.addScreenCapture(takeScreenShot()));
-			System.out
-					.println("Reached FailXXXXXXXX " + right3dotsoption + " workspace is not available on the Dom for top header menu");
+			System.out.println("Reached FailXXXXXXXX " + right3dotsoption
+					+ " workspace is not available on the Dom for top header menu");
 		}
 		viewFiles();
 	}
 
-	public void viewFiles ()throws Exception {
-		
-		if(!elementIsDisplayed(er.kmviewfiles, "xpath"))
+	public void viewFiles() throws Exception {
+
+		if (!elementIsDisplayed(er.kmviewfiles, "xpath"))
 			test.log(LogStatus.FAIL,
-					"For view files, View Files header is not displayed or there could be a change in element".toString()
-							+ test.addScreenCapture(takeScreenShot()));
-		
-		test.log(LogStatus.WARNING,
-				"On click of view files, View Files header got displayed".toString()
-						+ test.addScreenCapture(takeScreenShot()));
+					"For view files, View Files header is not displayed or there could be a change in element"
+							.toString() + test.addScreenCapture(takeScreenShot()));
+
+		test.log(LogStatus.WARNING, "On click of view files, View Files header got displayed".toString()
+				+ test.addScreenCapture(takeScreenShot()));
 		click("//div[@class='p-dialog-titlebar-icons']", "Close view files");
-		
+
+	}
+
+	public void forwardPostOrValidation(boolean forwardpost, String chatheadername, String forwardedmsg,
+			String newparticipants) throws Exception {
+		try {
+			if (forwardpost) {
+				if (elementIsDisplayed("//span[text() = 'Forward Message']", "xpath")) {
+					System.out.println("Forward New Conversation -");
+					click(er.kdstartnewconversation, " Click on Start New conversation");
+					if (newparticipants.contains(",")) {
+						String result[] = newparticipants.trim().split("\\s*,\\s*");
+						for (String part : result) {
+							System.out.println(part);
+							select(part);
+						}
+					} else {
+						select(newparticipants);
+					}
+					click(er.kdcreatenforwardpost, "click on  Create & Forward");
+					Thread.sleep(2000);
+				}
+			}
+			if (elementIsDisplayed("//p[@class='chatUserTitle']/span[text()='" + chatheadername
+					+ "']/../../../../../..//div[@class='send-message' and text()='" + forwardedmsg
+					+ "']/..//span[text() = 'Forwarded']", "xpath")) {
+				test.log(LogStatus.PASS, forwardedmsg+" got displayed as <b> Forwarded </b> message " + test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL,
+						"After forward, forward placeholder is not diaplyed on top of <b>"+forwardpost+" <b> text or it is not scrolled completely to the bottom"
+								.toString() + test.addScreenCapture(takeScreenShot()));
+			}
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"Forward message pop up is not displayedor unable to select the provided participant".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+		}
 	}
 }
