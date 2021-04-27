@@ -43,28 +43,36 @@ public class KoraHomePage extends PageBase {
 
 	public void selectMenuOption(String menuoption) throws Exception {
 		boolean flag = false;
-		waitTillappear(er.kheadermenu, "xpath", "Top header");
+		boolean hmenu = false;
+		waitTillappear(er.kmctopleftmenu, "xpath", "Top header");
 		waittillpageload();
-		System.out.println("Header menu displayed");
-		List<WebElement> Menulist = remoteDriver.findElements(By.xpath("//span[@class='menuTabs']/a"));
-		for (WebElement e : Menulist) {
-			if (e.getText().trim().equalsIgnoreCase(menuoption)) {
-				flag = true;
-				e.click();
-				System.out.println(menuoption + " option got selected");
-				Thread.sleep(1000);
-				test.log(LogStatus.PASS, menuoption + " selected");
-						/*.toString() + test.addScreenCapture(takeScreenShot()));*/
-				break;
+		System.out.println("Post login screen displayed");
+		hmenu = remoteDriver.findElements(By.xpath("//span[@class='menuTabs']/a")).size() > 0;
+		if (hmenu) {
+			List<WebElement> Menulist = remoteDriver.findElements(By.xpath("//span[@class='menuTabs']/a"));
+			for (WebElement e : Menulist) {
+				if (e.getText().trim().equalsIgnoreCase(menuoption)) {
+					flag = true;
+					e.click();
+					System.out.println(menuoption + " option got selected");
+					Thread.sleep(1000);
+					test.log(LogStatus.PASS, menuoption + " selected");
+					/*
+					 * .toString() + test.addScreenCapture(takeScreenShot()));
+					 */
+					break;
+				}
 			}
-		}
-		if (!flag) {
-			System.out.println(menuoption + " option was not selected");
-			test.log(LogStatus.FAIL,
-					menuoption + "  option not selected or it is not available in the options".toString()
-							+ test.addScreenCapture(takeScreenShot()));
-			System.out
-					.println("Reached FailXXXXXXXX " + menuoption + " is not available on the Dom for top header menu");
+			if (!flag) {
+				System.out.println(menuoption + " option was not selected");
+				test.log(LogStatus.FAIL,
+						menuoption + "  option not selected or it is not available in the options".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+				System.out.println(
+						"Reached FailXXXXXXXX " + menuoption + " is not available on the Dom for top header menu");
+			}
+		} else {
+			test.log(LogStatus.INFO, "There is no top header here");
 		}
 	}
 
@@ -76,7 +84,7 @@ public class KoraHomePage extends PageBase {
 
 	public void selectTopLeftMenuOption(String menuoption) throws Exception {
 		boolean flag = false;
-		waitTillappear(er.kheadermenu, "xpath", "Top header");
+		waitTillappear(er.kmctopleftmenu, "xpath", "Top header");
 		WebElement ele= remoteDriver.findElement(By.xpath(er.kmctopleftmenu));
 		List<WebElement> Menulist = remoteDriver.findElements(By.xpath(er.kmctopleftmenu));
 		for (WebElement e : Menulist) {
