@@ -939,7 +939,6 @@ public class PageBase extends DriverSetUp {
 				break;
 			case "Selenium":
 				
-
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 				remoteDriver.findElement(By.xpath(locator)).click();

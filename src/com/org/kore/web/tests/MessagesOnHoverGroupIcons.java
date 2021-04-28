@@ -48,18 +48,17 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 14)
+	@Test(enabled = true, priority = 18)
 	public void MC_TC41_koraFirstGroupIconValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
@@ -70,18 +69,17 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 15)
+	@Test(enabled = true, priority = 19)
 	public void MC_TC35_koraOnHoverParticipantsValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.getOnHoverParticipantsCount(groupname, korajusername);
@@ -91,7 +89,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 16)
+	@Test(enabled = true, priority = 20)
 	public void MC_TC23_koraGroupChat3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -102,8 +100,8 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsforgroup");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, false, "NA");
@@ -116,7 +114,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 17)
+	@Test(enabled = true, priority = 21)
 	public void MC_TC_22_TC_39_TC_40_koraMuteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -127,8 +125,8 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 			String muteslots = DriverSetUp.testdataMap.get("expectedmuteslots");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "Mute");
@@ -142,7 +140,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 18)
+	@Test(enabled = true, priority = 22)
 	public void MC_TC_22_TC_36_validateStarredChats() throws Exception {
 		
 		try {
@@ -156,8 +154,8 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			String user="null";
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
@@ -172,7 +170,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 19)
+	@Test(enabled = true, priority = 23)
 	public void MC_TC_22_TC_38_validateUnreadChats() throws Exception {
 		
 		try {
@@ -185,8 +183,8 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			String user="null";
-			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
@@ -200,7 +198,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 20)
+	@Test(enabled = true, priority = 24)
 	public void MC_TC44_koraAtmentionUsers() throws Exception {
 		
 		try {
@@ -211,8 +209,8 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, false, "NA");

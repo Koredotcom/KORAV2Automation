@@ -42,7 +42,8 @@ public class ElementRepository {
 			kdsearchbarinforwardpost = null, kdsearchresultsforwardpost = null, kdrsearchresultsfirstsenditem = null,
 			kdrManageRoom3dots0 = null, kdrManageRoom3dots1 = null, kwmanagedrMemebrs = null,
 			kwaddpeopleplacehilder = null, kwmemebrsinaDreamilaccess0 = null, kwmemebrsinaDreamilaccess1 = null,
-			kwremovingmemebrindr = null, kwremovingmemebrindrconfirm = null, kwaddpeopleadinmember = null;;
+			kwremovingmemebrindr = null, kwremovingmemebrindrconfirm = null, kwaddpeopleadinmember = null,
+			kwpostinfonMessageinfofrom3dots = null, kdpostinfonmsginfoTitle = null, kwclosecommentreadpopup = null;
 
 	public void repoIOS() {
 
@@ -192,6 +193,9 @@ public class ElementRepository {
 		kwremovingmemebrindrconfirm = "//span[@class='p-button-text p-c' and text()='Remove']";
 		kwaddpeopleadinmember = "//span[@class='p-button-text p-c' and text()='Add people']";
 
+		kwpostinfonMessageinfofrom3dots = "//*[text()='Post Info'] | //*[text()='Message Info']";
+		kdpostinfonmsginfoTitle = "//span[@class='p-dialog-title']";
+		kwclosecommentreadpopup = "//span[@class='kr-close']";
 	}
 
 }

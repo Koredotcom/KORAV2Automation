@@ -58,7 +58,7 @@ public class MessagesDR extends DriverSetUp {
 	}
 
 	
-	@Test(enabled = true, priority = 23)
+	@Test(enabled = true, priority = 28)
 	public void MDR_TC1_TC2_TC3_TC65_createNewWorkspaceAndDelete() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -68,8 +68,8 @@ public class MessagesDR extends DriverSetUp {
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
 			String workspacename = DriverSetUp.drdataMap.get("workspacename123");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.createNewWorkspaceAndCheckDefault(workspacename);
@@ -81,7 +81,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 24)
+	@Test(enabled = true, priority = 29)
 	public void MDR_TC4_TC5_inviteMembersToWorkspaceAndManage() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -92,8 +92,8 @@ public class MessagesDR extends DriverSetUp {
 			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
 			String workspaceauto = DriverSetUp.drdataMap.get("workspaceauto");
 			String invitemems = DriverSetUp.drdataMap.get("workspacemems");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.createNewWorkspaceAs(workspaceauto);
 			koraworkspacepage.workspaceDirectInvite(invitemems);
@@ -109,7 +109,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 25)
+	@Test(enabled = true, priority = 30)
 	public void MDR_TC8_filterByWorkspace() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -120,8 +120,8 @@ public class MessagesDR extends DriverSetUp {
 			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String workspacename = DriverSetUp.drdataMap.get("workspacename8");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.createNewWorkspaceAs(workspacename);
 			korahomepage.selectMenuOption(Messages);
@@ -139,7 +139,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 26)
+	@Test(enabled = true, priority = 31)
 	public void MDR_TC9_TC10_DefaultDRAndTimeline() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -149,7 +149,6 @@ public class MessagesDR extends DriverSetUp {
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
 			String workspacename = DriverSetUp.drdataMap.get("workspacename910");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			
 			korahomepage.selectMenuOption(Workspaces);
@@ -167,7 +166,7 @@ public class MessagesDR extends DriverSetUp {
 	}
 
 
-	@Test(enabled = true, priority = 27)
+	@Test(enabled = true, priority = 32)
 	public void MDR_TC11_TC41_TC42_TC46_TC58_likeCommentToAPost() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -178,8 +177,8 @@ public class MessagesDR extends DriverSetUp {
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 			String Messages = DriverSetUp.drdataMap.get("messages");			
 			String drcomment = DriverSetUp.drdataMap.get("drcomment");			
-
-			test.log(LogStatus.INFO, "Navigation url :" + url);			
+			test.log(LogStatus.INFO, "Navigation url :" + url);	
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");									
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");
@@ -205,7 +204,7 @@ public class MessagesDR extends DriverSetUp {
 	} 
 
 
-	@Test(enabled = true, priority = 28)
+	@Test(enabled = true, priority = 33)
 	public void MDR_TC12_13_TC30_validating3DotOptionsFromMidAndRightPanels() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -216,8 +215,8 @@ public class MessagesDR extends DriverSetUp {
 			String standarddiscroom = DriverSetUp.drdataMap.get("standarddr"); // ??
 			String expWDRmiddle3dotoptions = DriverSetUp.drdataMap.get("wexpected3dotoptionsmiddle");
 			String expWDRright3dotoptions = DriverSetUp.drdataMap.get("wexpected3dotoptionsright");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddiscroom, true, "3dots"); // ??
@@ -229,7 +228,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 29)
+	@Test(enabled = true, priority = 34)
 	public void MDR_TC24_hoveronaDRandverifyoptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -238,8 +237,8 @@ public class MessagesDR extends DriverSetUp {
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
@@ -260,7 +259,7 @@ public class MessagesDR extends DriverSetUp {
 	 * @throws Exception
 	 *             Pass
 	 */
-	@Test(enabled = true, priority = 30)
+	@Test(enabled = true, priority = 35)
 	public void MDR_TC34_TC37_CreatenewDRwithDifferentAccessTypes() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -270,8 +269,8 @@ public class MessagesDR extends DriverSetUp {
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 
 			// To Create DR from All messages and Discussion Room
@@ -303,7 +302,7 @@ public class MessagesDR extends DriverSetUp {
 	 * TC_64Delete Discussion Room with WorkSpace, without WorkSpace from
 	 * Messages Updated
 	 */
-	@Test(enabled = true, priority = 31)
+	@Test(enabled = true, priority = 36)
 	public void MDR_TC64_DeleteWorkSpacefromMessages() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -313,8 +312,8 @@ public class MessagesDR extends DriverSetUp {
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			// Discussion Rooms || All Messages
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
@@ -339,7 +338,7 @@ public class MessagesDR extends DriverSetUp {
 	 * Edit,Forward,Reminder,Post Info,Delete options displayed in 3 dots to a
 	 * post
 	 */
-	@Test(enabled = true, priority = 32)
+	@Test(enabled = true, priority = 37)
 	public void MDR_TC53_TC56_EditaPost() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -349,8 +348,8 @@ public class MessagesDR extends DriverSetUp {
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 			String expWDpost3dotoptions = DriverSetUp.drdataMap.get("drexpected3dotsforPostinrightpanel");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
@@ -367,14 +366,13 @@ public class MessagesDR extends DriverSetUp {
 	 * At Mentions in posts users should display the users who are part of the
 	 * room
 	 */
-	@Test(enabled = true, priority = 33)
+	@Test(enabled = true, priority = 38)
 	public void MDR_TC59_atmentionUsersinDr() throws Exception {
 
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
@@ -393,7 +391,7 @@ public class MessagesDR extends DriverSetUp {
 	/**
 	 * Forward post to new conversation , Existing and DR
 	 */
-	@Test(enabled = true, priority = 34)
+	@Test(enabled = true, priority = 39)
 	public void MDR_TC_54_57_forwardPosttoToGroupdnDrandnewconv() throws Exception {
 
 		try {
@@ -416,8 +414,8 @@ public class MessagesDR extends DriverSetUp {
 			koramessagedrpage.goToGroupAndPerforminWSDR("DoNotDeleteDRAuto", false, "");
 			String post = "forwardingpost" + korahomepage.runtimehhmmss();
 			koramessagespage.enterYourMessageAs(post);
-//			koramessagedrpage.movetoaPostandClickon3dots("DoNotDeleteDRAuto", post, true);
-//			koramessagedrpage.forwardPosttonewconvorexisting(post, forwardtomemebers, "NA", "NA");
+			koramessagedrpage.movetoaPostandClickon3dots("DoNotDeleteDRAuto", post, true);
+			koramessagedrpage.forwardPosttonewconvorexisting(post, forwardtomemebers, "NA", "NA");
 			koramessagedrpage.movetoaPostandClickon3dots("DoNotDeleteDRAuto", post, true);			
 			koramessagedrpage.forwardPosttonewconvorexisting(post, "NA", "DRDelete", "NA");
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
@@ -429,7 +427,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 35)
+	@Test(enabled = true, priority = 40)
 	public void MDR_TC66_TC17_TC21_CreationofRoomwithoutWS_MangeMembers_ValidatingDRinAllmessages() throws Exception {
 		try {
 			
@@ -440,8 +438,8 @@ public class MessagesDR extends DriverSetUp {
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages"); 
@@ -459,7 +457,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 36)
+	@Test(enabled = true, priority = 41)
 	public void MDR_TC25_TC26_StarDrandMuteDrandvaldiation() throws Exception {
 		try {
 			
@@ -469,8 +467,8 @@ public class MessagesDR extends DriverSetUp {
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String DNDStarANDOther = DriverSetUp.drdataMap.get("standarddrForOther");			
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 				

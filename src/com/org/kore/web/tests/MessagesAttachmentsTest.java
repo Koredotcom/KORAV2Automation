@@ -53,7 +53,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		directory = System.getProperty("user.dir");
 	}
 
-	@Test(enabled = true, priority = 21)
+	@Test(enabled = false, priority = 25)
 	public void MC_TC11_TC30_uploadFileBelow25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -64,7 +64,6 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String recepientuser = DriverSetUp.UtilityMap.get("recepientuser");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-			
 			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
 			String doc=directory + insertdoc;
 			String insertmp4 = DriverSetUp.UtilityMap.get("mp4exe");
@@ -97,7 +96,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 22)
+	@Test(enabled = false, priority = 26)
 	public void MC_TC31_TC49_uploadMultipleFilesAndView() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -110,11 +109,10 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			String allfileexe = DriverSetUp.UtilityMap.get("allfilesexe");
 			String allfiles=directory + allfileexe;
-			
 			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
 			String doc=directory + insertdoc;
-			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
@@ -131,23 +129,21 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = false,priority = 27)
 	public void MC_uploadFileabove25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String recepientuser = DriverSetUp.UtilityMap.get("recepientuser");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-			
 			// need to add file which is having more than 25 mb
 			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
 			String allfiles=directory + insertdoc;
-			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith("chat",recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);

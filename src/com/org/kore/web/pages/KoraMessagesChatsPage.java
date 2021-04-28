@@ -1258,13 +1258,14 @@ public class KoraMessagesChatsPage extends PageBase {
 					if (messagemarkafteraction = remoteDriver
 							.findElements(By.xpath("//p[@class='chatUserTitle']/span[text()='" + user
 									+ "']/../../../../../..//div[@class='send-message' and text()='" + message
-									+ "']/..//span[text() = 'Forwarded'] "))
+									+"Edited']/..//span[text() = 'Edited'] "))
 							.size() > 0) {
+						
 						test.log(LogStatus.PASS,
-								"Text got edited".toString() + test.addScreenCapture(takeScreenShot()));
+								message+" edited text".toString() + test.addScreenCapture(takeScreenShot()));
 					} else {
 						test.log(LogStatus.FAIL,
-								"Seems Text got edited butt, Edited water mark text is not available on top of the edited text"
+								"Seems Text got edited but, Edited placeholder text is not available on top of the edited text"
 										.toString() + test.addScreenCapture(takeScreenShot()));
 					}
 				}
@@ -1461,6 +1462,26 @@ public class KoraMessagesChatsPage extends PageBase {
 			} else {
 				test.log(LogStatus.FAIL,
 						"After forward, forward placeholder is not diaplyed on top of <b>"+forwardpost+" <b> text or it is not scrolled completely to the bottom"
+								.toString() + test.addScreenCapture(takeScreenShot()));
+			}
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"Forward message pop up is not displayedor unable to select the provided participant".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+		}
+	}
+	
+	public void validationOfForwardedOrEdited(String chatheadername, String expectedmsg,String ForwardedorEdited) throws Exception {
+		try {
+			
+			if (elementIsDisplayed("//p[@class='chatUserTitle']/span[text()='" + chatheadername
+					+ "']/../../../../../..//div[@class='send-message' and text()='" + expectedmsg
+					+ "']/..//span[text() = '"+ForwardedorEdited+"']", "xpath")) {
+				test.log(LogStatus.PASS, expectedmsg+" got displayed as <b>"+ ForwardedorEdited +"</b> message " + test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL,
+						"After forward, forward placeholder is not diaplyed on top of <b>"+expectedmsg+" <b> text or it is not scrolled completely to the bottom"
 								.toString() + test.addScreenCapture(takeScreenShot()));
 			}
 

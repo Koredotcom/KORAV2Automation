@@ -58,8 +58,8 @@ public class Messages121Test extends DriverSetUp {
 
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 		//	koraloginpage.launchw3(url, korajusername, korajpassword);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
@@ -81,6 +81,7 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.checkMatchesWith(checkmatch);
 			extent.endTest(test);
@@ -101,7 +102,7 @@ public class Messages121Test extends DriverSetUp {
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 			String expbgclr= DriverSetUp.testdataMap.get("expectedlabelbackground");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
 			String updatedstr=onetoonetext+korahomepage.runtimehhmmss();
@@ -111,7 +112,6 @@ public class Messages121Test extends DriverSetUp {
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
 			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions,"middle");
 			koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr, "More", "Edit");
-			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
@@ -128,6 +128,7 @@ public class Messages121Test extends DriverSetUp {
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
@@ -135,7 +136,7 @@ public class Messages121Test extends DriverSetUp {
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 			koramessagespage.getFirstActiveUser(user, true);
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Delete Conversation");
+			koramessagespage.operationsFrom3Dots("Delete Chat");
 			korahomepage.clickOn("Delete", true);
 			koramessagespage.getFirstActiveUser(user, false);
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
@@ -149,13 +150,12 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-		@Test(enabled = true, priority = 5)
+			@Test(enabled = true, priority = 5)
 	public void MC_TC28_TC29_TC43_ValidateChevronIconFor1ParticipantAndSendLongText() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
@@ -180,11 +180,10 @@ public class Messages121Test extends DriverSetUp {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.enterYourEmojiWithText(true, " Hi Sending with emoji ");
@@ -199,11 +198,10 @@ public class Messages121Test extends DriverSetUp {
 				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 						.assignCategory("WorkAssist_Messages_Chats");
 				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-
 				String url = DriverSetUp.propsMap.get("weburl");
 				String Messages = DriverSetUp.testdataMap.get("messages");
-
 				test.log(LogStatus.INFO, "Navigation url :" + url);
+				
 				korahomepage.selectMenuOption(Messages);
 				korahomepage.selectTopLeftMenuOption("Chats");
 				koramessagespage.validateChatsAndDRS(true,false);
@@ -230,13 +228,13 @@ public class Messages121Test extends DriverSetUp {
 				String replymsg="It is Reply";
 				test.log(LogStatus.INFO, "Navigation url :" + url);
 				
-				koraloginpage.loginToKora(url, korajusername, korajpassword);	
 				korahomepage.selectMenuOption(Messages);
 				korahomepage.selectTopLeftMenuOption("All Messages");
 				koramessagespage.startNewConversationWith("chat",newparticipants, true);
 				String updatedstr=onetoonetext+korahomepage.runtimehhmmss();
 				user = koramessagespage.enterYourMessageAs(updatedstr);
 				koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr, "Reply Back", replymsg);
+				
 				koraloginpage.logoutAndReLogin(true,url, korahusername, korahpassword);	
 				korahomepage.selectTopLeftMenuOption("All Messages");
 				koramessagespage.goToGroupAndPerform("James Middleton", false, "NA");
@@ -248,7 +246,7 @@ public class Messages121Test extends DriverSetUp {
 			}
 		}
 	
-	@Test(enabled = true, priority = 9)
+	@Test(enabled = false, priority = 9)
 	public void MC_TC48_Reactions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -293,7 +291,7 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			koraloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);	
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
