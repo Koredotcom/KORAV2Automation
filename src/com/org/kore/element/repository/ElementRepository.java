@@ -43,7 +43,8 @@ public class ElementRepository {
 			kdrManageRoom3dots0 = null, kdrManageRoom3dots1 = null, kwmanagedrMemebrs = null,
 			kwaddpeopleplacehilder = null, kwmemebrsinaDreamilaccess0 = null, kwmemebrsinaDreamilaccess1 = null,
 			kwremovingmemebrindr = null, kwremovingmemebrindrconfirm = null, kwaddpeopleadinmember = null,
-			kwpostinfonMessageinfofrom3dots = null, kdpostinfonmsginfoTitle = null, kwclosecommentreadpopup = null;
+			kwpostinfonMessageinfofrom3dots = null, kdpostinfonmsginfoTitle = null, kwclosecommentreadpopup = null,
+			kwstarfilledstatus = null;
 
 	public void repoIOS() {
 
@@ -113,8 +114,8 @@ public class ElementRepository {
 		kmcrightchaticon = "//span[@class='chatUserIcon']";
 		kmcatmentionusernames = "//table[@class='mentionDialogBoxTable']//span[@class='mentionFullName']";
 		kmcmessagebubbles = "//div[@class='sendBubble messageBubble saveMsg']";
-		kmcfirstactiveuser = "//div[@class='userDetails active']//div[@class='userNameDiv']";
-		kmcactivebackground = "//div[@class='userDetails active']";
+		kmcfirstactiveuser = "//div[@class='userDetails active chat']//div[@class='userNameDiv']";
+		kmcactivebackground = "//div[@class='userDetails active chat']";
 		kmplaceholder = "//input[@class='searchInput fullWidth']";
 		kmsearchsuggestions = "//div[@class='p-menuitem-link']//div[@class='heroText']//*[text()='";
 		kmattachfromplus = "//span[@class='addIcon kr-plus']";
@@ -192,10 +193,10 @@ public class ElementRepository {
 		kwremovingmemebrindr = "//div[contains(@class,'userRoleDropDownMenu')]/ul/li[@class='remove']/span";
 		kwremovingmemebrindrconfirm = "//span[@class='p-button-text p-c' and text()='Remove']";
 		kwaddpeopleadinmember = "//span[@class='p-button-text p-c' and text()='Add people']";
-
 		kwpostinfonMessageinfofrom3dots = "//*[text()='Post Info'] | //*[text()='Message Info']";
 		kdpostinfonmsginfoTitle = "//span[@class='p-dialog-title']";
 		kwclosecommentreadpopup = "//span[@class='kr-close']";
+		kwstarfilledstatus = "//div[contains(@class,'krDropDownMenu chatHeaderOptions')]/div[1]//i[contains(@class,'icon kr-starred')]";
 	}
 
 }

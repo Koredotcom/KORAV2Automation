@@ -49,6 +49,7 @@ public class KoraMessagesDRPage extends PageBase {
 
 	public void goToGroupAndPerforminWSDR(String discussionRoomName, boolean check, String action) throws Exception {
 
+		System.out.println("----------------------- goToGroupAndPerforminWSDR --------------------");
 		moveToElement(er.kdrcidgroup + discussionRoomName + "']", "xpath");
 		click(er.kdrcidgroup + discussionRoomName + "']", discussionRoomName + " chat");
 		try {
@@ -434,6 +435,7 @@ public class KoraMessagesDRPage extends PageBase {
 	public void createDRwithAccessTypefromMessages(String workspacename, String NewDRname, String participantlist,
 			String AccessType) throws Exception {
 		try {
+			System.out.println("---------------------- createDRwithAccessTypefromMessages -------------");
 			click(er.kmcplusicon, "Plus icon to start new Dsicussion Room");
 			if (getAttributeValue(er.kdSearchboxinmsgnDR, "placeholder").equalsIgnoreCase("Search Messages"))
 				click(er.kmdiscussion, "Create a Discussion Room");
@@ -461,7 +463,6 @@ public class KoraMessagesDRPage extends PageBase {
 				koramessagespage.select(participantlist);
 			}
 			Thread.sleep(2000);
-
 			System.out.println("------------ Selecting Access Type -------");
 			click(er.kdrsettings, "Clicking on Setting icon in Right Side panel While creating DR");
 			// Validating Everyone at No workspace is displayed and its on or
@@ -494,9 +495,12 @@ public class KoraMessagesDRPage extends PageBase {
 			click(er.kdrsettings,
 					"Clicking on Setting icon in Right Side panel After creating DR and Setting Access Type");
 			System.out.println("----- Entering Data to Disucssion Room ---");
+			moveToElement(er.kmcenterparticipant, "xpath");
 			moveToElement(er.kcomposebar, "Moving to composebar");
 			click(er.kcomposebar, "Clicking on Compose Bar");
+			Thread.sleep(5000);
 			koramessagespage.enterYourMessageAs("Newely Created Discusion Room " + NewDRname);
+			Thread.sleep(5000);
 			korahomepage.waittillpageload();
 
 		} catch (Exception e) {
@@ -551,7 +555,13 @@ public class KoraMessagesDRPage extends PageBase {
 							"Reaction on post NOT Applied".toString() + test.addScreenCapture(takeScreenShot()));
 				}
 			}
-			click(er.kwclosecommentreadpopup, "Close pop up");
+			waitTillappear(er.kwclosecommentreadpopup, "xpath", "Close pop up");
+			if(remoteDriver.findElement(By.xpath(er.kwclosecommentreadpopup)).isDisplayed())
+			{
+				click(er.kwclosecommentreadpopup, "Close pop up");
+				System.out.println("-------------- Closed popup in validatingreactionsandCommentsonPost----------------");
+			}		
+			
 		} catch (Exception e) {
 			click(er.kwclosecommentreadpopup, "Close pop up");
 			test.log(LogStatus.FAIL, "Failed to validate reactions and Comments on a Post");
@@ -610,6 +620,7 @@ public class KoraMessagesDRPage extends PageBase {
 	}
 
 	public void atMentionValidationinDR() throws Exception {
+		try {
 		moveToElement(er.kwcomposebar, "xpath");
 		Thread.sleep(2000);
 		enterText(er.kwcomposebar, "@", "xpath", "Type your message");
@@ -618,9 +629,17 @@ public class KoraMessagesDRPage extends PageBase {
 		if (atmentionusers.size() > 0) {
 			test.log(LogStatus.WARNING, "@ mention showing the particiapants in list ".toString()
 					+ test.addScreenCapture(takeScreenShot()));
+			enterText(er.kwcomposebar, "", "xpath", "enter Empty message");
 		} else {
 			test.log(LogStatus.FAIL,
 					" @ Mention not Showing any Participants ".toString() + test.addScreenCapture(takeScreenShot()));
+			enterText(er.kwcomposebar, "", "xpath", "enter Empty message");
+			
+		}
+		}catch(Exception e){
+			enterText(er.kwcomposebar, "", "xpath", "enter Empty message");
+			e.printStackTrace();
+			
 		}
 	}
 
@@ -643,9 +662,10 @@ public class KoraMessagesDRPage extends PageBase {
 	 *            Discussion room or Group Conversation
 	 * @param Searchwith
 	 *            search with either name,groupname or Discussion room name
+	 * @throws Exception 
 	 */
 	public void forwardPosttonewconvorexisting(String post, String newconversation, String discRoomorConversationName,
-			String Searchwith) {
+			String Searchwith) throws Exception {
 		try {
 			click(er.kdforwardpost, "selecting forwarding  post");
 			waitTillappear(er.kdfowradpostWindow, "xpath", "Forward post window");
@@ -673,7 +693,6 @@ public class KoraMessagesDRPage extends PageBase {
 					click(er.kdemailaddresstoselect + newconversation + er.ksinglquote, "Participant Email Address");
 					test.log(LogStatus.INFO, newconversation + "is selected");
 				}
-
 				test.log(LogStatus.PASS, "Partcipants are selected in new conversation window"
 						+ test.addScreenCapture(takeScreenShot()));
 				click(er.kdcreatenforwardpost, "click on  Create & Forward");
@@ -702,17 +721,16 @@ public class KoraMessagesDRPage extends PageBase {
 							"Failed to validate Post forwarded successfully. message after post being forwarded");
 				}
 				click(er.kdfowradpostWindowclose, "Clicking to close forward post window");
-
-				/** Validate whether post is being forwarded or not */
-				korahomepage.refreshpage();
+				Thread.sleep(2000);
+				/** Validate whether post is being forwarded or not */				
 				korahomepage.selectTopLeftMenuOption("All Messages");
 				Thread.sleep(2000);
-				moveToElement(er.kmdmsgordiscroom + discRoomorConversationName + er.ksinglquote, "");
-				movetoaPostandClickon3dots(discRoomorConversationName, post, false);
-				System.out.println(er.kdrpostname0 + discRoomorConversationName + er.kdrpostname1 + post
-						+ er.ksinglquote + "/../..//i[@class='p-icon kr-return']");
-				elementIsDisplayed(er.kdrpostname0 + discRoomorConversationName + er.kdrpostname1 + post
-						+ er.ksinglquote + "/../..//i[@class='p-icon kr-return']", "xpath");
+//				moveToElement(er.kmdmsgordiscroom + discRoomorConversationName + er.ksinglquote, "");
+//				movetoaPostandClickon3dots(discRoomorConversationName, post, false);
+//				System.out.println(er.kdrpostname0 + discRoomorConversationName + er.kdrpostname1 + post
+//						+ er.ksinglquote + "/../..//i[@class='p-icon kr-return']");
+//				elementIsDisplayed(er.kdrpostname0 + discRoomorConversationName + er.kdrpostname1 + post
+//						+ er.ksinglquote + "/../..//i[@class='p-icon kr-return']", "xpath");
 
 			} else if (!Searchwith.equalsIgnoreCase("NA")) {
 				System.out.println("-------------------- Search people, chats & rooms in Forward post  ----------");
@@ -724,9 +742,10 @@ public class KoraMessagesDRPage extends PageBase {
 					Thread.sleep(2000);
 					if (remoteDriver.getPageSource().contains("Post forwarded successfully.")) {
 						test.log(LogStatus.PASS,
-								"Post forwarded successfully. message disaplyed after post being forwarded"
+								"Post forwarded successfully. message disaplyed after post being forwarded in Search with Email address"
 										+ test.addScreenCapture(takeScreenShot()));
 						click(er.kdfowradpostWindowclose, "Clicking to close forward post window");
+						Thread.sleep(2000);
 						korahomepage.selectTopLeftMenuOption("All Messages");
 						Thread.sleep(2000);
 						test.log(LogStatus.PASS, "Forwarded post is applied to Searched group/emails"
@@ -739,15 +758,18 @@ public class KoraMessagesDRPage extends PageBase {
 					test.log(LogStatus.FAIL,
 							"In Forward post 'people, chats & rooms' in Forward post didn't fetch any results "
 									+ test.addScreenCapture(takeScreenShot()));
+					click(er.kdfowradpostWindowclose, "Clicking to close forward post window");
 				}
 			} else {
 
 				test.log(LogStatus.WARNING,
 						"Please select either newconversation or Discussion Room or One one to messages to forward post");
+				click(er.kdfowradpostWindowclose, "Clicking to close forward post window");
 			}
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Forward post to new conversation or Group or Discussion room ");
+			click(er.kdfowradpostWindowclose, "Clicking to close forward post window");
 		}
 	}
 
@@ -777,10 +799,19 @@ public class KoraMessagesDRPage extends PageBase {
 			if (Option.equalsIgnoreCase("Mute")) {
 				click("//*[text()='" + Option + "']", "xpath");
 				click("//*[text()='" + Muteminutes + "']", "xpath");
+				Thread.sleep(3000);
 				test.log(LogStatus.PASS, "Mute action performed successfully on DR " + discRoom.toString()
 						+ test.addScreenCapture(takeScreenShot()));
 			} else {
+				
+				if(Option.equalsIgnoreCase("Star")&& remoteDriver.findElement(By.xpath(er.kwstarfilledstatus)).getText().trim().equalsIgnoreCase("Unstar"))
+				{
+					click(er.kwstarfilledstatus, "Clicking on Unstar");
+					Thread.sleep(2000);
+				}
+				
 				click("//*[text()='" + Option + "']", "xpath");
+				Thread.sleep(3000);
 				test.log(LogStatus.PASS, Option.toString() + " action performed successfully on DR "
 						+ discRoom.toString() + test.addScreenCapture(takeScreenShot()));
 			}
@@ -816,7 +847,7 @@ public class KoraMessagesDRPage extends PageBase {
 						click("//span[text()='" + part + "']", "Selecting email address " + part);
 						Thread.sleep(2000);
 						click(er.kwaddpeopleadinmember, "xpath");
-						Thread.sleep(2000);
+						Thread.sleep(5000);
 						test.log(LogStatus.PASS, "Added User to Memebrs list of Discussion Room"
 								+ test.addScreenCapture(takeScreenShot()));
 					}
@@ -828,7 +859,7 @@ public class KoraMessagesDRPage extends PageBase {
 					click("//span[text()='" + addpeople + "']", "Selecting email address " + addpeople);
 					Thread.sleep(2000);
 					click(er.kwaddpeopleadinmember, "xpath");
-					Thread.sleep(2000);
+					Thread.sleep(5000);
 					test.log(LogStatus.PASS,
 							"Added User to Memebrs list of Discussion Room" + test.addScreenCapture(takeScreenShot()));
 				}
@@ -844,6 +875,7 @@ public class KoraMessagesDRPage extends PageBase {
 						Thread.sleep(2000);
 						click(er.kwremovingmemebrindr, "removing the particiapant " + part);
 						click(er.kwremovingmemebrindrconfirm, "Confirm removing the particiapant " + part);
+						Thread.sleep(5000);
 						test.log(LogStatus.PASS, "Removing User from Memebrs list of Discussion Room"
 								+ test.addScreenCapture(takeScreenShot()));
 					}
@@ -855,6 +887,7 @@ public class KoraMessagesDRPage extends PageBase {
 					Thread.sleep(2000);
 					click(er.kwremovingmemebrindr, "removing the particiapant " + removepeople);
 					click(er.kwremovingmemebrindrconfirm, "Confirm removing the particiapant " + removepeople);
+					Thread.sleep(5000);
 					test.log(LogStatus.PASS, "Removing User from Memebrs list of Discussion Room"
 							+ test.addScreenCapture(takeScreenShot()));
 				}

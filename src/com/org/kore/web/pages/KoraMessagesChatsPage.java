@@ -175,7 +175,7 @@ public class KoraMessagesChatsPage extends PageBase {
 	public void select(String participant) throws Exception {
 
 		enterText(er.kmcenterparticipant, participant, "xpath", "Participant name");
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		waitTillappear(er.kmcsuggestmailids, "xpath", "Suggested emails");
 		List<WebElement> mailid = remoteDriver.findElements(By.xpath(er.kmcsuggestmailids));
 		for (WebElement e : mailid) {
@@ -200,9 +200,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			click(er.kmcgroupname, "GroupName");
 			Thread.sleep(1000);
 			enterText(er.kmcgroupname, groupname, "GroupName");
-			test.log(LogStatus.INFO, "Group created successfully as <b>" + groupname + "</b>".toString());
-			test.log(LogStatus.INFO, test.addScreenCapture(takeScreenShot()));
-
+			test.log(LogStatus.INFO, "Group created successfully as <b>" + groupname + "</b>".toString(),test.addScreenCapture(takeScreenShot()));
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to create Groupname");
 			test.log(LogStatus.FAIL, test.addScreenCapture(takeScreenShot()));
@@ -219,13 +217,14 @@ public class KoraMessagesChatsPage extends PageBase {
 		try {
 			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
 			compose.sendKeys(enterthistext, Keys.ENTER);
-			Thread.sleep(4000);
+			Thread.sleep(2000);
+			waitTillappear(er.kcomposebar, "xpath", "Waiting for compose bar");
 			chatheadername = getText("//div[@class='chatHeader']//span");
 			test.log(LogStatus.INFO, "In<b> " + chatheadername + " </b>Entered message as " + enterthistext
 					+ " ".toString() + test.addScreenCapture(takeScreenShot()));
-
+			
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Compose bar or Chat header name elements might got updated ".toString()
+			test.log(LogStatus.FAIL, "Compose bar or Chat header name is not displayed here".toString()
 					+ test.addScreenCapture(takeScreenShot()));
 		}
 
@@ -241,6 +240,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		try {
 			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
 			click(er.kmemoji, "Emoji");
+			Thread.sleep(2000);
 			test.log(LogStatus.WARNING,
 					"Emojis displayed, requires human eye to check the UI from the below screenshot".toString()
 							+ test.addScreenCapture(takeScreenShot()));
@@ -276,6 +276,7 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	public String getFirstActiveUser(String expecteduser, boolean check) throws Exception {
 		String activeuser = null;
+		Thread.sleep(3000);
 		try {
 			activeuser = getText(er.kmcfirstactiveuser);
 			test.log(LogStatus.INFO, "Current active user is " + activeuser);
@@ -415,7 +416,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			String timestamp = getText(er.kmcidgroup + groupname + "']/../..//span[@class='dayTime']");
 			test.log(LogStatus.INFO, "For " + groupname + " Timestamp displayed as : <b>" + timestamp + "</b>");
 			List<WebElement> ele = remoteDriver.findElements(By.xpath(
-					"//div[@class='userDetails active']//div[@class='userNameDiv'][text()='AutomationGroup']/../../..//div[@class='userChatDEsc']//span"));
+					er.kmcenterparticipant+"[text()='AutomationGroup']/../../..//div[@class='userChatDEsc']//span"));
 			for (WebElement e : ele) {
 				e.getText();
 				test.log(LogStatus.INFO,
@@ -528,12 +529,10 @@ public class KoraMessagesChatsPage extends PageBase {
 					break;
 				case "DeleteGroup":
 					System.out.println("In Delete");
-					click("//div[@class='userDetails active']//div[@class='userNameDiv'][text()='" + groupname
-							+ "']/../../..//div[@class='userChatDEsc']", "Delete Group");
+					click("//div[@class='userDetails active chat']//div[@class='userNameDiv'][text()='"+groupname+"']/../../../..//i[@class='icon __i right kr-delete']", "Delete Group");
 					Thread.sleep(1000);
-					click("//i[@class='icon __i right kr-delete']", "Delete Group");
-					test.log(LogStatus.PASS, groupname + " Deleted Successfully");
 					clickOn("Delete", true);
+					test.log(LogStatus.PASS, groupname + " Deleted Successfully");
 					break;
 				default:
 					test.log(LogStatus.FAIL,
@@ -542,7 +541,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "For <b>" + groupname + "</b> Unable to click on <b>" + action
-					+ "</b>... Seems element got updated ".toString() + test.addScreenCapture(takeScreenShot()));
+					+ "</b>.... Seems element got updated ".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 	}
@@ -1022,8 +1021,8 @@ public class KoraMessagesChatsPage extends PageBase {
 			test.log(LogStatus.FAIL, "Add Participants option displayed under General Tab");
 		clickOn("Members", true);
 		String addparticipants = getText("//div[@class='addParticipantsCtr-Btn']");
-		if (!manageconvttl.equalsIgnoreCase("Manage Conversation")
-				|| (!addparticipants.equalsIgnoreCase("Add Participants")))
+		if (!manageconvttl.equalsIgnoreCase("Manage Chat")
+				|| (!addparticipants.equalsIgnoreCase("Add people")))
 			test.log(LogStatus.FAIL, "New conversation text displayed as " + manageconvttl);
 		clickOn("General", true);
 		test.log(LogStatus.INFO, "Manage Conversation title displayed as : <b>" + manageconvttl + "</b> ");
@@ -1041,7 +1040,7 @@ public class KoraMessagesChatsPage extends PageBase {
 	public void AddParticipantsFromManage(String memberstoadd, boolean plusiconclick) throws Exception {
 		try {
 			clickOn("Members", false);
-			clickOn("Add Participants", true);
+			clickOn("Add people", true);
 			startNewConversationWith("chat", memberstoadd, false);
 			clickOn("Done", false);
 			validateRecentAddedParticipants(memberstoadd);
@@ -1148,7 +1147,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					clickOn("Remove", false);
 					click(er.kmremoveparticipantpopup, "Participant Remove from manage pop up");
 					test.log(LogStatus.INFO, "Removed : " + name);
-					Thread.sleep(8000);
+					Thread.sleep(3000);
 				}
 			} while ((memb));
 			test.log(LogStatus.PASS,
@@ -1213,20 +1212,33 @@ public class KoraMessagesChatsPage extends PageBase {
 
 			case "Reply Back":
 				System.out.println("In Reply back");
-				// click(er.kmmessagehoverreplyback, action + " on message
-				// hover");
 				click("//p[@class='chatUserTitle']/span[text()='" + user
 						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
 						+ "']/..//div[@class='msgCntrlBar _content']//i[@class='icon __i kr-return replyButton']",
-						action + " on message hover");
+						action + "on message hover");
 				Thread.sleep(1000);
 				compose.click();
-				test.log(LogStatus.PASS, "Selected Reply back option from the hover".toString()
+				test.log(LogStatus.PASS, "Selected Reply back option from the hover options".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 
-				if (subaction.contains("It is Reply")) {
+				if (subaction.equals("It is Reply")) {
 					compose.sendKeys(subaction, Keys.ENTER);
-					test.log(LogStatus.WARNING, "Replied successfully. Please check the UI with human eye".toString()
+					messagemarkafteraction = remoteDriver
+							.findElements(By.xpath("//p[@class='chatUserTitle']/span[text()='"+user+"']/../../../../../..//div[@class='replayBubbleText' and text()='"+message+"']/../../..//div[@class='send-message'][text() = '"+subaction+"']"))
+							.size()>0 ;
+							if(messagemarkafteraction){
+						test.log(LogStatus.PASS, "Selected Reply back option and replied successfully");
+						
+						test.log(LogStatus.WARNING, "Replied successfully. Please check the UI with human eye.. Sometimes it is displaying username instead of You".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+					} else {
+						test.log(LogStatus.FAIL,
+								"Replied text is not displayed after reply, or issue with auto scroll to the bottom after Reply"
+										.toString() + test.addScreenCapture(takeScreenShot()));
+					}
+					
+				}else {
+					test.log(LogStatus.FAIL, "Seems some issue with the input data. Please provide valid subaction i.e. It is Reply ".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 				}
 				break;
@@ -1341,7 +1353,7 @@ public class KoraMessagesChatsPage extends PageBase {
 
 			} else {
 				test.log(LogStatus.PASS,
-						"For long text, Read moreis not getting displayed, which is expected".toString()
+						"For long text, Read more is not getting displayed, which is expected".toString()
 								+ test.addScreenCapture(takeScreenShot()));
 			}
 
