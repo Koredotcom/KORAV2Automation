@@ -48,7 +48,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 	}
 
-	/*@Test(enabled = true, priority = 11)
+	@Test(enabled = true, priority = 11)
 	public void MC_TC13_createAndDeleteGroupWithNoName() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -84,7 +84,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate group creation with no name and delete the same conversation flow");
 		}
-	}*/
+	}
 
 	@Test(enabled = true, priority = 12)
 	public void MC_TC14_TC15_TC16_TC20_TC21_createNewGroupConversation() throws Exception {

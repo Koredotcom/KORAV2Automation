@@ -218,6 +218,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
 			compose.sendKeys(enterthistext, Keys.ENTER);
 			Thread.sleep(2000);
+			waitUntilDissapear("//div[@class='lds-ring']", "Loading to disappear");
 			waitTillappear(er.kcomposebar, "xpath", "Waiting for compose bar");
 			chatheadername = getText("//div[@class='chatHeader']//span");
 			test.log(LogStatus.INFO, "In<b> " + chatheadername + " </b>Entered message as " + enterthistext
@@ -416,7 +417,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			String timestamp = getText(er.kmcidgroup + groupname + "']/../..//span[@class='dayTime']");
 			test.log(LogStatus.INFO, "For " + groupname + " Timestamp displayed as : <b>" + timestamp + "</b>");
 			List<WebElement> ele = remoteDriver.findElements(By.xpath(
-					er.kmcenterparticipant+"[text()='AutomationGroup']/../../..//div[@class='userChatDEsc']//span"));
+					er.kmcfirstactiveuser+"[text()='AutomationGroup']/../../..//div[@class='userChatDEsc']//span"));
 			for (WebElement e : ele) {
 				e.getText();
 				test.log(LogStatus.INFO,
@@ -959,12 +960,12 @@ public class KoraMessagesChatsPage extends PageBase {
 	 *              this
 	 */
 	public void verifyGroupUpdateTimelines(String typeofAmend) throws Exception {
-		waitTillappear(
-				"//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
-						+ typeofAmend + "')]",
-				"xpath", "Timeline");
 		ArrayList<String> timelines = new ArrayList<>();
 		try {
+			waitTillappear(
+					"//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
+							+ typeofAmend + "')]",
+					"xpath", "Timeline");
 			moveToElement(
 					"//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
 							+ typeofAmend + "')]",
@@ -987,7 +988,7 @@ public class KoraMessagesChatsPage extends PageBase {
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"Failed to display timeline for amends".toString() + test.addScreenCapture(takeScreenShot()));
+					"Failed to display timeline for<b> "+typeofAmend+" </b>timeline".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 	}
 
@@ -1015,18 +1016,24 @@ public class KoraMessagesChatsPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void manageConversationValidations() throws Exception {
-		String manageconvttl = getText("//div[@class='dialog-title']");
-		int size = getSize("//div[@class='addParticipantsCtr-Btn']");
-		if (size > 0)
-			test.log(LogStatus.FAIL, "Add Participants option displayed under General Tab");
-		clickOn("Members", true);
-		String addparticipants = getText("//div[@class='addParticipantsCtr-Btn']");
-		if (!manageconvttl.equalsIgnoreCase("Manage Chat")
-				|| (!addparticipants.equalsIgnoreCase("Add people")))
-			test.log(LogStatus.FAIL, "New conversation text displayed as " + manageconvttl);
-		clickOn("General", true);
-		test.log(LogStatus.INFO, "Manage Conversation title displayed as : <b>" + manageconvttl + "</b> ");
-		test.log(LogStatus.INFO, "Add Participants text displayed as : <b>" + addparticipants + "</b> ");
+		try {
+			String manageconvttl = getText("//div[@class='dialog-title']");
+			int size = getSize("//div[@class='addParticipantsCtr-Btn']");
+			if (size > 0)
+				test.log(LogStatus.FAIL, "Add Participants option displayed under General Tab");
+			clickOn("Members", true);
+			String addparticipants = getText("//div[@class='addParticipantsCtr-Btn']");
+			if (!manageconvttl.equalsIgnoreCase("Manage Chat") || (!addparticipants.equalsIgnoreCase("Add People")))
+				test.log(LogStatus.FAIL, "New conversation text displayed as " + manageconvttl);
+
+			click("//div[@class='header-container']//*[text()='General']", "General");
+			test.log(LogStatus.INFO, "Manage Conversation title displayed as : <b>" + manageconvttl + "</b> ");
+			test.log(LogStatus.INFO, "Add Participants text displayed as : <b>" + addparticipants + "</b> ");
+		} catch (Exception e) {
+			click("//div[@class='header-container']//*[text()='General']", "General");
+			test.log(LogStatus.FAIL,
+					"Faled to validate manage conversation".toString() + test.addScreenCapture(takeScreenShot()));
+		}
 	}
 
 	/**
@@ -1124,6 +1131,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			click(er.kmcmanageclose, "Close button");
 
 		} catch (Exception e) {
+			click(er.kmcmanageclose, "Close button");
 			System.out.println(e);
 		}
 		return updatedname;
@@ -1147,7 +1155,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					clickOn("Remove", false);
 					click(er.kmremoveparticipantpopup, "Participant Remove from manage pop up");
 					test.log(LogStatus.INFO, "Removed : " + name);
-					Thread.sleep(3000);
+					Thread.sleep(1500);
 				}
 			} while ((memb));
 			test.log(LogStatus.PASS,
