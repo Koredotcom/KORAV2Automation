@@ -53,7 +53,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		directory = System.getProperty("user.dir");
 	}
 
-	@Test(enabled = false, priority = 25)
+	@Test(enabled = true, priority = 25)
 	public void MC_TC11_TC30_uploadFileBelow25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -96,7 +96,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = false, priority = 26)
+	@Test(enabled = true, priority = 26)
 	public void MC_TC31_TC49_uploadMultipleFilesAndView() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -113,7 +113,6 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			String doc=directory + insertdoc;
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",recepientuser, true);

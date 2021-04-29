@@ -69,7 +69,9 @@ public class KoraLoginPage extends PageBase {
 		test.log(LogStatus.PASS, "Entered Password".toString() + test.addScreenCapture(takeScreenShot()));
 		click(er.kosignin, "Signin");
 		test.log(LogStatus.PASS, "Selected Sign In".toString() + test.addScreenCapture(takeScreenShot()));
+		waitTillappear(er.kstaysignin, "xpath", "Stay Signin");
 		click(er.kstaysignin, "Stay Signin");
+		Thread.sleep(3000);
 		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
 		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName);
 		/* + " ".toString()+ test.addScreenCapture(takeScreenShot())); */

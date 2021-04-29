@@ -259,8 +259,8 @@ public class KoraMessagesDRPage extends PageBase {
 							+ test.addScreenCapture(takeScreenShot()));
 
 				default:
-					test.log(LogStatus.WARNING,
-							"Please provided valid on hover action i.e. , should be match with case value in METHOD perfromreactionsonPost");
+//					test.log(LogStatus.WARNING,
+//							"Please provided valid on hover action i.e. , should be match with case value in METHOD perfromreactionsonPost");
 				}
 				Thread.sleep(2000);
 			}
@@ -527,6 +527,7 @@ public class KoraMessagesDRPage extends PageBase {
 			String element = er.kdrpostname0 + discRoom + er.kdrpostname1;
 			moveToElement(element + post + er.ksinglquote, "xpath");
 			if (!commenttext.equals("") || !commenttext.equals(null)) {
+				moveToElement(element + post + er.ksinglquote + "/../..//*[contains(@class,'icon kr-comment')]", "xpath");
 				click(element + post + er.ksinglquote + "/../..//*[contains(@class,'icon kr-comment')]",
 						"Click on post ");
 				Thread.sleep(2000);
@@ -541,8 +542,8 @@ public class KoraMessagesDRPage extends PageBase {
 				}
 			}
 			if (!Whoreacted.equals("") || !Whoreacted.equals(null)) {
-				moveToElement(element + post + er.ksinglquote + "/../..//div[@class='postReaction']/div[1]", "xpath");
-				click(element + post + er.ksinglquote + "/../..//div[@class='postReaction']/div[1]",
+				moveToElement(element + post + er.ksinglquote + "/../..//div[@class='postReaction']/div[1]/i[1]", "xpath");
+				click(element + post + er.ksinglquote + "/../..//div[@class='postReaction']/div[1]/i[1]",
 						"Clicking on Ractions");
 				Thread.sleep(2000);
 				String actualuserwhoreacted = getText(element + post + er.ksinglquote

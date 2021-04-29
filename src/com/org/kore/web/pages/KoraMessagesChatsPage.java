@@ -263,7 +263,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		String chatheadername = null;
 		try {
 			chatheadername = getText("//div[@class='chatHeader']//span");
-			if (chatheadername.equalsIgnoreCase("and NaN others")) {
+			if (chatheadername.equalsIgnoreCase("and NaN others")||(chatheadername.equalsIgnoreCase(" and NaN others"))) {
 				test.log(LogStatus.FAIL, "Displayed invalid group name as and NaN others".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 			}
@@ -612,9 +612,10 @@ public class KoraMessagesChatsPage extends PageBase {
 			}
 			test.log(LogStatus.INFO, "Mute slots".toString() + test.addScreenCapture(takeScreenShot()));
 			if (select) {
-				System.out.println("Selecting mute slot i.e. " + options.get(0).getText());
+				String selectedslot =options.get(0).getText();
+				System.out.println("Selecting mute slot i.e. " + selectedslot);
 				options.get(0).click();
-				test.log(LogStatus.PASS, "Selected a slot and Muted the thread");
+				test.log(LogStatus.PASS, "Selected a slot and Muted the thread <b>"+selectedslot+" </b>");
 			}
 
 		} catch (Exception e) {
@@ -710,9 +711,20 @@ public class KoraMessagesChatsPage extends PageBase {
 	 *            : Expected message
 	 * @throws Exception
 	 */
-	public void checkEmptyScreen() throws Exception {
-		String expected = "How about, Let’s start with just a hello?";
-		try {
+	public void checkEmptyScreen(String user, String message) throws Exception {
+		//String expected = "How about, Let’s start with just a hello?";
+		boolean clearchatstate=false;
+		clearchatstate = remoteDriver.findElements(By.xpath("//p[@class='chatUserTitle']/span[text()='" + user
+		+ "']/../../../../../..//div[@class='send-message' and text()='" + message
+		+ "']")).size() > 0;
+		if (!clearchatstate){
+			test.log(LogStatus.WARNING, "Displayed empty screen i.e. it got cleared previous message".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}else{
+			test.log(LogStatus.FAIL, "After clear conversation it is still displaying previous messages on the chat".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		
+		/*try {
 			String actual = getText("//div[@class='emptyScreenMsg']").trim();
 			if (actual.equals(expected)) {
 				test.log(LogStatus.PASS, "Displayed empty screen message as expected".toString()
@@ -726,7 +738,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
 					"How about, Let’s start with just a hello? is not displayed in empty screen validation".toString()
-							+ test.addScreenCapture(takeScreenShot()));
+							+ test.addScreenCapture(takeScreenShot()));*/
 		}
 	}
 
@@ -962,8 +974,9 @@ public class KoraMessagesChatsPage extends PageBase {
 	public void verifyGroupUpdateTimelines(String typeofAmend) throws Exception {
 		ArrayList<String> timelines = new ArrayList<>();
 		try {
-			waitTillappear(
-					"//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
+			//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly' and contains(text(),'cleared')]
+			waitToappear(
+					"//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly' and contains(text(),'"
 							+ typeofAmend + "')]",
 					"xpath", "Timeline");
 			moveToElement(
@@ -1225,12 +1238,12 @@ public class KoraMessagesChatsPage extends PageBase {
 						+ "']/..//div[@class='msgCntrlBar _content']//i[@class='icon __i kr-return replyButton']",
 						action + "on message hover");
 				Thread.sleep(1000);
-				compose.click();
 				test.log(LogStatus.PASS, "Selected Reply back option from the hover options".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 
 				if (subaction.equals("It is Reply")) {
 					compose.sendKeys(subaction, Keys.ENTER);
+					Thread.sleep(5000);
 					messagemarkafteraction = remoteDriver
 							.findElements(By.xpath("//p[@class='chatUserTitle']/span[text()='"+user+"']/../../../../../..//div[@class='replayBubbleText' and text()='"+message+"']/../../..//div[@class='send-message'][text() = '"+subaction+"']"))
 							.size()>0 ;
@@ -1256,7 +1269,7 @@ public class KoraMessagesChatsPage extends PageBase {
 				click(er.kmmessagehoveroptiontitles + action + er.ksinglquote, action + " on message hover");
 				Thread.sleep(1000);
 				break;
-
+				
 			case "More":
 				System.out.println("In messge on hover 3dots ");
 				click("//p[@class='chatUserTitle']/span[text()='" + user
@@ -1273,7 +1286,6 @@ public class KoraMessagesChatsPage extends PageBase {
 					test.log(LogStatus.PASS,
 							"Same text pasted successfully".toString() + test.addScreenCapture(takeScreenShot()));
 				} else if (subaction.equalsIgnoreCase("Edit")) {
-					compose.click();
 					compose.sendKeys("Edited", Keys.ENTER);
 					if (messagemarkafteraction = remoteDriver
 							.findElements(By.xpath("//p[@class='chatUserTitle']/span[text()='" + user

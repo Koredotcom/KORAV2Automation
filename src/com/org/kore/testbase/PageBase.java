@@ -431,6 +431,57 @@ public class PageBase extends DriverSetUp {
 			throw new Exception(exc);
 		}
 	}
+	
+	public void waitToappear(String locator, String locatorType, String elementName) throws Exception {
+		try {
+			switch (DriverSetUp.propsMap.get("tool")) {
+
+			case "Appium":
+
+				WebDriverWait wait = new WebDriverWait(appiumDriver, 20, 500);
+				if (locatorType.equalsIgnoreCase("xpath")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+				} else if (locatorType.equalsIgnoreCase("id")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("css")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("name")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(locator)));
+
+				}
+
+				break;
+			case "Selenium":
+
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
+				if (locatorType.equalsIgnoreCase("xpath")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+				} else if (locatorType.equalsIgnoreCase("id")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.id(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("css")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("name")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.name(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("class")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.className(locator)));
+
+				}
+
+				break;
+			}
+
+		} catch (Exception exc) {
+			System.out.println("Failed to find " + locator+" i.e."+ elementName);
+			test.log(LogStatus.FAIL,
+					elementName + " element is not displayed ".toString() + test.addScreenCapture(takeScreenShot()));
+			throw new Exception(exc);
+		}
+	}
 
 	public void click(WebElement e, String elementName) throws Exception {
 		try {

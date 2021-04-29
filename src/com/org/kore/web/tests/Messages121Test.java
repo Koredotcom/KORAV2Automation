@@ -119,8 +119,9 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 4)
-	public void MC_TC12_TC34_TC35_DeleteAndCheckActiveParticipant_Copy() throws Exception {
+	// False due to KV2-2089
+	@Test(enabled = false, priority = 4)
+	public void MC_TC12_TC34_DeleteAndCheckActiveParticipant_Copy() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -220,7 +221,7 @@ public class Messages121Test extends DriverSetUp {
 	} 
 
 	@Test(enabled = true, priority = 8)
-	public void MC_TC47_Replyback() throws Exception {
+	public void MC_TC35_TC47_Replyback() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -250,7 +251,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = false, priority = 9)
+	@Test(enabled = true, priority = 9)
 	public void MC_TC52_Forward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())

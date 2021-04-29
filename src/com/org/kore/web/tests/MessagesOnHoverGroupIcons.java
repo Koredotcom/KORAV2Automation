@@ -70,26 +70,6 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 19)
-	public void MC_TC35_koraOnHoverParticipantsValidation() throws Exception {
-		try {
-			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_Messages_Chats");
-			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
-			String Messages = DriverSetUp.testdataMap.get("messages");
-			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
-			test.log(LogStatus.INFO, "Navigation url :" + url);
-			
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.getOnHoverParticipantsCount(groupname, korajusername);
-			extent.endTest(test);
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate on hover participants count");
-		}
-	}
-
-	@Test(enabled = true, priority = 20)
 	public void MC_TC23_koraGroupChat3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -107,14 +87,14 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			koramessagespage.goToGroupAndPerform(groupname, false, "NA");
 			koramessagespage.enterYourMessageAs("Sending Group Message");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
-			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expected3dotoptions,"middle");
+			koramessagespage.optionsDisplayedOn3Dots("Group Chat", expected3dotoptions,"middle");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate 3 dot options for a group");
 		}
 	}
 	
-	@Test(enabled = true, priority = 21)
+	@Test(enabled = true, priority = 20)
 	public void MC_TC_22_TC_39_TC_40_koraMuteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -133,6 +113,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			koramessagespage.validateAndSelectMuteSlots(muteslots, true);
 			korahomepage.selectTopLeftMenuOption("Muted");
 			koramessagespage.searchAndSelectFrom("Muted", groupname, true);
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "UnMute");
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -140,7 +121,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 22)
+	@Test(enabled = true, priority = 21)
 	public void MC_TC_22_TC_36_validateStarredChats() throws Exception {
 		
 		try {
@@ -159,7 +140,8 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
-			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
 			koramessagespage.goToGroupAndPerform(user, true, "Star");
 			korahomepage.selectTopLeftMenuOption(Starred);
 			koramessagespage.searchAndSelectFrom(Starred, user, true);
@@ -170,7 +152,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 23)
+	@Test(enabled = true, priority = 22)
 	public void MC_TC_22_TC_38_validateUnreadChats() throws Exception {
 		
 		try {
@@ -188,7 +170,8 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",newparticipants, true);
-			user = koramessagespage.enterYourMessageAs(onetoonetext);
+			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
 			koramessagespage.goToGroupAndPerform(user, true, "Unread");
 			korahomepage.selectTopLeftMenuOption("Unread");
 			koramessagespage.goToGroupAndPerform(user, false, "na");
@@ -198,7 +181,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 24)
+	@Test(enabled = true, priority = 23)
 	public void MC_TC44_koraAtmentionUsers() throws Exception {
 		
 		try {
@@ -221,4 +204,28 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
 		}
 	}
+	
+	/**
+	 * This will become NA since Group onHover count functionality got removed
+	 * @throws Exception
+	 */
+	/*@Test(enabled = true, priority = 24)
+	public void MC_TC35_koraOnHoverParticipantsValidation() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagespage.getOnHoverParticipantsCount(groupname, korajusername);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate on hover participants count");
+		}
+	}*/
 }

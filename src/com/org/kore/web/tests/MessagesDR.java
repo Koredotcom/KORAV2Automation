@@ -166,6 +166,7 @@ public class MessagesDR extends DriverSetUp {
 	}
 
 
+
 	@Test(enabled = true, priority = 32)
 	public void MDR_TC11_TC41_TC42_TC46_TC58_likeCommentToAPost() throws Exception {
 		try {
@@ -196,7 +197,12 @@ public class MessagesDR extends DriverSetUp {
 			koraloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);							
 			korahomepage.selectMenuOption(Messages);			
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
-			koramessagedrpage.validatingreactionsandCommentsonPost(standarddrname,drpost,ReactedUserName,drcomment);					
+			koramessagedrpage.validatingreactionsandCommentsonPost(standarddrname,drpost,ReactedUserName,drcomment);
+			
+			koramessagedrpage.perfromreactionsonPost(standarddrname, drpost, "More", false,"");
+			koramessagedrpage.messagesreadinPostinfandMsginfo(ReactedUserName);
+			
+						
 			extent.endTest(test);
 
 		} catch (Exception e) {
@@ -216,7 +222,7 @@ public class MessagesDR extends DriverSetUp {
 			String standarddiscroom = DriverSetUp.drdataMap.get("standarddr"); // ??
 			String expWDRmiddle3dotoptions = DriverSetUp.drdataMap.get("wexpected3dotoptionsmiddle");
 			String expWDRright3dotoptions = DriverSetUp.drdataMap.get("wexpected3dotoptionsright");
-			test.log(LogStatus.INFO, "Navigation url :" + url);
+			test.log(LogStatus.INFO, "Navigation url :" + url);			
 			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
