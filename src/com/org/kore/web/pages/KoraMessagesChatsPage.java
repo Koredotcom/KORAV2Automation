@@ -1201,6 +1201,9 @@ public class KoraMessagesChatsPage extends PageBase {
 		boolean messagemarkafteraction = false;
 		try {
 			Thread.sleep(3000);
+			if(action.equalsIgnoreCase("Reactions")){
+				System.out.println("Do nothing in try");
+			}else {
 			moveToElement(er.kmmessages + message + er.ksinglquote, "xpath");
 			Thread.sleep(1000);
 			moveToElement(er.kmmessages + message + er.ksinglquote + "/.." + er.kmmessagehoveroptiontitles + action
@@ -1208,10 +1211,10 @@ public class KoraMessagesChatsPage extends PageBase {
 			test.log(LogStatus.PASS, "For <b>" + message + "</b> on hover options displayed and focus moved to <b>"
 					+ action + "</b> as per below screenshot ".toString() + test.addScreenCapture(takeScreenShot()));
 			Thread.sleep(1000);
+			}
 			switch (action.trim()) {
 			case "Reactions":
 				System.out.println("In Reactions");
-
 				click("//p[@class='chatUserTitle']/span[text()='" + user
 						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
 						+ "']/..//div[@class='msgCntrlBar _content']//i[@title='" + subaction + "']",

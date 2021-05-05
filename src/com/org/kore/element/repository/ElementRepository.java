@@ -44,7 +44,7 @@ public class ElementRepository {
 			kwaddpeopleplacehilder = null, kwmemebrsinaDreamilaccess0 = null, kwmemebrsinaDreamilaccess1 = null,
 			kwremovingmemebrindr = null, kwremovingmemebrindrconfirm = null, kwaddpeopleadinmember = null,
 			kwpostinfonMessageinfofrom3dots = null, kdpostinfonmsginfoTitle = null, kwclosecommentreadpopup = null,
-			kwstarfilledstatus = null;
+			kwstarfilledstatus = null,kmchatname0=null,kmchatname1=null,kwatmentionuserslist=null;
 
 	public void repoIOS() {
 
@@ -197,6 +197,9 @@ public class ElementRepository {
 		kdpostinfonmsginfoTitle = "//span[@class='p-dialog-title']";
 		kwclosecommentreadpopup = "//span[@class='kr-close']";
 		kwstarfilledstatus = "//div[contains(@class,'krDropDownMenu chatHeaderOptions')]/div[1]//i[contains(@class,'icon kr-starred')]";
+		kmchatname0="//p[@class='chatUserTitle']/span[text()='";
+		kmchatname1="']/../../../../../..//div[@class='send-message' and text()='";		
+		kwatmentionuserslist="//table[@class='mentionDialogBoxTable']/tbody/tr";
 	}
 
 }

@@ -36,7 +36,8 @@
 		"xlsxexe": "/FileAttachments/AutoItCompiles/jattachxlsxfile.exe",
 		"pngexe": "/FileAttachments/AutoItCompiles/jpngfile.exe",
 		"zipexe": "/FileAttachments/AutoItCompiles/jzipfile.exe",
-		"allfilesexe": "/FileAttachments/AutoItCompiles/jallfiles.exe"
+		"allfilesexe": "/FileAttachments/AutoItCompiles/jallfiles.exe",
+		"23mbfile": "/FileAttachments/AutoItCompiles/j23mbzipfile.exe"
 	},
 	"TESTDATAgmail": {
 		"messages": "Messages",

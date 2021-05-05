@@ -54,7 +54,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 25)
-	public void MC_TC11_TC30_uploadFileBelow25MB() throws Exception {
+	public void MC_TC11_TC30_uploadAllIndividualFilesBelow25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -83,12 +83,12 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
-			korahomepage.uploadfilesfromAttachment(doc,true, "doc file");
-			korahomepage.uploadfilesfromAttachment(mp4,true, "mp4 file");
-			korahomepage.uploadfilesfromAttachment(pdf,true, "pdf file");
-			korahomepage.uploadfilesfromAttachment(xlsx,true, "xlsx file");
-			korahomepage.uploadfilesfromAttachment(png,true, "png file");
-			korahomepage.uploadfilesfromAttachment(zip,true, "zip file");
+			korahomepage.uploadfilesfromAttachment(doc,true, "doc file", false);
+			korahomepage.uploadfilesfromAttachment(mp4,true, "mp4 file", false);
+			korahomepage.uploadfilesfromAttachment(pdf,true, "pdf file", false);
+			korahomepage.uploadfilesfromAttachment(xlsx,true, "xlsx file", false);
+			korahomepage.uploadfilesfromAttachment(png,true, "png file", false);
+			korahomepage.uploadfilesfromAttachment(zip,true, "zip file", false);
 			
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -118,8 +118,8 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			koramessagespage.startNewConversationWith("chat",recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			
-			korahomepage.uploadfilesfromAttachment(doc,true, "doc file");
-			korahomepage.uploadfilesfromAttachment(allfiles,true, "Multiple file formats");
+			korahomepage.uploadfilesfromAttachment(doc,true, "doc file",false);
+			korahomepage.uploadfilesfromAttachment(allfiles,true, "Multiple file formats", true);
 			koramessagespage.selectOptionFromRightNav3Dots(user, "View Files");
 			extent.endTest(test);
 			
@@ -128,8 +128,8 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = false,priority = 27)
-	public void MC_uploadFileabove25MB() throws Exception {
+	@Test(enabled = true,priority = 27)
+	public void MC_TC53_uploadFileabove25MBAndCancel() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -139,15 +139,14 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			String recepientuser = DriverSetUp.UtilityMap.get("recepientuser");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			// need to add file which is having more than 25 mb
-			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
-			String allfiles=directory + insertdoc;
+			String ziptocancel = DriverSetUp.UtilityMap.get("23mbfile");
+			String ziptocancel23mb=directory + ziptocancel;
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith("chat",recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
-			korahomepage.uploadfilesfromAttachment(allfiles,true, "Beyond 25 MB file");
-			
+			korahomepage.cancelWhileUploadingfiles(ziptocancel23mb,"25 MB", true);
 			
 			extent.endTest(test);
 		} catch (Exception e) {

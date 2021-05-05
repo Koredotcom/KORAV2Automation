@@ -1,5 +1,7 @@
 package com.org.kore.web.tests;
 
+import java.util.List;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -56,7 +58,6 @@ public class MessagesDR extends DriverSetUp {
 		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 
 	}
-
 	
 	@Test(enabled = false, priority = 28)
 	public void MDR_TC1_TC2_TC3_TC65_createNewWorkspaceAndDelete() throws Exception {
@@ -69,8 +70,7 @@ public class MessagesDR extends DriverSetUp {
 			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
 			String workspacename = DriverSetUp.drdataMap.get("workspacename123");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
+						
 			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.createNewWorkspaceAndCheckDefault(workspacename);
 			koraworkspacepage.clickOnWorkspace3Dots(workspacename);
@@ -164,8 +164,6 @@ public class MessagesDR extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate default DR and Timeline (General name might got changed)");
 		}
 	}
-
-
 
 	@Test(enabled = true, priority = 32)
 	public void MDR_TC11_TC41_TC42_TC46_TC58_likeCommentToAPost() throws Exception {
@@ -370,7 +368,7 @@ public class MessagesDR extends DriverSetUp {
 	 * room
 	 */
 	@Test(enabled = true, priority = 38)
-	public void MDR_TC59_atmentionUsersinDr() throws Exception {
+	public void MDR_TC7_atmentionUsersinDr() throws Exception {
 
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -380,17 +378,23 @@ public class MessagesDR extends DriverSetUp {
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 
-			test.log(LogStatus.INFO, "Navigation url :" + url);
+			test.log(LogStatus.INFO, "Navigation url :" + url);			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");
-			koramessagedrpage.atMentionValidationinDR();
+			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(standarddrname, "Manage Room","N/A");
+			List<String> membersingroup=koramessagedrpage.addandremovepeoplefromdiscussionRoom(standarddrname,"N/A","N/A");
+			String atmentionmsg = "at mention Automation "+korahomepage.runtimehhmmss();
+			koramessagedrpage.atMentionValidationinDR(membersingroup,"james@koraqa1.com", atmentionmsg);			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
 		}
 	}
 
+	
+
+			
 	/**
 	 * Forward post to new conversation , Existing and DR
 	 */

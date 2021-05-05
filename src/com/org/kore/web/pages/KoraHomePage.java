@@ -168,11 +168,13 @@ public class KoraHomePage extends PageBase {
 	 *            : if it is true, attachment will go with a message, else only
 	 *            attachment will be sent alone
 	 * @param message
-	 *            : THis message will be used for reporting purpose as well as
+	 *            : This message will be used for reporting purpose as well as
 	 *            for message with attachment
+	 * @param processscreenshots
+	 * 			  : If this parameter is true, it will capture the screenshots while loading to upload
 	 * @throws Exception
 	 */
-	public void uploadfilesfromAttachment(String autoitfilepath, boolean imagewithtext, String message)
+	public void uploadfilesfromAttachment(String autoitfilepath, boolean imagewithtext, String message, boolean processscreenshots)
 			throws Exception {
 		boolean loading = false;
 		int counter = 0;
@@ -186,12 +188,21 @@ public class KoraHomePage extends PageBase {
 				loading = remoteDriver.findElements(By.xpath("//div[@class='small-Loader loading-screen']")).size() > 0;
 				if (loading) {
 					Thread.sleep(1000);
+					if (processscreenshots){
+					test.log(LogStatus.INFO,
+							"While uploading <b>" + message
+									+ "</b> displayed loading indicator".toString()
+									+ test.addScreenCapture(takeScreenShot()));
+					}else{
+						System.out.println("Uploading but not reporting in results");
+					}
 					counter++;
 				}
 			} while ((loading) || (counter > 30));
 			Thread.sleep(1000);
 			moveToElement(er.kcomposebar, "xpath");
 			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
+			click(er.kcomposebar, "Compose Bar");
 			if (imagewithtext)
 				compose.sendKeys(message, Keys.ENTER);
 			compose.sendKeys(Keys.ENTER);
@@ -204,6 +215,46 @@ public class KoraHomePage extends PageBase {
 			test.log(LogStatus.WARNING,
 					"Below screenshot requires human eye to check user interface hence TC marked as Warning");
 			test.log(LogStatus.WARNING, "Uploaded <b>" + message + "</b> successfully".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"Failed to upload " + message
+							+ ". It is either because of attachment element or Auto IT ".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+		}
+	}
+	
+	
+	public void cancelWhileUploadingfiles(String autoitfilepath, String message, boolean processscreenshots)
+			throws Exception {
+		boolean loading = false;
+		int counter = 0;
+		try {
+			click(er.kattachment, "Attachment");
+			Thread.sleep(2000);
+			System.out.println("About to run auto it to upload : " + message);
+			Runtime.getRuntime().exec(autoitfilepath);
+			Thread.sleep(3000);
+			do {
+				loading = remoteDriver.findElements(By.xpath("//div[@class='small-Loader loading-screen']")).size() > 0;
+				if (loading) {
+					Thread.sleep(1000);
+					if (processscreenshots){
+					test.log(LogStatus.WARNING,
+							"While uploading <b>" + message
+									+ "</b> displayed loading indicator".toString()
+									+ test.addScreenCapture(takeScreenShot()));
+					}else{
+						System.out.println("Uploading but not reporting in results");
+					}
+					counter++;
+				}
+			} while ((loading) && (counter > 3));
+			moveToElement("//div[@class='small-Loader loading-screen']", "xpath");
+			click("//span[@class='attachment-close']", "Cancel Attachment");
+			test.log(LogStatus.INFO,
+					"Canceled the attachment while uploading".toString()
 					+ test.addScreenCapture(takeScreenShot()));
 
 		} catch (Exception e) {

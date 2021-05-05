@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.org.kore.testbase.DriverSetUp;
 import com.org.kore.web.pages.KoraHomePage;
 import com.org.kore.web.pages.KoraLoginPage;
+import com.org.kore.web.pages.KoraMessagesDRPage;
 import com.org.kore.web.pages.KoraMessagesChatsPage;
 import com.relevantcodes.extentreports.LogStatus;
 
@@ -20,6 +21,8 @@ public class Messages121Test extends DriverSetUp {
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
 	KoraMessagesChatsPage koramessagespage;
+	KoraMessagesDRPage koramessagedrpage;
+	
 
 	String korajusername;
 	String korajpassword;
@@ -198,7 +201,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 7)
-	public void MC_TC38_checkChatsDRSAndAllMessagesSections() throws Exception {
+	public void MC_TC38_TC55_TC56_checkChatsDRSAndAllMessagesSections() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -207,12 +210,22 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Chats");
 			koramessagespage.validateChatsAndDRS(true, false);
+			korahomepage.selectMenuOption("Workspaces");
+			korahomepage.selectMenuOption(Messages);
+			koramessagespage.validateChatsAndDRS(true, false);
+			
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			korahomepage.selectMenuOption("Workspaces");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.validateChatsAndDRS(false, true);
+			
 			korahomepage.selectTopLeftMenuOption("All Messages");
+			korahomepage.selectMenuOption("Workspaces");
+			korahomepage.selectMenuOption(Messages);
 			koramessagespage.validateChatsAndDRS(true, true);
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -297,21 +310,30 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
+			
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);			
+			korahomepage.selectMenuOption(Messages);			
+			korahomepage.selectTopLeftMenuOption("Chats");
+			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");			
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 
 			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
-			koramessagespage.goToGroupAndPerform("James Middleton", false, "NA");
+			String ReactedUserName=koraloginpage.getUserDetails();
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Chats");
+			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
 			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "Reactions", "Like");
 
+			
 			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform(user, false, "NA");
+			korahomepage.selectMenuOption(Messages);			
+			korahomepage.selectTopLeftMenuOption("Chats");
+			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
+			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Like");
+						
+			koramessagedrpage.messagesreadinPostinfandMsginfo(ReactedUserName);
+			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Reactionas functionality");

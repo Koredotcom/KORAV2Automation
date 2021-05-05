@@ -1,8 +1,11 @@
 package com.org.kore.web.pages;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -24,7 +27,8 @@ public class KoraMessagesDRPage extends PageBase {
 	ElementRepository er = DriverSetUp.er;
 	KoraMessagesChatsPage koramessagespage;
 	KoraHomePage korahomepage;
-
+	List<String> listofusersinatmention = new ArrayList<String>();
+	List<String> totalmemebersinRoom = new ArrayList<String>() ;
 	public KoraMessagesDRPage(RemoteWebDriver remoteWebDriver) {
 		super(remoteWebDriver);
 		cf = new CPCommonFunctions(remoteWebDriver);
@@ -131,7 +135,7 @@ public class KoraMessagesDRPage extends PageBase {
 					} catch (Exception e) {
 						test.log(LogStatus.FAIL,
 								discussionRoomName + " Badge count was not displayed for unread chat".toString()
-										+ test.addScreenCapture(takeScreenShot()));
+								+ test.addScreenCapture(takeScreenShot()));
 					}
 					break;
 				case "3dots":
@@ -259,8 +263,8 @@ public class KoraMessagesDRPage extends PageBase {
 							+ test.addScreenCapture(takeScreenShot()));
 
 				default:
-//					test.log(LogStatus.WARNING,
-//							"Please provided valid on hover action i.e. , should be match with case value in METHOD perfromreactionsonPost");
+					//					test.log(LogStatus.WARNING,
+					//							"Please provided valid on hover action i.e. , should be match with case value in METHOD perfromreactionsonPost");
 				}
 				Thread.sleep(2000);
 			}
@@ -338,7 +342,7 @@ public class KoraMessagesDRPage extends PageBase {
 							discussionRoomName + " was Unstarred".toString() + test.addScreenCapture(takeScreenShot()));
 				}
 				break;
-			// i[contains(@class,'icon __i kr-audio')]
+				// i[contains(@class,'icon __i kr-audio')]
 
 			case "MUTE":
 				System.out.println("In MUTE");
@@ -405,7 +409,7 @@ public class KoraMessagesDRPage extends PageBase {
 					} catch (Exception e) {
 						test.log(LogStatus.FAIL,
 								discussionRoomName + " Badge count was not displayed for unread chat".toString()
-										+ test.addScreenCapture(takeScreenShot()));
+								+ test.addScreenCapture(takeScreenShot()));
 					}
 				}
 				break;
@@ -562,7 +566,7 @@ public class KoraMessagesDRPage extends PageBase {
 				click(er.kwclosecommentreadpopup, "Close pop up");
 				System.out.println("-------------- Closed popup in validatingreactionsandCommentsonPost----------------");
 			}		
-			
+
 		} catch (Exception e) {
 			click(er.kwclosecommentreadpopup, "Close pop up");
 			test.log(LogStatus.FAIL, "Failed to validate reactions and Comments on a Post");
@@ -578,11 +582,11 @@ public class KoraMessagesDRPage extends PageBase {
 			click(er.kmdmsgordiscroom + chatordiscroomname + er.ksinglquote, "chatordiscroomname");
 			test.log(LogStatus.FAIL,
 					"Even after After Deleting/Starring/Muting/... Discussion room We are not able to see the Discussion Room in particular Section"
-							.toString() + test.addScreenCapture(takeScreenShot()));
+					.toString() + test.addScreenCapture(takeScreenShot()));
 		} catch (Exception e) {
 			test.log(LogStatus.PASS,
 					"After Deleting/Starring/Muting/... Discussion room We are not able to see the Discussion Room "
-							.toString() + test.addScreenCapture(takeScreenShot()));
+					.toString() + test.addScreenCapture(takeScreenShot()));
 		}
 	}
 
@@ -620,28 +624,66 @@ public class KoraMessagesDRPage extends PageBase {
 		}
 	}
 
-	public void atMentionValidationinDR() throws Exception {
-		try {
-		moveToElement(er.kwcomposebar, "xpath");
-		Thread.sleep(2000);
-		enterText(er.kwcomposebar, "@", "xpath", "Type your message");
-		Thread.sleep(2000);
-		List<WebElement> atmentionusers = remoteDriver.findElements(By.xpath(er.kmcatmentionusernames));
-		if (atmentionusers.size() > 0) {
-			test.log(LogStatus.WARNING, "@ mention showing the particiapants in list ".toString()
-					+ test.addScreenCapture(takeScreenShot()));
-			enterText(er.kwcomposebar, "", "xpath", "enter Empty message");
-		} else {
-			test.log(LogStatus.FAIL,
-					" @ Mention not Showing any Participants ".toString() + test.addScreenCapture(takeScreenShot()));
-			enterText(er.kwcomposebar, "", "xpath", "enter Empty message");
-			
-		}
+
+	public void atMentionValidationinDR(List<String> membersingroup, String mentionemailaddress, String mentionmessage) throws Exception {
+
+		try {						
+			moveToElement(er.kwcomposebar, "xpath");
+			Thread.sleep(2000);
+			enterText(er.kwcomposebar, "@", "xpath", "Type your message");
+			Thread.sleep(10000);			
+			List<WebElement> atmentionusers = remoteDriver.findElements(By.xpath(er.kwatmentionuserslist));
+			if (atmentionusers.size() > 0) {
+				for(int i=1;i<=atmentionusers.size();i++)
+				{					
+					String useremailaddressincompose= remoteDriver.findElement(By.xpath("//table[@class='mentionDialogBoxTable']/tbody/tr["+i+"]/td[2]/div/span[@class='mentionEmailId']")).getText().trim();
+					if(!useremailaddressincompose.equalsIgnoreCase("everyone") ||!useremailaddressincompose.equals(""))
+						listofusersinatmention.add(useremailaddressincompose);
+				}
+				listofusersinatmention.removeIf(item -> item.isEmpty());	
+				test.log(LogStatus.PASS, "in Compose Bar @ mention showing the particiapants in list ".toString()+listofusersinatmention
+						+ test.addScreenCapture(takeScreenShot()));								
+				if(mentionemailaddress.contains("@"))
+				{
+					String mentionedNAmeicompose=remoteDriver.findElement(By.xpath("//span[@class='mentionEmailId' and text()='"+mentionemailaddress+"']/../span[1]")).getText().toLowerCase();
+					remoteDriver.findElement(By.xpath("//span[@class='mentionEmailId' and text()='"+mentionemailaddress+"']")).click();
+					Thread.sleep(3000);						
+					String arr[]=mentionedNAmeicompose.split(" ");
+					mentionedNAmeicompose="";
+					for(String x : arr)
+					{
+						mentionedNAmeicompose+=x;
+					}					
+					enterText(er.kwcomposebar, "@"+mentionedNAmeicompose+" "+mentionmessage+"\n", "xpath","enter  message "+mentionmessage);
+				}else {
+					enterText(er.kwcomposebar, "", "xpath", "enter Empty message");
+				}
+				// Users from 				
+				Collections.sort(listofusersinatmention);
+				// Users from Manage Group
+				Collections.sort(membersingroup);
+
+				boolean boolval = membersingroup.equals(listofusersinatmention);
+				if(boolval)
+				{
+					test.log(LogStatus.PASS, "@ mention showing the particiapants in list ".toString()
+							+ test.addScreenCapture(takeScreenShot()));	
+				}else
+				{
+					test.log(LogStatus.FAIL, "in @menton functinality  Group Memembers are ".toString()+membersingroup+" and in @mention compose bar "
+							+ test.addScreenCapture(takeScreenShot()));
+				}
+			} else {
+				test.log(LogStatus.FAIL,
+						" @ Mention not Showing any Participants ".toString() + test.addScreenCapture(takeScreenShot()));
+				enterText(er.kwcomposebar, "", "xpath", "enter Empty message");
+			}
 		}catch(Exception e){
 			enterText(er.kwcomposebar, "", "xpath", "enter Empty message");
 			e.printStackTrace();
-			
-		}
+			test.log(LogStatus.FAIL,
+					" FAILING in atMentionValidationinDR ".toString() + test.addScreenCapture(takeScreenShot()));
+		}		
 	}
 
 	public void movetoaPostandClickon3dots(String discRoom, String posttoforward, boolean threedots) throws Exception {
@@ -726,12 +768,12 @@ public class KoraMessagesDRPage extends PageBase {
 				/** Validate whether post is being forwarded or not */				
 				korahomepage.selectTopLeftMenuOption("All Messages");
 				Thread.sleep(2000);
-//				moveToElement(er.kmdmsgordiscroom + discRoomorConversationName + er.ksinglquote, "");
-//				movetoaPostandClickon3dots(discRoomorConversationName, post, false);
-//				System.out.println(er.kdrpostname0 + discRoomorConversationName + er.kdrpostname1 + post
-//						+ er.ksinglquote + "/../..//i[@class='p-icon kr-return']");
-//				elementIsDisplayed(er.kdrpostname0 + discRoomorConversationName + er.kdrpostname1 + post
-//						+ er.ksinglquote + "/../..//i[@class='p-icon kr-return']", "xpath");
+				//				moveToElement(er.kmdmsgordiscroom + discRoomorConversationName + er.ksinglquote, "");
+				//				movetoaPostandClickon3dots(discRoomorConversationName, post, false);
+				//				System.out.println(er.kdrpostname0 + discRoomorConversationName + er.kdrpostname1 + post
+				//						+ er.ksinglquote + "/../..//i[@class='p-icon kr-return']");
+				//				elementIsDisplayed(er.kdrpostname0 + discRoomorConversationName + er.kdrpostname1 + post
+				//						+ er.ksinglquote + "/../..//i[@class='p-icon kr-return']", "xpath");
 
 			} else if (!Searchwith.equalsIgnoreCase("NA")) {
 				System.out.println("-------------------- Search people, chats & rooms in Forward post  ----------");
@@ -802,24 +844,24 @@ public class KoraMessagesDRPage extends PageBase {
 				click("//*[text()='" + Muteminutes + "']", "xpath");
 				Thread.sleep(3000);
 				test.log(LogStatus.PASS, "Mute action performed successfully on DR " + discRoom.toString()
-						+ test.addScreenCapture(takeScreenShot()));
+				+ test.addScreenCapture(takeScreenShot()));
 			} else {
-				
+
 				if(Option.equalsIgnoreCase("Star")&& remoteDriver.findElement(By.xpath(er.kwstarfilledstatus)).getText().trim().equalsIgnoreCase("Unstar"))
 				{
 					click(er.kwstarfilledstatus, "Clicking on Unstar");
 					Thread.sleep(2000);
 				}
-				
+
 				click("//*[text()='" + Option + "']", "xpath");
 				Thread.sleep(3000);
 				test.log(LogStatus.PASS, Option.toString() + " action performed successfully on DR "
 						+ discRoom.toString() + test.addScreenCapture(takeScreenShot()));
 			}
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to Perfrom 3Dots Actions on Discussion Room " + discRoom.toString()
-					+ test.addScreenCapture(takeScreenShot()));
+			+ test.addScreenCapture(takeScreenShot()));
 			e.printStackTrace();
 		}
 	}
@@ -833,10 +875,23 @@ public class KoraMessagesDRPage extends PageBase {
 	 * @param removepeople
 	 * @throws Exception
 	 */
-	public void addandremovepeoplefromdiscussionRoom(String discRoom, String addpeople, String removepeople)
+
+	public List<String> addandremovepeoplefromdiscussionRoom(String discRoom, String addpeople, String removepeople)
 			throws Exception {
 		try {
 			click(er.kwmanagedrMemebrs, "xpath");
+			/*
+			 * Print the number people who are in Group
+			 */			
+			int numberofpeople=remoteDriver.findElements(By.xpath("//div[@class='memberList']/div[2]/ul/li")).size();
+			for(int i=1;i<=numberofpeople;i++)
+			{
+				moveToElement("//div[@class='memberList']/div[2]/ul/li[\"+i+\"]//div[1]/div[@class='userEmail']", "xpath");
+				String useremailaddress= remoteDriver.findElement(By.xpath("//div[@class='memberList']/div[2]/ul/li["+i+"]//div[1]/div[@class='userEmail']")).getText().trim();
+				totalmemebersinRoom.add(useremailaddress);
+			}	
+			test.log(LogStatus.PASS, "Memebers in Group are"+totalmemebersinRoom
+					+ test.addScreenCapture(takeScreenShot()));
 			if (!addpeople.contains("N/A")) {
 				if (addpeople.contains(",")) {
 					String result[] = addpeople.trim().split("\\s*,\\s*");
@@ -864,7 +919,6 @@ public class KoraMessagesDRPage extends PageBase {
 					test.log(LogStatus.PASS,
 							"Added User to Memebrs list of Discussion Room" + test.addScreenCapture(takeScreenShot()));
 				}
-
 			}
 			if (!removepeople.contains("N/A")) {
 				if (removepeople.contains(",")) {
@@ -899,8 +953,8 @@ public class KoraMessagesDRPage extends PageBase {
 			test.log(LogStatus.FAIL, "Failed to Add/remove  User from Memebrs list of Discussion Room"
 					+ test.addScreenCapture(takeScreenShot()));
 			e.printStackTrace();
-
 		}
+		return totalmemebersinRoom;
 	}
 
 	public void messagesreadinPostinfandMsginfo(String userwhoreadthemessage) throws Exception {
@@ -932,5 +986,8 @@ public class KoraMessagesDRPage extends PageBase {
 			e.printStackTrace();
 		}
 	}
+
+
+
 
 }
