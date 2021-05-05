@@ -71,6 +71,7 @@ public class MessagesDR extends DriverSetUp {
 			String workspacename = DriverSetUp.drdataMap.get("workspacename123");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 						
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.createNewWorkspaceAndCheckDefault(workspacename);
 			koraworkspacepage.clickOnWorkspace3Dots(workspacename);
@@ -139,7 +140,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = false, priority = 31)
+	@Test(enabled = true, priority = 31)
 	public void MDR_TC9_TC10_DefaultDRAndTimeline() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -178,7 +179,6 @@ public class MessagesDR extends DriverSetUp {
 			String drcomment = DriverSetUp.drdataMap.get("drcomment");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);	
 			
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");									
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");
@@ -391,9 +391,6 @@ public class MessagesDR extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
 		}
 	}
-
-	
-
 			
 	/**
 	 * Forward post to new conversation , Existing and DR
@@ -410,8 +407,8 @@ public class MessagesDR extends DriverSetUp {
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 			String expWDpost3dotoptions = DriverSetUp.drdataMap.get("drexpected3dotsforPostinrightpanel");
-
 			test.log(LogStatus.INFO, "Navigation url :" + url);			
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 
