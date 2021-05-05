@@ -957,10 +957,12 @@ public class KoraMessagesDRPage extends PageBase {
 		return totalmemebersinRoom;
 	}
 
-	public void messagesreadinPostinfandMsginfo(String userwhoreadthemessage) throws Exception {
+	public void messagesreadinPostinfandMsginfo(String userwhoreadthemessage, boolean clicksubaction) throws Exception {
 		try {
 			System.out.println("------------------- Post/Message info ------------");
+			if (clicksubaction)
 			click(er.kwpostinfonMessageinfofrom3dots, "Message info");
+			Thread.sleep(3000);
 			waitTillappear(er.kdpostinfonmsginfoTitle, "xpath", "Post or Message info Title popup");
 			Thread.sleep(5000);
 			waitTillappear("//div[@class='traceInfoBox']/div[1]", "xpath", "Post or Message info Title popup");

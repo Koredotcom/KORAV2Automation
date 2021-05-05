@@ -198,7 +198,7 @@ public class MessagesDR extends DriverSetUp {
 			koramessagedrpage.validatingreactionsandCommentsonPost(standarddrname,drpost,ReactedUserName,drcomment);
 			
 			koramessagedrpage.perfromreactionsonPost(standarddrname, drpost, "More", false,"");
-			koramessagedrpage.messagesreadinPostinfandMsginfo(ReactedUserName);
+			koramessagedrpage.messagesreadinPostinfandMsginfo(ReactedUserName, true);
 			
 						
 			extent.endTest(test);

@@ -19,12 +19,12 @@ public class ElementRepository {
 			kmbottonleftmenu = null, kmcplusicon = null, kmconv = null, kmcomposebar = null, kmcrecent = null,
 			kmremoveparticipantpopup = null, kmcenterparticipant = null, kmcloseconversation = null,
 			kmcsuggestnames = null, kmcsuggestmailids = null, kmcprofileicon = null, kmcgroupchevronicon = null,
-			kmcgroupname = null, kmcidgroup = null, kmcidchatdesc = null, kmc3dots = null, kmc3dotoptions = null,
+			kmcgroupname = null,kmchatheadername=null, kmcidgroup = null, kmcidchatdesc = null, kmc3dots = null, kmc3dotoptions = null,
 			kmcmanageclose = null, kmcmembername = null, kmcmuteslots = null, kmcactiveusericon = null,
 			kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null, kmcfirstactiveuser = null,
 			kmcactivebackground = null, kmdiscussion = null, kmplaceholder = null, kmsearchsuggestions = null,
-			kmattachfromplus = null, kmmessages = null, kmmessagehoveroptiontitles = null, kmmessagehover3dots = null,
-			kmmessagehoverreplyback = null, kmmessagehovermoreoptions = null, kmlongtextreadmore = null,
+			kmattachfromplus = null, kmmessages = null, kmmessagehoveroptiontitles = null,kmmessagerighthover=null,
+			kmchatname0=null,kmchatname1=null,kmmessagehovermoreoptions = null, kmlongtextreadmore = null,
 			kmreadmore = null, kmreadless = null, kmemoji = null, kmsmiley = null, kmright3dotoptions = null,
 			kmviewfiles = null, kwfilterbyws = null, kwplusicon = null, kwcreatenew = null, kwjoinexisting = null,
 			kworkplaceholder = null, kwdefaulworkspace = null, kwdrheader = null, kworkspaces = null,
@@ -44,7 +44,7 @@ public class ElementRepository {
 			kwaddpeopleplacehilder = null, kwmemebrsinaDreamilaccess0 = null, kwmemebrsinaDreamilaccess1 = null,
 			kwremovingmemebrindr = null, kwremovingmemebrindrconfirm = null, kwaddpeopleadinmember = null,
 			kwpostinfonMessageinfofrom3dots = null, kdpostinfonmsginfoTitle = null, kwclosecommentreadpopup = null,
-			kwstarfilledstatus = null,kmchatname0=null,kmchatname1=null,kwatmentionuserslist=null;
+			kwstarfilledstatus = null,kwatmentionuserslist=null;
 
 	public void repoIOS() {
 
@@ -103,6 +103,7 @@ public class ElementRepository {
 		kmcprofileicon = "//div[@class='p-clearfix userDetailBox']/div[@class='userDetail']/../div[@class='circle']";
 		kmcgroupchevronicon = "//span[@class='kr-down_arrowBox']";
 		kmcgroupname = "//input[@placeholder='Group Name'] | //input[@placeholder='Discussion Room Name']";
+		kmchatheadername ="//div[@class='chatHeader']//span";
 		kmcidgroup = "//div[@class='userNameDiv'][text()='";
 		kmcidchatdesc = "']/../../..//div[@class='userChatDEsc']";
 		kmc3dots = "//div[contains(@class,'_content')]/i[contains(@class, 'icon __i kr-ellipsis')]";
@@ -120,10 +121,11 @@ public class ElementRepository {
 		kmsearchsuggestions = "//div[@class='p-menuitem-link']//div[@class='heroText']//*[text()='";
 		kmattachfromplus = "//span[@class='addIcon kr-plus']";
 		kmmessages = "//span[@class='msgText ']//div[@class='send-message'][text()='";
-		kmmessagehoveroptiontitles = "//div[@class='msgCntrlBar _content']/i[@title='";
-		kmmessagehover3dots = "//div[@class='msgCntrlBar _content']//i[contains(@class,'icon __i kr-ellipsis')]";
-		kmmessagehoverreplyback = "//div[@class='msgCntrlBar _content']//i[@class='icon __i kr-return replyButton']";
-		kmmessagehovermoreoptions = "//div[@class='msgCntrlBar _content']//div[text()='";
+		kmmessagehoveroptiontitles = "//div[@class='msgCntrlBarParent hoverOptionsBar ']//i[@title='";
+		kmmessagerighthover="//div[@class='msgCntrlBarParent hoverOptionsBar ']";
+		kmchatname0="//p[@class='chatUserTitle']/span[text()='";
+		kmchatname1="']/../../../../../..//div[@class='send-message' and text()='";	
+		kmmessagehovermoreoptions = "//div[@class='krDropDownMenu msgOptDD active overflow']//div[text()='";
 		kmlongtextreadmore = "//span[@class='readMoreText'][text()='Read more']/..//span[@class='truncateText']";
 		kmreadmore = "//span[@class='readMoreText'][text()='Read more'][contains(@style,'cursor: pointer;')]";
 		kmreadless = "//span[@class='readMoreText'][text()='Read less'][contains(@style,'cursor: pointer;')]";
@@ -197,8 +199,6 @@ public class ElementRepository {
 		kdpostinfonmsginfoTitle = "//span[@class='p-dialog-title']";
 		kwclosecommentreadpopup = "//span[@class='kr-close']";
 		kwstarfilledstatus = "//div[contains(@class,'krDropDownMenu chatHeaderOptions')]/div[1]//i[contains(@class,'icon kr-starred')]";
-		kmchatname0="//p[@class='chatUserTitle']/span[text()='";
-		kmchatname1="']/../../../../../..//div[@class='send-message' and text()='";		
 		kwatmentionuserslist="//table[@class='mentionDialogBoxTable']/tbody/tr";
 	}
 

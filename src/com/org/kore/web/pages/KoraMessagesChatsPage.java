@@ -220,7 +220,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			Thread.sleep(2000);
 			waitUntilDissapear("//div[@class='lds-ring']", "Loading to disappear");
 			waitTillappear(er.kcomposebar, "xpath", "Waiting for compose bar");
-			chatheadername = getText("//div[@class='chatHeader']//span");
+			chatheadername = getText(er.kmchatheadername);
 			test.log(LogStatus.INFO, "In<b> " + chatheadername + " </b>Entered message as " + enterthistext
 					+ " ".toString() + test.addScreenCapture(takeScreenShot()));
 			
@@ -262,7 +262,7 @@ public class KoraMessagesChatsPage extends PageBase {
 	public String getChatHeaderName() throws Exception {
 		String chatheadername = null;
 		try {
-			chatheadername = getText("//div[@class='chatHeader']//span");
+			chatheadername = getText(er.kmchatheadername);
 			if (chatheadername.equalsIgnoreCase("and NaN others")||(chatheadername.equalsIgnoreCase(" and NaN others"))) {
 				test.log(LogStatus.FAIL, "Displayed invalid group name as and NaN others".toString()
 						+ test.addScreenCapture(takeScreenShot()));
@@ -301,7 +301,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		String actbckgclr = null;
 		try {
 			String cted = "rgba(231, 241, 255, 1)";
-			actbckgclr = remoteDriver.findElement(By.xpath("//div[@class='userDetails active chat']"))
+			actbckgclr = remoteDriver.findElement(By.xpath(er.kmcactivebackground))
 					.getCssValue("background-color");
 			if (cted.equals(actbckgclr)) {
 				test.log(LogStatus.PASS, "Active thread highlighted in light color with RGBA values as : " + cted);
@@ -715,7 +715,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		//String expected = "How about, Let’s start with just a hello?";
 		boolean clearchatstate=false;
 		clearchatstate = remoteDriver.findElements(By.xpath("//p[@class='chatUserTitle']/span[text()='" + user
-		+ "']/../../../../../..//div[@class='send-message' and text()='" + message
+		+ er.kmchatname1 + message
 		+ "']")).size() > 0;
 		if (!clearchatstate){
 			test.log(LogStatus.WARNING, "Displayed empty screen i.e. it got cleared previous message".toString()
@@ -1181,7 +1181,6 @@ public class KoraMessagesChatsPage extends PageBase {
 		}
 
 	}
-
 	/**
 	 * 
 	 * @param message
@@ -1194,7 +1193,7 @@ public class KoraMessagesChatsPage extends PageBase {
 	// span[@class='msgText ']//div[@class='send-message'][text()='Hello Copy
 	// Me']
 	// span[@class='msgText ']//div[@class='send-message'][text()='Hello Copy
-	// Me']/..//div[@class='msgCntrlBar _content']/i[@title='
+	// Me']/..//div[@class='msgCntrlBarParent hoverOptionsBar ']/i[@title='
 	public void goToMessageAndPerformActionsAs(String user, String message, String action, String subaction)
 			throws Exception {
 		WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
@@ -1214,15 +1213,18 @@ public class KoraMessagesChatsPage extends PageBase {
 			}
 			switch (action.trim()) {
 			case "Reactions":
+				//p[@class='chatUserTitle']/span[text()='James Middleton']/../../../../../..//div[@class='send-message' and text()='Hi Jeo']/..//div[@class='msgCntrlBarParent hoverOptionsBar ']//i[@title='Like']
 				System.out.println("In Reactions");
-				click("//p[@class='chatUserTitle']/span[text()='" + user
-						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
-						+ "']/..//div[@class='msgCntrlBar _content']//i[@title='" + subaction + "']",
+				moveToElement(er.kmchatname0 + user+er.kmchatname1 + message + er.ksinglquote, "xpath");
+				Thread.sleep(1000);
+				click(er.kmchatname0 + user
+						+ er.kmchatname1 + message
+						+ "']/.."+er.kmmessagerighthover+"//i[@title='" + subaction + "']",
 						action + " on message hover");
-
-				String reactioncount = getText("//p[@class='chatUserTitle']/span[text()='" + user
-						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
-						+ "']/..//div[@class='msgCntrlBar _content']/../../../..//div[@class='count']");
+				Thread.sleep(2000);
+				String reactioncount = getText(er.kmchatname0 + user
+						+ er.kmchatname1 + message
+						+ "']/.."+er.kmmessagerighthover+"/../../../..//div[@class='count']");
 				if (reactioncount.equals("1")) {
 					test.log(LogStatus.WARNING,
 							"Reaction count was 1".toString() + test.addScreenCapture(takeScreenShot()));
@@ -1236,9 +1238,9 @@ public class KoraMessagesChatsPage extends PageBase {
 
 			case "Reply Back":
 				System.out.println("In Reply back");
-				click("//p[@class='chatUserTitle']/span[text()='" + user
-						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
-						+ "']/..//div[@class='msgCntrlBar _content']//i[@class='icon __i kr-return replyButton']",
+				click(er.kmchatname0 + user
+						+ er.kmchatname1 + message
+						+ "']/.."+er.kmmessagerighthover+"//i[@class='icon __i kr-return replyButton']",
 						action + "on message hover");
 				Thread.sleep(1000);
 				test.log(LogStatus.PASS, "Selected Reply back option from the hover options".toString()
@@ -1248,7 +1250,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					compose.sendKeys(subaction, Keys.ENTER);
 					Thread.sleep(5000);
 					messagemarkafteraction = remoteDriver
-							.findElements(By.xpath("//p[@class='chatUserTitle']/span[text()='"+user+"']/../../../../../..//div[@class='replayBubbleText' and text()='"+message+"']/../../..//div[@class='send-message'][text() = '"+subaction+"']"))
+							.findElements(By.xpath(er.kmchatname0+user+"']/../../../../../..//div[@class='replayBubbleText' and text()='"+message+"']/../../..//div[@class='send-message'][text() = '"+subaction+"']"))
 							.size()>0 ;
 							if(messagemarkafteraction){
 						test.log(LogStatus.PASS, "Selected Reply back option and replied successfully");
@@ -1275,10 +1277,11 @@ public class KoraMessagesChatsPage extends PageBase {
 				
 			case "More":
 				System.out.println("In messge on hover 3dots ");
-				click("//p[@class='chatUserTitle']/span[text()='" + user
-						+ "']/../../../../../..//div[@class='send-message' and text()='" + message
+				click(er.kmchatname0 + user
+						+ er.kmchatname1 + message
 						+ "']/..//i[contains(@class,'icon __i kr-ellipsis')]", action + " on message hover");
-				Thread.sleep(1000);
+				Thread.sleep(3000);
+				//div[@class='msgCntrlBarParent hoverOptionsBar ']//div[text()='
 				click(er.kmmessagehovermoreoptions + subaction + er.ksinglquote, "xpath");
 				test.log(LogStatus.PASS, "Selected<b> " + subaction + " </b> option from message onhover 3 dots".toString()
 						+ test.addScreenCapture(takeScreenShot()));
@@ -1291,8 +1294,8 @@ public class KoraMessagesChatsPage extends PageBase {
 				} else if (subaction.equalsIgnoreCase("Edit")) {
 					compose.sendKeys("Edited", Keys.ENTER);
 					if (messagemarkafteraction = remoteDriver
-							.findElements(By.xpath("//p[@class='chatUserTitle']/span[text()='" + user
-									+ "']/../../../../../..//div[@class='send-message' and text()='" + message
+							.findElements(By.xpath(er.kmchatname0 + user
+									+ er.kmchatname1 + message
 									+"Edited']/..//span[text() = 'Edited'] "))
 							.size() > 0) {
 						
@@ -1490,8 +1493,8 @@ public class KoraMessagesChatsPage extends PageBase {
 					Thread.sleep(2000);
 				}
 			}
-			if (elementIsDisplayed("//p[@class='chatUserTitle']/span[text()='" + chatheadername
-					+ "']/../../../../../..//div[@class='send-message' and text()='" + forwardedmsg
+			if (elementIsDisplayed(er.kmchatname0 + chatheadername
+					+ er.kmchatname1 + forwardedmsg
 					+ "']/..//span[text() = 'Forwarded']", "xpath")) {
 				test.log(LogStatus.PASS, forwardedmsg+" got displayed as <b> Forwarded </b> message " + test.addScreenCapture(takeScreenShot()));
 			} else {
@@ -1510,8 +1513,8 @@ public class KoraMessagesChatsPage extends PageBase {
 	public void validationOfForwardedOrEdited(String chatheadername, String expectedmsg,String ForwardedorEdited) throws Exception {
 		try {
 			
-			if (elementIsDisplayed("//p[@class='chatUserTitle']/span[text()='" + chatheadername
-					+ "']/../../../../../..//div[@class='send-message' and text()='" + expectedmsg
+			if (elementIsDisplayed(er.kmchatname0 + chatheadername
+					+ er.kmchatname1 + expectedmsg
 					+ "']/..//span[text() = '"+ForwardedorEdited+"']", "xpath")) {
 				test.log(LogStatus.PASS, expectedmsg+" got displayed as <b>"+ ForwardedorEdited +"</b> message " + test.addScreenCapture(takeScreenShot()));
 			} else {

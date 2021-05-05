@@ -156,7 +156,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 5)
+		@Test(enabled = true, priority = 5)
 	public void MC_TC28_TC29_TC43_ValidateChevronIconFor1ParticipantAndSendLongText() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -210,7 +210,6 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Chats");
 			koramessagespage.validateChatsAndDRS(true, false);
@@ -231,7 +230,7 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Chats, DR's and All Message sections");
 		}
-	} 
+	}
 
 	@Test(enabled = true, priority = 8)
 	public void MC_TC35_TC47_Replyback() throws Exception {
@@ -296,9 +295,9 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");
 		}
-	}
+	} 
 
-	@Test(enabled = false, priority = 10)
+	@Test(enabled = true, priority = 10)
 	public void MC_TC48_Reactions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -310,7 +309,6 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			
 			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);			
 			korahomepage.selectMenuOption(Messages);			
 			korahomepage.selectTopLeftMenuOption("Chats");
@@ -319,20 +317,19 @@ public class Messages121Test extends DriverSetUp {
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 
 			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
-			String ReactedUserName=koraloginpage.getUserDetails();
 			korahomepage.selectMenuOption(Messages);
+			String ReactedUserName=koraloginpage.getUserDetails();
 			korahomepage.selectTopLeftMenuOption("Chats");
 			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "Reactions", "Like");
+			koramessagespage.goToMessageAndPerformActionsAs("QA Pride", updatedstr, "Reactions", "Like");
 
-			
 			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);			
 			korahomepage.selectTopLeftMenuOption("Chats");
 			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Like");
+			koramessagespage.goToMessageAndPerformActionsAs("QA Pride", updatedstr, "More", "Message Info");
 						
-			koramessagedrpage.messagesreadinPostinfandMsginfo(ReactedUserName);
+			koramessagedrpage.messagesreadinPostinfandMsginfo(ReactedUserName,false);
 			
 			extent.endTest(test);
 		} catch (Exception e) {

@@ -61,8 +61,8 @@ public class CPCommonFunctions extends PageBase {
 		} else if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Selenium")) {
 			remoteDriver.get(url);			
 			remoteDriver.manage().window().maximize();
-			System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
-			System.out.println("After maximize Window width is: " + remoteDriver.manage().window().getSize().getWidth());
+		//	System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
+		//	System.out.println("After maximize Window width is: " + remoteDriver.manage().window().getSize().getWidth());
 			waitUntilDissapear("//div[@class='lds-ring']", "Loading Indicator to load init elements");
 			JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
 			String result = js.executeScript("return document.readyState").toString();
