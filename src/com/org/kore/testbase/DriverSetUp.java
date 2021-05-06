@@ -8,12 +8,19 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -73,7 +80,7 @@ public class DriverSetUp {
 
 	public static AppiumServiceBuilder builder;
 	public static AppiumDriverLocalService service;
-
+	
 	public DriverSetUp() {
 
 	}
@@ -183,8 +190,10 @@ public class DriverSetUp {
 		extent.flush();
 	}
 
-	@AfterMethod // TODO
+	@AfterMethod // 
 	protected void afterMethod(ITestResult result) {
+		System.out.println("In After method method name is :"+Thread.currentThread().getStackTrace()[1].getMethodName());
+		String methodname=result.getName();
 		LogStatus status = test.getRunStatus();
 		String mystatus = status.toString();
 		if (mystatus.equalsIgnoreCase("pass")) {
@@ -197,10 +206,10 @@ public class DriverSetUp {
 			skipcount++;
 		}
 		totaltc = passcount + failcount + warncount + skipcount;
-		System.out.println("PASS TC's are :::::: " + passcount);
-		System.out.println("FAIL TC's are :::::: " + failcount);
-		System.out.println("WARNING TC's are :::::: " + warncount);
-		System.out.println("SKIP/WARNING TC's are :::::: " + skipcount);
+		System.out.println(methodname+" PASS TC's are :::::: " + passcount);
+		System.out.println(methodname+" FAIL TC's are :::::: " + failcount);
+		System.out.println(methodname+" WARNING TC's are :::::: " + warncount);
+		System.out.println(methodname+" SKIP/WARNING TC's are :::::: " + skipcount);
 		System.out.println("Total TC's are :::::: " + totaltc);
 	}
 
@@ -278,7 +287,7 @@ public class DriverSetUp {
 				"<html><head><style>table {font-family: arial, sans-serif; border-collapse: collapse;width: 30%;}td, th {border: 1px solid #dddddd;text-align: center;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head>");
 
 		bw.write("<body><h2>Work Assist Automation Execution Report</h2>");
-		bw.write("<table><tr><th>Status</th> <th>Count</th></tr><tr><td>PASS</td><td>" + passcount
+		bw.write("<table><tr><th>Status</th><th>Status</th> <th>Count</th></tr><tr><td>PASS</td><td>" + passcount
 				+ "</td></tr><tr><td>FAIL</td><td>" + failcount + "</td></tr><tr><td>WARNING</td><td>" + warncount + "</td></tr><tr><td>TOTAL</td><td>" + totaltc
 				+ "</td></tr>");
 		bw.write("<table></table>");
@@ -351,5 +360,4 @@ public class DriverSetUp {
 			Desktop.getDesktop().browse(htmlFile.toURI());
 		}
 	}*/
-
 }

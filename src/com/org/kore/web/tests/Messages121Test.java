@@ -52,22 +52,23 @@ public class Messages121Test extends DriverSetUp {
 		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 	}
 
-	@Test(enabled = true, priority = 1)
+	@Test(description = "MC_TC2_TC3_TC4_TC5_LoginRecentValidation",enabled = true, priority = 1)
 	public void MC_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
+			String methodname = Thread.currentThread().getStackTrace()[1].getMethodName();
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			// koraloginpage.launchw3(url, korajusername, korajpassword);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			 koraloginpage.launchw3(url, korajusername, korajpassword);
+			/*koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.checkDefaultFocus_Recents();
+			koramessagespage.checkDefaultFocus_Recents();*/
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
@@ -85,15 +86,17 @@ public class Messages121Test extends DriverSetUp {
 			String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.checkMatchesWith(checkmatch);
+			koraloginpage.launchw3(url, korajusername, korajpassword);
+			
+			/*korahomepage.selectMenuOption(Messages);
+			koramessagespage.checkMatchesWith(checkmatch);*/
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate user suggestion validation");
 		}
 	}
 
-	@Test(enabled = true, priority = 3)
+	/*@Test(enabled = true, priority = 3)
 	public void MC_TC8_TC9_TC24_TC46_OneToOneConvEdit_3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -335,6 +338,6 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Reactionas functionality");
 		}
-	}
+	}*/
 
 }
