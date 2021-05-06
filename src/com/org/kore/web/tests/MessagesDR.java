@@ -140,7 +140,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 31)
+	@Test(enabled = false, priority = 31)
 	public void MDR_TC9_TC10_DefaultDRAndTimeline() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -179,6 +179,7 @@ public class MessagesDR extends DriverSetUp {
 			String drcomment = DriverSetUp.drdataMap.get("drcomment");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);	
 			
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");									
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");
