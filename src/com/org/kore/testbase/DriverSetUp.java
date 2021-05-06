@@ -287,7 +287,7 @@ public class DriverSetUp {
 				"<html><head><style>table {font-family: arial, sans-serif; border-collapse: collapse;width: 30%;}td, th {border: 1px solid #dddddd;text-align: center;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head>");
 
 		bw.write("<body><h2>Work Assist Automation Execution Report</h2>");
-		bw.write("<table><tr><th>Status</th><th>Status</th> <th>Count</th></tr><tr><td>PASS</td><td>" + passcount
+		bw.write("<table><tr><th>Status</th> <th>Count</th></tr><tr><td>PASS</td><td>" + passcount
 				+ "</td></tr><tr><td>FAIL</td><td>" + failcount + "</td></tr><tr><td>WARNING</td><td>" + warncount + "</td></tr><tr><td>TOTAL</td><td>" + totaltc
 				+ "</td></tr>");
 		bw.write("<table></table>");
