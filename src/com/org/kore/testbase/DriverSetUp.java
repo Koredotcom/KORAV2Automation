@@ -363,21 +363,21 @@ public class DriverSetUp {
 				String Testcases=TCnums;
 
 				writer.write("<tr>");
-				writer.write("<td>");
+				writer.write("<td><font-family:"+"Calibri (Body)>");
 				writer.write(ModuleName);
 				writer.write("</td> ");
-				writer.write("<td>");
+				writer.write("<td><font-family:"+"Calibri (Body)>");
 				writer.write("Scenario "+cnt++);
 				writer.write("</td> ");
-				writer.write("<td>");
+				writer.write("<td><font-family:"+"Calibri (Body)>");
 				writer.write(Testcases);
-				writer.write("</td> ");
+				writer.write("</td><font-family:"+"Calibri (Body)>");
 				writer.write("<td>");
 				writer.write(TestcaseDesction);
-				writer.write("</td> ");
+				writer.write("</td><font-family:"+"Calibri (Body)>");
 				writer.write("<td>");
 				writer.write(status);
-				writer.write("</td> ");
+				writer.write("</td><font-family:"+"Calibri (Body)>");
 				writer.write("</tr> ");
 			}
 			// }
