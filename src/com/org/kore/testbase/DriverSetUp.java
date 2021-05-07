@@ -292,7 +292,6 @@ public class DriverSetUp {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
 		bw.write(
 				"<html><head><style>table {font-family: arial, sans-serif; border-collapse: collapse;width: 30%;}td, th {border: 1px solid #dddddd;text-align: center;padding: 8px;}tr:nth-child(even) {background-color: #dddddd;}</style></head>");
-
 		bw.write("<body><h2>Work Assist Automation Execution Report</h2>");
 		bw.write("<table><tr><th>Status</th> <th>Count</th></tr><tr><td>PASS</td><td>" + passcount
 				+ "</td></tr><tr><td>FAIL</td><td>" + failcount + "</td></tr><tr><td>WARNING</td><td>" + warncount + "</td></tr><tr><td>TOTAL</td><td>" + totaltc
@@ -301,45 +300,80 @@ public class DriverSetUp {
 		bw.write("</table></body></html>");
 		bw.close();
 		Desktop.getDesktop().browse(f.toURI());
-
 	}
 	
 	public void tcTableCreation(Map<String, String> map2) throws IOException {
+		String dir = System.getProperty("user.dir");
 		BufferedWriter writer;
 		File file;
 		String tcdescription = null;
 		String status = null;
 		try {
-			file = new File("TCResults.html");
+			file = new File(dir+"/ReportGenerator/TCResults.html");
 			writer = new BufferedWriter(new FileWriter(file));
+			writer.write(
+					"<html><head></head>");
+			writer.write("<body><h2>Work Assist Automation Execution Report</h2>");
+			writer.write("<table><table border ='1'><tr bgcolor="+"#02c8ff"+"><th><font color="+"white"+"><b>Scenarios Status</b></th><th><font color="+"white"+"><b>Scenarios Count</b></th></tr><tr><td><font color="+"green"+"><b>PASS</b></font></td><td style="+"text-align:center"+">" + passcount
+					+ "</td></tr><tr><td><font color="+"red"+"><b>FAIL</b></font></td><td style="+"text-align:center"+">" + failcount + "</td></tr><tr><td><font color="+"orange"+"><b>WARNING</b></font></td><td style="+"text-align:center"+">" + warncount + "</td></tr><tr><td><b>TOTAL</b></td><td style="+"text-align:center"+">"+"<b>" + totaltc
+					+"</b>"+ "</td></tr>");
+			writer.write("<table></table>");
 			
-			writer.write("<html>" + "<body>" + "<table border ='1'>" + "<tr bgcolor="+"#ddd"+">" + "<th>MODULE</th>" +"<th>SCENARIO</th>"+ "<th>TC_NUMBER</th>"+"<th>DESCRIPTION</th>"
-                    + "<th>STATUS</th>" + "</tr><tr>");
+			writer.write("<html>" + "<body>" + "<table border ='1'>" + "<tr bgcolor="+"#02c8ff"+">" + "<th><font color="+"white"+"><b>Module</b></th>" +"<th><font color="+"white"+"><b>Scenario</b></th>"+ "<th><font color="+"white"+"><b>TC Number</b></th>"+"<th><font color="+"white"+"><b>Description</b></th>"
+                    + "<th><font color="+"white"+"><b>Status</b></th>" + "</tr><tr>");
+			
+			writer.write("<body><h2> </h2>");
 			
 			// for (int i=0; i<totaltc;i++){
 			System.out.println("in map split");
+			
+			int cnt=1;
 			for (Entry<String, String> entry : map.entrySet()) {
 				System.out.println(entry.getKey() + "=" + entry.getValue());
 				tcdescription = entry.getKey();
 				status = entry.getValue().toUpperCase();
-				
-				
-				
-				
-				
-				
+
+				if(status.equalsIgnoreCase("PASS")){
+					status = "<font color="+"green"+"><b>PASS</b></font>";
+				}else if(status.equalsIgnoreCase("FAIL")){
+					status = "<font color="+"red"+"><b>FAIL</b></font>";
+				}else if(status.equalsIgnoreCase("WARNING")){
+					status = "<font color="+"orange"+"><b>WARNING</b></font>";
+				}else if(status.equalsIgnoreCase("INFO")){
+					status = "<font color="+"gold"+"><b>INFO</b></font>";
+				}else if(status.equalsIgnoreCase("SKIP")){
+					status = "<font color="+"purple"+"><b>SKIP</b></font>";
+				}
+
+				String TCnums="";
+				String methodname=tcdescription;
+				String[] arr=methodname.split("_");
+				String ModuleName=arr[0];
+				if(ModuleName.equalsIgnoreCase("MC"))
+				{
+					ModuleName="Messages_Chats";
+				}else if(ModuleName.equalsIgnoreCase("MDR")){
+					ModuleName="Messages_DR";
+				}
+				String TestcaseDesction=arr[arr.length-1];
+				for(int i=1;i<arr.length-1;i++)
+				{
+					TCnums=TCnums+arr[i]+" ";
+				}		
+				String Testcases=TCnums;
+
 				writer.write("<tr>");
 				writer.write("<td>");
-				writer.write("Module");
+				writer.write(ModuleName);
 				writer.write("</td> ");
 				writer.write("<td>");
-				writer.write("Scenario");
+				writer.write("Scenario "+cnt++);
 				writer.write("</td> ");
 				writer.write("<td>");
-				writer.write("TC Number");
+				writer.write(Testcases);
 				writer.write("</td> ");
 				writer.write("<td>");
-				writer.write(tcdescription);
+				writer.write(TestcaseDesction);
 				writer.write("</td> ");
 				writer.write("<td>");
 				writer.write(status);
@@ -367,7 +401,7 @@ public class DriverSetUp {
 			mitigateHTML(htmlFile);
 			Desktop.getDesktop().browse(htmlFile.toURI());
 			zipFolder(dir + "/ReportGenerator/WorkAssistReport", dir + "/ReportGenerator/WorkAssistReport.zip");
-			customReport();
+		//	customReport();
 			tcTableCreation(map);
 		} catch (Exception e) {
 			System.out.println("End");
