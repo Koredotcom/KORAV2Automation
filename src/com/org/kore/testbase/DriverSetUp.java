@@ -8,11 +8,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -56,7 +58,8 @@ public class DriverSetUp {
 	static int warncount = 0;
 	static int totaltc = 0;
 	static int skipcount = 0;
-
+	Map<String, String> map = new HashMap<String, String>();
+	
 	public AppiumDriver appiumDriver;
 	public RemoteWebDriver remoteDriver;
 	public static String platformName = null, browser = null, appType = null, tool = null, appName = null;
@@ -196,6 +199,9 @@ public class DriverSetUp {
 		String methodname=result.getName();
 		LogStatus status = test.getRunStatus();
 		String mystatus = status.toString();
+		
+		map.put(methodname, mystatus);
+		
 		if (mystatus.equalsIgnoreCase("pass")) {
 			passcount++;
 		} else if (mystatus.equalsIgnoreCase("fail")) {
@@ -211,6 +217,7 @@ public class DriverSetUp {
 		System.out.println(methodname+" WARNING TC's are :::::: " + warncount);
 		System.out.println(methodname+" SKIP/WARNING TC's are :::::: " + skipcount);
 		System.out.println("Total TC's are :::::: " + totaltc);
+		
 	}
 
 	static public void zipFolder(String srcFolder, String destZipFile) throws Exception {
@@ -297,6 +304,59 @@ public class DriverSetUp {
 
 	}
 	
+	public void tcTableCreation(Map<String, String> map2) throws IOException {
+		BufferedWriter writer;
+		File file;
+		String tcdescription = null;
+		String status = null;
+		try {
+			file = new File("TCResults.html");
+			writer = new BufferedWriter(new FileWriter(file));
+			
+			writer.write("<html>" + "<body>" + "<table border ='1'>" + "<tr bgcolor="+"#ddd"+">" + "<th>MODULE</th>" +"<th>SCENARIO</th>"+ "<th>TC_NUMBER</th>"+"<th>DESCRIPTION</th>"
+                    + "<th>STATUS</th>" + "</tr><tr>");
+			
+			// for (int i=0; i<totaltc;i++){
+			System.out.println("in map split");
+			for (Entry<String, String> entry : map.entrySet()) {
+				System.out.println(entry.getKey() + "=" + entry.getValue());
+				tcdescription = entry.getKey();
+				status = entry.getValue().toUpperCase();
+				
+				
+				
+				
+				
+				
+				writer.write("<tr>");
+				writer.write("<td>");
+				writer.write("Module");
+				writer.write("</td> ");
+				writer.write("<td>");
+				writer.write("Scenario");
+				writer.write("</td> ");
+				writer.write("<td>");
+				writer.write("TC Number");
+				writer.write("</td> ");
+				writer.write("<td>");
+				writer.write(tcdescription);
+				writer.write("</td> ");
+				writer.write("<td>");
+				writer.write(status);
+				writer.write("</td> ");
+				writer.write("</tr> ");
+			}
+			// }
+			writer.write("</tr></table>" + "</body>" + "</html>");
+			writer.close();
+			Desktop.getDesktop().browse(file.toURI());
+		} catch (IOException e) {
+			System.out.println("IO EXCEPTION-----" + e);
+		}
+
+		System.out.println("----------END---------------");
+	}
+	
 	@AfterSuite // This is working, before moving the report to other location
 	public void closeConnections() throws Exception {
 		try {
@@ -308,6 +368,7 @@ public class DriverSetUp {
 			Desktop.getDesktop().browse(htmlFile.toURI());
 			zipFolder(dir + "/ReportGenerator/WorkAssistReport", dir + "/ReportGenerator/WorkAssistReport.zip");
 			customReport();
+			tcTableCreation(map);
 		} catch (Exception e) {
 			System.out.println("End");
 		}

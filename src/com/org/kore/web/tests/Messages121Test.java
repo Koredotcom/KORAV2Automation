@@ -87,7 +87,6 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
 			koraloginpage.launchw3(url, korajusername, korajpassword);
-			
 			/*korahomepage.selectMenuOption(Messages);
 			koramessagespage.checkMatchesWith(checkmatch);*/
 			extent.endTest(test);
