@@ -398,9 +398,9 @@ public class DriverSetUp {
 				writer.write(TestcaseDesction);
 				writer.write("</td>");
 				
-				writer.write("</td><font-family:"+"Calibri (Body)>");
+				writer.write("<td><font-family:"+"Calibri (Body)>");
 				writer.write(status);
-				writer.write("<td>");
+				writer.write("</td>");
 				
 				writer.write("</tr> ");
 			}
