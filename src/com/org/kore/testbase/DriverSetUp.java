@@ -338,9 +338,9 @@ public class DriverSetUp {
 			writer.write("<table> </table>");
 			
 			writer.write("<body><table><table border ='1'>" + "<tr bgcolor="+"#02c8ff"+">" + "<th><font color="+"white"+"><b>Module</b></th>" +"<th><font color="+"white"+"><b>Scenario</b></th>"+ "<th><font color="+"white"+"><b>TC Number</b></th>"+"<th><font color="+"white"+"><b>Description</b></th>"
-                    + "<th><font color="+"white"+"><b>Status</b></th>" + "</tr><tr></body>");
+                    + "<th><font color="+"white"+"><b>Status</b></th>");
 			writer.write("<body><h2> </h2></body>");
-			writer.write("<table> </table>");
+		//	writer.write("<table> </table>");
 			
 			// for (int i=0; i<totaltc;i++){
 			System.out.println("in map split");
@@ -399,8 +399,8 @@ public class DriverSetUp {
 				writer.write("</tr> ");
 			}
 			// }
-		//	writer.write("</tr></table>" + "</body>" + "</html>");
-			writer.write("</html>");
+			writer.write("</tr></table>" + "</body>" + "</html>");
+		//	writer.write("</html>");
 			writer.close();
 			Desktop.getDesktop().browse(file.toURI());
 		} catch (IOException e) {
