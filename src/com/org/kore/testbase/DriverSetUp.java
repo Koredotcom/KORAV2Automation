@@ -339,7 +339,7 @@ public class DriverSetUp {
 			
 			writer.write("<body><table><table border ='1'>" + "<tr bgcolor="+"#02c8ff"+">" + "<th><font color="+"white"+"><b>Module</b></th>" +"<th><font color="+"white"+"><b>Scenario</b></th>"+ "<th><font color="+"white"+"><b>TC Number</b></th>"+"<th><font color="+"white"+"><b>Description</b></th>"
                     + "<th><font color="+"white"+"><b>Status</b></th>");
-			writer.write("<body><h2> </h2></body>");
+		//	writer.write("<body><h2> </h2></body>");
 		//	writer.write("<table> </table>");
 			
 			// for (int i=0; i<totaltc;i++){
