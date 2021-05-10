@@ -325,16 +325,19 @@ public class DriverSetUp {
 					"<html><head></head>");
 			writer.write("<body><h2>Work Assist Automation Execution Report</h2>");
 			
-			writer.write("<table><table border ='1'><tr><th><b>Scope</b></th><td> <a href="+"https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=1327035589"+"> Basic sanity test cases (Spreadsheet Link too)</a></td><tr><th><b>Environment</b></th><td>"+workingurl+"  <b>("+App+"  )</b>"+"</td></tr><tr><th><b>Browser</b></th><td>Chrome</td></tr><tr><th><b>Version</b></th><td>123</td></tr>");
-			writer.write("<table></table>");
+			writer.write("<table><table border ='1'><tr><th><b>Scope</b></th><td> <a href="+"https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=1327035589"+"> Basic sanity test cases (Spreadsheet Link too)</a></td><tr><th><b>Environment</b></th><td>"+workingurl+"  <b>("+App+"  )</b>"+"</td></tr><tr><th><b>Browser</b></th><td>Chrome</td></tr>");
 			writer.write("<body><h2> </h2>");
+			writer.write("<table> </table>");
+			
+		//	writer.write("<body><h2> </h2>");
 			
 			writer.write("<table><table border ='1'><tr bgcolor="+"#02c8ff"+"><th><font color="+"white"+"><b>Scenarios Status</b></th><th><font color="+"white"+"><b>Scenarios Count</b></th></tr><tr><td><font color="+"green"+"><b>PASS</b></font></td><td style="+"text-align:center"+">" + passcount
 					+ "</td></tr><tr><td><font color="+"red"+"><b>FAIL</b></font></td><td style="+"text-align:center"+">" + failcount + "</td></tr><tr><td><font color="+"orange"+"><b>WARNING</b></font></td><td style="+"text-align:center"+">" + warncount + "</td></tr><tr><td><b>TOTAL</b></td><td style="+"text-align:center"+">"+"<b>" + totaltc
 					+"</b>"+ "</td></tr>");
-			writer.write("<table></table>");
+			writer.write("<body><h2> </h2>");
+			writer.write("<table> </table>");
 			
-			writer.write("<html>" + "<body>" + "<table border ='1'>" + "<tr bgcolor="+"#02c8ff"+">" + "<th><font color="+"white"+"><b>Module</b></th>" +"<th><font color="+"white"+"><b>Scenario</b></th>"+ "<th><font color="+"white"+"><b>TC Number</b></th>"+"<th><font color="+"white"+"><b>Description</b></th>"
+			writer.write("<table border ='1'>" + "<tr bgcolor="+"#02c8ff"+">" + "<th><font color="+"white"+"><b>Module</b></th>" +"<th><font color="+"white"+"><b>Scenario</b></th>"+ "<th><font color="+"white"+"><b>TC Number</b></th>"+"<th><font color="+"white"+"><b>Description</b></th>"
                     + "<th><font color="+"white"+"><b>Status</b></th>" + "</tr><tr>");
 			writer.write("<body><h2> </h2>");
 			
