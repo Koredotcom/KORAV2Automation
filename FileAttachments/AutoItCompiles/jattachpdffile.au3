@@ -1,3 +1,3 @@
 ControlFocus ( "Open", "", "Edit1")
-ControlSetText ( "Open", "", "Edit1", "C:\Users\Jayakrishna.Dandru\git\KORAV2Automation\FileAttachments\Cloud.pdf")
+ControlSetText ( "Open", "", "Edit1", "D:\AUTOITFILES\Cloud.pdf")
 ControlClick ("Open", "", "Button1")

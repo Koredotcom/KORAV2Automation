@@ -1,5 +1,5 @@
 ControlFocus ( "Open", "", "Edit1")
-ControlSetText ( "Open", "", "Edit1", "C:\Users\Jayakrishna.Dandru\git\KORAV2Automation\FileAttachments\")
+ControlSetText ( "Open", "", "Edit1", "D:\AUTOITFILES\")
 Sleep(2000)
 ControlFocus ( "Open", "", "DirectUIHWND2")
 Send("^a")
