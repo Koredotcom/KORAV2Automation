@@ -61,10 +61,12 @@ public class KoraLoginPage extends PageBase {
 		test.log(LogStatus.PASS,
 				"Type of accounts displayed to choose: ".toString() + test.addScreenCapture(takeScreenShot()));
 		click(er.ko365, "Select Microsoft option");
+		waitTillappear(er.koenteremail, "xpath", "Enter Email");
 		enterText(er.koenteremail, userName, "xpath", "Enter Email");
 		test.log(LogStatus.PASS, "Entered username".toString() + test.addScreenCapture(takeScreenShot()));
 		click(er.kousernext, "UsrNext");
 		waitTillappear(er.kosignin, "xpath", "Signin in Password");
+		Thread.sleep(5000);
 		enterText(er.kpwd, password, "xpath", "Password");
 		test.log(LogStatus.PASS, "Entered Password".toString() + test.addScreenCapture(takeScreenShot()));
 		click(er.kosignin, "Signin");
