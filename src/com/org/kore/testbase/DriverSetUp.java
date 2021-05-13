@@ -58,7 +58,7 @@ public class DriverSetUp {
 	static int warncount = 0;
 	static int totaltc = 0;
 	static int skipcount = 0;
-	Map<String, String> map = new HashMap<String, String>();
+	public static Map<String, String> map = new LinkedHashMap<String, String>();
 	
 	public AppiumDriver appiumDriver;
 	public RemoteWebDriver remoteDriver;
@@ -212,11 +212,11 @@ public class DriverSetUp {
 			skipcount++;
 		}
 		totaltc = passcount + failcount + warncount + skipcount;
-		System.out.println(methodname+" PASS TC's are :::::: " + passcount);
+		/*System.out.println(methodname+" PASS TC's are :::::: " + passcount);
 		System.out.println(methodname+" FAIL TC's are :::::: " + failcount);
 		System.out.println(methodname+" WARNING TC's are :::::: " + warncount);
-		System.out.println(methodname+" SKIP/WARNING TC's are :::::: " + skipcount);
-		System.out.println("Total TC's are :::::: " + totaltc);
+		System.out.println(methodname+" SKIP/WARNING TC's are :::::: " + skipcount);*/
+		System.out.println("Updated Total TC's are :::::: " + totaltc);
 		
 	}
 

@@ -71,6 +71,7 @@ public class MessagesDR extends DriverSetUp {
 			String workspacename = DriverSetUp.drdataMap.get("workspacename123");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 						
+		//	koraloginpage.launchw3(url, korajusername, korajpassword);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Workspaces);
 			koraworkspacepage.createNewWorkspaceAndCheckDefault(workspacename);
