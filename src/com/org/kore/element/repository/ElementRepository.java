@@ -93,7 +93,7 @@ public class ElementRepository {
 		kmctopleftmenu = "//span[@class='p-menuitem-text']";
 		kmbottonleftmenu = "//div[contains(@class,'p-menuitem-link')]//span[@class='p-menuitem-text ws-name-ellipsis']";
 		kmcplusicon = "//span[@class='p-icon kr-plus']";
-		kmconv = "//div[@class='krDropDownMenu']//div[text() = 'Chat']";
+		kmconv = "//div[@class='krDropDownMenu']//span[text() = 'Chat']";
 		kmcomposebar = "//div[@placeholder='Type your message']";
 		kmcrecent = "//ul[@class='p-autocomplete-items p-autocomplete-list p-component p-reset']//li[@class='p-autocomplete-list-item']";
 		kmcenterparticipant = "//input[@placeholder='Enter participant name'] | //input[@placeholder='Add Participants'] | //input[@placeholder='Add people']| //input[@placeholder='Type and select people']";
@@ -133,7 +133,7 @@ public class ElementRepository {
 		kmsmiley = "//ul[@class='icons']//li[3]";
 		kmright3dotoptions = "//div[@class='krDropDownMenu chatHeaderOptions active']//div";
 		kmviewfiles = "//div[@class='modalHeaderSec'][text() = 'View Files']";
-		kmdiscussion = "//div[@class='krDropDownMenu']//div[text() = 'Discussion Room']";
+		kmdiscussion = "//div[@class='krDropDownMenu']//span[text() = 'Discussion Room']";
 
 		kwfilterbyws = "//div[text()='Filter By Workspaces']";
 		kwplusicon = "//span[@id='ws-plus-button']";

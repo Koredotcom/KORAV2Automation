@@ -49,7 +49,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 18)
-	public void MC_TC41_koraFirstGroupIconValidation() throws Exception {
+	public void MC_TC41_firstGroupIconValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -70,7 +70,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 19)
-	public void MC_TC23_koraGroupChat3dotOptions() throws Exception {
+	public void MC_TC23_groupChat3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -95,7 +95,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 	}
 	
 	@Test(enabled = true, priority = 20)
-	public void MC_TC_22_TC_39_TC_40_koraMuteSlotsVerification() throws Exception {
+	public void MC_TC_22_TC_39_TC_40_muteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");

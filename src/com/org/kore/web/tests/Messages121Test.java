@@ -94,7 +94,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 3)
-	public void MC_TC8_TC9_TC24_TC46_OneToOneConvEdit_3dotOptions() throws Exception {
+	public void MC_TC8_TC9_TC24_TC46_OneToOneConvEdit3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -124,7 +124,7 @@ public class Messages121Test extends DriverSetUp {
 
 	// False due to KV2-2089
 	@Test(enabled = false, priority = 4)
-	public void MC_TC12_TC34_DeleteAndCheckActiveParticipant_Copy() throws Exception {
+	public void MC_TC12_TC34_CheckActiveParticipantAndCopy() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -157,7 +157,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 		@Test(enabled = true, priority = 5)
-	public void MC_TC28_TC29_TC43_ValidateChevronIconFor1ParticipantAndSendLongText() throws Exception {
+	public void MC_TC28_TC29_TC43_ValidateSendLongText() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -201,7 +201,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 7)
-	public void MC_TC38_TC55_TC56_checkChatsDRSAndAllMessagesSections() throws Exception {
+	public void MC_TC38_TC55_TC56_validateTopLeftMenu() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -233,7 +233,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 8)
-	public void MC_TC35_TC47_Replyback() throws Exception {
+	public void MC_TC35_TC47_validateReplyback() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -264,7 +264,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 9)
-	public void MC_TC52_Forward() throws Exception {
+	public void MC_TC52_validateForward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -298,7 +298,7 @@ public class Messages121Test extends DriverSetUp {
 	} 
 
 	@Test(enabled = true, priority = 10)
-	public void MC_TC48_Reactions() throws Exception {
+	public void MC_TC48_validateReactions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
