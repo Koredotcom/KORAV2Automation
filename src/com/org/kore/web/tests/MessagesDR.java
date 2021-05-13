@@ -142,7 +142,7 @@ public class MessagesDR extends DriverSetUp {
 	}
 
 	@Test(enabled = false, priority = 31)
-	public void MDR_TC9_TC10_DefaultDRAndTimeline() throws Exception {
+	public void MDR_TC9_TC10_defaultDRAndTimeline() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
@@ -236,7 +236,7 @@ public class MessagesDR extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 34)
-	public void MDR_TC24_hoveronaDRandverifyoptions() throws Exception {
+	public void MDR_TC24_DROnhoverOptionsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
@@ -267,7 +267,7 @@ public class MessagesDR extends DriverSetUp {
 	 *             Pass
 	 */
 	@Test(enabled = true, priority = 35)
-	public void MDR_TC34_TC37_CreatenewDRwithDifferentAccessTypes() throws Exception {
+	public void MDR_TC34_TC37_createNewDRwithDifferentAccessTypes() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
@@ -307,7 +307,7 @@ public class MessagesDR extends DriverSetUp {
 	 * Messages Updated
 	 */
 	@Test(enabled = true, priority = 36)
-	public void MDR_TC64_DeleteWorkSpacefromMessages() throws Exception {
+	public void MDR_TC64_deleteWorkSpacefromMessages() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
@@ -374,7 +374,7 @@ public class MessagesDR extends DriverSetUp {
 
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_Messages_Chats");
+					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
@@ -398,11 +398,11 @@ public class MessagesDR extends DriverSetUp {
 	 * Forward post to new conversation , Existing and DR
 	 */
 	@Test(enabled = true, priority = 39)
-	public void MDR_TC_54_57_forwardPosttoToGroupdnDrandnewconv() throws Exception {
+	public void MDR_TC_54_57_forwardPostToGroupDrAndNewconv() throws Exception {
 
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_Messages_Chats");
+					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -437,7 +437,7 @@ public class MessagesDR extends DriverSetUp {
 	}
 	
 	@Test(enabled = true, priority = 40)
-	public void MDR_TC66_TC17_TC21_CreationofRoomwithoutWS_MangeMembers_ValidatingDRinAllmessages() throws Exception {
+	public void MDR_TC66_TC17_TC21_creationofRoomwithoutWS() throws Exception {
 		try {
 			
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -466,7 +466,7 @@ public class MessagesDR extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 41)
-	public void MDR_TC25_TC26_StarDrandMuteDrandvaldiation() throws Exception {
+	public void MDR_TC25_TC26_starDrandMuteDrandvaldiation() throws Exception {
 		try {
 			
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())

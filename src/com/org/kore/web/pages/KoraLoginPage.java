@@ -81,6 +81,8 @@ public class KoraLoginPage extends PageBase {
 	}
 
 	public void logoutAndReLogin(boolean relogin, String url, String userName, String password) throws Exception {
+		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
+		waitTillappear(er.klogo, "xpath", "Top left menu");
 		click(er.kuserprofileicon, "Click on User profile icon");
 		click(er.klogout, "Logout");
 		click(er.klogoutyes, "Logout Confirmation Popup Yes");
