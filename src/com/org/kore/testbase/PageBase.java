@@ -254,13 +254,14 @@ public class PageBase extends DriverSetUp {
 			switch (DriverSetUp.propsMap.get("tool")) {
 
 			case "Appium":
-
+				
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-
 				appiumDriver.findElementByXPath(xpath).click();
 				break;
+				
 			case "Selenium":
+				
 				Thread.sleep(2000);
 				JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
 				WebElement button = remoteDriver.findElement(By.xpath(xpath));

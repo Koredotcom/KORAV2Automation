@@ -76,8 +76,10 @@
 		"kmstarred": "Starred",
 		"kmmuted": "Muted",
 		"kmunread": "Unread",
-		"expectedmuteslots": "4 hours, 1 day, 1 week, Until turned off"
+		"expectedmuteslots": "4 hours, 1 day, 1 week, Until turned off",
+		"expectedreminderslots": "15 mins, 1 hr, 2 hrs,4 hrs,1 Day,2 Days,1 Week"
 	},
+	
 	"WSTESTDATA": {
 		"workspaces": "Workspaces",
 		"messages": "Messages",

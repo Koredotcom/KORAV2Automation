@@ -593,12 +593,18 @@ public class KoraMessagesChatsPage extends PageBase {
 	 *            : Getting actual options from testdata json file @throws
 	 *            IOException @throws
 	 */
-	public void validateAndSelectMuteSlots(String expectedmuteslots, boolean select) throws Exception {
+	public void validateAndSelectMuteSlots(String muteorreminder,String expectedmuteslots, boolean select) throws Exception {
 		String[] exp = cf.convertStringstoArray(expectedmuteslots);
 		int i = 0;
 		boolean check = false;
+		String slottype = null;
+		if (muteorreminder.equalsIgnoreCase("mute")){
+		slottype =er.kmcmuteslots;
+		}else if (muteorreminder.equalsIgnoreCase("reminder")){
+			slottype =er.kmreminderslots;
+		}
 		try {
-			List<WebElement> options = remoteDriver.findElements(By.xpath(er.kmcmuteslots));
+			List<WebElement> options = remoteDriver.findElements(By.xpath(slottype));
 			for (WebElement ele : options) {
 				Thread.sleep(500);
 				String act = ele.getText();
@@ -610,7 +616,7 @@ public class KoraMessagesChatsPage extends PageBase {
 				}
 				i++;
 			}
-			test.log(LogStatus.INFO, "Mute slots".toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.INFO, muteorreminder+" slots".toString() + test.addScreenCapture(takeScreenShot()));
 			if (select) {
 				String selectedslot =options.get(0).getText();
 				System.out.println("Selecting mute slot i.e. " + selectedslot);
@@ -1276,13 +1282,18 @@ public class KoraMessagesChatsPage extends PageBase {
 				break;
 				
 			case "More":
-				System.out.println("In messge on hover 3dots ");
-				click(er.kmchatname0 + user
+				//p[@class='chatUserTitle']/span[text()='Hana Yori']/../../../../../..//div[@class='send-message' and text()='Hi... Ignore_Automationmessage164459']/..//i[contains(@class,'icon __i kr-ellipsis')]
+				System.out.println("In message on hover 3dots ");
+				try{
+					jsClick(er.kmchatname0 + user
 						+ er.kmchatname1 + message
 						+ "']/..//i[contains(@class,'icon __i kr-ellipsis')]", action + " on message hover");
-				Thread.sleep(3000);
-				//div[@class='msgCntrlBarParent hoverOptionsBar ']//div[text()='
-				click(er.kmmessagehovermoreoptions + subaction + er.ksinglquote, "xpath");
+				jsClick(er.kmmessagehovermoreoptions + subaction + er.ksinglquote, "xpath");
+				}catch (Exception e){
+					click(er.kmmessagehovermoreoptions + "Edit" + er.ksinglquote, "xpath");
+					System.out.println("failed");
+					e.printStackTrace();
+				}
 				test.log(LogStatus.PASS, "Selected<b> " + subaction + " </b> option from message onhover 3 dots".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 				if (subaction.equalsIgnoreCase("Copy")) {
@@ -1529,4 +1540,19 @@ public class KoraMessagesChatsPage extends PageBase {
 							+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
+	
+	public void validateDeleteMessage(String user,String message) throws Exception{
+		boolean flag =false;
+	if (flag=remoteDriver.findElements(By.xpath(er.kmmessagedeleted))
+					.size() > 0 &&(!elementIsDisplayed(er.kmchatname0 + user
+					+ er.kmchatname1 + message+ "']", "xpath"))){
+		test.log(LogStatus.PASS,
+				message+" got dleted susccessfully".toString() + test.addScreenCapture(takeScreenShot()));
+	} else{
+		test.log(LogStatus.PASS,
+				message+" got dleted susccessfully".toString() + test.addScreenCapture(takeScreenShot()));
+	}
+	
+	}
+	
 }

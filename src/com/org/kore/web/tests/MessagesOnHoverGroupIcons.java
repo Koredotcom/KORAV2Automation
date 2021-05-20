@@ -48,7 +48,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 18)
+	@Test(enabled = true, priority = 23)
 	public void MC_TC41_firstGroupIconValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -69,7 +69,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 19)
+	@Test(enabled = true, priority = 24)
 	public void MC_TC23_groupChat3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -94,7 +94,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 20)
+	@Test(enabled = true, priority = 25)
 	public void MC_TC_22_TC_39_TC_40_muteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -110,7 +110,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "Mute");
-			koramessagespage.validateAndSelectMuteSlots(muteslots, true);
+			koramessagespage.validateAndSelectMuteSlots("mute",muteslots, true);
 			korahomepage.selectTopLeftMenuOption("Muted");
 			koramessagespage.searchAndSelectFrom("Muted", groupname, true);
 			korahomepage.selectTopLeftMenuOption("All Messages");
@@ -121,7 +121,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 21)
+	@Test(enabled = true, priority = 26)
 	public void MC_TC_22_TC_36_validateStarredChats() throws Exception {
 		
 		try {
@@ -152,7 +152,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 22)
+	@Test(enabled = true, priority = 27)
 	public void MC_TC_22_TC_38_validateUnreadChats() throws Exception {
 		
 		try {
@@ -181,7 +181,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 23)
+	@Test(enabled = true, priority = 28)
 	public void MC_TC44_koraAtmentionUsers() throws Exception {
 		
 		try {

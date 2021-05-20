@@ -325,7 +325,7 @@ public class DriverSetUp {
 					"<html><head></head>");
 			writer.write("<body><h2>Work Assist Automation Execution Report</h2></body>");
 			
-			writer.write("<body><table><table border ='1'><tr><th><b>Scope</b></th><td> <a href="+"https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=1327035589"+"> Basic sanity test cases (Spreadsheet Link too)</a></td><tr><th><b>Environment</b></th><td>"+workingurl+"  <b>("+App+"  )</b>"+"</td></tr><tr><th><b>Browser</b></th><td>Chrome</td></tr></body>");
+			writer.write("<body><table><table border ='1'><tr><th><b>Scope</b></th><td> <a href="+"https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=1327035589"+"> Basic sanity test cases</a></td><tr><th><b>Environment</b></th><td>"+workingurl+"  <b>("+App+"  )</b>"+"</td></tr><tr><th><b>Browser</b></th><td>Chrome</td></tr></body>");
 			writer.write("<body><h2> </h2></body>");
 			writer.write("<table> </table>");
 			
@@ -337,7 +337,7 @@ public class DriverSetUp {
 			writer.write("<body><h2> </h2></body>");
 			writer.write("<table> </table>");
 			
-			writer.write("<body><table><table border ='1'>" + "<tr bgcolor="+"#02c8ff"+">" + "<th><font color="+"white"+"><b>Module</b></th>" +"<th><font color="+"white"+"><b>Scenario</b></th>"+ "<th><font color="+"white"+"><b>TC Number</b></th>"+"<th><font color="+"white"+"><b>Description</b></th>"
+			writer.write("<body><table><table border ='1'>" + "<tr bgcolor="+"#02c8ff"+">" + "<th><font color="+"white"+"><b>Module</b></th>" +"<th><font color="+"white"+"><b>Scenario</b></th>"+ "<th><font color="+"white"+"><b>TC ID</b></th>"+"<th><font color="+"white"+"><b>Description</b></th>"
                     + "<th><font color="+"white"+"><b>Status</b></th>");
 		//	writer.write("<body><h2> </h2></body>");
 		//	writer.write("<table> </table>");

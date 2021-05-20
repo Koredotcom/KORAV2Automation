@@ -336,5 +336,63 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate Reactionas functionality");
 		}
 	}
+	
+	@Test(enabled = true, priority = 11)
+	public void MC_TC61_verifyReminderSlots() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			String expreminderslots = DriverSetUp.testdataMap.get("expectedreminderslots");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagespage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
+			koramessagespage.goToGroupAndPerform(user, false, "NA");
+			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Reminder");
+
+			koramessagespage.validateAndSelectMuteSlots("reminder",expreminderslots, false);
+			
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");
+		}
+	}
+
+	@Test(enabled = true, priority = 12)
+	public void MC_TC62_TC63_DeleteMessage() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagespage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
+			koramessagespage.goToGroupAndPerform(user, false, "NA");
+			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Delete");
+			koramessagespage.clickOn("Cancel", true);
+			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Delete");
+			koramessagespage.clickOn("Delete for everyone", true);
+			koramessagespage.validateDeleteMessage(user,updatedstr);
+			
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");
+		}
+	}
 }

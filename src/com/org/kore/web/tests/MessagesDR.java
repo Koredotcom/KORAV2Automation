@@ -370,7 +370,7 @@ public class MessagesDR extends DriverSetUp {
 	 * room
 	 */
 	@Test(enabled = true, priority = 38)
-	public void MDR_TC7_atmentionUsersinDr() throws Exception {
+	public void MDR_TC7_TC55_TC61_atmentionUsersinDr() throws Exception {
 
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -386,8 +386,15 @@ public class MessagesDR extends DriverSetUp {
 			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");
 			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(standarddrname, "Manage Room","N/A");
 			List<String> membersingroup=koramessagedrpage.addandremovepeoplefromdiscussionRoom(standarddrname,"N/A","N/A");
-			String atmentionmsg = "at mention Automation "+korahomepage.runtimehhmmss();
-			koramessagedrpage.atMentionValidationinDR(membersingroup,"james@koraqa1.com", atmentionmsg);			
+			String atmentionmsg = "at mention Automation post"+korahomepage.runtimehhmmss();
+			koramessagedrpage.atMentionValidationinDR(membersingroup,"james@koraqa1.com", atmentionmsg,"post");
+			
+			String drpost="postforComment"+korahomepage.runtimehhmmss();
+			koramessagespage.enterYourMessageAs(drpost);
+			koramessagedrpage.perfromreactionsonPost(standarddrname, drpost, "", true,"");
+			koramessagedrpage.atMentionsinComments(standarddrname, drpost, "@");			
+			koramessagedrpage.atMentionValidationinDR(membersingroup,"hana@koraqa1.com", atmentionmsg,"");
+			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
@@ -501,5 +508,73 @@ public class MessagesDR extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
 		}
-	}	
+	}
+	
+
+	@Test(enabled = true, priority = 42)
+	public void MDR_TC14_TC15_TC71_LeaveandDeleteDRfromManageRoom() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
+			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
+			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();
+			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime, newparticipants, "Post Only");								
+			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime, false, "");						
+			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(randomDrwithTime, "Manage Room","N/A");						
+			koramessagedrpage.rename_LeaveRoom_DeleteRoom("Rename","Leave");
+			koramessagedrpage.valdiatedeletedMsgorDR(randomDrwithTime+"Rename");
+						
+			String randomDrwithTime2 = "randomDR" +korahomepage.runtimehhmmss();
+			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime2, newparticipants, "Post Only");								
+			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime2, false, "");						
+			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(randomDrwithTime2, "Manage Room","N/A");						
+			koramessagedrpage.rename_LeaveRoom_DeleteRoom("","Delete");
+			koramessagedrpage.valdiatedeletedMsgorDR(randomDrwithTime2+"Rename");
+			extent.endTest(test);
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to  Leave and Delete DR from ManageRoom");
+		}
+	}
+		
+	/**
+	 * Editing a post in Discussion Room Also validates
+	 * Edit,Forward,Reminder,Post Info,Delete options displayed in 3 dots to a
+	 * post
+	 */
+	@Test(enabled = true, priority = 43)
+	public void MDR_TC_45_TC52_TC77_DeletePostandCancelnewDR() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");			
+			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");			
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+		
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");						
+			String exeTimeHMS1 = "random"+korahomepage.runtimehhmmss();						
+			koramessagedrpage.cancledrcreationanddiscardmsg(exeTimeHMS1,newparticipants);		
+			String drpost="postforLiknComment"+korahomepage.runtimehhmmss();
+			koramessagedrpage.goToGroupAndPerforminWSDR("DRDelete", false, "");
+			koramessagespage.enterYourMessageAs(drpost);
+			koramessagedrpage.deletepostandreactcount("DRDelete", drpost);					
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
+		}
+	}
+	
+	
 }

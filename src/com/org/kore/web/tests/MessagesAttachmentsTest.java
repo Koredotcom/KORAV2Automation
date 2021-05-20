@@ -53,7 +53,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		directory = System.getProperty("user.dir");
 	}
 
-	@Test(enabled = true, priority = 25)
+	@Test(enabled = true, priority = 29)
 	public void MC_TC11_TC30_uploadAllIndividualFilesBelow25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -96,7 +96,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 26)
+	@Test(enabled = true, priority = 30)
 	public void MC_TC31_TC49_uploadMultipleFilesAndView() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -128,7 +128,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true,priority = 27)
+	@Test(enabled = true,priority = 31)
 	public void MC_TC53_uploadFileabove25MBAndCancel() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())

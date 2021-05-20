@@ -48,7 +48,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 11)
+	@Test(enabled = true, priority = 16)
 	public void MC_TC13_createAndDeleteGroupWithNoName() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -86,7 +86,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 12)
+	@Test(enabled = true, priority = 17)
 	public void MC_TC14_TC15_TC16_TC20_TC21_createNewGroupConversation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -113,7 +113,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 13)
+	@Test(enabled = true, priority = 18)
 	public void MC_TC17_TC18_TC19_addMemberToGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -139,7 +139,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 14)
+	@Test(enabled = true, priority = 19)
 	public void MC_TC17_renameExistingGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -167,7 +167,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 15)
+	@Test(enabled = true, priority = 20)
 	public void MC_TC17_removeParticipantsFromGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -192,7 +192,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 16)
+	@Test(enabled = true, priority = 21)
 	public void MC_TC25_TC26_clearChatHistory() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -217,7 +217,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 17)
+	@Test(enabled = true, priority = 22)
 	public void MC_TC_27_deleteConversation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
