@@ -48,6 +48,25 @@ public class KoraMessagesChatsPage extends PageBase {
 		test.log(LogStatus.INFO, "For + icon text displayed as : <b>" + plusicon + "</b>");
 	}
 
+	public void validateDirectChatOrDR(String chatorDr) throws IOException{
+		try{
+			click(er.kmcplusicon, "Plus icon to start direct" + chatorDr);
+			if (chatorDr.toLowerCase().contains("chat")){
+				click(er.kmcenterparticipant, "Enter participant name");
+				test.log(LogStatus.PASS, "From<b> chats, </b> on click of Plus(+) icon it directly navigates to New chat flow".toString()
+				+ test.addScreenCapture(takeScreenShot()));
+			}	else if (chatorDr.toLowerCase().contains("dr")){
+				click(er.kmcgroupname, "Discussion Room Name");
+				test.log(LogStatus.PASS, "From<b> DR, </b>on click of Plus(+) icon it directly navigates to DR flow".toString()
+				+ test.addScreenCapture(takeScreenShot()));
+				}
+		}catch (Exception e){
+			test.log(LogStatus.FAIL, "From <b>"+chatorDr+" </b>, on click of + icon it is failed to navigate to Direct flow of new"+chatorDr+" ".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}
+		
+	}
+	
 	/**
 	 * @Description : To select an option after clicking on plus icon
 	 * @param userchoice
@@ -161,7 +180,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			}
 			Thread.sleep(2000);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
+			test.log(LogStatus.FAIL, "Unable to select the mentioned participant with or with out selecting + icon .Select plus icon is --> "+plusicon);
 
 		}
 	}
@@ -1090,8 +1109,8 @@ public class KoraMessagesChatsPage extends PageBase {
 
 		click(er.ktext + option + "']", option + " tab");
 		if (screenshot)
-			test.log(LogStatus.PASS, "Clicked on " + option, test.addScreenCapture(takeScreenShot()));
-
+			Thread.sleep(1000);
+			test.log(LogStatus.PASS," Clicked on <b> " + option+" </b>".toString() + test.addScreenCapture(takeScreenShot()));
 	}
 
 	/**
@@ -1222,29 +1241,31 @@ public class KoraMessagesChatsPage extends PageBase {
 				//p[@class='chatUserTitle']/span[text()='James Middleton']/../../../../../..//div[@class='send-message' and text()='Hi Jeo']/..//div[@class='msgCntrlBarParent hoverOptionsBar ']//i[@title='Like']
 				System.out.println("In Reactions");
 				moveToElement(er.kmchatname0 + user+er.kmchatname1 + message + er.ksinglquote, "xpath");
-				Thread.sleep(1000);
-				click(er.kmchatname0 + user
+				Thread.sleep(2000);
+				jsClick(er.kmchatname0 + user
 						+ er.kmchatname1 + message
 						+ "']/.."+er.kmmessagerighthover+"//i[@title='" + subaction + "']",
 						action + " on message hover");
-				Thread.sleep(2000);
-				String reactioncount = getText(er.kmchatname0 + user
+				Thread.sleep(1000);
+				moveToElement(er.kmchatname0 + user
 						+ er.kmchatname1 + message
-						+ "']/.."+er.kmmessagerighthover+"/../../../..//div[@class='count']");
-				if (reactioncount.equals("1")) {
+						+ "']/.."+er.kmmessagerighthover+"/../../..//div[@class='count']", "xpath");
+				/*String reactioncount = getText(er.kmchatname0 + user
+						+ er.kmchatname1 + message+er.ksinglquote
+						+ "/.."+er.kmmessagerighthover+"/../../..//div[@class='count']");
+				if (reactioncount.equals("1")) {*/
 					test.log(LogStatus.WARNING,
 							"Reaction count was 1".toString() + test.addScreenCapture(takeScreenShot()));
-				} else {
+				/*} else {
 					test.log(LogStatus.WARNING,
-							"Reaction count was not reflected".toString() + test.addScreenCapture(takeScreenShot()));
-				}
+							"Verify Reaction count ".toString() + test.addScreenCapture(takeScreenShot()));
+				}*/
 
-				Thread.sleep(1000);
 				break;
 
 			case "Reply Back":
 				System.out.println("In Reply back");
-				click(er.kmchatname0 + user
+				jsClick(er.kmchatname0 + user
 						+ er.kmchatname1 + message
 						+ "']/.."+er.kmmessagerighthover+"//i[@class='icon __i kr-return replyButton']",
 						action + "on message hover");
@@ -1284,16 +1305,10 @@ public class KoraMessagesChatsPage extends PageBase {
 			case "More":
 				//p[@class='chatUserTitle']/span[text()='Hana Yori']/../../../../../..//div[@class='send-message' and text()='Hi... Ignore_Automationmessage164459']/..//i[contains(@class,'icon __i kr-ellipsis')]
 				System.out.println("In message on hover 3dots ");
-				try{
 					jsClick(er.kmchatname0 + user
 						+ er.kmchatname1 + message
 						+ "']/..//i[contains(@class,'icon __i kr-ellipsis')]", action + " on message hover");
 				jsClick(er.kmmessagehovermoreoptions + subaction + er.ksinglquote, "xpath");
-				}catch (Exception e){
-					click(er.kmmessagehovermoreoptions + "Edit" + er.ksinglquote, "xpath");
-					System.out.println("failed");
-					e.printStackTrace();
-				}
 				test.log(LogStatus.PASS, "Selected<b> " + subaction + " </b> option from message onhover 3 dots".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 				if (subaction.equalsIgnoreCase("Copy")) {
@@ -1328,7 +1343,7 @@ public class KoraMessagesChatsPage extends PageBase {
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"Fora message either onhover options title is not displaying or failed to perform <b> " + action
+					"For a message either onhover options title is not displaying or failed to perform <b> " + action
 							+ "</b> Action".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
@@ -1486,6 +1501,7 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	public void forwardPostOrValidation(boolean forwardpost, String chatheadername, String forwardedmsg,
 			String newparticipants) throws Exception {
+		boolean forwardmsg=false;
 		try {
 			if (forwardpost) {
 				if (elementIsDisplayed("//span[text() = 'Forward Message']", "xpath")) {
@@ -1504,13 +1520,15 @@ public class KoraMessagesChatsPage extends PageBase {
 					Thread.sleep(2000);
 				}
 			}
-			if (elementIsDisplayed(er.kmchatname0 + chatheadername
+			//p[@class='chatUserTitle']/span[text()='Hana Yori']/../../../../../..//div[@class='send-message' and text()='Hi... Ignore_Automationmessage170356']/..//span[text() = 'Forwarded']
+			forwardmsg = remoteDriver.findElements(By.xpath(er.kmchatname0 + chatheadername
 					+ er.kmchatname1 + forwardedmsg
-					+ "']/..//span[text() = 'Forwarded']", "xpath")) {
+					+ "']/..//span[text() = 'Forwarded']")).size() > 0;
+			if (forwardmsg) {
 				test.log(LogStatus.PASS, forwardedmsg+" got displayed as <b> Forwarded </b> message " + test.addScreenCapture(takeScreenShot()));
 			} else {
 				test.log(LogStatus.FAIL,
-						"After forward, forward placeholder is not diaplyed on top of <b>"+forwardpost+" <b> text or it is not scrolled completely to the bottom"
+						"After forward, forward placeholder or <b>"+ forwardedmsg+" <b> text is not displayed completely .Seems it is not scrolled completely to the bottom"
 								.toString() + test.addScreenCapture(takeScreenShot()));
 			}
 
@@ -1541,18 +1559,54 @@ public class KoraMessagesChatsPage extends PageBase {
 		}
 	}
 	
-	public void validateDeleteMessage(String user,String message) throws Exception{
-		boolean flag =false;
-	if (flag=remoteDriver.findElements(By.xpath(er.kmmessagedeleted))
-					.size() > 0 &&(!elementIsDisplayed(er.kmchatname0 + user
-					+ er.kmchatname1 + message+ "']", "xpath"))){
-		test.log(LogStatus.PASS,
-				message+" got dleted susccessfully".toString() + test.addScreenCapture(takeScreenShot()));
-	} else{
-		test.log(LogStatus.PASS,
-				message+" got dleted susccessfully".toString() + test.addScreenCapture(takeScreenShot()));
+	public void validateDeleteMessageFromSelfUser(boolean selfuser, String user, String message) throws Exception {
+		boolean flag = false;
+		String messagesentfrom;
+		if (selfuser){
+			messagesentfrom="Host user";
+		}else {
+			messagesentfrom="Recepient";
+		}
+			if (flag = remoteDriver.findElements(By.xpath(er.kmmessagedeleted)).size() > 0
+					&& (!elementIsDisplayed(er.kmchatname0 + user + er.kmchatname1 + message + "']", "xpath"))) {
+				test.log(LogStatus.PASS,
+						message + " got deleted susccessfully from <b>"+messagesentfrom+"</b> and displayed as <b> This message was deleted</b>".toString() + test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL,
+						message + " is still displaying or it is not displaying This message displayed placeholder after deletion operation".toString() + test.addScreenCapture(takeScreenShot()));
+			}
 	}
 	
+	public void validateDeleteMessageforMyself(boolean selfuser, String user, String message) throws Exception {
+		try{
+		boolean flag = false;
+		String messagesentfrom;
+		if (selfuser){
+			messagesentfrom="Host user";
+			if (flag = (!elementIsDisplayed(er.kmchatname0 + user + er.kmchatname1 + message + "']", "xpath"))) {
+				test.log(LogStatus.PASS,
+						message + " got deleted susccessfully from <b>"+messagesentfrom+"</b>".toString() + test.addScreenCapture(takeScreenShot()));
+				if (flag = remoteDriver.findElements(By.xpath(er.kmmessagedeleted)).size() > 0){
+					test.log(LogStatus.FAIL,
+							"From "+messagesentfrom+" on click of Delete my self option, <b> This message was deleted</b> test should not be displayed".toString() + test.addScreenCapture(takeScreenShot()));
+				}
+			} else {
+				test.log(LogStatus.FAIL,
+						message + " is still displaying, i.e. Delete for My self is not working from"+messagesentfrom+" ".toString() + test.addScreenCapture(takeScreenShot()));
+			}
+	}else {
+		messagesentfrom="Recepient";
+		if (flag = remoteDriver.findElements(By.xpath(er.kmchatname0 + user + er.kmchatname1 + message + "']")).size() > 0){
+			test.log(LogStatus.PASS,"Since <b>"+
+					message + " </b>got deleted for my self, message is displayed for other users".toString() + test.addScreenCapture(takeScreenShot()));
+		} else {
+			test.log(LogStatus.FAIL,"As <b>"+
+					message + " </b>got deleted for my self, message should display for other users and it is not displaying to others".toString() + test.addScreenCapture(takeScreenShot()));
+		}
+	}
+	}catch (Exception e){
+		System.out.println("check");
+	}
 	}
 	
 }

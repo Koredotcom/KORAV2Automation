@@ -58,9 +58,6 @@ public class KoraHomePage extends PageBase {
 					Thread.sleep(1000);
 					waitTillappear(er.klogo, "xpath", "Top left menu");
 					test.log(LogStatus.PASS, menuoption + " selected");
-					/*
-					 * .toString() + test.addScreenCapture(takeScreenShot()));
-					 */
 					break;
 				}
 			}

@@ -75,20 +75,25 @@ public class KoraLoginPage extends PageBase {
 		click(er.kstaysignin, "Stay Signin");
 		Thread.sleep(3000);
 		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
-		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName);
+		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName+" ".toString() + test.addScreenCapture(takeScreenShot()));
 		/* + " ".toString()+ test.addScreenCapture(takeScreenShot())); */
 
 	}
 
 	public void logoutAndReLogin(boolean relogin, String url, String userName, String password) throws Exception {
-		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
-		waitTillappear(er.klogo, "xpath", "Top left menu");
-		click(er.kuserprofileicon, "Click on User profile icon");
-		click(er.klogout, "Logout");
-		click(er.klogoutyes, "Logout Confirmation Popup Yes");
-		test.log(LogStatus.INFO, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
-		waitTillappear(er.ko365, "xpath", "Choose ur account type");
-		if (relogin) {
+		try {
+			waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
+			waitTillappear(er.klogo, "xpath", "Top left menu");
+			click(er.kuserprofileicon, "Click on User profile icon");
+			click(er.klogout, "Logout");
+			click(er.klogoutyes, "Logout Confirmation Popup Yes");
+			test.log(LogStatus.INFO, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
+			waitTillappear(er.ko365, "xpath", "Choose ur account type");
+			if (relogin) {
+				clearChromeCache();
+				loginToKora(url, userName, password);
+			}
+		} catch (Exception e) {
 			clearChromeCache();
 			loginToKora(url, userName, password);
 		}

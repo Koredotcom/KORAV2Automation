@@ -320,7 +320,7 @@ public class PageBase extends DriverSetUp {
 			}
 		} catch (Exception exc) {
 			System.out.println("Waited for 2 minutes to disappear //div[@class='lds-ring'] and to get Home screen loaded");
-			test.log(LogStatus.FAIL, "Exception on  Element to get disappear from the screen even after 120 secs"
+			test.log(LogStatus.UNKNOWN, "Exception on  Element to get disappear from the screen, even after 120 secs"
 					.toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
