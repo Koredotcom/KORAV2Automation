@@ -27,26 +27,27 @@ public class ElementRepository {
 			kmmessagerighthover = null, kmchatname0 = null, kmchatname1 = null, kmmessagehovermoreoptions = null,
 			kmlongtextreadmore = null, kmreadmore = null, kmreadless = null, kmemoji = null, kmsmiley = null,
 			kmright3dotoptions = null, kmviewfiles = null, kmreminderslots = null, kmmessagedeleted = null,
-			kwfilterbyws = null, kwplusicon = null, kwcreatenew = null, kwjoinexisting = null, kworkplaceholder = null,
-			kwdefaulworkspace = null, kwdrheader = null, kworkspaces = null, kwdrgeneral = null, kworkspacename = null,
-			kwleft3dots = null, kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null,
-			kwdeletewsname = null, kwproceedDelete = null, kwcomposebar = null, kwinvite = null,
-			kwsearchandaddpeople = null, kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null,
-			kwmemslist = null, kdrcidgroup = null, kdrc3dotoptionsRightPanel = null,
-			kdrc3dotoptionsRightPanelOptions = null, kdrpostname0 = null, kdrpostname1 = null, kdrsettings = null,
-			kdeveryoneAtnoWorkspace = null, kdselectworkspace = null, kdtoggleicontoselectWS = null,
-			kddiscussionTitle = null, kddefaultAccessto = null, kdSearchboxinmsgnDR = null, kuserProfileUserName = null,
-			kmdmsgordiscroom = null, kdeditpost = null, kdeditpostcomposebar = null, kdforwardpost = null,
-			kdfowradpostWindow = null, kdfrwrdpostConversationname = null, kdfowradpostWindowclose = null,
-			kdstartnewconversation = null, kdselectpeopleinnewconv = null, kdemailaddresstoselect = null,
-			kdcreatenforwardpost = null, kdsearchbarinforwardpost = null, kdsearchresultsforwardpost = null,
-			kdrsearchresultsfirstsenditem = null, kdrManageRoom3dots0 = null, kdrManageRoom3dots1 = null,
-			kwmanagedrMemebrs = null, kwaddpeopleplacehilder = null, kwmemebrsinaDreamilaccess0 = null,
-			kwmemebrsinaDreamilaccess1 = null, kwremovingmemebrindr = null, kwremovingmemebrindrconfirm = null,
-			kwaddpeopleadinmember = null, kwpostinfonMessageinfofrom3dots = null, kdpostinfonmsginfoTitle = null,
-			kwclosecommentreadpopup = null, kwstarfilledstatus = null, kwatmentionuserslist = null, kdrRoomname = null,
-			kdrleaveDR = null, kdrleaveDRconfirm = null, kdrdeleteDR = null, kdrdeleteDRconfirm = null,
-			kdrclosenewdrcreation = null, kdrdiscardmsg = null;
+			kmforwardmsgpopup = null, kmsendbutton = null, kwfilterbyws = null, kwplusicon = null, kwcreatenew = null,
+			kwjoinexisting = null, kworkplaceholder = null, kwdefaulworkspace = null, kwdrheader = null,
+			kworkspaces = null, kwdrgeneral = null, kworkspacename = null, kwleft3dots = null,
+			kwsleft3dotoptions = null, kwyesDeletepopup = null, kwproceed2delete = null, kwdeletewsname = null,
+			kwproceedDelete = null, kwcomposebar = null, kwinvite = null, kwsearchandaddpeople = null,
+			kwsuggestedmailids = null, kwinviteclose = null, kwsendinvitation = null, kwmemslist = null,
+			kdrcidgroup = null, kdrc3dotoptionsRightPanel = null, kdrc3dotoptionsRightPanelOptions = null,
+			kdrpostname0 = null, kdrpostname1 = null, kdrsettings = null, kdeveryoneAtnoWorkspace = null,
+			kdselectworkspace = null, kdtoggleicontoselectWS = null, kddiscussionTitle = null, kddefaultAccessto = null,
+			kdSearchboxinmsgnDR = null, kuserProfileUserName = null, kmdmsgordiscroom = null, kdeditpost = null,
+			kdeditpostcomposebar = null, kdforwardpost = null, kdfowradpostWindow = null,
+			kdfrwrdpostConversationname = null, kdfowradpostWindowclose = null, kdstartnewconversation = null,
+			kdselectpeopleinnewconv = null, kdemailaddresstoselect = null, kdcreatenforwardpost = null,
+			kdsearchbarinforwardpost = null, kdsearchresultsforwardpost = null, kdrsearchresultsfirstsenditem = null,
+			kdrManageRoom3dots0 = null, kdrManageRoom3dots1 = null, kwmanagedrMemebrs = null,
+			kwaddpeopleplacehilder = null, kwmemebrsinaDreamilaccess0 = null, kwmemebrsinaDreamilaccess1 = null,
+			kwremovingmemebrindr = null, kwremovingmemebrindrconfirm = null, kwaddpeopleadinmember = null,
+			kwpostinfonMessageinfofrom3dots = null, kdpostinfonmsginfoTitle = null, kwclosecommentreadpopup = null,
+			kwstarfilledstatus = null, kwatmentionuserslist = null, kdrRoomname = null, kdrleaveDR = null,
+			kdrleaveDRconfirm = null, kdrdeleteDR = null, kdrdeleteDRconfirm = null, kdrclosenewdrcreation = null,
+			kdrdiscardmsg = null;
 
 	public void repoIOS() {
 
@@ -137,6 +138,8 @@ public class ElementRepository {
 		kmviewfiles = "//div[@class='modalHeaderSec'][text() = 'View Files']";
 		kmreminderslots = "//div[@class='krDropDownMenuWithoutIcon msgRemDD active overflow']//li";
 		kmmessagedeleted = "//i[@class='markdownItalic'][text() = 'This message was deleted']";
+		kmforwardmsgpopup = "//span[text() = 'Forward Message']";
+		kmsendbutton = "/../../../..//button[@class='sendBtn']";
 		kmdiscussion = "//div[@class='krDropDownMenu']//span[text() = 'Discussion Room']";
 
 		kwfilterbyws = "//div[text()='Filter By Workspaces']";

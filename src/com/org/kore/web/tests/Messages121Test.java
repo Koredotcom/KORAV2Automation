@@ -287,14 +287,14 @@ public class Messages121Test extends DriverSetUp {
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 			koramessagespage.goToGroupAndPerform(user, false, "NA");
 			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Forward");
-			koramessagespage.forwardPostOrValidation(true, user, updatedstr, newparticipants);
+			koramessagespage.forwardPostOrValidation(true,true, user, updatedstr, newparticipants);
 
 			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			String hostuser = "James Middleton";
 			koramessagespage.goToGroupAndPerform(hostuser, false, "NA");
-			koramessagespage.forwardPostOrValidation(false, hostuser, updatedstr, newparticipants);
+			koramessagespage.forwardPostOrValidation(false,false, hostuser, updatedstr, newparticipants);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");
@@ -313,7 +313,8 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
+		//	koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Chats");
 			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");			
@@ -321,14 +322,17 @@ public class Messages121Test extends DriverSetUp {
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 			
 			koramessagespage.selectOptionFromRightNav3Dots(user, "Select Messages");
-			koramessagespage.forwardPostOrValidation(true, user, updatedstr, newparticipants);
+			koramessagespage.forwardPostOrValidation(true,false, user, updatedstr, "QA Pride");
 
 			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
+			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
+			koramessagespage.enterYourMessageAs(updatedstr1);
+			
 			String hostuser = "James Middleton";
-			koramessagespage.goToGroupAndPerform(hostuser, false, "NA");
-			koramessagespage.forwardPostOrValidation(false, hostuser, updatedstr, newparticipants);
+			koramessagespage.forwardPostOrValidation(false,false, hostuser, updatedstr, "NA");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");

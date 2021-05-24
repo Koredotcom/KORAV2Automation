@@ -788,7 +788,7 @@ public class KoraMessagesDRPage extends PageBase {
 				System.out.println("------------------ Discussion Room Name -------------------------");
 				moveToElement(er.kdfrwrdpostConversationname + discRoomorConversationName + er.ksinglquote, "xpath");
 				click(er.kdfrwrdpostConversationname + discRoomorConversationName + er.ksinglquote
-						+ "/../../../..//button[@class='sendBtn']", "Clicking to Forward a post");
+						+ er.kmsendbutton, "Clicking to Forward a post");
 				Thread.sleep(2000);
 				if (remoteDriver.getPageSource().contains("Post forwarded successfully.")) {
 					test.log(LogStatus.PASS, "Post forwarded successfully. message disaplyed after post being forwarded"

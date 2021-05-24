@@ -1483,7 +1483,6 @@ public class KoraMessagesChatsPage extends PageBase {
 			System.out.println("Reached FailXXXXXXXX " + right3dotsoption
 					+ " workspace is not available on the Dom for top header menu");
 		}
-		viewFiles();
 	}
 
 	public void viewFiles() throws Exception {
@@ -1499,33 +1498,53 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	}
 
-	public void forwardPostOrValidation(boolean forwardpost, String chatheadername, String forwardedmsg,
-			String newparticipants) throws Exception {
+	public void forwardPostOrValidation(boolean forwardpost,boolean oneToOne, String chatheadername, String forwardedmsg,
+			String newparticipantsorroupname) throws Exception {
 		boolean forwardmsg=false;
 		try {
-			if (forwardpost) {
+			if ((forwardpost)&&(oneToOne)) {
 				if (elementIsDisplayed("//span[text() = 'Forward Message']", "xpath")) {
 					System.out.println("Forward New Conversation -");
 					click(er.kdstartnewconversation, " Click on Start New conversation");
-					if (newparticipants.contains(",")) {
-						String result[] = newparticipants.trim().split("\\s*,\\s*");
+					if (newparticipantsorroupname.contains(",")) {
+						String result[] = newparticipantsorroupname.trim().split("\\s*,\\s*");
 						for (String part : result) {
 							System.out.println(part);
 							select(part);
 						}
 					} else {
-						select(newparticipants);
+						select(newparticipantsorroupname);
 					}
 					click(er.kdcreatenforwardpost, "click on  Create & Forward");
 					Thread.sleep(2000);
 				}
+				
+			}else if ((forwardpost)&&(!oneToOne)){
+				if (elementIsDisplayed(er.kmforwardmsgpopup, "xpath")) {
+					
+					moveToElement(er.kdfrwrdpostConversationname + newparticipantsorroupname + er.ksinglquote, "xpath");
+					click(er.kdfrwrdpostConversationname + newparticipantsorroupname + er.ksinglquote
+							+ er.kmsendbutton, "Clicking to Forward message SendButton");
+					Thread.sleep(2000);
+					if (remoteDriver.getPageSource().contains("Message forwarded successfully.")) {
+						test.log(LogStatus.PASS, "Message forwarded successfully. message disaplyed after post being forwarded"
+								+ test.addScreenCapture(takeScreenShot()));
+					} else {
+						test.log(LogStatus.FAIL,
+								"Failed to validate forward message toast test.");
+					}
+					click(er.kdfowradpostWindowclose, "Clicking to close forward message window");
+					Thread.sleep(2000);
+					
+				}
+				
 			}
 			//p[@class='chatUserTitle']/span[text()='Hana Yori']/../../../../../..//div[@class='send-message' and text()='Hi... Ignore_Automationmessage170356']/..//span[text() = 'Forwarded']
 			forwardmsg = remoteDriver.findElements(By.xpath(er.kmchatname0 + chatheadername
 					+ er.kmchatname1 + forwardedmsg
 					+ "']/..//span[text() = 'Forwarded']")).size() > 0;
 			if (forwardmsg) {
-				test.log(LogStatus.PASS, forwardedmsg+" got displayed as <b> Forwarded </b> message " + test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.PASS, forwardedmsg+" got Forwarded" + test.addScreenCapture(takeScreenShot()));
 			} else {
 				test.log(LogStatus.FAIL,
 						"After forward, forward placeholder or <b>"+ forwardedmsg+" <b> text is not displayed completely .Seems it is not scrolled completely to the bottom"

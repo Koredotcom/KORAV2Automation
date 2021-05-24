@@ -121,6 +121,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			korahomepage.uploadfilesfromAttachment(doc,true, "doc file",false);
 			korahomepage.uploadfilesfromAttachment(allfiles,true, "Multiple file formats", true);
 			koramessagespage.selectOptionFromRightNav3Dots(user, "View Files");
+			koramessagespage.viewFiles();
 			extent.endTest(test);
 			
 		} catch (Exception e) {
