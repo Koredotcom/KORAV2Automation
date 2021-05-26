@@ -269,7 +269,7 @@ public class PageBase extends DriverSetUp {
 				break;
 			}
 		} catch (Exception exc) {
-			test.log(LogStatus.FAIL, exc + "Exception on clicking webelement",
+			test.log(LogStatus.FAIL, exc + "Exception on clicking webelement i.e. <b>"+elementName+"</b> ",
 					exc.toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}

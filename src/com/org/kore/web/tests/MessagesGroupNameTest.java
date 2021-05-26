@@ -23,7 +23,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 	String korajusername;
 	String korajpassword;
-	
+
 	String korahusername;
 	String korahpassword;
 
@@ -42,7 +42,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 
 		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
 		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
-		
+
 		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Username");
 		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 
@@ -55,34 +55,36 @@ public class MessagesGroupNameTest extends DriverSetUp {
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String groupname = null;
+			String groupname, groupcount = null;
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("groupparticipants");
 			String grouptext = DriverSetUp.testdataMap.get("groupchat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			
+
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("Chat",newparticipants, true);
+			koramessagespage.startNewConversationWith("Chat", newparticipants, true);
 			groupname = koramessagespage.enterYourMessageAs(grouptext);
+
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Chat");
 			koramessagespage.removeParticipantsAndClose();
-			groupname=koramessagespage.enterYourMessageAs("Removed participants");
+			groupname = koramessagespage.enterYourMessageAs("Removed participants");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Clear Chat History");
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Leave Chat");
-			koramessagespage.clickOn("Leave Chat", true);
+			koramessagespage.clickOn("Leave", true);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			groupname=koramessagespage.getChatHeaderName();
+			groupname = koramessagespage.getChatHeaderNameorCount(true);
 			koramessagespage.goToGroupAndPerform(groupname, true, "DeleteGroup");
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate group creation with no name and delete the same conversation flow");
+			test.log(LogStatus.FAIL,
+					"Failed to validate group creation with no name and delete the same conversation flow");
 		}
 	}
 
@@ -99,10 +101,10 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			String groupname = DriverSetUp.testdataMap.get("groupname");
 			String grouptext = DriverSetUp.testdataMap.get("groupchat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			
+
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("chat",newparticipants, true);
+			koramessagespage.startNewConversationWith("chat", newparticipants, true);
 			koramessagespage.createGroupAs(groupname);
 			koramessagespage.enterYourMessageAs(grouptext);
 			koramessagespage.verifyGroupCreationTimeline(korajusername);
@@ -125,7 +127,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			String groupname = DriverSetUp.testdataMap.get("groupname");
 			String updatedgroupmems = DriverSetUp.testdataMap.get("updateparticipant");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			
+
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
@@ -152,8 +154,8 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			String renameto = DriverSetUp.testdataMap.get("renamegroupto");
 			String groupname = DriverSetUp.testdataMap.get("groupname");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			
- 			korahomepage.selectMenuOption(Messages);
+
+			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Chat");
@@ -178,7 +180,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			
+
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
@@ -203,13 +205,13 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			
+
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Clear Chat History");
 			koramessagespage.verifyGroupUpdateTimelines("cleared");
-			koramessagespage.checkEmptyScreen(renamedgroup,"Removed participants");
+			koramessagespage.checkEmptyScreen(renamedgroup, "Removed participants");
 			koramessagespage.visibilityOfComposeBar(true);
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -228,14 +230,14 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-			
+
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Leave Chat");
-			koramessagespage.clickOn("Leave Chat", true);
+			koramessagespage.clickOn("Leave", true);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			renamedgroup=koramessagespage.getChatHeaderName();
+			renamedgroup = koramessagespage.getChatHeaderNameorCount(true);
 			koramessagespage.goToGroupAndPerform(renamedgroup, true, "DeleteGroup");
 			extent.endTest(test);
 		} catch (Exception e) {

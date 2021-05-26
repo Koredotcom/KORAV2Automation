@@ -164,7 +164,6 @@ public class KoraMessagesChatsPage extends PageBase {
 	 */
 	public void startNewConversationWith(String conversationorDR, String participantlist, boolean plusicon)
 			throws Exception {
-
 		try {
 			if (plusicon)
 				newChatOrDiscussion(conversationorDR);
@@ -278,20 +277,27 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	}
 
-	public String getChatHeaderName() throws Exception {
-		String chatheadername = null;
+	public String getChatHeaderNameorCount(boolean Headername) throws Exception {
+		String chatheadernameorcount = null;
 		try {
-			chatheadername = getText(er.kmchatheadername);
-			if (chatheadername.equalsIgnoreCase("and NaN others")||(chatheadername.equalsIgnoreCase(" and NaN others"))) {
+			if(Headername){
+				chatheadernameorcount = getText(er.kmchatheadername);
+			if (chatheadernameorcount.equalsIgnoreCase("and NaN others")||(chatheadernameorcount.equalsIgnoreCase(" and NaN others"))) {
 				test.log(LogStatus.FAIL, "Displayed invalid group name as and NaN others".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 			}
+			}else {
+				chatheadernameorcount=getText("//i[@class='p-icon _choI kr-members usersCountBox ']//span");
+				test.log(LogStatus.INFO, "This group contains <b>" + chatheadernameorcount
+						+ "</b> Participants from chat header".toString() + test.addScreenCapture(takeScreenShot()));
+				
+			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"After creating workspace when user navigates to Messages, chat header is not displaying".toString()
+					"After creating Chats/workspace, chat header is name or participants count is not displaying".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 		}
-		return chatheadername;
+		return chatheadernameorcount;
 	}
 
 	public String getFirstActiveUser(String expecteduser, boolean check) throws Exception {
@@ -665,7 +671,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			throws Exception {
 		List<WebElement> options = null;
 		if (windowpanel.contains("right")) {
-			String headername = getChatHeaderName();
+			String headername = getChatHeaderNameorCount(true);
 			moveToElement(er.kdrc3dotoptionsRightPanel + headername
 					+ "']/../../../../..//I[@class='p-icon _choI kr-ellipsis']", "xpath");
 			click(er.kdrc3dotoptionsRightPanel + headername + "']/../../../../..//I[@class='p-icon _choI kr-ellipsis']",
@@ -1176,6 +1182,50 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	}
 
+	public int searchFromManageChat(String usertosearch) throws Exception{
+		int manageparticipantssize =0;
+		try{
+		boolean searchresults=false;
+		clickOn("Members", true);
+		
+		manageparticipantssize =getSize("//div[@class='userDetailsElips']//div[@class='emailUi']");
+		test.log(LogStatus.INFO, "This group contains <b>" + manageparticipantssize
+				+ "</b> Participants from manage chat".toString() + test.addScreenCapture(takeScreenShot()));
+		
+		enterText("//input[@placeholder='Search Members']", usertosearch, "xpath", "Enter Email");
+		searchresults = remoteDriver
+				.findElements(By.xpath("//div[@class='emailUi']"))
+				.size() > 0;
+				if (searchresults){
+					test.log(LogStatus.PASS,
+							"Search results displayed from manage chat".toString() + test.addScreenCapture(takeScreenShot()));
+				}else {
+					test.log(LogStatus.FAIL,
+							"When user search with <b> "+usertosearch+" </b>Search results are notgetting displayed ".toString() + test.addScreenCapture(takeScreenShot()));
+				}
+				click(er.kmcmanageclose, "Close");
+		} catch (Exception e) {
+			clickOn("General", false);
+			click(er.kmcmanageclose, "Close");
+			test.log(LogStatus.FAIL,
+					"Here".toString() + test.addScreenCapture(takeScreenShot()));
+		}
+		return manageparticipantssize;
+	}
+	
+	public void compareGroupCount(String act, int exp) throws IOException{
+		int aact = Integer.parseInt(act);
+		if (aact==(exp)){
+			test.log(LogStatus.PASS,
+					"Group Participants from Chat header and manage Chat is Same i.e. <b>"+act+"</b> ".toString() + test.addScreenCapture(takeScreenShot()));
+		}else {
+			test.log(LogStatus.FAIL,
+					"Group Participants from Chat header is <b>"+act+"</b> Group Participants from manage Chat is <b>"+exp+"</b>".toString() + test.addScreenCapture(takeScreenShot()));
+		
+		}
+		
+	}
+	
 	/**
 	 * @Description : It will remove all the members from the group
 	 * @throws Exception
@@ -1483,6 +1533,27 @@ public class KoraMessagesChatsPage extends PageBase {
 			System.out.println("Reached FailXXXXXXXX " + right3dotsoption
 					+ " workspace is not available on the Dom for top header menu");
 		}
+	}
+	
+	public void selectMessages(String userorGroup,String messagetobeSelected ) throws Exception {
+		try{
+
+		//p[@class='chatUserTitle']/span[text()='QA Pride']/../../../../../..//div[@class='send-message' and text()='Check msg']/../../../..//span[@class='checkmark']
+		jsClick(er.kmchatname0 + userorGroup
+				+ er.kmchatname1 + messagetobeSelected
+				+ "']/../../../..//span[@class='checkmark']", messagetobeSelected+" after select messages");
+		
+		test.log(LogStatus.PASS,
+				messagetobeSelected+" ,Message got select successfully "
+							.toString() + test.addScreenCapture(takeScreenShot()));
+		
+		click("//div[@class='msgChatHeader']//i[@class='icon kr-return']", "Forward icon after message selection");
+		
+	}catch (Exception e) {
+		test.log(LogStatus.FAIL,
+				"Failed to select message and Forward".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+	}
 	}
 
 	public void viewFiles() throws Exception {

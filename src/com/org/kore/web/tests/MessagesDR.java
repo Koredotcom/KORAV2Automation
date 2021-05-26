@@ -129,7 +129,7 @@ public class MessagesDR extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.getActiveOptionFromLeftNav("All Messages");
 			koraworkspacepage.selectWorkspace(workspacename);
-			koramessagespage.getChatHeaderName();
+			koramessagespage.getChatHeaderNameorCount(true);
 			String wsname = koramessagespage.enterYourMessageAs("My post in " + workspacename);
 			koraworkspacepage.compareActualExpected(wsname, "General", "Default selected workspace is : ");
 			korahomepage.selectMenuOption(Workspaces);

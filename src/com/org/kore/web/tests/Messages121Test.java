@@ -53,7 +53,7 @@ public class Messages121Test extends DriverSetUp {
 		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 	}
 
-	@Test(enabled = true, priority = 1)
+		@Test(enabled = true, priority = 1)
 	public void MC_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -75,7 +75,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	/*@Test(enabled = true, priority = 2)
+/*		@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -124,7 +124,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	// False due to KV2-2089
-	@Test(enabled = false, priority = 4)
+	@Test(enabled = true, priority = 4)
 	public void MC_TC12_TC34_CheckActiveParticipantAndCopy() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -235,8 +235,37 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate Chats, DR's and All Message sections");
 		}
 	}
+		
+		@Test(enabled = true, priority = 8) 
+		public void MC_TC60_TC67_validateGroupCoundAndSearchUserFromManage() throws Exception {
+			try {
+				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+						.assignCategory("WorkAssist_Messages_Chats");
+				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+				String url = DriverSetUp.propsMap.get("weburl");
+				String Messages = DriverSetUp.testdataMap.get("messages");
+				String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+				test.log(LogStatus.INFO, "Navigation url :" + url);
 
-	@Test(enabled = true, priority = 8)
+				koraloginpage.loginToKora(url, korajusername, korajpassword);
+				korahomepage.selectMenuOption(Messages);
+				korahomepage.selectTopLeftMenuOption("Chats");
+				koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");			
+				String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
+				user = koramessagespage.enterYourMessageAs(updatedstr);
+				
+				String groupcount=koramessagespage.getChatHeaderNameorCount(false);
+				koramessagespage.goToGroupAndPerform("QA Pride", true, "3dots");
+				koramessagespage.operationsFrom3Dots("Manage Chat");
+				int managepartcount=koramessagespage.searchFromManageChat("hana@koraqa1.com");
+				koramessagespage.compareGroupCount(groupcount,managepartcount);
+				extent.endTest(test);
+			} catch (Exception e) {
+				test.log(LogStatus.FAIL, "Failed to validate Group count and Manage chat Search functionality");
+			}
+		}
+
+		@Test(enabled = true, priority = 9)
 	public void MC_TC35_TC47_validateReplyback() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -267,7 +296,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	} 
 
-	@Test(enabled = true, priority = 9)
+	@Test(enabled = true, priority = 10)
 	public void MC_TC52_validateForward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -301,7 +330,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 10) //////////////////////////////////////////////////////////////////////////////////////////
+	@Test(enabled = true, priority = 11) //////////////////////////////////////////////////////////////////////////////////////////
 	public void MC_TC59_selectAndForward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -313,8 +342,7 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
-		//	koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Chats");
 			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");			
@@ -322,6 +350,7 @@ public class Messages121Test extends DriverSetUp {
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 			
 			koramessagespage.selectOptionFromRightNav3Dots(user, "Select Messages");
+			koramessagespage.selectMessages("QA Pride", updatedstr);
 			koramessagespage.forwardPostOrValidation(true,false, user, updatedstr, "QA Pride");
 
 			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
@@ -331,6 +360,7 @@ public class Messages121Test extends DriverSetUp {
 			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
 			koramessagespage.enterYourMessageAs(updatedstr1);
 			
+			//Chances to fail below validation because it is not validated from recipient end because of session expired issue
 			String hostuser = "James Middleton";
 			koramessagespage.forwardPostOrValidation(false,false, hostuser, updatedstr, "NA");
 			extent.endTest(test);
@@ -339,7 +369,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 11)
+	@Test(enabled = true, priority = 12)
 	public void MC_TC48_validateReactions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -379,7 +409,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 12)
+	@Test(enabled = true, priority = 13)
 	public void MC_TC61_verifyReminderSlots() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -408,7 +438,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 13)
+	@Test(enabled = true, priority = 14)
 	public void MC_TC62_TC63_TC64_DeleteMessage() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
