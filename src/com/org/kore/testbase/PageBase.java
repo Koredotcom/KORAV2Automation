@@ -143,7 +143,7 @@ public class PageBase extends DriverSetUp {
 					options.addArguments("start-maximized");
 					options.setExperimentalOption("useAutomationExtension", false);
 					options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-					remoteDriver = new ChromeDriver(options);
+					remoteDriver = new ChromeDriver();
 					
 					System.out.println("chrome started");
 				} else {
