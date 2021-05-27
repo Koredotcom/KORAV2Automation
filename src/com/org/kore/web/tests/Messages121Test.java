@@ -237,7 +237,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 		
 		@Test(enabled = true, priority = 8) 
-		public void MC_TC60_TC67_validateGroupCoundAndSearchUserFromManage() throws Exception {
+		public void MC_TC60_TC66_validateGroupCoundAndSearchUserFromManage() throws Exception {
 			try {
 				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 						.assignCategory("WorkAssist_Messages_Chats");
