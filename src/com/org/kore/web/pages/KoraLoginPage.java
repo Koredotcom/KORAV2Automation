@@ -74,11 +74,12 @@ public class KoraLoginPage extends PageBase {
 		waitTillappear(er.kstaysignin, "xpath", "Stay Signin");
 		click(er.kstaysignin, "Stay Signin");
 		Thread.sleep(10000);
+		System.out.println("Sign in success with "+userName+ " and waiting for home screen");
 		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
+		System.out.println("Loading indicator got disappeared from the screen");
 		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName+" ".toString() + test.addScreenCapture(takeScreenShot()));
 		waitTillappear(er.klogo, "xpath", "Top left menu");
 		test.log(LogStatus.PASS, "After waiting for logo, post login state:".toString() + test.addScreenCapture(takeScreenShot()));
-		/* + " ".toString()+ test.addScreenCapture(takeScreenShot())); */
 	}
 
 	public void logoutAndReLogin(boolean relogin, String url, String userName, String password) throws Exception {
