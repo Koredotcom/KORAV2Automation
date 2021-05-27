@@ -76,6 +76,7 @@ public class KoraLoginPage extends PageBase {
 		Thread.sleep(3000);
 		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
 		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName+" ".toString() + test.addScreenCapture(takeScreenShot()));
+		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
 		/* + " ".toString()+ test.addScreenCapture(takeScreenShot())); */
 
 	}
