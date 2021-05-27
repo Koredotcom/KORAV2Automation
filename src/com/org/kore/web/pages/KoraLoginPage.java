@@ -76,8 +76,6 @@ public class KoraLoginPage extends PageBase {
 		Thread.sleep(3000);
 		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
 		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName+" ".toString() + test.addScreenCapture(takeScreenShot()));
-		Thread.sleep(50000);
-		test.log(LogStatus.PASS, "App state after 50 sec's: ".toString() + test.addScreenCapture(takeScreenShot()));
 		waitTillappear(er.klogo, "xpath", "Top left menu");
 		test.log(LogStatus.PASS, "After waiting for logo, post login state:".toString() + test.addScreenCapture(takeScreenShot()));
 		
