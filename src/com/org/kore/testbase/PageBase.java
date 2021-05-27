@@ -128,13 +128,6 @@ public class PageBase extends DriverSetUp {
 					System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("macchromeDriverPath"));
 					ChromeOptions options = new ChromeOptions();
 					// options.addArguments("user-data-dir=/path/to/your/custom/profile");
-					
-					/*options.addArguments("--disable-extensions");
-					options.addArguments("--disable-gpu");
-					options.addArguments("--no-sandbox");*/
-					options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
-					options.addArguments("--headless");
-					
 					options.addArguments("--profile-directory=Default");
 					options.addArguments("--whitelisted-ips");
 					options.addArguments("--disable-plugins-discovery");
@@ -144,12 +137,17 @@ public class PageBase extends DriverSetUp {
 					options.setExperimentalOption("useAutomationExtension", false);
 					options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 					remoteDriver = new ChromeDriver();
-					
 					System.out.println("chrome started");
 				} else {
 					System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("winchromeDriverPath"));
 					ChromeOptions options = new ChromeOptions();
 					// options.addArguments("user-data-dir=/path/to/your/custom/profile");
+					/*options.addArguments("--disable-extensions");
+					options.addArguments("--disable-gpu");
+					options.addArguments("--no-sandbox");*/
+					options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
+					options.addArguments("--headless");
+					
 					options.addArguments("--profile-directory=Default");
 					options.addArguments("--whitelisted-ips");
 					options.addArguments("--disable-plugins-discovery");

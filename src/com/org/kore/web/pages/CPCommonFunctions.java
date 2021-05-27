@@ -78,7 +78,7 @@ public class CPCommonFunctions extends PageBase {
 					break doloop;
 			}while(waitincreamental <30||!result.equals("complete"));
 			test.log(LogStatus.INFO, test.addScreenCapture(takeScreenShot()));
-			System.out.println("Launched");
+			System.out.println("Displayed WorkAssist Login page");
 		}
 
 	}

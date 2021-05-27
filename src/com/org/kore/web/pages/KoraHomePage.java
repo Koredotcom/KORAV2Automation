@@ -46,7 +46,7 @@ public class KoraHomePage extends PageBase {
 		boolean hmenu = false;
 		waittillpageload();
 		waitTillappear(er.klogo, "xpath", "Top left menu");
-		System.out.println("Post login screen displayed");
+		System.out.println("Work Assist home screen displayed");
 		hmenu = remoteDriver.findElements(By.xpath("//span[@class='menuTabs']/a")).size() > 0;
 		if (hmenu) {
 			List<WebElement> Menulist = remoteDriver.findElements(By.xpath("//span[@class='menuTabs']/a"));

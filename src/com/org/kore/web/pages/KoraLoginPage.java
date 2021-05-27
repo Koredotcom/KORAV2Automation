@@ -78,10 +78,7 @@ public class KoraLoginPage extends PageBase {
 		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName+" ".toString() + test.addScreenCapture(takeScreenShot()));
 		waitTillappear(er.klogo, "xpath", "Top left menu");
 		test.log(LogStatus.PASS, "After waiting for logo, post login state:".toString() + test.addScreenCapture(takeScreenShot()));
-		
-		
 		/* + " ".toString()+ test.addScreenCapture(takeScreenShot())); */
-
 	}
 
 	public void logoutAndReLogin(boolean relogin, String url, String userName, String password) throws Exception {
