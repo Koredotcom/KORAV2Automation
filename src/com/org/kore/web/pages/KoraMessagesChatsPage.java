@@ -302,7 +302,7 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	public String getFirstActiveUser(String expecteduser, boolean check) throws Exception {
 		String activeuser = null;
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		try {
 			activeuser = getText(er.kmcfirstactiveuser);
 			test.log(LogStatus.INFO, "Current active user is " + activeuser);
@@ -1362,7 +1362,13 @@ public class KoraMessagesChatsPage extends PageBase {
 				test.log(LogStatus.PASS, "Selected<b> " + subaction + " </b> option from message onhover 3 dots".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 				if (subaction.equalsIgnoreCase("Copy")) {
+					waitToappear(er.kmmessagecopied, "xpath", "Message copied successfully !");
+					test.log(LogStatus.PASS, "Message copied successfully ! text got displayed".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+					Thread.sleep(4000);
 					compose.click();
+					compose.click();
+					Thread.sleep(3000);
 					click("//span[text()='Paste']", "Paste option on compose bar");
 					compose.sendKeys(Keys.ENTER);
 					test.log(LogStatus.PASS,
@@ -1574,7 +1580,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		boolean forwardmsg=false;
 		try {
 			if ((forwardpost)&&(oneToOne)) {
-				if (elementIsDisplayed("//span[text() = 'Forward Message']", "xpath")) {
+				if (elementIsDisplayed(er.kmforwardmsgpopup, "xpath")) {
 					System.out.println("Forward New Conversation -");
 					click(er.kdstartnewconversation, " Click on Start New conversation");
 					if (newparticipantsorroupname.contains(",")) {
@@ -1596,14 +1602,14 @@ public class KoraMessagesChatsPage extends PageBase {
 					moveToElement(er.kdfrwrdpostConversationname + newparticipantsorroupname + er.ksinglquote, "xpath");
 					click(er.kdfrwrdpostConversationname + newparticipantsorroupname + er.ksinglquote
 							+ er.kmsendbutton, "Clicking to Forward message SendButton");
-					Thread.sleep(2000);
-					if (remoteDriver.getPageSource().contains("Message forwarded successfully.")) {
+					waitToappear(er.kmmessageforwarded, "xpath", "Message forwarded successfully.");
+					/*if (remoteDriver.getPageSource().contains("Message forwarded successfully.")) {
 						test.log(LogStatus.PASS, "Message forwarded successfully. message disaplyed after post being forwarded"
 								+ test.addScreenCapture(takeScreenShot()));
 					} else {
 						test.log(LogStatus.FAIL,
 								"Failed to validate forward message toast test.");
-					}
+					}*/
 					click(er.kdfowradpostWindowclose, "Clicking to close forward message window");
 					Thread.sleep(2000);
 					
@@ -1615,7 +1621,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					+ er.kmchatname1 + forwardedmsg
 					+ "']/..//span[text() = 'Forwarded']")).size() > 0;
 			if (forwardmsg) {
-				test.log(LogStatus.PASS, forwardedmsg+" got Forwarded" + test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.PASS, "<b>"+forwardedmsg+" </b>got displayed as a Forwarded message" + test.addScreenCapture(takeScreenShot()));
 			} else {
 				test.log(LogStatus.FAIL,
 						"After forward, forward placeholder or <b>"+ forwardedmsg+" <b> text is not displayed completely .Seems it is not scrolled completely to the bottom"
@@ -1676,10 +1682,10 @@ public class KoraMessagesChatsPage extends PageBase {
 			if (flag = (!elementIsDisplayed(er.kmchatname0 + user + er.kmchatname1 + message + "']", "xpath"))) {
 				test.log(LogStatus.PASS,
 						message + " got deleted susccessfully from <b>"+messagesentfrom+"</b>".toString() + test.addScreenCapture(takeScreenShot()));
-				if (flag = remoteDriver.findElements(By.xpath(er.kmmessagedeleted)).size() > 0){
+				/*if (flag = remoteDriver.findElements(By.xpath(er.kmmessagedeleted)).size() > 0){
 					test.log(LogStatus.FAIL,
 							"From "+messagesentfrom+" on click of Delete my self option, <b> This message was deleted</b> test should not be displayed".toString() + test.addScreenCapture(takeScreenShot()));
-				}
+				}*/
 			} else {
 				test.log(LogStatus.FAIL,
 						message + " is still displaying, i.e. Delete for My self is not working from"+messagesentfrom+" ".toString() + test.addScreenCapture(takeScreenShot()));

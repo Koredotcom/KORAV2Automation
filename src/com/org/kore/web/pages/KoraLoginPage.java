@@ -1,6 +1,5 @@
 package com.org.kore.web.pages;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.org.kore.element.repository.ElementRepository;
@@ -74,21 +73,23 @@ public class KoraLoginPage extends PageBase {
 		waitTillappear(er.kstaysignin, "xpath", "Stay Signin");
 		click(er.kstaysignin, "Stay Signin");
 		Thread.sleep(10000);
-		System.out.println("Sign in success with "+userName+ " and waiting for home screen");
+		System.out.println("Sign in success with " + userName + " and waiting for home screen");
 		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
 		System.out.println("Loading indicator got disappeared from the screen");
-		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName+" ".toString() + test.addScreenCapture(takeScreenShot()));
+		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName + " ".toString()
+				+ test.addScreenCapture(takeScreenShot()));
 		waitTillappear(er.klogo, "xpath", "Top left menu");
-		test.log(LogStatus.PASS, "After waiting for logo, post login state:".toString() + test.addScreenCapture(takeScreenShot()));
+		test.log(LogStatus.PASS,
+				"After waiting for logo, post login state:".toString() + test.addScreenCapture(takeScreenShot()));
 	}
 
 	public void logoutAndReLogin(boolean relogin, String url, String userName, String password) throws Exception {
 		try {
 			waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
-			waitTillappear(er.klogo, "xpath", "Top left menu");
-			click(er.kuserprofileicon, "Click on User profile icon");
-			click(er.klogout, "Logout");
-			click(er.klogoutyes, "Logout Confirmation Popup Yes");
+			waitAndContinue(er.klogo, "xpath", "Top left menu");
+			clickNIgnoreFail(er.kuserprofileicon, "Click on User profile icon");
+			clickNIgnoreFail(er.klogout, "Logout");
+			clickNIgnoreFail(er.klogoutyes, "Logout Confirmation Popup Yes");
 			test.log(LogStatus.INFO, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
 			waitTillappear(er.ko365, "xpath", "Choose ur account type");
 			if (relogin) {

@@ -153,6 +153,11 @@ public class PageBase extends DriverSetUp {
 					//options.addArguments("- chrome.exe --ash-host-window-bounds=800x500");
 					//options.setExperimentalOption("useAutomationExtension", false);
 					//options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+					// options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
+					// options.addArguments("--headless");
+					/*options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
+					options.addArguments("--headless");*/
+					
 					DesiredCapabilities cap = DesiredCapabilities.chrome();
 					cap.setCapability("ignoreZoomSetting", true);
 					cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
@@ -225,6 +230,28 @@ public class PageBase extends DriverSetUp {
 			element = appiumDriver.findElement(By.xpath(property.replaceFirst(XPATH, "")));
 		}
 		return element;
+	}
+	
+	public void clickNIgnoreFail(String xpath, String elementName) throws Exception {
+		try {
+			switch (DriverSetUp.propsMap.get("tool")) {
+
+			case "Appium":
+				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+
+				appiumDriver.findElementByXPath(xpath).click();
+				break;
+			case "Selenium":
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 5, 500);
+				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+				remoteDriver.findElementByXPath(xpath).click();
+				break;
+			}
+		} catch (Exception exc) {
+			test.log(LogStatus.INFO,
+					elementName+" element is not available but still it doesn't have any impact".toString() + test.addScreenCapture(takeScreenShot()));
+		}
 	}
 
 	public void click(String xpath, String elementName) throws Exception {
@@ -383,6 +410,56 @@ public class PageBase extends DriverSetUp {
 		}
 	}
 
+	public void waitAndContinue(String locator, String locatorType, String elementName) throws Exception {
+		try {
+			switch (DriverSetUp.propsMap.get("tool")) {
+
+			case "Appium":
+
+				WebDriverWait wait = new WebDriverWait(appiumDriver, 20, 500);
+				if (locatorType.equalsIgnoreCase("xpath")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+				} else if (locatorType.equalsIgnoreCase("id")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("css")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("name")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(locator)));
+
+				}
+
+				break;
+			case "Selenium":
+
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 20, 500);
+				if (locatorType.equalsIgnoreCase("xpath")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+				} else if (locatorType.equalsIgnoreCase("id")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.id(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("css")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("name")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.name(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("class")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.className(locator)));
+
+				}
+
+				break;
+			}
+
+		} catch (Exception exc) {
+			test.log(LogStatus.INFO,
+					elementName + " element is not displayed but still it doesn't have any impact".toString() + test.addScreenCapture(takeScreenShot()));
+			throw new Exception(exc);
+		}
+	}
+	
 	public void waitTillappear(String locator, String locatorType, String elementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {

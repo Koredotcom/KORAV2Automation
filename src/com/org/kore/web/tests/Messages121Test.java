@@ -6,8 +6,8 @@ import org.testng.annotations.Test;
 import com.org.kore.testbase.DriverSetUp;
 import com.org.kore.web.pages.KoraHomePage;
 import com.org.kore.web.pages.KoraLoginPage;
-import com.org.kore.web.pages.KoraMessagesDRPage;
 import com.org.kore.web.pages.KoraMessagesChatsPage;
+import com.org.kore.web.pages.KoraMessagesDRPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
@@ -75,7 +75,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-/*		@Test(enabled = true, priority = 2)
+		@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -123,7 +123,6 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	// False due to KV2-2089
 	@Test(enabled = true, priority = 4)
 	public void MC_TC12_TC34_CheckActiveParticipantAndCopy() throws Exception {
 		try {
@@ -247,7 +246,6 @@ public class Messages121Test extends DriverSetUp {
 				String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 				test.log(LogStatus.INFO, "Navigation url :" + url);
 
-				koraloginpage.loginToKora(url, korajusername, korajpassword);
 				korahomepage.selectMenuOption(Messages);
 				korahomepage.selectTopLeftMenuOption("Chats");
 				koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");			
@@ -330,7 +328,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 11) //////////////////////////////////////////////////////////////////////////////////////////
+	@Test(enabled = true, priority = 11)
 	public void MC_TC59_selectAndForward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -338,20 +336,20 @@ public class Messages121Test extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
-			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String qapridegroup = DriverSetUp.testdataMap.get("standardgroupname");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
 			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");			
+			koramessagespage.goToGroupAndPerform(qapridegroup, false, "NA");			
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 			
 			koramessagespage.selectOptionFromRightNav3Dots(user, "Select Messages");
-			koramessagespage.selectMessages("QA Pride", updatedstr);
-			koramessagespage.forwardPostOrValidation(true,false, user, updatedstr, "QA Pride");
+			koramessagespage.selectMessages(qapridegroup, updatedstr);
+			koramessagespage.forwardPostOrValidation(true,false, user, updatedstr, qapridegroup);
 
 			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);
@@ -360,9 +358,7 @@ public class Messages121Test extends DriverSetUp {
 			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
 			koramessagespage.enterYourMessageAs(updatedstr1);
 			
-			//Chances to fail below validation because it is not validated from recipient end because of session expired issue
-			String hostuser = "James Middleton";
-			koramessagespage.forwardPostOrValidation(false,false, hostuser, updatedstr, "NA");
+			koramessagespage.forwardPostOrValidation(false,false, qapridegroup, updatedstr, "NA");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");
@@ -370,7 +366,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 12)
-	public void MC_TC48_validateReactions() throws Exception {
+	public void MC_TC48_TC51_validateReactionsAndMessageInfo() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -422,6 +418,7 @@ public class Messages121Test extends DriverSetUp {
 			String expreminderslots = DriverSetUp.testdataMap.get("expectedreminderslots");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);
@@ -450,6 +447,7 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(qapridegroup, false, "NA");			
@@ -477,5 +475,5 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
 		}
-	}*/
+	}
 }
