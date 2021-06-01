@@ -555,10 +555,13 @@ public class KoraMessagesChatsPage extends PageBase {
 					break;
 				case "DeleteGroup":
 					System.out.println("In Delete");
-					click("//div[@class='userDetails active chat']//div[@class='userNameDiv'][text()='"+groupname+"']/../../../..//i[@class='icon __i right kr-delete']", "Delete Group");
+					click(er.kmcfirstactiveuser+"[text()='"+groupname+"']/../../../..//i[@class='icon __i right kr-delete']", "Delete Group");
 					Thread.sleep(1000);
+					test.log(LogStatus.PASS, groupname + "is going to be deleted now".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 					clickOn("Delete", true);
-					test.log(LogStatus.PASS, groupname + " Deleted Successfully");
+					test.log(LogStatus.PASS, groupname + " Deleted Successfully".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 					break;
 				default:
 					test.log(LogStatus.FAIL,
@@ -1004,12 +1007,12 @@ public class KoraMessagesChatsPage extends PageBase {
 	 */
 	public void verifyGroupUpdateTimelines(String typeofAmend) throws Exception {
 		ArrayList<String> timelines = new ArrayList<>();
+		Thread.sleep(2000);
 		try {
-			//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly' and contains(text(),'cleared')]
-			waitToappear(
-					"//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly' and contains(text(),'"
+			/*waitToappear(
+					"//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
 							+ typeofAmend + "')]",
-					"xpath", "Timeline");
+					"xpath", "Timelines");*/
 			moveToElement(
 					"//div[@class='msgMemberTimeline']//span[@class='timelineCntr']/span[@class='messageOnly'][contains(text(),'"
 							+ typeofAmend + "')]",
@@ -1515,7 +1518,8 @@ public class KoraMessagesChatsPage extends PageBase {
 	}
 
 	public void selectOptionFromRightNav3Dots(String user, String right3dotsoption) throws Exception {
-		click(er.kdrManageRoom3dots0 + user + er.kdrManageRoom3dots1, "Right pane 3 dots");
+		Thread.sleep(2000);
+		jsClick(er.kdrManageRoom3dots0 + user + er.kdrManageRoom3dots1, "Right pane 3 dots");
 		boolean flag = false;
 		waitTillappear(er.kwfilterbyws, "xpath", "Left bottom header");
 		List<WebElement> Menulist = remoteDriver.findElements(By.xpath(er.kmright3dotoptions));

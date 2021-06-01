@@ -124,7 +124,7 @@ public class ElementRepository {
 		kmcfirstactiveuser = "//div[@class='userDetails active chat']//div[@class='userNameDiv']";
 		kmcactivebackground = "//div[@class='userDetails active chat']";
 		kmplaceholder = "//input[@class='searchInput fullWidth']";
-		kmsearchsuggestions = "//div[@class='p-menuitem-link']//div[@class='heroText']//*[text()='";
+		kmsearchsuggestions = "//div[@class='heroText'][text() = '";
 		kmattachfromplus = "//span[@class='addIcon kr-plus']";
 		kmmessages = "//span[@class='msgText ']//div[@class='send-message'][text()='";
 		kmmessagehoveroptiontitles = "//div[@class='msgCntrlBarParent hoverOptionsBar ']//i[@title='";

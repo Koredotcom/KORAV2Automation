@@ -155,8 +155,8 @@ public class PageBase extends DriverSetUp {
 					//options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 					// options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
 					// options.addArguments("--headless");
-					/*options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
-					options.addArguments("--headless");*/
+					options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
+					options.addArguments("--headless");
 					
 					DesiredCapabilities cap = DesiredCapabilities.chrome();
 					cap.setCapability("ignoreZoomSetting", true);
