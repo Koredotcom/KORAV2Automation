@@ -98,6 +98,7 @@
 		"randomDRname": "RuntimeDr333",
 		"commentonaPost":"Automation Comment",
 		"drcomment": "comment on a post",
-		"drexpected3dotsforPostinrightpanel": "Edit, Forward, Reminder, Post Info, Delete"
+		"drexpected3dotsforPostinrightpanel": "Edit, Forward, Reminder, Post Info, Delete",
+		"sampleurl":"https://techiesindiainc.com/"
 	}
 }
