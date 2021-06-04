@@ -58,6 +58,8 @@ public class MessagesDR extends DriverSetUp {
 
 		korahusername = dr.getValue("KORAV2", "KoraV2hana", "Username");
 		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
+		
+		directory = System.getProperty("user.dir");
 
 	}
 
@@ -634,57 +636,8 @@ public class MessagesDR extends DriverSetUp {
 	}
 	
 	//Attachments @Post
-	@Test(enabled = true, priority = 42)
-	public void MDR_TC6_postWithAttachments() throws Exception {
-		try {
-			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_DiscussionRooms");
-			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
-
-			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
-			String Messages = DriverSetUp.drdataMap.get("messages");			
-			
-			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
-			String doc=directory + insertdoc;
-			String insertmp4 = DriverSetUp.UtilityMap.get("mp4exe");
-			String mp4=directory + insertmp4;
-			String insertpdf = DriverSetUp.UtilityMap.get("pdfexe");
-			String pdf=directory + insertpdf;
-			String insertxlsx = DriverSetUp.UtilityMap.get("xlsxexe");
-			String xlsx=directory + insertxlsx;
-			String insertpng = DriverSetUp.UtilityMap.get("pngexe");
-			String png=directory + insertpng;
-			String insertzip = DriverSetUp.UtilityMap.get("zipexe");
-			String zip=directory + insertzip;
-			test.log(LogStatus.INFO, "Navigation url :" + url);	
-
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");									
-			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");
-			String drpost="postforLiknComment"+korahomepage.runtimehhmmss();
-			
-			koramessagespage.enterYourMessageAs("https://techiesindiainc.com/");
-			test.log(LogStatus.WARNING, "Validate URL from one of the screenshot");
-			
-			koramessagespage.enterYourMessageAs(drpost);
-			
-			korahomepage.uploadfilesfromDR(doc,true, "doc file", false);
-			korahomepage.uploadfilesfromDR(mp4,true, "mp4 file", false);
-			korahomepage.uploadfilesfromDR(pdf,true, "pdf file", false);
-			korahomepage.uploadfilesfromDR(xlsx,true, "xlsx file", false);
-			korahomepage.uploadfilesfromDR(png,true, "png file", false);
-			korahomepage.uploadfilesfromDR(zip,true, "zip file", false);
-			extent.endTest(test);
-
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate DR post with attachments");
-		}
-	} 
-	
-	//Attachments @Comment
-		@Test(enabled = true, priority = 43)
-		public void MDR_TC44_commentWithAttachments() throws Exception {
+		@Test(enabled = true, priority = 42)
+		public void MDR_TC6_TC44_postandcommentsWithAttachments() throws Exception {
 			try {
 				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 						.assignCategory("WorkAssist_DiscussionRooms");
@@ -693,27 +646,53 @@ public class MessagesDR extends DriverSetUp {
 
 				String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 				String Messages = DriverSetUp.drdataMap.get("messages");
-				String drcomment = DriverSetUp.drdataMap.get("drcomment");	
+				String sampleurl = DriverSetUp.drdataMap.get("sampleurl");
 				
+				String insertdoc = DriverSetUp.UtilityMap.get("docexe");
+				String doc=directory + insertdoc;
+				String insertmp4 = DriverSetUp.UtilityMap.get("mp4exe");
+				String mp4=directory + insertmp4;
+				String insertpdf = DriverSetUp.UtilityMap.get("pdfexe");
+				String pdf=directory + insertpdf;
+				String insertxlsx = DriverSetUp.UtilityMap.get("xlsxexe");
+				String xlsx=directory + insertxlsx;
 				String insertpng = DriverSetUp.UtilityMap.get("pngexe");
 				String png=directory + insertpng;
-				test.log(LogStatus.INFO, "Navigation url :" + url);	
+				String insertzip = DriverSetUp.UtilityMap.get("zipexe");
+				String zip=directory + insertzip;
 
+				
+				String drpost="postforattachement"+korahomepage.runtimehhmmss();				
+				String drpostforcomment="postforCommentattachment"+korahomepage.runtimehhmmss();
+				String drcommentattchment="Commentattachment"+korahomepage.runtimehhmmss();
+				
+				test.log(LogStatus.INFO, "Navigation url :" + url);	
+				koraloginpage.loginToKora(url, korajusername, korajpassword);
 				korahomepage.selectMenuOption(Messages);
-				korahomepage.selectTopLeftMenuOption("Discussion Rooms");									
-				koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");
-				String drpost="postforLiknComment"+korahomepage.runtimehhmmss();
+				korahomepage.selectTopLeftMenuOption("Discussion Rooms");	
 				
-				koramessagespage.enterYourMessageAs("https://techiesindiainc.com/");
-				test.log(LogStatus.WARNING, "Validate URL from one of the screenshot");
+				koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");						
+				koramessagespage.enterYourMessageAs(sampleurl);
+				koramessagespage.captureScreenShot("Validate UI after entering Url as a post "+sampleurl);
 				
-				koramessagespage.enterYourMessageAs(drpost);
+				koramessagespage.enterYourMessageAs(drpost);			
+				korahomepage.uploadfilesfromDR(doc,true, "doc file", false);
+				korahomepage.uploadfilesfromDR(mp4,true, "mp4 file", false);
+				korahomepage.uploadfilesfromDR(pdf,true, "pdf file", false);
+				korahomepage.uploadfilesfromDR(xlsx,true, "xlsx file", false);
 				korahomepage.uploadfilesfromDR(png,true, "png file", false);
+				korahomepage.uploadfilesfromDR(zip,true, "zip file", false);
+				
+				//post and comment post for attachments
+				koramessagespage.enterYourMessageAs(drpostforcomment);
+				koramessagedrpage.gotopostandcomment(standarddrname,drpostforcomment);
+				korahomepage.uploadfilesfromDR(png,true, "png file", false);
+				
+				
 				extent.endTest(test);
 
 			} catch (Exception e) {
-				test.log(LogStatus.FAIL, "Failed to validate DR comment with attachments");
+				test.log(LogStatus.FAIL, "Failed to validate DR post with attachments");
 			}
 		} 
-	
 }

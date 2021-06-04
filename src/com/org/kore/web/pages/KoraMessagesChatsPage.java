@@ -1709,4 +1709,7 @@ public class KoraMessagesChatsPage extends PageBase {
 	}
 	}
 	
+	public void captureScreenShot(String message) throws IOException{
+		test.log(LogStatus.WARNING,message+"".toString() + test.addScreenCapture(takeScreenShot()));
+	}
 }

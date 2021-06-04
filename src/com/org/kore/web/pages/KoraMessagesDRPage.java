@@ -1347,5 +1347,22 @@ public class KoraMessagesDRPage extends PageBase {
 
 		}
 	}
+	
+	public void gotopostandcomment(String discRoom,String post) throws Exception {
+		try {
+			moveToElement(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote, "xpath");				
+			Thread.sleep(3000);
+			moveToElement(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote
+					+ "/../..//i[@class='icon __i kr-comment']", "xpath");
+			Thread.sleep(1000);
+			click(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote
+					+ "/../..//i[@class='icon __i kr-comment']", "Comment on a post");
+			Thread.sleep(1000);
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
+
+		}
+	}
 
 }
