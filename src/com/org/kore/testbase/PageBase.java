@@ -155,6 +155,14 @@ public class PageBase extends DriverSetUp {
 					//options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 					// options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
 					// options.addArguments("--headless");
+					
+					/*// for incognito with headless
+					options.addArguments("--headless", "--window-size=1382,744", "--disable-gpu", "--disable-extensions", "--no-sandbox", "-incognito");*/
+
+					
+				//	options.addArguments("--disable-gpu", "--window-size=1382,744","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
+					
+					
 					options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
 					options.addArguments("--headless");
 					
@@ -330,6 +338,34 @@ public class PageBase extends DriverSetUp {
 		}
 	}
 
+	public void waitTillClickable(String xpath, String elementName) throws Exception {
+		try {
+			switch (DriverSetUp.propsMap.get("tool")) {
+
+			case "Appium":
+				
+				WebDriverWait wait = new WebDriverWait(appiumDriver, 20, 500);
+				WebElement ele = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+				break;
+			case "Selenium":
+				
+				System.out.println("Waiting for "+xpath+" to be clickable");
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 30, 500);
+				WebElement el = waitSelenium.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+				//el.click();
+				break;
+
+			}
+		} catch (Exception exc) {
+			System.out.println("Waited for 20 secs for element to be clickable");
+			test.log(LogStatus.UNKNOWN, "Exception on  Element to get disappear from the screen, even after 120 secs"
+					.toString() + test.addScreenCapture(takeScreenShot()));
+			throw new Exception(exc);
+		}
+	}
+
+	
+	
 	public void waitUntilDissapear(String xpath, String elementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
@@ -341,6 +377,7 @@ public class PageBase extends DriverSetUp {
 				break;
 			case "Selenium":
 
+				System.out.println("Waiting for "+xpath+" to be disappeared");
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 120, 500);
 				waitSelenium.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
 				break;
@@ -483,6 +520,7 @@ public class PageBase extends DriverSetUp {
 				break;
 			case "Selenium":
 
+				System.out.println("Waiting for "+locator+" to be displayed");
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 60, 500);
 				if (locatorType.equalsIgnoreCase("xpath")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
@@ -534,7 +572,7 @@ public class PageBase extends DriverSetUp {
 				break;
 			case "Selenium":
 
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 15, 500);
 				if (locatorType.equalsIgnoreCase("xpath")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 				} else if (locatorType.equalsIgnoreCase("id")) {

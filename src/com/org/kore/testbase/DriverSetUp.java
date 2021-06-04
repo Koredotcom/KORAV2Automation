@@ -138,7 +138,7 @@ public class DriverSetUp {
 			propsMap = fu.jsonRead(App);
 
 			UtilityMap = fu.jsonRead("UTILITIES");
-			testdataMap = fu.jsonRead("TESTDATA");
+			testdataMap = fu.jsonRead("CHATSTESTDATA");
 			drdataMap = fu.jsonRead("WSTESTDATA");
 
 			switch (App) {

@@ -279,7 +279,7 @@ public class KoraMessagesDRPage extends PageBase {
 				click(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote
 						+ "/../..//i[@class='icon __i kr-comment']", "Comment on a post");
 				Thread.sleep(1000);
-				if(!commenttext.contains(""))
+				if(!(commenttext.contains("NA")))
 				{
 					enterText(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote
 							+ "/../../..//div[@id='discInput']", commenttext + "\n", "xpath", "Comment on post");
@@ -473,7 +473,7 @@ public class KoraMessagesDRPage extends PageBase {
 			if (cf.elementIsDisplayed(er.kdrsettingallmembers, "xpath")) {
 				test.log(LogStatus.PASS, " All memebrs link Avaiable at particular Worskspace in setting section".toString() + test.addScreenCapture(takeScreenShot()));				
 			}			
-			
+
 			if (cf.elementIsDisplayed(er.kdeveryoneAtnoWorkspace, "xpath")) {
 				test.log(LogStatus.INFO, " Everyone at No workspace option dispalyed");
 			}
@@ -1059,10 +1059,11 @@ public class KoraMessagesDRPage extends PageBase {
 	}
 
 	public void atMentionsinComments(String discRoom,String post, String commenttext) throws Exception {
-		try {						
-
+		try {									
 			enterText(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote
-					+ "/../../..//div[@id='discInput']", commenttext , "xpath", "Comment on post");				
+					+ "/../../..//div[@id='discInput']", commenttext , "xpath", "Comment on post");	
+						
+			
 		}catch(Exception e){
 			enterText(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote
 					+ "/../../..//div[@id='discInput']", "" , "xpath", "Comment on post");
@@ -1115,7 +1116,6 @@ public class KoraMessagesDRPage extends PageBase {
 
 			moveToElement(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote, "xpath");
 			click(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote, "Click on post ");
-
 			System.out.println("performing More reaction");
 			Thread.sleep(1000);								
 			for(int j=1;j<5;j++)
@@ -1180,7 +1180,7 @@ public class KoraMessagesDRPage extends PageBase {
 			if (!elementIsDisplayed(er.kdrtogglecopy, "xpath")) {
 				test.log(LogStatus.PASS, "Copy option NOT displayed after toggle turned OFF".toString() + test.addScreenCapture(takeScreenShot()));
 			}
-//			click(er.kdrmembers, "Members tab from Manage room");
+			click(er.kdfowradpostWindowclose, "Members tab from Manage room");
 
 		}catch(Exception e){
 
@@ -1203,9 +1203,9 @@ public class KoraMessagesDRPage extends PageBase {
 			moveToElement(er.kdrnewWorkspacename, "xpath");
 			String os = System.getProperty("os.name");
 			if (os.equals("WINDOWS")){
-			   Keys.chord(Keys.CONTROL, "a");
+				Keys.chord(Keys.CONTROL, "a");
 			}else{
-			   Keys.chord(Keys.COMMAND, "a");			  
+				Keys.chord(Keys.COMMAND, "a");			  
 			}
 			enterText(er.kdrnewWorkspacename, workspacename, "Workspace Room Title as " + workspacename);				
 			click(er.kdrnewwsdonebtn, "Clicking on Done new Workspace button ");
@@ -1214,7 +1214,7 @@ public class KoraMessagesDRPage extends PageBase {
 			enterText(er.kddiscussionTitle, NewDRname, "Discussion Room Title as " + NewDRname);
 			moveToElement(er.kmcenterparticipant, "xpath");
 			click(er.kmcenterparticipant, "Enter participant name");
-			
+
 			System.out.println("participantlist-----" + participantlist);
 			if (participantlist.contains(",")) {
 				String result[] = participantlist.trim().split("\\s*,\\s*");
@@ -1235,6 +1235,113 @@ public class KoraMessagesDRPage extends PageBase {
 			Thread.sleep(5000);
 			korahomepage.waittillpageload();
 
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
+
+		}
+	}
+
+	public void addnewmemebrswithaccesstype(String DRname, String aditionalmember1,String aditionalmember2,String accesstype)
+	{
+		try {						
+			moveToElement(er.kdrcountofmembersrightpanel, "xpath");
+			String noofmemebersbeforeadd = remoteDriver.findElement(By.xpath(er.kdrcountofmembersrightpanel)).getText();			
+			int num1 = Integer.parseInt(noofmemebersbeforeadd);			
+			click(er.kdradduserfromrightpanel, "clicking Adding user" );
+			//			String[] arr=aditionalmember1.split("@");			
+			enterText(er.kmcenterparticipant,aditionalmember1, "Entering additional member");
+			Thread.sleep(3000);
+			String os = System.getProperty("os.name");
+			if (os.equals("WINDOWS")){
+				remoteDriver.findElement(By.xpath(er.kmcenterparticipant)).sendKeys(Keys.BACK_SPACE); //no idea in windows
+			}else{				
+				remoteDriver.findElement(By.xpath(er.kmcenterparticipant)).sendKeys(Keys.BACK_SPACE);
+				Thread.sleep(1000);
+			}
+			click("//span[text()='"+aditionalmember1+"']", "clicking on Done Button" );
+			Thread.sleep(3000);
+			click(er.kdrnewwsdonebtn, "clicking on Done Button" );
+			Thread.sleep(3000);
+			String noofmemebersaftereadd = remoteDriver.findElement(By.xpath(er.kdrcountofmembersrightpanel)).getText();			
+			int num2 = Integer.parseInt(noofmemebersaftereadd);
+			if(!(num1==num2))
+			{
+				test.log(LogStatus.PASS,
+						"Newly added members successfully refelcted in memebrs count in DR rightpanel ".toString() + test.addScreenCapture(takeScreenShot()));
+			}else {
+				test.log(LogStatus.PASS,
+						"Newly added members FAILED to refelct in memebrs count in DR rightpanel ".toString() + test.addScreenCapture(takeScreenShot()));
+			}									
+			moveToElement(er.kcomposebar, "Moving to composebar");
+			click(er.kcomposebar, "Clicking on Compose Bar");
+			Thread.sleep(3000);
+			String post="Post for comment";
+			String comment="comment for reactions";
+			koramessagespage.enterYourMessageAs(post);	
+			Thread.sleep(3000);
+			perfromreactionsonPost(DRname, "Post for comment", "", true,comment);			
+			moveToElement("//span[text()='"+comment+"']", "xpath");
+			Thread.sleep(3000);
+			click("//span[text()='"+comment+"']/../..//div[@class='reactionIcons']/i[1]", "reacting with like");		
+			Thread.sleep(3000);
+			moveToElement("//span[text()='comment for reactions']/../..//div[@class='reactionCount']", "xpath");
+			test.log(LogStatus.PASS,
+					"Reactions appiled to  comments successfully".toString() + test.addScreenCapture(takeScreenShot()));				
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
+
+		}
+	}
+
+	public void addnewmemebrswithaccesstypeinManageRoom(String DRname, String aditionalmember1,String accesstype)
+	{
+		try {												
+			selectoptionsfrom3dotsinRightPanelinDR(DRname, "Manage Room","N/A");			
+			click(er.kdrmembers, "Members tab from Manage room");			
+			enterText(er.kmcenterparticipant,aditionalmember1 , "Entering additional member");
+			Thread.sleep(5000);
+			String os = System.getProperty("os.name");
+			if (os.equals("WINDOWS")){
+				remoteDriver.findElement(By.xpath(er.kmcenterparticipant)).sendKeys(Keys.BACK_SPACE); //no idea in windows
+			}else{				
+				remoteDriver.findElement(By.xpath(er.kmcenterparticipant)).sendKeys(Keys.BACK_SPACE);
+			}
+			Thread.sleep(5000);
+			click("//span[text()='"+aditionalmember1+"']", "clicking on Done Button" );
+			//			click("//i[@class='icon kr-down_arrow']", "clicking on Done Button" );
+			//			click("//li[text()='"+accesstype+"']", "clicking on Done Button" );
+			Thread.sleep(1000);
+			//			click("//i[@class='icon kr-down_arrow']", "clicking on Done Button" );
+			click(er.kwaddpeopleadinmember, "clicking on Add people button");
+			String useraccesstype= remoteDriver.findElement(By.xpath(er.kdruaccesstype)).getText().trim();
+			String[]  arruseraccesstype =useraccesstype.split(" ");
+			String useraccesstype_1=arruseraccesstype[0];
+			test.log(LogStatus.PASS,
+					" members added successfully in discussion Room".toString() + test.addScreenCapture(takeScreenShot()));
+			Thread.sleep(2000);			
+			int numberofpeople=remoteDriver.findElements(By.xpath("//div[@class='memberList']/div[2]/ul/li")).size();
+			for(int i=1;i<=numberofpeople;i++)
+			{
+				moveToElement("//div[@class='memberList']/div[2]/ul/li["+i+"]//div[1]/div[@class='userEmail']", "xpath");
+				String useremailaddress= remoteDriver.findElement(By.xpath("//div[@class='memberList']/div[2]/ul/li["+i+"]//div[1]/div[@class='userEmail']")).getText().trim();
+				String accesstypeafteradding=remoteDriver.findElement(By.xpath("//div[@class='memberList']/div[2]/ul/li["+i+"]/div[1]/div[2]/div[2]/div[1]")).getText().trim();
+
+				if(aditionalmember1.equalsIgnoreCase(useremailaddress) && accesstypeafteradding.contains(useraccesstype_1))
+				{
+					test.log(LogStatus.PASS,
+							"Newly added members successfully refelcted in memebrs list".toString() + test.addScreenCapture(takeScreenShot()));
+
+					remoteDriver.findElement(By.xpath("//div[@class='memberList']/div[2]/ul/li["+i+"]/div[1]/div[2]/div[2]/div[1]")).click();
+					Thread.sleep(2000);
+					remoteDriver.findElement(By.xpath("//div[@class='userRoleDropDownMenu overflow']//span[text()='"+accesstype+"']")).click();
+					Thread.sleep(2000);
+					String accesstypeafteraddingpostmodification=remoteDriver.findElement(By.xpath("//div[@class='memberList']/div[2]/ul/li["+i+"]/div[1]/div[2]/div[2]/div[1]")).getText().trim();
+					if(accesstypeafteraddingpostmodification.equalsIgnoreCase(accesstype)) {
+						test.log(LogStatus.PASS,
+								"Accesstype modified successfully".toString() + test.addScreenCapture(takeScreenShot()));
+					}					
+				}
+			}			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
 

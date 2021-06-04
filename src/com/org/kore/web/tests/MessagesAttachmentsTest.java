@@ -83,12 +83,12 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat",recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
-			korahomepage.uploadfilesfromAttachment(doc,true, "doc file", false);
-			korahomepage.uploadfilesfromAttachment(mp4,true, "mp4 file", false);
-			korahomepage.uploadfilesfromAttachment(pdf,true, "pdf file", false);
-			korahomepage.uploadfilesfromAttachment(xlsx,true, "xlsx file", false);
-			korahomepage.uploadfilesfromAttachment(png,true, "png file", false);
-			korahomepage.uploadfilesfromAttachment(zip,true, "zip file", false);
+			korahomepage.uploadfilesfromChats(doc,true, "doc file", false);
+			korahomepage.uploadfilesfromChats(mp4,true, "mp4 file", false);
+			korahomepage.uploadfilesfromChats(pdf,true, "pdf file", false);
+			korahomepage.uploadfilesfromChats(xlsx,true, "xlsx file", false);
+			korahomepage.uploadfilesfromChats(png,true, "png file", false);
+			korahomepage.uploadfilesfromChats(zip,true, "zip file", false);
 			
 			extent.endTest(test);
 		} catch (Exception e) {
@@ -118,8 +118,8 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			koramessagespage.startNewConversationWith("chat",recepientuser, true);
 			user = koramessagespage.enterYourMessageAs(onetoonetext);
 			
-			korahomepage.uploadfilesfromAttachment(doc,true, "doc file",false);
-			korahomepage.uploadfilesfromAttachment(allfiles,true, "Multiple file formats", true);
+			korahomepage.uploadfilesfromChats(doc,true, "doc file",false);
+			korahomepage.uploadfilesfromChats(allfiles,true, "Multiple file formats", true);
 			koramessagespage.selectOptionFromRightNav3Dots(user, "View Files");
 			koramessagespage.viewFiles();
 			extent.endTest(test);

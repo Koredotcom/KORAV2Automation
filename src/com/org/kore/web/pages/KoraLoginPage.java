@@ -1,5 +1,8 @@
 package com.org.kore.web.pages;
 
+import java.util.TreeMap;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.org.kore.element.repository.ElementRepository;
@@ -56,36 +59,68 @@ public class KoraLoginPage extends PageBase {
 	 * @throws Exception
 	 */
 	public void signInWithO365(String userName, String password) throws Exception {
+		try{
+			System.out.println("Waiting for choose ur account screen");
 		waitTillappear(er.ko365, "xpath", "Choose ur account type");
 		test.log(LogStatus.PASS,
 				"Type of accounts displayed to choose: ".toString() + test.addScreenCapture(takeScreenShot()));
 		click(er.ko365, "Select Microsoft option");
-		waitTillappear(er.koenteremail, "xpath", "Enter Email");
+		System.out.println("Choosen microsoft account");
+		Thread.sleep(2000);
+		System.out.println("Waiting for Signin screen or pick ur account screen");
+		waitTillClickable("//input[@type='submit'] | //div[@role='heading'][text() = 'Pick an account']", "signin");
+		
+		boolean pickaccount=false;
+		pickaccount= remoteDriver.findElements(By.xpath("//div[@role='heading'][text() = 'Pick an account']")).size()>0;
+		if (pickaccount){
+			click("//div[@id='otherTileText'][text()='Use another account']", "Use another account");
+		}
+		waitTillClickable(er.kosignin,"Enter Email or Pick an account");
+		System.out.println("Waiting for entering emaail");
+		waitTillappear(er.koenteremail, "xpath", "Enter Email");   //////div[@role='heading'][text() = 'Pick an account'] 
 		enterText(er.koenteremail, userName, "xpath", "Enter Email");
 		test.log(LogStatus.PASS, "Entered username".toString() + test.addScreenCapture(takeScreenShot()));
 		click(er.kousernext, "UsrNext");
+		waitTillappear(er.kpwd, "xpath", "Enter Email");
 		waitTillappear(er.kosignin, "xpath", "Signin in Password");
 		Thread.sleep(5000);
 		enterText(er.kpwd, password, "xpath", "Password");
 		test.log(LogStatus.PASS, "Entered Password".toString() + test.addScreenCapture(takeScreenShot()));
 		click(er.kosignin, "Signin");
 		test.log(LogStatus.PASS, "Selected Sign In".toString() + test.addScreenCapture(takeScreenShot()));
+		
+		if(!pickaccount){
 		waitTillappear(er.kstaysignin, "xpath", "Stay Signin");
 		click(er.kstaysignin, "Stay Signin");
+		}
 		Thread.sleep(10000);
 		System.out.println("Sign in success with " + userName + " and waiting for home screen");
+		System.out.println("Waiting for loading to disappear");
 		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
 		System.out.println("Loading indicator got disappeared from the screen");
 		test.log(LogStatus.PASS, "logged in successfully with O'365 account as : " + userName + " ".toString()
 				+ test.addScreenCapture(takeScreenShot()));
+		System.out.println("waiting for logo");
 		waitTillappear(er.klogo, "xpath", "Top left menu");
+		System.out.println("Again waiting for loading to disappear");
+		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
+		waitTillClickable(er.klogo, "logo");
 		test.log(LogStatus.PASS,
 				"After waiting for logo, post login state:".toString() + test.addScreenCapture(takeScreenShot()));
+	}catch (Exception e){
+		
+		System.out.println("Retry");
+		
+		}
 	}
 
 	public void logoutAndReLogin(boolean relogin, String url, String userName, String password) throws Exception {
 		try {
+			boolean loadingflag=false;
+			loadingflag=remoteDriver.findElements(By.xpath("//div[@class='lds-ring']")).size()>0;
+			if(loadingflag)
 			waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
+			
 			waitAndContinue(er.klogo, "xpath", "Top left menu");
 			clickNIgnoreFail(er.kuserprofileicon, "Click on User profile icon");
 			clickNIgnoreFail(er.klogout, "Logout");
@@ -93,13 +128,37 @@ public class KoraLoginPage extends PageBase {
 			test.log(LogStatus.INFO, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
 			waitTillappear(er.ko365, "xpath", "Choose ur account type");
 			if (relogin) {
-				clearChromeCache();
+			//	clearChromeCache();
+				launchAndLogoutFrom0365("https://www.office.com/");
 				loginToKora(url, userName, password);
 			}
 		} catch (Exception e) {
-			clearChromeCache();
+		//	clearChromeCache();
+			launchAndLogoutFrom0365("https://www.office.com/");
 			loginToKora(url, userName, password);
 		}
+	}
+	
+	public void launchAndLogoutFrom0365(String o365url) throws Exception{
+		o365url="https://www.office.com/";
+		remoteDriver.get(o365url);	
+		/*boolean logout=false;
+		logout=remoteDriver.findElements(By.xpath("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']")).size()>0;*/
+		
+		waitToappear("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']", "xpath", "profile");
+		Thread.sleep(2000);
+		boolean extraheader =false;
+		extraheader=remoteDriver.findElements(By.xpath("//div[@class='mectrl_topHeader']")).size()>0;
+		if (extraheader){
+			click("//div[@class='mectrl_topHeader']", "extra header profile");
+			waitToappear("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']", "xpath", "profile");
+		}
+		
+		click("//div[@id='O365_MainLink_MePhoto']", "profile");
+		waitToappear("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "xpath", "logout");
+		Thread.sleep(1000);
+		click("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "signout");
+		waitToappear("//div[@id='switch-account'] | //div[@class='personalization__buttons-container']", "xpath", "logout");
 	}
 
 	public String getUserDetails() throws Exception {

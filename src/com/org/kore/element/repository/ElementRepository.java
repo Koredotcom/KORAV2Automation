@@ -50,7 +50,7 @@ public class ElementRepository {
 			kdrclosenewdrcreation = null, kdrdiscardmsg = null, kdpostviaemailtoggle = null, kdrtoggleemaillink = null,
 			kdrtoggleedit = null, kdrtogglecopy = null, kdrmembers = null, kdrsettingallmembers = null,
 			kdrcreatenewWsplus = null, kdrnewWorkspacename = null, kdrnewwsdonebtn = null,
-			kdrcountofmembersrightpanel = null, kdradduserfromrightpanel = null;
+			kdrcountofmembersrightpanel = null, kdradduserfromrightpanel = null,kdruaccesstype=null;
 
 	public void repoIOS() {
 
@@ -68,7 +68,7 @@ public class ElementRepository {
 		spasswordnext = "//*[@id='submitButton']";
 
 		ko365 = "//div[@class='loginButton microsoft']";
-		koenteremail = "//input[@name='loginfmt']";
+		koenteremail = "//input[@name='loginfmt'] | //div[@role='heading'][text() = 'Pick an account']";
 		kousernext = "//input[@value='Next']";
 		kuser = "//input[@placeholder='Enter your email']";
 		kloginnext = "//button[@class='signInNext']";
@@ -219,7 +219,6 @@ public class ElementRepository {
 		kdrdeleteDRconfirm = "//span[@class='p-button-text p-c'][text() = 'Delete']";
 		kdrclosenewdrcreation = "//i[@class='p-icon kr-close']";
 		kdrdiscardmsg = "//span[@class='p-button-text p-c' and text()='Yes']";
-
 		kdpostviaemailtoggle = "//div[contains(@class,'p-inputswitch p-component')]";
 		kdrtoggleemaillink = "//div[@class='emailLink']";
 		kdrtoggleedit = "//i[@class='icon kr-amend-edit']";
@@ -231,6 +230,7 @@ public class ElementRepository {
 		kdrnewwsdonebtn = "//*[text()='Done']";
 		kdrcountofmembersrightpanel = "//i[@class='p-icon _choI kr-members usersCountBox ']/span";
 		kdradduserfromrightpanel = "//i[@class='p-icon kr-add_user_male']";
+		kdruaccesstype="//div[@class='input-group']/div[1]";
 
 	}
 
