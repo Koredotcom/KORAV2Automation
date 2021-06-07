@@ -575,7 +575,7 @@ public class MessagesDR extends DriverSetUp {
 	}
 	
 	@Test(enabled = true, priority = 40)
-	public void MDR_TC66_TC17_TC21_TC70_creationofRoomwithoutWS() throws Exception {
+	public void MDR_TC66_TC16_TC21_TC70_creationofRoomwithoutWS() throws Exception {
 		try {
 
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
