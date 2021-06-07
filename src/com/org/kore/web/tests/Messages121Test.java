@@ -53,7 +53,7 @@ public class Messages121Test extends DriverSetUp {
 		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 	}
 
-		@Test(enabled = true, priority = 1)
+	@Test(enabled = true, priority = 1)
 	public void MC_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -67,20 +67,15 @@ public class Messages121Test extends DriverSetUp {
 		//	koraloginpage.launchw3(url, korajusername, korajpassword);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
-			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);   // Remove this line
-			korahomepage.selectMenuOption(Messages);
-		//	korahomepage.selectTopLeftMenuOption("All Messages");
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
-		//	koramessagespage.checkDefaultFocus_Recents();
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagespage.checkDefaultFocus_Recents();
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
 		}
 	}
 
-		/*@Test(enabled = true, priority = 2)
+		@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -480,5 +475,5 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
 		}
-	}*/
+	}
 }

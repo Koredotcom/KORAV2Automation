@@ -89,11 +89,19 @@ public class KoraLoginPage extends PageBase {
 		click(er.kosignin, "Signin");
 		test.log(LogStatus.PASS, "Selected Sign In".toString() + test.addScreenCapture(takeScreenShot()));
 		
-		if(!pickaccount){
+		/*if(!pickaccount){
 		waitTillappear(er.kstaysignin, "xpath", "Stay Signin");
 		click(er.kstaysignin, "Stay Signin");
+		}*/
+		Thread.sleep(15000);
+		
+		
+		boolean staysignin=false;
+		staysignin= remoteDriver.findElements(By.xpath(er.kstaysignin)).size()>0;
+		if (staysignin){
+			click(er.kstaysignin, "Stay Signin");
 		}
-		Thread.sleep(10000);
+		
 		System.out.println("Sign in success with " + userName + " and waiting for home screen");
 		System.out.println("Waiting for loading to disappear");
 		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
@@ -109,7 +117,7 @@ public class KoraLoginPage extends PageBase {
 				"After waiting for logo, post login state:".toString() + test.addScreenCapture(takeScreenShot()));
 	}catch (Exception e){
 		
-		System.out.println("Retry");
+		System.out.println("Issue with Login in terms of synchronization or Logout and Relogin flow");
 		
 		}
 	}
@@ -144,7 +152,7 @@ public class KoraLoginPage extends PageBase {
 		remoteDriver.get(o365url);	
 		/*boolean logout=false;
 		logout=remoteDriver.findElements(By.xpath("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']")).size()>0;*/
-		
+		test.log(LogStatus.INFO, "Office 365 account loaded ".toString() + test.addScreenCapture(takeScreenShot()));
 		waitToappear("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']", "xpath", "profile");
 		Thread.sleep(2000);
 		boolean extraheader =false;
@@ -158,6 +166,7 @@ public class KoraLoginPage extends PageBase {
 		waitToappear("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "xpath", "logout");
 		Thread.sleep(1000);
 		click("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "signout");
+		test.log(LogStatus.INFO, "Logged out from office 365".toString() + test.addScreenCapture(takeScreenShot()));
 		waitToappear("//div[@id='switch-account'] | //div[@class='personalization__buttons-container']", "xpath", "logout");
 	}
 

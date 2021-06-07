@@ -294,7 +294,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"After creating Chats/workspace, chat header is name or participants count is not displaying".toString()
+					"From Chats/workspace, chat header name or participants count is not displaying".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 		}
 		return chatheadernameorcount;
