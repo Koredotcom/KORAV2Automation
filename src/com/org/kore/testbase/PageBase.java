@@ -254,6 +254,54 @@ public class PageBase extends DriverSetUp {
 		}
 	}
 
+	public void waitToappearIgnoreFail(String locator, String locatorType, String elementName) throws Exception {
+		try {
+			switch (DriverSetUp.propsMap.get("tool")) {
+
+			case "Appium":
+
+				WebDriverWait wait = new WebDriverWait(appiumDriver, 20, 500);
+				if (locatorType.equalsIgnoreCase("xpath")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+				} else if (locatorType.equalsIgnoreCase("id")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("css")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("name")) {
+					wait.until(ExpectedConditions.visibilityOfElementLocated(By.name(locator)));
+
+				}
+
+				break;
+			case "Selenium":
+
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 15, 500);
+				if (locatorType.equalsIgnoreCase("xpath")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+				} else if (locatorType.equalsIgnoreCase("id")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.id(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("css")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("name")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.name(locator)));
+
+				} else if (locatorType.equalsIgnoreCase("class")) {
+					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.className(locator)));
+
+				}
+
+				break;
+			}
+
+		} catch (Exception exc) {
+			System.out.println("Failed to find in waitToappearIgnoreFail " + locator+" i.e."+ elementName);
+		}
+	}
+	
 	public void click(String xpath, String elementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
