@@ -188,14 +188,12 @@ public class DriverSetUp {
 
 	@AfterTest
 	public void flush() {
-		// System.out.println("Executes only once after all the TC's");
 		System.out.println("Total executed test cases are " + totaltc);
 		extent.flush();
 	}
 
 	@AfterMethod // 
 	protected void afterMethod(ITestResult result) {
-		System.out.println("In After method method name is :"+Thread.currentThread().getStackTrace()[1].getMethodName());
 		String methodname=result.getName();
 		LogStatus status = test.getRunStatus();
 		String mystatus = status.toString();
@@ -212,10 +210,7 @@ public class DriverSetUp {
 			skipcount++;
 		}
 		totaltc = passcount + failcount + warncount + skipcount;
-		/*System.out.println(methodname+" PASS TC's are :::::: " + passcount);
-		System.out.println(methodname+" FAIL TC's are :::::: " + failcount);
-		System.out.println(methodname+" WARNING TC's are :::::: " + warncount);
-		System.out.println(methodname+" SKIP/WARNING TC's are :::::: " + skipcount);*/
+		
 		System.out.println("Updated Total TC's are :::::: " + totaltc);
 		
 	}
@@ -224,13 +219,22 @@ public class DriverSetUp {
 		try {
 			ZipOutputStream zip = null;
 			FileOutputStream fileWriter = null;
-			fileWriter = new FileOutputStream(destZipFile);
+			try {
+				fileWriter = new FileOutputStream(destZipFile);
+			} catch (Exception e) {
+				File file = new File("D:/WorkAssist_AUTBackUPResults");
+				boolean dirCreated = file.mkdirs();
+				fileWriter = new FileOutputStream(destZipFile);
+				System.out.println("D:/WorkAssist_AUTBackUPResults/  --> Directory is not available to move the current results to Backup directory");
+			}
 			zip = new ZipOutputStream(fileWriter);
 			addFolderToZip("", srcFolder, zip);
+			System.out.println("Back up report Path :"+destZipFile);
 			zip.flush();
 			zip.close();
+			System.out.println("----------- END ------------");
 		} catch (Exception e) {
-			System.out.println("Fail to zip the report folder");
+			System.out.println("Fail to zip report folder");
 		}
 	}
 
@@ -261,6 +265,7 @@ public class DriverSetUp {
 		}
 	}
 
+	// Here tried to change the existing extentReport Html file from Https to Http ... But still it doesn't work at all
 	public void mitigateHTML(File htmlfilepath) throws Exception {
 		workingurl =null;
 		
@@ -319,7 +324,7 @@ public class DriverSetUp {
 		String tcdescription = null;
 		String status = null;
 		try {
-			file = new File(dir+"/ReportGenerator/TCResults.html");
+			file = new File(dir+"/ReportGenerator/"+reportFolder+"/CustomReport.html");
 			writer = new BufferedWriter(new FileWriter(file));
 			writer.write(
 					"<html><head></head>");
@@ -343,7 +348,6 @@ public class DriverSetUp {
 		//	writer.write("<table> </table>");
 			
 			// for (int i=0; i<totaltc;i++){
-			System.out.println("in map split");
 			
 			int cnt=1;
 			for (Entry<String, String> entry : map.entrySet()) {
@@ -404,16 +408,12 @@ public class DriverSetUp {
 				
 				writer.write("</tr> ");
 			}
-			// }
 			writer.write("</tr></table>" + "</body>" + "</html>");
-		//	writer.write("</html>");
 			writer.close();
 			Desktop.getDesktop().browse(file.toURI());
 		} catch (IOException e) {
-			System.out.println("IO EXCEPTION-----" + e);
+			System.out.println("Issue with Custom HTML report and table creation" + e);
 		}
-
-		System.out.println("----------END---------------");
 	}
 	
 	@AfterSuite // This is working, before moving the report to other location
@@ -422,14 +422,15 @@ public class DriverSetUp {
 			String dir = System.getProperty("user.dir");
 			// stopServer();
 			File htmlFile = new File(ExtentReportUtility.s);
-			System.out.println("_______________ Original report path_______________" + htmlFile);
-			mitigateHTML(htmlFile);
+		//	System.out.println("_______________ Original report path_______________" + htmlFile);
 			Desktop.getDesktop().browse(htmlFile.toURI());
-			zipFolder(dir + "/ReportGenerator/WorkAssistReport", dir + "/ReportGenerator/WorkAssistReport.zip");
+			System.out.println("Report Path : "+dir + "/ReportGenerator/"+reportFolder);
+		//	zipFolder(dir + "/ReportGenerator/"+reportFolder, dir + "/ReportGenerator/WorkAssistReport.zip");
 		//	customReport();
 			tcTableCreation(map);
+			zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/"+reportFolder+".zip");
 		} catch (Exception e) {
-			System.out.println("End");
+			System.out.println("End with issues in @Aftersuite");
 		}
 	}
 

@@ -209,7 +209,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 	 * This will become NA since Group onHover count functionality got removed
 	 * @throws Exception
 	 */
-	/*@Test(enabled = true, priority = 24)
+	/*@Test(enabled = true, priority = 29)
 	public void MC_TC35_koraOnHoverParticipantsValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())

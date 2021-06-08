@@ -102,6 +102,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			String grouptext = DriverSetUp.testdataMap.get("groupchat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);

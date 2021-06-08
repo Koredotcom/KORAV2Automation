@@ -1369,7 +1369,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					test.log(LogStatus.PASS, "Message copied successfully ! text got displayed".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 					Thread.sleep(4000);
-					compose.click();
+				//	compose.click();
 					compose.click();
 					Thread.sleep(3000);
 					click("//span[text()='Paste']", "Paste option on compose bar");

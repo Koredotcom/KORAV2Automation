@@ -76,7 +76,7 @@ public class KoraLoginPage extends PageBase {
 			click("//div[@id='otherTileText'][text()='Use another account']", "Use another account");
 		}
 		waitTillClickable(er.kosignin,"Enter Email or Pick an account");
-		System.out.println("Waiting for entering emaail");
+		System.out.println("Waiting for enter email");
 		waitTillappear(er.koenteremail, "xpath", "Enter Email");   //////div[@role='heading'][text() = 'Pick an account'] 
 		enterText(er.koenteremail, userName, "xpath", "Enter Email");
 		test.log(LogStatus.PASS, "Entered username".toString() + test.addScreenCapture(takeScreenShot()));

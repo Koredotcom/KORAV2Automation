@@ -8,6 +8,7 @@ import com.org.kore.testbase.DriverSetUp;
 import com.org.kore.web.pages.KoraHomePage;
 import com.org.kore.web.pages.KoraLoginPage;
 import com.org.kore.web.pages.KoraMessagesChatsPage;
+import com.org.kore.web.pages.KoraMessagesDRPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
@@ -21,6 +22,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
 	KoraMessagesChatsPage koramessagespage;
+	KoraMessagesDRPage koramessagedrpage;
 
 	String korajusername;
 	String korajpassword;
@@ -43,6 +45,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		koraloginpage = new KoraLoginPage(remoteDriver);
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
+		koramessagedrpage = new KoraMessagesDRPage(remoteDriver);
 
 		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
 		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
@@ -154,5 +157,64 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to insert image for 1to1 conversation");
 		}
 	}
+	
+	@Test(enabled = true, priority = 32)
+	public void MDR_TC6_TC44_postandcommentsWithAttachments() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+
+			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String sampleurl = DriverSetUp.drdataMap.get("sampleurl");
+
+			String insertdoc = DriverSetUp.UtilityMap.get("docexe");
+			String doc=directory + insertdoc;
+			String insertmp4 = DriverSetUp.UtilityMap.get("mp4exe");
+			String mp4=directory + insertmp4;
+			String insertpdf = DriverSetUp.UtilityMap.get("pdfexe");
+			String pdf=directory + insertpdf;
+			String insertxlsx = DriverSetUp.UtilityMap.get("xlsxexe");
+			String xlsx=directory + insertxlsx;
+			String insertpng = DriverSetUp.UtilityMap.get("pngexe");
+			String png=directory + insertpng;
+			String insertzip = DriverSetUp.UtilityMap.get("zipexe");
+			String zip=directory + insertzip;
+
+
+			String drpost="postforattachement"+korahomepage.runtimehhmmss();				
+			String drpostforcomment="postforCommentattachment"+korahomepage.runtimehhmmss();
+			String drcommentattchment="Commentattachment"+korahomepage.runtimehhmmss();
+
+			test.log(LogStatus.INFO, "Navigation url :" + url);	
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+		//	koraloginpage.loginToKora(url, korajusername, korajpassword);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");	
+
+			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");						
+			koramessagespage.enterYourMessageAs(sampleurl);
+			koramessagespage.captureScreenShot("Validate UI after entering Url as a post "+sampleurl);
+
+			koramessagespage.enterYourMessageAs(drpost);			
+			korahomepage.uploadfilesfromDR(doc,true, "doc file", false);
+			korahomepage.uploadfilesfromDR(mp4,true, "mp4 file", false);
+			korahomepage.uploadfilesfromDR(pdf,true, "pdf file", false);
+			korahomepage.uploadfilesfromDR(xlsx,true, "xlsx file", false);
+			korahomepage.uploadfilesfromDR(png,true, "png file", false);
+			korahomepage.uploadfilesfromDR(zip,true, "zip file", false);
+
+			//post and comment post for attachments
+			koramessagespage.enterYourMessageAs(drpostforcomment);
+			koramessagedrpage.gotopostandcomment(standarddrname,drpostforcomment);
+			korahomepage.uploadfilesfromDR(png,true, "png file", false);
+			extent.endTest(test);
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate DR post /comment with attachments");
+		}
+	} 
 	
 }
