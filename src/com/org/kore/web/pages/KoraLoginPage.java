@@ -164,6 +164,7 @@ public class KoraLoginPage extends PageBase {
 		
 		click("//div[@id='O365_MainLink_MePhoto']", "profile");
 		Thread.sleep(3000);
+		// need to check this
 		waitToappearIgnoreFail("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "xpath", "logout");
 		Thread.sleep(1000);
 		click("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "signout");
