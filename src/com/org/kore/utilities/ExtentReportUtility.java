@@ -20,13 +20,14 @@ public synchronized static ExtentReports getReporter(ExtentReports extent) throw
 		
 		if (extent == null) {
 			try {
-				SimpleDateFormat sdfDateReport = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");// dd/MM/yyyy
-				Date now = new Date();
+		//		SimpleDateFormat sdfDateReport = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");// dd/MM/yyyy
+		//		Date now = new Date();
 				String dir = System.getProperty("user.dir");
 				File index = new File(dir+"/ReportGenerator");
 				String ind= index.toString();
 				FileUtils.forceDelete(new File(ind));
-				reportFolder = "WorkAssist_"+ sdfDateReport.format(now);
+		//		reportFolder = "WorkAssist_"+ sdfDateReport.format(now);
+				reportFolder = "WorkAssistReport";
 			} catch (Exception e) {
 				System.out.println(" In folder to Remove here $$$$ Yet to concentrate more in this area to avoid failures here $$$$");
 			}

@@ -10,7 +10,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -225,7 +227,6 @@ public class DriverSetUp {
 				File file = new File("D:/WorkAssist_AUTBackUPResults");
 				boolean dirCreated = file.mkdirs();
 				fileWriter = new FileOutputStream(destZipFile);
-				System.out.println("D:/WorkAssist_AUTBackUPResults/  --> Directory is not available to move the current results to Backup directory");
 			}
 			zip = new ZipOutputStream(fileWriter);
 			addFolderToZip("", srcFolder, zip);
@@ -418,6 +419,8 @@ public class DriverSetUp {
 	
 	@AfterSuite // This is working, before moving the report to other location
 	public void closeConnections() throws Exception {
+		SimpleDateFormat sdfDateReport = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");// dd/MM/yyyy
+		Date now = new Date();
 		try {
 			String dir = System.getProperty("user.dir");
 			// stopServer();
@@ -428,7 +431,7 @@ public class DriverSetUp {
 		//	zipFolder(dir + "/ReportGenerator/"+reportFolder, dir + "/ReportGenerator/WorkAssistReport.zip");
 		//	customReport();
 			tcTableCreation(map);
-			zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/"+reportFolder+".zip");
+			zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/WorkAssist"+sdfDateReport.format(now)+".zip");
 		} catch (Exception e) {
 			System.out.println("End with issues in @Aftersuite");
 		}
