@@ -1289,6 +1289,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			if(action.equalsIgnoreCase("Reactions")){
 				System.out.println("Do nothing in try");
 			}else {
+			//span[@class='msgText ']//div[@class='send-message'][text()='
 			moveToElement(er.kmmessages + message + er.ksinglquote, "xpath");
 			Thread.sleep(1000);
 			moveToElement(er.kmmessages + message + er.ksinglquote + "/.." + er.kmmessagehoveroptiontitles + action
@@ -1377,7 +1378,8 @@ public class KoraMessagesChatsPage extends PageBase {
 					test.log(LogStatus.PASS, "Message copied successfully ! text got displayed".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 					Thread.sleep(4000);
-				//	compose.click();
+					moveToElement(er.kcomposebar, "xpath");
+					jsClick(er.kcomposebar, "xpath");
 					compose.click();
 					Thread.sleep(3000);
 					click("//span[text()='Paste']", "Paste option on compose bar");
@@ -1410,8 +1412,8 @@ public class KoraMessagesChatsPage extends PageBase {
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"For a message either onhover options title is not displaying or failed to perform <b> " + action
-							+ "</b> Action".toString() + test.addScreenCapture(takeScreenShot()));
+					"For a message either onhover options title is not displaying or failed to perform<b> " + action
+							+ "</b> Action ".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 	}

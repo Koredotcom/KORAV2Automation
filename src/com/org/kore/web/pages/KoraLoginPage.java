@@ -153,6 +153,7 @@ public class KoraLoginPage extends PageBase {
 		/*boolean logout=false;
 		logout=remoteDriver.findElements(By.xpath("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']")).size()>0;*/
 		test.log(LogStatus.INFO, "Office 365 account loaded ".toString() + test.addScreenCapture(takeScreenShot()));
+		System.out.println("https://www.office.com/ loaded successfully");
 		waitToappear("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']", "xpath", "profile");
 		Thread.sleep(2000);
 		boolean extraheader =false;
@@ -169,7 +170,7 @@ public class KoraLoginPage extends PageBase {
 		Thread.sleep(1000);
 		clickNIgnoreFail("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "signout");
 		test.log(LogStatus.INFO, "Logged out from office 365".toString() + test.addScreenCapture(takeScreenShot()));
-		waitToappear("//div[@id='switch-account'] | //div[@class='personalization__buttons-container']", "xpath", "logout");
+		waitToappearIgnoreFail("//div[@id='switch-account'] | //div[@class='personalization__buttons-container']", "xpath", "logout");
 	}
 
 	public String getUserDetails() throws Exception {
