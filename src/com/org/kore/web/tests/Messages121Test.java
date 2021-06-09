@@ -68,18 +68,14 @@ public class Messages121Test extends DriverSetUp {
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-		//	koramessagespage.checkDefaultFocus_Recents();
+			koramessagespage.checkDefaultFocus_Recents();
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
 		}
 	}
 
-			/*@Test(enabled = true, priority = 2)
+		@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -478,5 +474,5 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
 		}
-	}*/
+	}
 }

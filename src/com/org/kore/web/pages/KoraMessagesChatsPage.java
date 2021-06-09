@@ -547,7 +547,7 @@ public class KoraMessagesChatsPage extends PageBase {
 
 					break;
 				case "3dots":
-					System.out.println("In 3 dots");
+					System.out.println("About to Hover on middle pane 3 dots of "+groupname);
 					moveToElement(er.kmcidgroup + groupname + "']/../../../../.." + er.kmc3dots, "xpath");
 					Thread.sleep(1000);
 					click(er.kmcidgroup + groupname + "']/../../../../.." + er.kmc3dots, "3dots");
@@ -560,8 +560,16 @@ public class KoraMessagesChatsPage extends PageBase {
 					test.log(LogStatus.PASS, groupname + "is going to be deleted now".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 					clickOn("Delete", true);
-					test.log(LogStatus.PASS, groupname + " Deleted Successfully".toString()
-							+ test.addScreenCapture(takeScreenShot()));
+					boolean afterdelete=false;
+					afterdelete=remoteDriver.findElements(By.xpath(er.kmcfirstactiveuser+"[text()='"+groupname+"']/../../../..//i[@class='icon __i right kr-delete']")).size()>0;
+					if (afterdelete){
+						test.log(LogStatus.FAIL," Even after Deleting the group i.e.<b> " + groupname +"</b> . It still apears "  .toString()
+								+ test.addScreenCapture(takeScreenShot()));
+					}
+					else {
+						test.log(LogStatus.PASS, groupname + " Deleted Successfully".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+					}
 					break;
 				default:
 					test.log(LogStatus.FAIL,
