@@ -167,7 +167,7 @@ public class KoraLoginPage extends PageBase {
 		// need to check this
 		waitToappearIgnoreFail("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "xpath", "logout");
 		Thread.sleep(1000);
-		click("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "signout");
+		clickNIgnoreFail("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "signout");
 		test.log(LogStatus.INFO, "Logged out from office 365".toString() + test.addScreenCapture(takeScreenShot()));
 		waitToappear("//div[@id='switch-account'] | //div[@class='personalization__buttons-container']", "xpath", "logout");
 	}

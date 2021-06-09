@@ -464,9 +464,9 @@ public class KoraMessagesChatsPage extends PageBase {
 	 *             : Fail, if it fail to perform action
 	 */
 	public void goToGroupAndPerform(String groupname, boolean check, String action) throws Exception {
+		try {
 		moveToElement(er.kmcidgroup + groupname + er.kmcidchatdesc, "xpath");
 		click(er.kmcidgroup + groupname + er.kmcidchatdesc, groupname + " chat");
-		try {
 			if (check) {
 				switch (action.trim()) {
 				case "Star":
@@ -578,7 +578,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "For <b>" + groupname + "</b> Unable to click on <b>" + action
-					+ "</b>.... Seems element got updated ".toString() + test.addScreenCapture(takeScreenShot()));
+					+ "</b>.... Seems element got updated or <b> "+groupname+" </b>is not available in chats".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 
 	}
