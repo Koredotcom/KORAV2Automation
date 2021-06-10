@@ -141,7 +141,7 @@ public class PageBase extends DriverSetUp {
 				} else {
 					System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("winchromeDriverPath"));
 					ChromeOptions options = new ChromeOptions();
-					
+				//	options.addArguments("user-data-dir=/path/to/your/custom/profile");
 					options.addArguments("--profile-directory=Default");
 					options.addArguments("--whitelisted-ips");
 					options.addArguments("--disable-plugins-discovery");
@@ -155,8 +155,8 @@ public class PageBase extends DriverSetUp {
 					//for incognito with headless
 					//options.addArguments("--headless", "--window-size=1382,744", "--disable-gpu", "--disable-extensions", "--no-sandbox", "-incognito");*/
 					
-				//	options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
-				//	options.addArguments("--headless");
+					options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
+					options.addArguments("--headless");
 					
 					DesiredCapabilities cap = DesiredCapabilities.chrome();
 					cap.setCapability("ignoreZoomSetting", true);

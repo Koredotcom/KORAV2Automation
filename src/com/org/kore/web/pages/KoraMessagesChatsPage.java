@@ -1418,6 +1418,26 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	}
 
+	public void verifyJumbBackTomessage(String msg) throws Exception {
+		try {
+			moveToElement(er.kmreplybubble + msg + er.ksinglquote, "xpath");
+			Thread.sleep(3000);
+			jsClick(er.kmreplybubble + msg + er.ksinglquote, "Click Message");
+			boolean activemsg = false;
+			if (activemsg = remoteDriver.findElements(By.xpath(er.kmactivemsg + msg + er.ksinglquote)).size() > 0) {
+				test.log(LogStatus.WARNING, "On click of Replied message i.e. " + msg
+						+ " , original message got highlighted".toString() + test.addScreenCapture(takeScreenShot()));
+			} else {
+				test.log(LogStatus.FAIL,
+						"On click of Replied message i.e. " + msg + " , original message was not highlighted".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+			}
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to click on Replied message i.e. " + msg + " ".toString()
+					+ test.addScreenCapture(takeScreenShot()));
+		}
+	}
+	
 	public boolean verifyDisplayOfChevronIcon(boolean expvisibility) throws Exception {
 		boolean elementdisplayed = false;
 		elementdisplayed = remoteDriver

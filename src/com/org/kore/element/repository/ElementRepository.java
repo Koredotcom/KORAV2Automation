@@ -23,7 +23,7 @@ public class ElementRepository {
 			kmc3dotoptions = null, kmcmanageclose = null, kmcmembername = null, kmcmuteslots = null,
 			kmcactiveusericon = null, kmcrightchaticon = null, kmcatmentionusernames = null, kmcmessagebubbles = null,
 			kmcfirstactiveuser = null, kmcactivebackground = null, kmdiscussion = null, kmplaceholder = null,
-			kmsearchsuggestions = null, kmattachfromplus = null, kmmessages = null, kmmessagehoveroptiontitles = null,
+			kmsearchsuggestions = null, kmattachfromplus = null, kmmessages = null,kmreplybubble=null,kmactivemsg=null, kmmessagehoveroptiontitles = null,
 			kmmessagerighthover = null, kmchatname0 = null, kmchatname1 = null, kmmessagehovermoreoptions = null,
 			kmlongtextreadmore = null, kmreadmore = null, kmreadless = null, kmemoji = null, kmsmiley = null,
 			kmright3dotoptions = null, kmviewfiles = null, kmreminderslots = null, kmmessagedeleted = null,
@@ -127,6 +127,8 @@ public class ElementRepository {
 		kmsearchsuggestions = "//div[@class='heroText'][text() = '";
 		kmattachfromplus = "//span[@class='addIcon kr-plus']";
 		kmmessages = "//span[@class='msgText  ']//div[@class='send-message'][text()='";
+		kmreplybubble ="//div[@class='replyMessage replyMessageBubble']//div[@class='replayBubbleText'][text()='";
+		kmactivemsg =	"//span[@class='msgText  activenavigateMsg']/..//div[@class='send-message'][text()='";
 		kmmessagehoveroptiontitles = "//div[@class='msgCntrlBarParent hoverOptionsBar ']//i[@title='";
 		kmmessagerighthover = "//div[@class='msgCntrlBarParent hoverOptionsBar ']";
 		kmchatname0 = "//p[@class='chatUserTitle']/span[text()='";
@@ -188,7 +190,7 @@ public class ElementRepository {
 		kdeditpost = "//i[@class='icon kr-amend-edit']";
 		kdeditpostcomposebar = "//div[@class='p-dialog-titlebar']/following::div[@id='discInput'][1]";
 		kdforwardpost = "//i[@class='icon kr-return']";
-		kdfowradpostWindow = "//div[@class='p-dialog p-component ForwardPostAndMsgModal p-dialog-enter-done']/div[1]/span[1]/span[text()='Forward Post']";
+		kdfowradpostWindow = "//span[@class='p-dialog-title']/span[text()='Forward Post']";
 		kdfrwrdpostConversationname = "//div[@class='discussionRoomTitle']/div[@class='heroText' and text()='";
 		kdfowradpostWindowclose = "//span[@class='p-dialog-titlebar-close-icon pi pi-times']";
 		kdstartnewconversation = "//span[text()='Start a new Chat']";
@@ -214,7 +216,7 @@ public class ElementRepository {
 		kwatmentionuserslist = "//table[@class='mentionDialogBoxTable']/tbody/tr";
 		kdrRoomname = "//input[@class='wsNameInput krInputText']";
 		kdrleaveDR = "//span[contains(text(),'Leave Discussion Room')]";
-		kdrleaveDRconfirm = "//span[@class='p-button-text p-c'][text() = 'Leave Chat']";
+		kdrleaveDRconfirm = "//span[@class='p-button-text p-c'][text() = 'Leave']";
 		kdrdeleteDR = "//span[contains(text(),'Delete Discussion Room')]";
 		kdrdeleteDRconfirm = "//span[@class='p-button-text p-c'][text() = 'Delete']";
 		kdrclosenewdrcreation = "//i[@class='p-icon kr-close']";

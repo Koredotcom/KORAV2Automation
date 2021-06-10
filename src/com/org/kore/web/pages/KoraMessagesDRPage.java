@@ -488,6 +488,8 @@ public class KoraMessagesDRPage extends PageBase {
 			}
 			if (!AccessType.equals("Post Only")) {
 				if (AccessType.equals("Full Access")) {
+					// Whie selecting "Full access" script will also select the Toggle Turned on to check whether all people got Full access
+					click(er.kdpostviaemailtoggle, " Toggle on for All Members at Workspace "+workspacename);
 					click("//span[@class='Name' and text()='" + AccessType + "']",
 							"Clicking on Access Type " + AccessType);
 				} else if (AccessType.equals("Comment Only")) {
@@ -1025,7 +1027,8 @@ public class KoraMessagesDRPage extends PageBase {
 				if(!beforerename.equalsIgnoreCase(afterrename)) {
 					test.log(LogStatus.PASS,
 							"DR rename is successfully done"
-							.toString() + test.addScreenCapture(takeScreenShot()));	
+							.toString() + test.addScreenCapture(takeScreenShot()));
+					Thread.sleep(3000);
 				}				
 				else {
 					test.log(LogStatus.FAIL,
@@ -1035,19 +1038,25 @@ public class KoraMessagesDRPage extends PageBase {
 			}
 			if(leaveroomorDelete.contains("Leave"))
 			{		
-
-				click(er.kdrleaveDR," Leavning Room ");				
-				click(er.kdrleaveDRconfirm , " Leavning Room confirmation ");								
+				moveToElement(er.kdrdeleteDR, "xpath");
+				click(er.kdrleaveDR," Leavning Room ");	
+				Thread.sleep(3000);
+				click(er.kdrleaveDRconfirm , " Leavning Room confirmation ");
+				Thread.sleep(3000);
 				test.log(LogStatus.PASS,
 						"Leave Discussion Room succesffuly performed"
 						.toString() + test.addScreenCapture(takeScreenShot()));
 			}else if(leaveroomorDelete.contains("Delete"))
-			{				
-				click(er.kdrdeleteDR , " Delete Room ");				
+			{		
+				moveToElement(er.kdrdeleteDR, "xpath");
+				click(er.kdrdeleteDR , " Delete Room ");
+				Thread.sleep(3000);
 				click(er.kdrdeleteDRconfirm , " Confirm Delete Room ");
+				Thread.sleep(3000);
 				test.log(LogStatus.PASS,
 						"Delete Discussion Room performed successfully"
 						.toString() + test.addScreenCapture(takeScreenShot()));
+				
 			}
 
 		} catch (Exception e) {
@@ -1363,5 +1372,13 @@ public class KoraMessagesDRPage extends PageBase {
 
 		}
 	}
-
+	
+	public void selectDRBasedonWSname(String Workspace, String discussionRoomName) throws Exception {
+		
+		System.out.println("----------------------- selectDRBasedonWSname --------------------");
+		korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+		moveToElement(er.kdrcidgroup + discussionRoomName+"']/..//span[@class='wsName'][text()='"+Workspace+"']", "xpath");
+		
+	}	
+	
 }

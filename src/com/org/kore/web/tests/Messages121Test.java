@@ -264,7 +264,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 
 		@Test(enabled = true, priority = 9)
-	public void MC_TC35_TC47_validateReplyback() throws Exception {
+	public void MC_TC35_TC47_TC67_validateReplyback() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -276,18 +276,21 @@ public class Messages121Test extends DriverSetUp {
 			String replymsg = "It is Reply";
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "Reply Back", replymsg);
+			
+			koramessagespage.verifyJumbBackTomessage(updatedstr);
 
-			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
+			/*koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform("James Middleton", false, "NA");
-			koramessagespage.validateFromRecepientEnd(updatedstr, replymsg);
+			koramessagespage.validateFromRecepientEnd(updatedstr, replymsg);*/
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate reply back functionality");
