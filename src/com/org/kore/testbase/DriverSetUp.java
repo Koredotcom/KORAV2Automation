@@ -83,6 +83,8 @@ public class DriverSetUp {
 	public static DataReader dr;
 	PageBase pb;
 	public String workingurl;
+	
+	public String buildNumber;
 
 	public static AppiumServiceBuilder builder;
 	public static AppiumDriverLocalService service;
@@ -113,7 +115,8 @@ public class DriverSetUp {
 	public void executeSuite() {
 		try {
 			// startWindowsAppiumServer();
-			System.out.println("Build Number:"+System.getenv("BUILD_NUMBER"));
+			buildNumber = System.getenv("BUILD_NUMBER");
+			System.out.println("Build Number:"+buildNumber);
 			extent = ExtentReportUtility.getReporter(extent);
 			test = DriverSetUp.test;
 			extent = DriverSetUp.extent;
@@ -445,7 +448,11 @@ public class DriverSetUp {
 		//	zipFolder(dir + "/ReportGenerator/"+reportFolder, dir + "/ReportGenerator/WorkAssistReport.zip");
 		//	customReport();
 			tcTableCreation(map);
-			zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/WorkAssist"+sdfDateReport.format(now)+".zip");
+		//	zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/WorkAssist"+sdfDateReport.format(now)+".zip");
+		
+			zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/"+buildNumber+sdfDateReport.format(now)+".zip");
+			
+		
 		} catch (Exception e) {
 			System.out.println("End with issues in @Aftersuite");
 		}
