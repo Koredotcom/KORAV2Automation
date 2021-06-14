@@ -346,13 +346,14 @@ public class DriverSetUp {
 					"<html><head></head>");
 			writer.write("<body><h2> WorkAssist: "+App+" Env</b> WebApp Automation Results</h2></body>");
 			
-		//	<p style="text-align:center;">Learn for free</p>
+			/*writer.write("<body><table><table border ='1'><tr><th><p style=text-align:left><b>Scope</b></p></th><td> <a href="+"https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=1327035589"+"> Basic Sanity test cases</a></td><tr><th><b>Environment</b>&emsp;</th><td>"+workingurl+"  <b>("+App+"  )</b>"+"</td></tr><tr><th><p style=text-align:left><b>Browser</b></p></th><td>Chrome</td></tr></body>");
+			writer.write("<body><h2> </h2></body>");
+			writer.write("<table> </table>");*/
 			
-			writer.write("<body><table><table border ='1'><tr><th><p style=text-align:left><b>Scope</b></p></th><td> <a href="+"https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=1327035589"+"> Basic Sanity test cases</a></td><tr><th><b>Environment</b>&emsp;</th><td>"+workingurl+"  <b>("+App+"  )</b>"+"</td></tr><tr><th><p style=text-align:left><b>Browser</b></p></th><td>Chrome</td></tr></body>");
+			writer.write("<body><table><table border ='1'><tr><th><p style=text-align:left><b>Scope</b>&emsp;</p></th><td> <a href="+"https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=1327035589"+"> Basic Sanity test cases</a></td><tr><th><b>Environment</b>&emsp;</th><td>"+workingurl+"  <b>("+App+"  )</b>"+"</td></tr><tr><th><p style=text-align:left><b>Browser</b>&emsp;</p></th><td>Chrome</td></tr></body>");
 			writer.write("<body><h2> </h2></body>");
 			writer.write("<table> </table>");
 			
-		//	writer.write("<body><h2> </h2>");
 			
 			writer.write("<body><table><table border ='1'><tr bgcolor="+"#02c8ff"+"><th><font color="+"white"+"><b>Scenarios Status</b></th><th><font color="+"white"+"><b>Scenarios Count</b></th></tr><tr><td><font color="+"green"+"><b>PASS</b></font></td><td style="+"text-align:center"+">" + passcount
 					+ "</td></tr><tr><td><font color="+"red"+"><b>FAIL</b></font></td><td style="+"text-align:center"+">" + failcount + "</td></tr><tr><td><font color="+"orange"+"><b>WARNING</b></font></td><td style="+"text-align:center"+">" + warncount + "</td></tr><tr><td><b>TOTAL</b></td><td style="+"text-align:center"+">"+"<b>" + totaltc
