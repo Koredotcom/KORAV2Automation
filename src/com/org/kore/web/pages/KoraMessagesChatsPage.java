@@ -1767,40 +1767,58 @@ public class KoraMessagesChatsPage extends PageBase {
 		ArrayList list = new ArrayList();
 		String myname;
 		List<WebElement> messagelist;
-		
 		List<WebElement> updatedlistafterscroll;
 		
-		do {
-			messagelist = remoteDriver.findElements(By.xpath("//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
-			int counter =0;
-			for (WebElement e : messagelist) {
-				String currentthread;
-				currentthread=	e.getText();
-				System.out.println("Current thread is: "+currentthread);
-				list.add(e.getText().trim());
-				/*if (currentthread.isEmpty()&&(counter<7)){
-					continue;
-				}else*/ 
-					if (currentthread.isEmpty()){
-					String last1;
-					last1 =(String) list.get(list.size() - 2);
-					System.out.println("I am getting empty hence performing scroll action to "+last1);
-					scrollToElement("//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')][text() = '"+last1+"']", "xpath");
-					counter++;
-					if (counter>2){
-						updatedlistafterscroll = remoteDriver.findElements(By.xpath("//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
-						int updatedsize=updatedlistafterscroll.size();
-					}
-					
-					
-					}
-			}
-			
-		} while ((messagelist.size()>20));
+		int initialsize=0;
+		int updatedsize = 0 ;
+		
+		
+			do {
+				messagelist = remoteDriver.findElements(By.xpath(
+						"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
+				
+				initialsize=messagelist.size();
+				
+				int counter = 0;
+				for (WebElement e : messagelist) {
+					String currentthread;
+					currentthread = e.getText();
+					System.out.println("Current thread is: " + currentthread);
+					list.add(e.getText().trim());
+					/*
+					 * if (currentthread.isEmpty()&&(counter<7)){ continue;
+					 * }else
+					 */
+					if (currentthread.isEmpty()) {
+						String last1;
+						last1 = (String) list.get(list.size() - 2);
+						System.out.println("I am getting empty hence performing scroll action to " + last1);
+						scrollToElement(
+								"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')][text() = '"
+										+ last1 + "']",
+								"xpath");
+						counter++;
+						if (counter > 2) {
+							updatedlistafterscroll = remoteDriver.findElements(By.xpath(
+									"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
+							updatedsize = updatedlistafterscroll.size();
+						}
 
+					}
+				}
+
+			} while ((messagelist.size()>20));
+
+			if ((updatedsize ==40)){
+				test.log(LogStatus.PASS,"Pagination got updated from <b>"+initialsize+" </b> to <b>"+updatedsize+"</b>".toString() + test.addScreenCapture(takeScreenShot()));
+				
+			}else {
+				test.log(LogStatus.FAIL,"Pagination got updated from <b>"+initialsize+" </b> to <b>"+updatedsize+"</b>. There could be less records or issue with Pagination".toString() + test.addScreenCapture(takeScreenShot()));
+			}
 		
 		}catch (Exception e){
-			System.out.println("check");
+			test.log(LogStatus.FAIL,"Something wrong with Pagination validation".toString() + test.addScreenCapture(takeScreenShot()));
+			
 			}
 	}
 	
