@@ -442,17 +442,23 @@ public class DriverSetUp {
 			String dir = System.getProperty("user.dir");
 			// stopServer();
 			File htmlFile = new File(ExtentReportUtility.s);
-		//	System.out.println("_______________ Original report path_______________" + htmlFile);
+			// System.out.println("_______________ Original report
+			// path_______________" + htmlFile);
 			Desktop.getDesktop().browse(htmlFile.toURI());
-			System.out.println("Report Path : "+dir + "/ReportGenerator/"+reportFolder);
-		//	zipFolder(dir + "/ReportGenerator/"+reportFolder, dir + "/ReportGenerator/WorkAssistReport.zip");
-		//	customReport();
+			System.out.println("Report Path : " + dir + "/ReportGenerator/" + reportFolder);
+			// zipFolder(dir + "/ReportGenerator/"+reportFolder, dir +
+			// "/ReportGenerator/WorkAssistReport.zip");
+			// customReport();
 			tcTableCreation(map);
-			zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/WorkAssist"+sdfDateReport.format(now)+".zip");
-		
-		//	zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/"+buildNumber+sdfDateReport.format(now)+".zip");
-			
-		
+
+			if (buildNumber == null) {
+				zipFolder(dir + "/ReportGenerator/" + reportFolder,
+						"D:/WorkAssist_AUTBackUPResults/WorkAssist" + sdfDateReport.format(now) + ".zip");
+			} else {
+				zipFolder(dir + "/ReportGenerator/" + reportFolder,
+						"D:/WorkAssist_AUTBackUPResults/" + buildNumber + sdfDateReport.format(now) + ".zip");
+			}
+
 		} catch (Exception e) {
 			System.out.println("End with issues in @Aftersuite");
 		}
