@@ -84,7 +84,7 @@ public class DriverSetUp {
 	PageBase pb;
 	public String workingurl;
 	
-	public String buildNumber;
+	public static String buildNumber;
 
 	public static AppiumServiceBuilder builder;
 	public static AppiumDriverLocalService service;
@@ -456,7 +456,7 @@ public class DriverSetUp {
 						"D:/WorkAssist_AUTBackUPResults/WorkAssist" + sdfDateReport.format(now) + ".zip");
 			} else {
 				zipFolder(dir + "/ReportGenerator/" + reportFolder,
-						"D:/WorkAssist_AUTBackUPResults/" + buildNumber + sdfDateReport.format(now) + ".zip");
+						"D:/WorkAssist_AUTBackUPResults/" + buildNumber +"_"+ sdfDateReport.format(now) + ".zip");
 			}
 
 		} catch (Exception e) {

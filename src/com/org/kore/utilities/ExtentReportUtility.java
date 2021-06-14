@@ -31,7 +31,8 @@ public synchronized static ExtentReports getReporter(ExtentReports extent) throw
 			} catch (Exception e) {
 				System.out.println(" In folder to Remove here $$$$ Yet to concentrate more in this area to avoid failures here $$$$");
 			}
-			s = new File("ReportGenerator/" + reportFolder + "/TestReport.html").getPath();
+			s = new File("ReportGenerator/" + reportFolder + "/"+buildNumber+"_TestReport.html").getPath();
+		//	s = new File("ReportGenerator/" + reportFolder + "/TestReport.html").getPath();
 			extent = new ExtentReports(s, true, Locale.ENGLISH);
 			extent.addSystemInfo("Environment", "UAT");
 			extent.addSystemInfo("Application", "KORA WORK ASSIST");
