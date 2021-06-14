@@ -113,6 +113,7 @@ public class DriverSetUp {
 	public void executeSuite() {
 		try {
 			// startWindowsAppiumServer();
+			System.out.println("Build Number:"+System.getenv("BUILD_NUMBER"));
 			extent = ExtentReportUtility.getReporter(extent);
 			test = DriverSetUp.test;
 			extent = DriverSetUp.extent;
@@ -319,6 +320,17 @@ public class DriverSetUp {
 	}
 	
 	public void tcTableCreation(Map<String, String> map2) throws IOException {
+		
+		workingurl =null;
+		
+		if (App.equalsIgnoreCase("QA")){
+			workingurl="https://workassist-qa.kore.ai/";
+		}else if (App.equalsIgnoreCase("Dev")){
+			workingurl="https://workassist-dev.kore.ai/";
+		}else {
+			workingurl="Please check the environment and url";
+		}
+		
 		String dir = System.getProperty("user.dir");
 		BufferedWriter writer;
 		File file;
@@ -329,9 +341,11 @@ public class DriverSetUp {
 			writer = new BufferedWriter(new FileWriter(file));
 			writer.write(
 					"<html><head></head>");
-			writer.write("<body><h2>Work Assist Automation Execution Report</h2></body>");
+			writer.write("<body><h2> WorkAssist: "+App+" Env</b> WebApp Automation Results</h2></body>");
 			
-			writer.write("<body><table><table border ='1'><tr><th><b>Scope</b></th><td> <a href="+"https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=1327035589"+"> Basic sanity test cases</a></td><tr><th><b>Environment</b></th><td>"+workingurl+"  <b>("+App+"  )</b>"+"</td></tr><tr><th><b>Browser</b></th><td>Chrome</td></tr></body>");
+		//	<p style="text-align:center;">Learn for free</p>
+			
+			writer.write("<body><table><table border ='1'><tr><th><p style=text-align:left><b>Scope</b></p></th><td> <a href="+"https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=1327035589"+"> Basic Sanity test cases</a></td><tr><th><b>Environment</b>&emsp;</th><td>"+workingurl+"  <b>("+App+"  )</b>"+"</td></tr><tr><th><p style=text-align:left><b>Browser</b></p></th><td>Chrome</td></tr></body>");
 			writer.write("<body><h2> </h2></body>");
 			writer.write("<table> </table>");
 			
@@ -357,15 +371,15 @@ public class DriverSetUp {
 				status = entry.getValue().toUpperCase();
 
 				if(status.equalsIgnoreCase("PASS")){
-					status = "<font color="+"green"+"><b>PASS</b></font>";
+					status = "<font color="+"green"+"><b>&emsp;PASS</b></font>";
 				}else if(status.equalsIgnoreCase("FAIL")){
 					status = "<font color="+"red"+"><b>FAIL</b></font>";
 				}else if(status.equalsIgnoreCase("WARNING")){
-					status = "<font color="+"orange"+"><b>WARNING</b></font>";
+					status = "<font color="+"orange"+"><b>&ensp;WARNING</b></font>";
 				}else if(status.equalsIgnoreCase("INFO")){
-					status = "<font color="+"gold"+"><b>INFO</b></font>";
+					status = "<font color="+"gold"+"><b>&emsp;INFO</b></font>";
 				}else if(status.equalsIgnoreCase("SKIP")){
-					status = "<font color="+"purple"+"><b>SKIP</b></font>";
+					status = "<font color="+"purple"+"><b>&emsp;SKIP</b></font>";
 				}
 
 				String TCnums="";
@@ -388,23 +402,23 @@ public class DriverSetUp {
 				writer.write("<tr>");
 				
 				writer.write("<td><font-family:"+"Calibri (Body)>");
-				writer.write(ModuleName);
+				writer.write(ModuleName+"&emsp;");
 				writer.write("</td> ");
 				
 				writer.write("<td><font-family:"+"Calibri (Body)>");
-				writer.write("Scenario "+cnt++);
+				writer.write("Scenario "+cnt++ +"&emsp;");
 				writer.write("</td> ");
 				
 				writer.write("<td><font-family:"+"Calibri (Body)>");
-				writer.write(Testcases);
+				writer.write(Testcases+"&emsp;");
 				writer.write("</td> ");
 				
 				writer.write("<td><font-family:"+"Calibri (Body)>");
-				writer.write(TestcaseDesction);
+				writer.write(TestcaseDesction+"&nbsp;");
 				writer.write("</td>");
 				
 				writer.write("<td><font-family:"+"Calibri (Body)>");
-				writer.write(status);
+				writer.write(status+"&emsp;");
 				writer.write("</td>");
 				
 				writer.write("</tr> ");

@@ -155,8 +155,8 @@ public class PageBase extends DriverSetUp {
 					//for incognito with headless
 					//options.addArguments("--headless", "--window-size=1382,744", "--disable-gpu", "--disable-extensions", "--no-sandbox", "-incognito");*/
 					
-					options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
-					options.addArguments("--headless");
+					/*options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
+					options.addArguments("--headless");*/
 					
 					DesiredCapabilities cap = DesiredCapabilities.chrome();
 					cap.setCapability("ignoreZoomSetting", true);
@@ -1411,7 +1411,7 @@ public class PageBase extends DriverSetUp {
 
 				break;
 			case "Selenium":
-				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 100);
+				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 
 				if (locatorType.equals("xpath")) {
 					waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));

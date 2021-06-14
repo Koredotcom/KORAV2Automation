@@ -64,18 +64,18 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-		//	koraloginpage.launchw3(url, korajusername, korajpassword);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			koraloginpage.launchw3(url, korajusername, korajpassword);
+			/*koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.checkDefaultFocus_Recents();
+			koramessagespage.checkDefaultFocus_Recents();*/
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
 		}
 	}
 
-		@Test(enabled = true, priority = 2)
+		/*@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -286,11 +286,11 @@ public class Messages121Test extends DriverSetUp {
 			
 			koramessagespage.verifyJumbBackTomessage(updatedstr);
 
-			/*koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
+			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform("James Middleton", false, "NA");
-			koramessagespage.validateFromRecepientEnd(updatedstr, replymsg);*/
+			koramessagespage.validateFromRecepientEnd(updatedstr, replymsg);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate reply back functionality");
@@ -478,4 +478,29 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
 		}
 	}
+		
+		@Test(enabled = true, priority = 15)
+		public void MC_TC50_MiddlepanePagination() throws Exception {
+			try {
+				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+						.assignCategory("WorkAssist_Messages_Chats");
+				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+				String url = DriverSetUp.propsMap.get("weburl");
+				String Messages = DriverSetUp.testdataMap.get("messages");
+				String qapridegroup = DriverSetUp.testdataMap.get("standardgroupname");
+				String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+				test.log(LogStatus.INFO, "Navigation url :" + url);
+
+				koraloginpage.loginToKora(url, korajusername, korajpassword);
+				korahomepage.selectMenuOption(Messages);
+				korahomepage.selectTopLeftMenuOption("All Messages");
+			//	koramessagespage.paginationValidationWithFor();
+				koramessagespage.paginationValidationWithDoWhile();
+				
+				
+				extent.endTest(test);
+			} catch (Exception e) {
+				test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
+			}
+		}*/
 }

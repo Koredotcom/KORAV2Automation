@@ -1420,20 +1420,38 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	public void verifyJumbBackTomessage(String msg) throws Exception {
 		try {
-			moveToElement(er.kmreplybubble + msg + er.ksinglquote, "xpath");
-			Thread.sleep(3000);
+			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
+			compose.click();
+			Thread.sleep(2000);
+		//	moveToElement(er.kmreplybubble + msg + er.ksinglquote, "xpath");
 			jsClick(er.kmreplybubble + msg + er.ksinglquote, "Click Message");
-			boolean activemsg = false;
-			if (activemsg = remoteDriver.findElements(By.xpath(er.kmactivemsg + msg + er.ksinglquote)).size() > 0) {
-				test.log(LogStatus.WARNING, "On click of Replied message i.e. " + msg
-						+ " , original message got highlighted".toString() + test.addScreenCapture(takeScreenShot()));
-			} else {
+			Thread.sleep(2000);
+			test.log(LogStatus.WARNING, "After clicking on Replied message i.e. " + msg
+					+ " , please check the UI i.e. original message got highlighted or Not".toString() + test.addScreenCapture(takeScreenShot()));
+			/*boolean activemsg = false;
+			activemsg=elementIsDisplayed(er.kmactivemsg + msg + er.ksinglquote, "xpath");
+			if(!activemsg)
 				test.log(LogStatus.FAIL,
 						"On click of Replied message i.e. " + msg + " , original message was not highlighted".toString()
 								+ test.addScreenCapture(takeScreenShot()));
-			}
+			
+				/*test.log(LogStatus.WARNING, "After clicking on Replied message i.e. " + msg
+						+ " , please check the UI i.e. original message got highlighted or Not".toString() + test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.WARNING, "After clicking on Replied message i.e. " + msg
+						+ " , please check the UI i.e. original message got highlighted or Not".toString() + test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.WARNING, "After clicking on Replied message i.e. " + msg
+						+ " , please check the UI i.e. original message got highlighted or Not".toString() + test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.WARNING, "After clicking on Replied message i.e. " + msg
+						+ " , please check the UI i.e. original message got highlighted or Not".toString() + test.addScreenCapture(takeScreenShot()));
+				test.log(LogStatus.WARNING, "After clicking on Replied message i.e. " + msg
+						+ " , please check the UI i.e. original message got highlighted or Not".toString() + test.addScreenCapture(takeScreenShot()));*/
+			/*} else {
+				test.log(LogStatus.FAIL,
+						"On click of Replied message i.e. " + msg + " , original message was not highlighted".toString()
+								+ test.addScreenCapture(takeScreenShot()));
+			}*/
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to click on Replied message i.e. " + msg + " ".toString()
+			test.log(LogStatus.FAIL, "Failed  to click on Replied message i.e. " + msg + " ".toString()
 					+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
@@ -1742,4 +1760,82 @@ public class KoraMessagesChatsPage extends PageBase {
 	public void captureScreenShot(String message) throws IOException{
 		test.log(LogStatus.WARNING,message+"".toString() + test.addScreenCapture(takeScreenShot()));
 	}
-}
+	
+	public void paginationValidationWithDoWhile() throws Exception{
+		try{
+		System.out.println("###############I am in Middle pagination Do while");
+		ArrayList list = new ArrayList();
+		String myname;
+		List<WebElement> messagelist;
+		
+		List<WebElement> updatedlistafterscroll;
+		
+		do {
+			messagelist = remoteDriver.findElements(By.xpath("//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
+			int counter =0;
+			for (WebElement e : messagelist) {
+				String currentthread;
+				currentthread=	e.getText();
+				System.out.println("Current thread is: "+currentthread);
+				list.add(e.getText().trim());
+				/*if (currentthread.isEmpty()&&(counter<7)){
+					continue;
+				}else*/ 
+					if (currentthread.isEmpty()){
+					String last1;
+					last1 =(String) list.get(list.size() - 2);
+					System.out.println("I am getting empty hence performing scroll action to "+last1);
+					scrollToElement("//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')][text() = '"+last1+"']", "xpath");
+					counter++;
+					if (counter>2){
+						updatedlistafterscroll = remoteDriver.findElements(By.xpath("//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
+						int updatedsize=updatedlistafterscroll.size();
+					}
+					
+					
+					}
+			}
+			
+		} while ((messagelist.size()>20));
+
+		
+		}catch (Exception e){
+			System.out.println("check");
+			}
+	}
+	
+	public void paginationValidationWithFor() throws Exception{
+		try{
+		System.out.println("I am in Middle pagination");
+		ArrayList list = new ArrayList();
+		List<WebElement> messagelist = remoteDriver.findElements(By.xpath("//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
+		int ttlsize=messagelist.size();
+		int counter =0;
+		
+		for (WebElement e : messagelist) {
+			String currentthread;
+			currentthread=	e.getText();
+			System.out.println("Current thread is: "+currentthread);
+			counter++;
+			if (currentthread.isEmpty()&&(counter>7)){
+				String last1;
+				last1 =(String) list.get(list.size() - 1);
+				System.out.println(list.get(list.size() - 1));
+				System.out.println("I am getting empty hence performing scroll action to "+currentthread);
+				
+				scrollToElement("//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')][text() = '"+last1+"']", "xpath");
+				
+				
+			}
+				Thread.sleep(500);
+				list.add(e.getText().trim());
+			}
+		System.out.println(list);
+		String last =(String) list.get(list.size() - 1);
+		System.out.println(list.get(list.size() - 1));
+		
+		}catch (Exception e){
+			System.out.println("check");
+			}
+		}
+	}
