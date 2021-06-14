@@ -448,9 +448,9 @@ public class DriverSetUp {
 		//	zipFolder(dir + "/ReportGenerator/"+reportFolder, dir + "/ReportGenerator/WorkAssistReport.zip");
 		//	customReport();
 			tcTableCreation(map);
-		//	zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/WorkAssist"+sdfDateReport.format(now)+".zip");
+			zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/WorkAssist"+sdfDateReport.format(now)+".zip");
 		
-			zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/"+buildNumber+sdfDateReport.format(now)+".zip");
+		//	zipFolder(dir + "/ReportGenerator/"+reportFolder, "D:/WorkAssist_AUTBackUPResults/"+buildNumber+sdfDateReport.format(now)+".zip");
 			
 		
 		} catch (Exception e) {
