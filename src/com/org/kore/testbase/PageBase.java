@@ -195,7 +195,7 @@ public class PageBase extends DriverSetUp {
 				remoteDriver.manage().window().maximize();
 			}
 		} catch (Exception e) {
-			System.out.println("Provide valid broser to start your execution");
+			System.out.println("Provide valid browser to start your execution");
 		}
 		return remoteDriver;
 	}
