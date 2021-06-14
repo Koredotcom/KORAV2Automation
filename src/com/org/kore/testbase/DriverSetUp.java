@@ -350,7 +350,7 @@ public class DriverSetUp {
 			writer.write("<body><h2> </h2></body>");
 			writer.write("<table> </table>");*/
 			
-			writer.write("<body><table><table border ='1'><tr><th><p style=text-align:left><b>Scope</b></p></th><td> <a href="+"https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=1327035589"+"> Basic Sanity test cases</a></td><tr><th><b>Environment</b></th><td>"+workingurl+"  <b>("+App+"  )</b>"+"</td></tr><tr><th><p style=text-align:left><b>Browser</b></p></th><td>Chrome</td></tr></body>");
+			writer.write("<body><table><table border ='1'><tr><th><p style=text-align:left><b>Scope </b></p></th><td> <a href="+"https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=1327035589"+"> Basic Sanity test cases</a></td><tr><th><b>Environment  </b></th><td>"+workingurl+"  <b>("+App+"  )</b>"+"</td></tr><tr><th><p style=text-align:left><b>Browser</b></p></th><td>Chrome </td></tr></body>");
 		//	writer.write("<body><h2> </h2></body>");
 			writer.write("<table> </table>");
 			
