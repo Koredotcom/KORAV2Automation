@@ -75,7 +75,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-		/*@Test(enabled = true, priority = 2)
+		@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -123,7 +123,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 4)
+	/*@Test(enabled = true, priority = 4)
 	public void MC_TC12_TC34_CheckActiveParticipantAndCopy() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
