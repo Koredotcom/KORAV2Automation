@@ -1763,34 +1763,38 @@ public class KoraMessagesChatsPage extends PageBase {
 		test.log(LogStatus.WARNING,message+"".toString() + test.addScreenCapture(takeScreenShot()));
 	}
 	
-	public void paginationValidationWithDoWhile() throws Exception{
-		try{
-		System.out.println("###############I am in Middle pagination Do while");
-		ArrayList list = new ArrayList();
-		String myname;
-		List<WebElement> messagelist;
-		List<WebElement> updatedlistafterscroll;
-		
-		int initialsize=0;
-		int updatedsize = 0 ;
-		
-		
+	public void middlePanePaginationValidation() throws Exception {
+		try {
+			ArrayList list = new ArrayList();
+			String myname;
+			List<WebElement> messagelist;
+			List<WebElement> updatedlistafterscroll;
+
+			int initialsize = 0;
+			int updatedsize = 0;
+
 			do {
 				messagelist = remoteDriver.findElements(By.xpath(
 						"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
-				
-				initialsize=messagelist.size();
-				
+
+				initialsize = messagelist.size();
 				int counter = 0;
+				if ((counter == 0) && (initialsize <= 20)) {
+					test.log(LogStatus.PASS, "Initial Pagination records displayed as: <b> " + initialsize
+							+ "</b>".toString() + test.addScreenCapture(takeScreenShot()));
+				} else if (counter > 0) {
+					test.log(LogStatus.INFO, "After scroll pagination records updated as: <b> " + initialsize
+							+ "</b>".toString() + test.addScreenCapture(takeScreenShot()));
+				} else {
+					test.log(LogStatus.FAIL, "Initial Pagination records displayed as:<b> " + initialsize
+							+ "</b> i.e. More than 20".toString() + test.addScreenCapture(takeScreenShot()));
+
+				}
 				for (WebElement e : messagelist) {
 					String currentthread;
 					currentthread = e.getText();
 					System.out.println("Current thread is: " + currentthread);
 					list.add(e.getText().trim());
-					/*
-					 * if (currentthread.isEmpty()&&(counter<7)){ continue;
-					 * }else
-					 */
 					if (currentthread.isEmpty()) {
 						String last1;
 						last1 = (String) list.get(list.size() - 2);
@@ -1809,53 +1813,59 @@ public class KoraMessagesChatsPage extends PageBase {
 					}
 				}
 
-			} while ((messagelist.size()>20));
+			} while ((messagelist.size() > 20));
 
-			if ((updatedsize ==40)){
-				test.log(LogStatus.PASS,"Pagination got updated from <b>"+initialsize+" </b> to <b>"+updatedsize+"</b>".toString() + test.addScreenCapture(takeScreenShot()));
-				
-			}else {
-				test.log(LogStatus.FAIL,"Pagination got updated from <b>"+initialsize+" </b> to <b>"+updatedsize+"</b>. There could be less records or issue with Pagination".toString() + test.addScreenCapture(takeScreenShot()));
+			if ((updatedsize == 40)) {
+				test.log(LogStatus.PASS, "Pagination got updated from <b>" + initialsize + " </b> to <b>" + updatedsize
+						+ "</b>".toString() + test.addScreenCapture(takeScreenShot()));
+
+			} else {
+				test.log(LogStatus.FAIL,
+						"Pagination got updated from <b>" + initialsize + " </b> to <b>" + updatedsize
+								+ "</b>. There could be less records or issue with Pagination".toString()
+								+ test.addScreenCapture(takeScreenShot()));
 			}
-		
-		}catch (Exception e){
-			test.log(LogStatus.FAIL,"Something wrong with Pagination validation".toString() + test.addScreenCapture(takeScreenShot()));
-			
-			}
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"Something wrong with Pagination validation".toString() + test.addScreenCapture(takeScreenShot()));
+
+		}
 	}
 	
-	public void paginationValidationWithFor() throws Exception{
-		try{
-		System.out.println("I am in Middle pagination");
-		ArrayList list = new ArrayList();
-		List<WebElement> messagelist = remoteDriver.findElements(By.xpath("//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
-		int ttlsize=messagelist.size();
-		int counter =0;
-		
-		for (WebElement e : messagelist) {
-			String currentthread;
-			currentthread=	e.getText();
-			System.out.println("Current thread is: "+currentthread);
-			counter++;
-			if (currentthread.isEmpty()&&(counter>7)){
-				String last1;
-				last1 =(String) list.get(list.size() - 1);
-				System.out.println(list.get(list.size() - 1));
-				System.out.println("I am getting empty hence performing scroll action to "+currentthread);
-				
-				scrollToElement("//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')][text() = '"+last1+"']", "xpath");
-				
-				
-			}
+	public void paginationValidationWithFor() throws Exception {
+		try {
+			System.out.println("I am in Middle pagination");
+			ArrayList list = new ArrayList();
+			List<WebElement> messagelist = remoteDriver.findElements(By.xpath(
+					"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
+			int ttlsize = messagelist.size();
+			int counter = 0;
+
+			for (WebElement e : messagelist) {
+				String currentthread;
+				currentthread = e.getText();
+				System.out.println("Current thread is: " + currentthread);
+				counter++;
+				if (currentthread.isEmpty() && (counter > 7)) {
+					String last1;
+					last1 = (String) list.get(list.size() - 1);
+					System.out.println(list.get(list.size() - 1));
+					System.out.println("I am getting empty hence performing scroll action to " + currentthread);
+
+					scrollToElement(
+							"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')][text() = '"
+									+ last1 + "']","xpath");
+				}
 				Thread.sleep(500);
 				list.add(e.getText().trim());
 			}
-		System.out.println(list);
-		String last =(String) list.get(list.size() - 1);
-		System.out.println(list.get(list.size() - 1));
-		
-		}catch (Exception e){
+			System.out.println(list);
+			String last = (String) list.get(list.size() - 1);
+			System.out.println(list.get(list.size() - 1));
+
+		} catch (Exception e) {
 			System.out.println("check");
-			}
 		}
+	}
 	}

@@ -490,13 +490,11 @@ public class Messages121Test extends DriverSetUp {
 				String qapridegroup = DriverSetUp.testdataMap.get("standardgroupname");
 				String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 				test.log(LogStatus.INFO, "Navigation url :" + url);
-
+				
+				korahomepage.selectMenuOption("Workspaces");
 				korahomepage.selectMenuOption(Messages);
 				korahomepage.selectTopLeftMenuOption("All Messages");
-			//	koramessagespage.paginationValidationWithFor();
-				koramessagespage.paginationValidationWithDoWhile();
-				
-				
+				koramessagespage.middlePanePaginationValidation();
 				extent.endTest(test);
 			} catch (Exception e) {
 				test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
