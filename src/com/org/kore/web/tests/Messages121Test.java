@@ -64,18 +64,18 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-		//	koraloginpage.launchw3(url, korajusername, korajpassword);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			koraloginpage.launchw3(url, korajusername, korajpassword);
+			/*koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.checkDefaultFocus_Recents();
+			koramessagespage.checkDefaultFocus_Recents();*/
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
 		}
 	}
 
-		@Test(enabled = true, priority = 2)
+		/*	@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -491,6 +491,7 @@ public class Messages121Test extends DriverSetUp {
 				String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 				test.log(LogStatus.INFO, "Navigation url :" + url);
 				
+				koraloginpage.loginToKora(url, korajusername, korajpassword);
 				korahomepage.selectMenuOption("Workspaces");
 				korahomepage.selectMenuOption(Messages);
 				korahomepage.selectTopLeftMenuOption("All Messages");
@@ -499,5 +500,5 @@ public class Messages121Test extends DriverSetUp {
 			} catch (Exception e) {
 				test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
 			}
-		}
+		}*/
 }

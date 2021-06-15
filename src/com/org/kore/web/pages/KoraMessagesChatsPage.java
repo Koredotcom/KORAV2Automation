@@ -1805,6 +1805,7 @@ public class KoraMessagesChatsPage extends PageBase {
 								"xpath");
 						counter++;
 						if (counter > 2) {
+							System.out.println("Pagination counter");
 							updatedlistafterscroll = remoteDriver.findElements(By.xpath(
 									"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
 							updatedsize = updatedlistafterscroll.size();
