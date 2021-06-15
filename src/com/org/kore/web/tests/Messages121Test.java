@@ -123,7 +123,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	/*@Test(enabled = true, priority = 4)
+	@Test(enabled = true, priority = 4)
 	public void MC_TC12_TC34_CheckActiveParticipantAndCopy() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -149,7 +149,7 @@ public class Messages121Test extends DriverSetUp {
 			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr1);
 			koramessagespage.getFirstActiveUser(user, true);
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr1, "More", "Copy");
+		//	koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr1, "More", "Copy");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
@@ -276,7 +276,7 @@ public class Messages121Test extends DriverSetUp {
 			String replymsg = "It is Reply";
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);
@@ -297,7 +297,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	} 
 
-	@Test(enabled = true, priority = 10)
+			@Test(enabled = true, priority = 10)
 	public void MC_TC52_validateForward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -501,5 +501,5 @@ public class Messages121Test extends DriverSetUp {
 			} catch (Exception e) {
 				test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
 			}
-		}*/
+		}
 }

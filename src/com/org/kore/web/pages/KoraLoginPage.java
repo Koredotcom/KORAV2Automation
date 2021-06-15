@@ -150,15 +150,16 @@ public class KoraLoginPage extends PageBase {
 	public void launchAndLogoutFrom0365(String o365url) throws Exception{
 		o365url="https://www.office.com/";
 		remoteDriver.get(o365url);	
-		/*boolean logout=false;
-		logout=remoteDriver.findElements(By.xpath("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']")).size()>0;*/
+		boolean logout=false;
+		logout=remoteDriver.findElements(By.xpath("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']")).size()>0;
 		test.log(LogStatus.INFO, "Office 365 account loaded ".toString() + test.addScreenCapture(takeScreenShot()));
 		System.out.println("https://www.office.com/ loaded successfully");
-		waitToappear("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']", "xpath", "profile");
+		waitToappearIgnoreFail("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']", "xpath", "profile");
 		Thread.sleep(2000);
 		boolean extraheader =false;
 		extraheader=remoteDriver.findElements(By.xpath("//div[@class='mectrl_topHeader']")).size()>0;
 		if (extraheader){
+			System.out.println("Had extra header for O 365 logout");
 			click("//div[@class='mectrl_topHeader']", "extra header profile");
 			waitToappear("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']", "xpath", "profile");
 		}
@@ -166,9 +167,10 @@ public class KoraLoginPage extends PageBase {
 		click("//div[@id='O365_MainLink_MePhoto']", "profile");
 		Thread.sleep(3000);
 		// need to check this
-		waitToappearIgnoreFail("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "xpath", "logout");
+		waitToappearIgnoreFail("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "xpath", "wait for signout");
 		Thread.sleep(1000);
-		clickNIgnoreFail("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "signout");
+		clickNIgnoreFail("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "click signout");
+		Thread.sleep(5000);
 		test.log(LogStatus.INFO, "Logged out from office 365".toString() + test.addScreenCapture(takeScreenShot()));
 		waitToappearIgnoreFail("//div[@id='switch-account'] | //div[@class='personalization__buttons-container']", "xpath", "logout");
 	}

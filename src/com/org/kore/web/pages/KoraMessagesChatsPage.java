@@ -1215,16 +1215,18 @@ public class KoraMessagesChatsPage extends PageBase {
 							"When user search with <b> "+usertosearch+" </b>Search results are notgetting displayed ".toString() + test.addScreenCapture(takeScreenShot()));
 				}
 				click(er.kmcmanageclose, "Close");
+				Thread.sleep(2000);
 		} catch (Exception e) {
 			clickOn("General", false);
 			click(er.kmcmanageclose, "Close");
+			Thread.sleep(2000);
 			test.log(LogStatus.FAIL,
 					"Here".toString() + test.addScreenCapture(takeScreenShot()));
 		}
 		return manageparticipantssize;
 	}
 	
-	public void compareGroupCount(String act, int exp) throws IOException{
+	public void compareGroupCount(String act, int exp) throws Exception {
 		int aact = Integer.parseInt(act);
 		if (aact==(exp)){
 			test.log(LogStatus.PASS,

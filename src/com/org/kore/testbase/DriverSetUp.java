@@ -370,15 +370,15 @@ public class DriverSetUp {
 				status = entry.getValue().toUpperCase();
 
 				if(status.equalsIgnoreCase("PASS")){
-					status = "<font color="+"green"+"><b>&emsp;PASS</b></font>";
+					status = "<font color="+"green"+"><b>&emsp;&emsp;PASS</b></font>";
 				}else if(status.equalsIgnoreCase("FAIL")){
-					status = "<font color="+"red"+"><b>FAIL</b></font>";
+					status = "<font color="+"red"+"><b>&emsp;&emsp;FAIL</b></font>";
 				}else if(status.equalsIgnoreCase("WARNING")){
 					status = "<font color="+"orange"+"><b>&ensp;WARNING</b></font>";
 				}else if(status.equalsIgnoreCase("INFO")){
-					status = "<font color="+"gold"+"><b>&emsp;INFO</b></font>";
+					status = "<font color="+"gold"+"><b>&emsp;&emsp;INFO</b></font>";
 				}else if(status.equalsIgnoreCase("SKIP")){
-					status = "<font color="+"purple"+"><b>&emsp;SKIP</b></font>";
+					status = "<font color="+"purple"+"><b>&emsp;&emsp;SKIP</b></font>";
 				}
 
 				String TCnums="";
