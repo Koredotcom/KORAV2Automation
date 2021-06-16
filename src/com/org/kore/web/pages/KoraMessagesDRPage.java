@@ -1063,6 +1063,8 @@ public class KoraMessagesDRPage extends PageBase {
 			test.log(LogStatus.FAIL,
 					"Failed in rename_LeaveRoom_DeleteRoom page"
 					.toString() + test.addScreenCapture(takeScreenShot()));
+			click(er.kdfowradpostWindowclose, "Clicking to close forward post window");
+
 		}
 	}
 

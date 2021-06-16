@@ -392,7 +392,7 @@ public class MessagesDR extends DriverSetUp {
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");						
 			String exeTimeHMS1 = "random"+korahomepage.runtimehhmmss();						
