@@ -346,7 +346,11 @@ public class DriverSetUp {
 					"<html><head></head>");
 			writer.write("<body><h2> WorkAssist: "+App+" Env</b> WebApp Automation Results</h2></body>");
 			
-			writer.write("<body><table><table border ='1'><tr><th><b>Scope</b></th><td> <a href=https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWM=fnyhppFIds6A/edit?ts=3D5fd77590#gid=3D1327035589> Basic sanity test cases</a></td><tr><th><b>Env</b>&emsp;</th><td><b>https://workassist-qa.kore.ai/ (QA)</b></td> </tr><tr><th><b>Browser</b></th><td>Chrome</td></tr></body>");
+			/*writer.write("<body><table><table border ='1'><tr><th><b>Scope</b></th><td> <a href=https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWM=fnyhppFIds6A/edit?ts=3D5fd77590#gid=3D1327035589> Basic sanity test cases</a></td><tr><th><b>Env</b>&emsp;</th><td><b>https://workassist-qa.kore.ai/ (QA)</b></td> </tr><tr><th><b>Browser</b></th><td>Chrome</td></tr></body>");
+			writer.write("<body><h2> </h2></body>");
+			writer.write("<table> </table>");*/
+			
+			writer.write("<body><table><table border ='1'><tr><th><b>Scope</b></th><td> <a href=https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWM=fnyhppFIds6A/edit?ts=3D5fd77590#gid=3D1327035589> Basic sanity test cases</a></td></tr><tr><th><b>Env</b>&ensp;</th><td><b>https://workassist-qa.kore.ai &emsp;</b></td> </tr></th><tr><th><b>Browser &emsp;</b></th><td>Chrome</td></tr><tr><th><b>Analysis &emsp;</b></th><td><a href=https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=252492981>For report analysis click here</a></td></tr></body>");
 			writer.write("<body><h2> </h2></body>");
 			writer.write("<table> </table>");
 			
