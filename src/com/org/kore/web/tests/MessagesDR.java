@@ -527,5 +527,69 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
+	@Test(enabled = true, priority = 51)
+	public void MDR_TC20_TC79_TC80_createNEWDRandvalidatefrompartcipantsend() throws Exception {
+		try {
+
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String newparticipants = "hana@koraqa1.com";
+			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages"); 
+			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();
+			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime, newparticipants, "Post Only");			
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			
+			koraloginpage.logoutAndReLogin(true,url, korahusername, korahpassword);			
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages");						
+			koramessagedrpage.searchforDRorchatfromallmsgDRnChat(randomDrwithTime,"NA");	
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagedrpage.searchforDRorchatfromallmsgDRnChat("NA","QA Pride");
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagedrpage.searchforDRorchatfromallmsgDRnChat("NA","James Middleton");
+			
+			extent.endTest(test);
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate create new Dr and valdiate from partipates end");
+		}
+	}
+	
+	@Test(enabled = true, priority = 52)
+	public void MDR_TC48_SearchforfileinChatandDR() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String newparticipants = "hana@koraqa1.com";
+			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages"); 											
+			koramessagedrpage.searchforattachmentinmsgandDR("Hypertext.html");
+			korahomepage.selectTopLeftMenuOption("Chats");
+			koramessagedrpage.searchforattachmentinmsgandDR("Hypertext.html");
+			
+			korahomepage.selectTopLeftMenuOption("All Messages"); 											
+			koramessagedrpage.searchforattachmentinmsgandDR("zipper.zip");
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			koramessagedrpage.searchforattachmentinmsgandDR("zipper.zip");
+			
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate create new Dr and valdiate from partipates end");
+		}
+	}
+
 
 }

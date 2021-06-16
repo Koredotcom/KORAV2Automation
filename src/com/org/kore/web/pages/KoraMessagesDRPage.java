@@ -1056,7 +1056,7 @@ public class KoraMessagesDRPage extends PageBase {
 				test.log(LogStatus.PASS,
 						"Delete Discussion Room performed successfully"
 						.toString() + test.addScreenCapture(takeScreenShot()));
-				
+
 			}
 
 		} catch (Exception e) {
@@ -1070,8 +1070,8 @@ public class KoraMessagesDRPage extends PageBase {
 		try {									
 			enterText(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote
 					+ "/../../..//div[@id='discInput']", commenttext , "xpath", "Comment on post");	
-						
-			
+
+
 		}catch(Exception e){
 			enterText(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote
 					+ "/../../..//div[@id='discInput']", "" , "xpath", "Comment on post");
@@ -1355,7 +1355,7 @@ public class KoraMessagesDRPage extends PageBase {
 
 		}
 	}
-	
+
 	public void gotopostandcomment(String discRoom,String post) throws Exception {
 		try {
 			moveToElement(er.kdrpostname0 + discRoom + er.kdrpostname1 + post + er.ksinglquote, "xpath");				
@@ -1372,13 +1372,84 @@ public class KoraMessagesDRPage extends PageBase {
 
 		}
 	}
-	
+
 	public void selectDRBasedonWSname(String Workspace, String discussionRoomName) throws Exception {
-		
+
 		System.out.println("----------------------- selectDRBasedonWSname --------------------");
 		korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 		moveToElement(er.kdrcidgroup + discussionRoomName+"']/..//span[@class='wsName'][text()='"+Workspace+"']", "xpath");
-		
+
 	}	
+
+	public void searchforDRorchatfromallmsgDRnChat(String DRname,String chatname) throws Exception {
+
+		try {
+			if(!DRname.equalsIgnoreCase("NA"))
+			{
+				System.out.println("----------------------- Searching for DR from messages and Discussion Room --------------------");
+				enterText(er.kdSearchboxinmsgnDR,DRname , "Searching for Discussion Room ");
+				test.log(LogStatus.PASS,
+						chatname+" DR Name  Searched ".toString() + test.addScreenCapture(takeScreenShot()));
+				click(er.kmsearchsuggestions+DRname+"']", "Members tab from Manage room");			
+				moveToElement("//p[@class=\"chatUserTitle\"]/span[text()='"+DRname+"']", "xpath");
+				test.log(LogStatus.PASS,
+						DRname+" Discussion Room Searched and selected from All messages".toString() + test.addScreenCapture(takeScreenShot()));
+				korahomepage.selectTopLeftMenuOption("Discussion Rooms");		
+				enterText(er.kdSearchboxinmsgnDR,DRname , "Searching for Discussion Room ");
+				test.log(LogStatus.PASS,
+						chatname+" DR Name  Searched ".toString() + test.addScreenCapture(takeScreenShot()));
+				click(er.kmsearchsuggestions+DRname+"']", "Members tab from Manage room");			
+				moveToElement("//p[@class=\"chatUserTitle\"]/span[text()='"+DRname+"']", "xpath");
+				test.log(LogStatus.PASS,
+						DRname+" Discussion Room Searched and selected from Discussion Room section ".toString() + test.addScreenCapture(takeScreenShot()));
+			}
+			if(!chatname.equalsIgnoreCase("NA"))
+			{
+				System.out.println("----------------------- Searching for DR from messages and Discussion Room --------------------");
+				enterText(er.kdSearchboxinmsgnDR,chatname , "Searching for Discussion Room ");
+				Thread.sleep(5000);
+				test.log(LogStatus.PASS,
+						chatname+" Chat Name  Searched ".toString() + test.addScreenCapture(takeScreenShot()));
+				moveToElement(er.kmsearchsuggestions+chatname+"']", "xpath");
+				click(er.kmsearchsuggestions+chatname+"']", "Members tab from Manage room");			
+				moveToElement("//p[@class=\"chatUserTitle\"]/span[text()='"+chatname+"']", "xpath");
+				test.log(LogStatus.PASS,
+						chatname+" Chat Name  Searched and selected from All messages".toString() + test.addScreenCapture(takeScreenShot()));
+				korahomepage.selectTopLeftMenuOption("Chats");		
+				enterText(er.kdSearchboxinmsgnDR,chatname , "Searching for Discussion Room ");
+				Thread.sleep(5000);
+				test.log(LogStatus.PASS,
+						chatname+" Chat Name  Searched ".toString() + test.addScreenCapture(takeScreenShot()));
+				moveToElement(er.kmsearchsuggestions+chatname+"']", "xpath");
+				click(er.kmsearchsuggestions+chatname+"']", "Members tab from Manage room");			
+				moveToElement("//p[@class=\"chatUserTitle\"]/span[text()='"+chatname+"']", "xpath");
+				test.log(LogStatus.PASS,
+						chatname+" Chat name Searched and selected from Chat m section ".toString() + test.addScreenCapture(takeScreenShot()));
+			}
+
+		}catch (Exception e)
+		{
+			System.out.println(" Failied to search for a DR or 121 msg ");
+		}
+	}	
+
 	
+	public void searchforattachmentinmsgandDR(String searchingfile) throws Exception {
+
+		try {			
+				System.out.println("----------------------- Searching for DR from messages and Discussion Room --------------------");
+				enterText(er.kdSearchboxinmsgnDR,searchingfile+"\n" , "Searching for Discussion Room ");
+				Thread.sleep(5000);				
+				test.log(LogStatus.PASS,
+						searchingfile+" File searched in DR ".toString() + test.addScreenCapture(takeScreenShot()));
+				moveToElement("//div[@class='userDetails'][1]", "xpath");
+				click("//div[@class='userDetails'][1]", "Members tab from Manage room");							
+				test.log(LogStatus.WARNING,
+						searchingfile+" Discussion Room Searched and selected from All messages".toString() + test.addScreenCapture(takeScreenShot()));								
+		}catch (Exception e)
+		{
+			System.out.println(" Failied to search for a DR or 121 msg ");
+		}
+	}	
+
 }

@@ -7,11 +7,12 @@
 		<classes>
 
 	 		<class name="com.org.kore.web.tests.Messages121Test" />
-			<!-- <class name="com.org.kore.web.tests.MessagesGroupNameTest" />
+			<class name="com.org.kore.web.tests.MessagesGroupNameTest" />
 			<class name="com.org.kore.web.tests.MessagesOnHoverGroupIcons" />
 			<class name="com.org.kore.web.tests.MessagesAttachmentsTest" /> 
-		 	<class name="com.org.kore.web.tests.MessagesDR" /> -->
-			
+			<class name="com.org.kore.web.tests.MessagesDR" />
+		 	
+		 	
 		</classes>
 	</test> <!-- Sequential Tests -->
 	<!-- <test thread-count="2" name="Parallel Tests" parallel="classes"> <parameter 
