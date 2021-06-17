@@ -22,7 +22,6 @@ public class Messages121Test extends DriverSetUp {
 	KoraHomePage korahomepage;
 	KoraMessagesChatsPage koramessagespage;
 	KoraMessagesDRPage koramessagedrpage;
-	
 
 	String korajusername;
 	String korajpassword;
@@ -44,7 +43,7 @@ public class Messages121Test extends DriverSetUp {
 		koraloginpage = new KoraLoginPage(remoteDriver);
 		korahomepage = new KoraHomePage(remoteDriver);
 		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
-		koramessagedrpage= new KoraMessagesDRPage(remoteDriver);
+		koramessagedrpage = new KoraMessagesDRPage(remoteDriver);
 
 		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
 		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
@@ -53,7 +52,7 @@ public class Messages121Test extends DriverSetUp {
 		korahpassword = dr.getValue("KORAV2", "KoraV2hana", "Password");
 	}
 
-		@Test(enabled = true, priority = 1)
+	@Test(enabled = true, priority = 1)
 	public void MC_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -64,7 +63,7 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-		//	koraloginpage.launchw3(url, korajusername, korajpassword);
+			// koraloginpage.launchw3(url, korajusername, korajpassword);
 			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
@@ -75,7 +74,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-			/*@Test(enabled = true, priority = 2)
+	@Test(enabled = true, priority = 2)
 	public void MC_TC6_UserSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -149,14 +148,15 @@ public class Messages121Test extends DriverSetUp {
 			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr1);
 			koramessagespage.getFirstActiveUser(user, true);
-		//	koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr1, "More", "Copy");
+			// koramessagespage.goToMessageAndPerformActionsAs(user,
+			// updatedstr1, "More", "Copy");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
 		}
 	}
 
-		@Test(enabled = true, priority = 5)
+	@Test(enabled = true, priority = 5)
 	public void MC_TC28_TC29_TC43_ValidateSendLongText() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -218,13 +218,13 @@ public class Messages121Test extends DriverSetUp {
 			korahomepage.selectMenuOption("Workspaces");
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.validateChatsAndDRS(true, false);
-			
+
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 			koramessagespage.validateDirectChatOrDR("DR");
 			korahomepage.selectMenuOption("Workspaces");
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.validateChatsAndDRS(false, true);
-			
+
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			korahomepage.selectMenuOption("Workspaces");
 			korahomepage.selectMenuOption(Messages);
@@ -234,36 +234,36 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate Chats, DR's and All Message sections");
 		}
 	}
-		
-		@Test(enabled = true, priority = 8) 
-		public void MC_TC60_TC66_validateGroupCoundAndSearchUserFromManage() throws Exception {
-			try {
-				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-						.assignCategory("WorkAssist_Messages_Chats");
-				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-				String url = DriverSetUp.propsMap.get("weburl");
-				String Messages = DriverSetUp.testdataMap.get("messages");
-				String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-				test.log(LogStatus.INFO, "Navigation url :" + url);
 
-				korahomepage.selectMenuOption(Messages);
-				korahomepage.selectTopLeftMenuOption("Chats");
-				koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");			
-				String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-				user = koramessagespage.enterYourMessageAs(updatedstr);
-				
-				String groupcount=koramessagespage.getChatHeaderNameorCount(false);
-				koramessagespage.goToGroupAndPerform("QA Pride", true, "3dots");
-				koramessagespage.operationsFrom3Dots("Manage Chat");
-				int managepartcount=koramessagespage.searchFromManageChat("hana@koraqa1.com");
-				koramessagespage.compareGroupCount(groupcount,managepartcount);
-				extent.endTest(test);
-			} catch (Exception e) {
-				test.log(LogStatus.FAIL, "Failed to validate Group count and Manage chat Search functionality");
-			}
+	@Test(enabled = true, priority = 8)
+	public void MC_TC60_TC66_validateGroupCoundAndSearchUserFromManage() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Chats");
+			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
+			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
+
+			String groupcount = koramessagespage.getChatHeaderNameorCount(false);
+			koramessagespage.goToGroupAndPerform("QA Pride", true, "3dots");
+			koramessagespage.operationsFrom3Dots("Manage Chat");
+			int managepartcount = koramessagespage.searchFromManageChat("hana@koraqa1.com");
+			koramessagespage.compareGroupCount(groupcount, managepartcount);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Group count and Manage chat Search functionality");
 		}
+	}
 
-		@Test(enabled = true, priority = 9)
+	@Test(enabled = true, priority = 9)
 	public void MC_TC35_TC47_TC67_validateReplyback() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -283,7 +283,7 @@ public class Messages121Test extends DriverSetUp {
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "Reply Back", replymsg);
-			
+
 			koramessagespage.verifyJumbBackTomessage(updatedstr);
 
 			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
@@ -295,9 +295,9 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate reply back functionality");
 		}
-	} 
+	}
 
-			@Test(enabled = true, priority = 10)
+	@Test(enabled = true, priority = 10)
 	public void MC_TC52_validateForward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -317,20 +317,20 @@ public class Messages121Test extends DriverSetUp {
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 			koramessagespage.goToGroupAndPerform(user, false, "NA");
 			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Forward");
-			koramessagespage.forwardPostOrValidation(true,true, user, updatedstr, newparticipants);
+			koramessagespage.forwardPostOrValidation(true, true, user, updatedstr, newparticipants);
 
 			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			String hostuser = "James Middleton";
 			koramessagespage.goToGroupAndPerform(hostuser, false, "NA");
-			koramessagespage.forwardPostOrValidation(false,false, hostuser, updatedstr, newparticipants);
+			koramessagespage.forwardPostOrValidation(false, false, hostuser, updatedstr, newparticipants);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");
 		}
 	}
-	
+
 	@Test(enabled = true, priority = 11)
 	public void MC_TC59_selectAndForward() throws Exception {
 		try {
@@ -346,13 +346,13 @@ public class Messages121Test extends DriverSetUp {
 			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagespage.goToGroupAndPerform(qapridegroup, false, "NA");			
+			koramessagespage.goToGroupAndPerform(qapridegroup, false, "NA");
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr);
-			
+
 			koramessagespage.selectOptionFromRightNav3Dots(user, "Select Messages");
 			koramessagespage.selectMessages(qapridegroup, updatedstr);
-			koramessagespage.forwardPostOrValidation(true,false, user, updatedstr, qapridegroup);
+			koramessagespage.forwardPostOrValidation(true, false, user, updatedstr, qapridegroup);
 
 			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);
@@ -360,8 +360,8 @@ public class Messages121Test extends DriverSetUp {
 			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
 			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
 			koramessagespage.enterYourMessageAs(updatedstr1);
-			
-			koramessagespage.forwardPostOrValidation(false,false, qapridegroup, updatedstr, "NA");
+
+			koramessagespage.forwardPostOrValidation(false, false, qapridegroup, updatedstr, "NA");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");
@@ -381,33 +381,33 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
 			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);			
+			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");			
+			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 
 			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);
-			String ReactedUserName=koraloginpage.getUserDetails();
+			String ReactedUserName = koraloginpage.getUserDetails();
 			korahomepage.selectTopLeftMenuOption("Chats");
 			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
 			koramessagespage.goToMessageAndPerformActionsAs("QA Pride", updatedstr, "Reactions", "Like");
 
 			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);			
+			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Chats");
 			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
 			koramessagespage.goToMessageAndPerformActionsAs("QA Pride", updatedstr, "More", "Message Info");
-						
-			koramessagedrpage.messagesreadinPostinfandMsginfo(ReactedUserName,false);
-			
+
+			koramessagedrpage.messagesreadinPostinfandMsginfo(ReactedUserName, false);
+
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Reactionas functionality");
 		}
 	}
-	
+
 	@Test(enabled = true, priority = 13)
 	public void MC_TC61_verifyReminderSlots() throws Exception {
 		try {
@@ -430,7 +430,7 @@ public class Messages121Test extends DriverSetUp {
 			koramessagespage.goToGroupAndPerform(user, false, "NA");
 			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Reminder");
 
-			koramessagespage.validateAndSelectMuteSlots("reminder",expreminderslots, false);
+			koramessagespage.validateAndSelectMuteSlots("reminder", expreminderslots, false);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");
@@ -452,51 +452,51 @@ public class Messages121Test extends DriverSetUp {
 			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform(qapridegroup, false, "NA");			
+			koramessagespage.goToGroupAndPerform(qapridegroup, false, "NA");
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr);
-			
+
 			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Delete");
 			koramessagespage.clickOn("Cancel", true);
 			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Delete");
 			koramessagespage.clickOn("Delete for everyone", true);
-			koramessagespage.validateDeleteMessageFromSelfUser(true,user,updatedstr);
+			koramessagespage.validateDeleteMessageFromSelfUser(true, user, updatedstr);
 			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr1);
 			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr1, "More", "Delete");
 			koramessagespage.clickOn("Delete for myself", true);
-			koramessagespage.validateDeleteMessageforMyself(true,user,updatedstr1);
-			
+			koramessagespage.validateDeleteMessageforMyself(true, user, updatedstr1);
+
 			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
 			korahomepage.selectMenuOption(Messages);
-			koramessagespage.goToGroupAndPerform(qapridegroup, false, "NA");	
-			koramessagespage.validateDeleteMessageFromSelfUser(false,user,updatedstr);
-			koramessagespage.validateDeleteMessageforMyself(false,user,updatedstr1);
-			
+			koramessagespage.goToGroupAndPerform(qapridegroup, false, "NA");
+			koramessagespage.validateDeleteMessageFromSelfUser(false, user, updatedstr);
+			koramessagespage.validateDeleteMessageforMyself(false, user, updatedstr1);
+
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
 		}
 	}
-		
-		@Test(enabled = true, priority = 15)
-		public void MC_TC50_MiddlepanePagination() throws Exception {
-			try {
-				test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-						.assignCategory("WorkAssist_Messages_Chats");
-				System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-				String url = DriverSetUp.propsMap.get("weburl");
-				String Messages = DriverSetUp.testdataMap.get("messages");
-				test.log(LogStatus.INFO, "Navigation url :" + url);
-				
-				koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-				korahomepage.selectMenuOption("Workspaces");
-				korahomepage.selectMenuOption(Messages);
-				korahomepage.selectTopLeftMenuOption("All Messages");
-				koramessagespage.middlePanePaginationValidation();
-				extent.endTest(test);
-			} catch (Exception e) {
-				test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
-			}
-		}*/
+
+	@Test(enabled = true, priority = 15)
+	public void MC_TC50_MiddlepanePagination() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			korahomepage.selectMenuOption("Workspaces");
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagespage.middlePanePaginationValidation();
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
+		}
+	}
 }

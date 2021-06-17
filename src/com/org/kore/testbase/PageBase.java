@@ -141,22 +141,27 @@ public class PageBase extends DriverSetUp {
 				} else {
 					System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("winchromeDriverPath"));
 					ChromeOptions options = new ChromeOptions();
-				//	options.addArguments("user-data-dir=/path/to/your/custom/profile");
+					// options.addArguments("user-data-dir=/path/to/your/custom/profile");
 					options.addArguments("--profile-directory=Default");
 					options.addArguments("--whitelisted-ips");
 					options.addArguments("--disable-plugins-discovery");
 					options.addArguments("--disable-extensions");
 					options.addArguments("--test-type");
 					options.addArguments("start-maximized");
-					//options.addArguments("--start-fullscreen");
-					//options.addArguments("window-size=1382,744");
-					//options.setExperimentalOption("useAutomationExtension", false);
-					
-					//for incognito with headless
-					//options.addArguments("--headless", "--window-size=1382,744", "--disable-gpu", "--disable-extensions", "--no-sandbox", "-incognito");*/
-					
-					options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
-					
+					// options.addArguments("--start-fullscreen");
+					// options.addArguments("window-size=1382,744");
+					// options.setExperimentalOption("useAutomationExtension",
+					// false);
+
+					// for incognito with headless
+					// options.addArguments("--headless",
+					// "--window-size=1382,744", "--disable-gpu",
+					// "--disable-extensions", "--no-sandbox", "-incognito");*/
+
+					options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744",
+							"--ignore-certificate-errors", "--disable-extensions", "--no-sandbox",
+							"--disable-dev-shm-usage");
+
 					DesiredCapabilities cap = DesiredCapabilities.chrome();
 					cap.setCapability("ignoreZoomSetting", true);
 					cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
@@ -230,7 +235,7 @@ public class PageBase extends DriverSetUp {
 		}
 		return element;
 	}
-	
+
 	public void clickNIgnoreFail(String xpath, String elementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
@@ -249,7 +254,8 @@ public class PageBase extends DriverSetUp {
 			}
 		} catch (Exception exc) {
 			test.log(LogStatus.INFO,
-					elementName+" element is not available but still it doesn't have any impact".toString() + test.addScreenCapture(takeScreenShot()));
+					elementName + " element is not available but still it doesn't have any impact".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
 
@@ -297,10 +303,10 @@ public class PageBase extends DriverSetUp {
 			}
 
 		} catch (Exception exc) {
-			System.out.println("Failed to find in waitToappearIgnoreFail " + locator+" i.e."+ elementName);
+			System.out.println("Failed to find in waitToappearIgnoreFail " + locator + " i.e." + elementName);
 		}
 	}
-	
+
 	public void click(String xpath, String elementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
@@ -329,14 +335,14 @@ public class PageBase extends DriverSetUp {
 			switch (DriverSetUp.propsMap.get("tool")) {
 
 			case "Appium":
-				
+
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 60, 500);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 				appiumDriver.findElementByXPath(xpath).click();
 				break;
-				
+
 			case "Selenium":
-				
+
 				Thread.sleep(2000);
 				JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
 				WebElement button = remoteDriver.findElement(By.xpath(xpath));
@@ -344,7 +350,7 @@ public class PageBase extends DriverSetUp {
 				break;
 			}
 		} catch (Exception exc) {
-			test.log(LogStatus.FAIL, exc + "Exception on clicking webelement i.e. <b>"+elementName+"</b> ",
+			test.log(LogStatus.FAIL, exc + "Exception on clicking webelement i.e. <b>" + elementName + "</b> ",
 					exc.toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
@@ -382,28 +388,27 @@ public class PageBase extends DriverSetUp {
 			switch (DriverSetUp.propsMap.get("tool")) {
 
 			case "Appium":
-				
+
 				WebDriverWait wait = new WebDriverWait(appiumDriver, 20, 500);
 				WebElement ele = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 				break;
 			case "Selenium":
-				
+
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 30, 500);
 				WebElement el = waitSelenium.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
-				//el.click();
+				// el.click();
 				break;
 
 			}
 		} catch (Exception exc) {
 			System.out.println("Fail... Waited for 20 secs for element to be clickable");
-			test.log(LogStatus.UNKNOWN, "Exception on  Element to get disappear from the screen, even after 120 secs"
-					.toString() + test.addScreenCapture(takeScreenShot()));
+			test.log(LogStatus.UNKNOWN,
+					"Exception on  Element to get disappear from the screen, even after 120 secs".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
 	}
 
-	
-	
 	public void waitUntilDissapear(String xpath, String elementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
@@ -421,9 +426,11 @@ public class PageBase extends DriverSetUp {
 
 			}
 		} catch (Exception exc) {
-			System.out.println("Fail... Waited for 2 minutes to disappear //div[@class='lds-ring'] and to get Home screen loaded");
-			test.log(LogStatus.UNKNOWN, "Exception on  Element to get disappear from the screen, even after 120 secs"
-					.toString() + test.addScreenCapture(takeScreenShot()));
+			System.out.println(
+					"Fail... Waited for 2 minutes to disappear //div[@class='lds-ring'] and to get Home screen loaded");
+			test.log(LogStatus.UNKNOWN,
+					"Exception on  Element to get disappear from the screen, even after 120 secs".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
 	}
@@ -529,11 +536,12 @@ public class PageBase extends DriverSetUp {
 
 		} catch (Exception exc) {
 			test.log(LogStatus.INFO,
-					elementName + " element is not displayed but still it doesn't have any impact".toString() + test.addScreenCapture(takeScreenShot()));
+					elementName + " element is not displayed but still it doesn't have any impact".toString()
+							+ test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
 	}
-	
+
 	public void waitTillappear(String locator, String locatorType, String elementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
@@ -578,13 +586,13 @@ public class PageBase extends DriverSetUp {
 			}
 
 		} catch (Exception exc) {
-			System.out.println("Failed to find " + locator+" i.e."+ elementName);
+			System.out.println("Failed to find " + locator + " i.e." + elementName);
 			test.log(LogStatus.FAIL,
 					locator + " element is not displayed ".toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
 	}
-	
+
 	public void waitToappear(String locator, String locatorType, String elementName) throws Exception {
 		try {
 			switch (DriverSetUp.propsMap.get("tool")) {
@@ -629,7 +637,7 @@ public class PageBase extends DriverSetUp {
 			}
 
 		} catch (Exception exc) {
-			System.out.println("Failed to find " + locator+" i.e."+ elementName);
+			System.out.println("Failed to find " + locator + " i.e." + elementName);
 			test.log(LogStatus.FAIL,
 					elementName + " element is not displayed ".toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
@@ -1142,22 +1150,23 @@ public class PageBase extends DriverSetUp {
 				appiumDriver.findElement(By.xpath(locator)).sendKeys(cred);
 				break;
 			case "Selenium":
-				
+
 				WebDriverWait waitSelenium = new WebDriverWait(remoteDriver, 10, 500);
 				waitSelenium.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 				remoteDriver.findElement(By.xpath(locator)).click();
 				WebElement ele = remoteDriver.findElement(By.xpath(locator));
-				
+
 				String os = System.getProperty("os.name");
-				if (os.equalsIgnoreCase("WINDOWS")){
-				ele.sendKeys(Keys.CONTROL + "a");
-				ele.sendKeys(Keys.DELETE);
-				}else{
-				ele.sendKeys(Keys.COMMAND + "a");
-				ele.sendKeys(Keys.DELETE);
+				if (os.equalsIgnoreCase("WINDOWS")) {
+					ele.sendKeys(Keys.CONTROL + "a");
+					ele.sendKeys(Keys.DELETE);
+				} else {
+					ele.sendKeys(Keys.COMMAND + "a");
+					ele.sendKeys(Keys.DELETE);
 				}
-				/*ele.sendKeys(Keys.CONTROL + "a");
-				ele.sendKeys(Keys.DELETE);*/
+				/*
+				 * ele.sendKeys(Keys.CONTROL + "a"); ele.sendKeys(Keys.DELETE);
+				 */
 				remoteDriver.findElement(By.xpath(locator)).sendKeys(cred);
 				test.log(LogStatus.PASS, "Entered as " + cred + " in " + elementName + " ".toString()
 						+ test.addScreenCapture(takeScreenShot()));
@@ -1587,7 +1596,8 @@ public class PageBase extends DriverSetUp {
 			String clickcleardata = "document.querySelector('body > settings-ui').shadowRoot.querySelector('#main').shadowRoot.querySelector('settings-basic-page').shadowRoot.querySelector('settings-section > settings-privacy-page').shadowRoot.querySelector('settings-clear-browsing-data-dialog').shadowRoot.querySelectorAll('cr-button')[1]"
 					+ ".click()";
 			js.executeScript(clickcleardata);
-			test.log(LogStatus.INFO, " Browser cache cleared successfully to login with different user with in the same session");
+			test.log(LogStatus.INFO,
+					" Browser cache cleared successfully to login with different user with in the same session");
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
@@ -1607,7 +1617,7 @@ public class PageBase extends DriverSetUp {
 		scrollObject.put("direction", "down");
 		appiumDriver.executeScript("mobile:scroll", scrollObject);
 	}
-	
+
 	public void getCoordinates(String element) throws Exception {
 		WebElement ele = remoteDriver.findElement(By.xpath(element));
 		// Used points class to get x and y coordinates of element.
