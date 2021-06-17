@@ -445,11 +445,11 @@ public class KoraMessagesDRPage extends PageBase {
 			if (!workspacename.contains("NA")) {
 				if (cf.elementIsDisplayed(er.kdselectworkspace, "xpath")) {
 					click(er.kdselectworkspace, "Clicking on Select workspace ");
-					click(er.kdtoggleicontoselectWS, "Clicking on  breadcrumb");
-					click("//span[@class='hamMenuWSName' and text()='" + workspacename + "']",
-							"Selecting Workspace  " + workspacename);
+					Thread.sleep(2000);										
+					click("//div[@class='wsItemCntr']//span[@class='wsName' and text()='"+workspacename+"']", "Clicking on Select workspace ");					
 				}
 			}
+			
 			click(er.kddiscussionTitle, "Clicking on Discussion Room title ");
 			enterText(er.kddiscussionTitle, NewDRname, "Discussion Room Title as " + NewDRname);
 			moveToElement(er.kmcenterparticipant, "xpath");
@@ -512,7 +512,7 @@ public class KoraMessagesDRPage extends PageBase {
 			korahomepage.waittillpageload();
 
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
+			test.log(LogStatus.FAIL, "Unable to create new DR with Workspace");
 
 		}
 	}
@@ -871,13 +871,11 @@ public class KoraMessagesDRPage extends PageBase {
 				test.log(LogStatus.PASS, "Mute action performed successfully on DR " + discRoom.toString()
 				+ test.addScreenCapture(takeScreenShot()));
 			} else {
-
 				if(Option.equalsIgnoreCase("Star")&& remoteDriver.findElement(By.xpath(er.kwstarfilledstatus)).getText().trim().equalsIgnoreCase("Unstar"))
 				{
 					click(er.kwstarfilledstatus, "Clicking on Unstar");
 					Thread.sleep(2000);
 				}
-
 				click("//*[text()='" + Option + "']", "xpath");
 				Thread.sleep(3000);
 				test.log(LogStatus.PASS, Option.toString() + " action performed successfully on DR "
@@ -1018,11 +1016,23 @@ public class KoraMessagesDRPage extends PageBase {
 	public void rename_LeaveRoom_DeleteRoom(String rename,String leaveroomorDelete) throws InterruptedException, Exception {		
 		try {						
 			if(!rename.contains("N/A")||!rename.contains(""))
-			{
-				String beforerename=getAttributeValue(er.kdrRoomname, "value");
-				//				enterText(er.kdrRoomname, "", "renaming Room as "+"");
-				enterText(er.kdrRoomname, rename, "renaming Room as "+rename);
+			{				
+				String beforerename=getAttributeValue(er.kdrRoomname, "value");				
 				click(er.kdrRoomname, "RenameRoom");
+				Thread.sleep(3000);
+				String os = System.getProperty("os.name");
+				if (os.equals("WINDOWS")){
+					remoteDriver.findElement(By.xpath(er.kdrRoomname)).sendKeys(Keys.CONTROL, "a"); 
+					remoteDriver.findElement(By.xpath(er.kdrRoomname)).sendKeys(Keys.BACK_SPACE);
+				}else{				
+					remoteDriver.findElement(By.xpath(er.kdrRoomname)).sendKeys(Keys.COMMAND, "a");
+					remoteDriver.findElement(By.xpath(er.kdrRoomname)).sendKeys(Keys.BACK_SPACE);
+				}					
+				Thread.sleep(3000);			
+				String newDrname=rename+"_"+beforerename;
+				enterText(er.kdrRoomname, newDrname, "renaming Room as "+newDrname);
+				click(er.kdrRoomname, "RenameRoom");
+				Thread.sleep(3000);
 				String afterrename=getAttributeValue(er.kdrRoomname, "value");								
 				if(!beforerename.equalsIgnoreCase(afterrename)) {
 					test.log(LogStatus.PASS,
@@ -1064,7 +1074,6 @@ public class KoraMessagesDRPage extends PageBase {
 					"Failed in rename_LeaveRoom_DeleteRoom page"
 					.toString() + test.addScreenCapture(takeScreenShot()));
 			click(er.kdfowradpostWindowclose, "Clicking to close forward post window");
-
 		}
 	}
 
@@ -1219,12 +1228,11 @@ public class KoraMessagesDRPage extends PageBase {
 			}
 			enterText(er.kdrnewWorkspacename, workspacename, "Workspace Room Title as " + workspacename);				
 			click(er.kdrnewwsdonebtn, "Clicking on Done new Workspace button ");
-			Thread.sleep(5000);
-			click(er.kddiscussionTitle, "Clicking on Discussion Room title ");
+			Thread.sleep(7000);			
+			click(er.kddiscussionTitle, "Clicking on Discussion Room title ");			
 			enterText(er.kddiscussionTitle, NewDRname, "Discussion Room Title as " + NewDRname);
 			moveToElement(er.kmcenterparticipant, "xpath");
 			click(er.kmcenterparticipant, "Enter participant name");
-
 			System.out.println("participantlist-----" + participantlist);
 			if (participantlist.contains(",")) {
 				String result[] = participantlist.trim().split("\\s*,\\s*");
@@ -1257,8 +1265,7 @@ public class KoraMessagesDRPage extends PageBase {
 			moveToElement(er.kdrcountofmembersrightpanel, "xpath");
 			String noofmemebersbeforeadd = remoteDriver.findElement(By.xpath(er.kdrcountofmembersrightpanel)).getText();			
 			int num1 = Integer.parseInt(noofmemebersbeforeadd);			
-			click(er.kdradduserfromrightpanel, "clicking Adding user" );
-			//			String[] arr=aditionalmember1.split("@");			
+			click(er.kdradduserfromrightpanel, "clicking Adding user" );			
 			enterText(er.kmcenterparticipant,aditionalmember1, "Entering additional member");
 			Thread.sleep(3000);
 			String os = System.getProperty("os.name");
@@ -1318,10 +1325,7 @@ public class KoraMessagesDRPage extends PageBase {
 			}
 			Thread.sleep(5000);
 			click("//span[text()='"+aditionalmember1+"']", "clicking on Done Button" );
-			//			click("//i[@class='icon kr-down_arrow']", "clicking on Done Button" );
-			//			click("//li[text()='"+accesstype+"']", "clicking on Done Button" );
 			Thread.sleep(1000);
-			//			click("//i[@class='icon kr-down_arrow']", "clicking on Done Button" );
 			click(er.kwaddpeopleadinmember, "clicking on Add people button");
 			String useraccesstype= remoteDriver.findElement(By.xpath(er.kdruaccesstype)).getText().trim();
 			String[]  arruseraccesstype =useraccesstype.split(" ");
@@ -1340,10 +1344,11 @@ public class KoraMessagesDRPage extends PageBase {
 				{
 					test.log(LogStatus.PASS,
 							"Newly added members successfully refelcted in memebrs list".toString() + test.addScreenCapture(takeScreenShot()));
-
+					moveToElement("//div[@class='memberList']/div[2]/ul/li["+i+"]/div[1]/div[2]/div[2]/div[1]", "xpath");
 					remoteDriver.findElement(By.xpath("//div[@class='memberList']/div[2]/ul/li["+i+"]/div[1]/div[2]/div[2]/div[1]")).click();
 					Thread.sleep(2000);
-					remoteDriver.findElement(By.xpath("//div[@class='userRoleDropDownMenu overflow']//span[text()='"+accesstype+"']")).click();
+					moveToElement("//div[contains(@class,'userRoleDropDownMenu')]//span[text()='"+accesstype+"']", "xpath");
+					remoteDriver.findElement(By.xpath("//div[contains(@class,'userRoleDropDownMenu')]//span[text()='"+accesstype+"']")).click();
 					Thread.sleep(2000);
 					String accesstypeafteraddingpostmodification=remoteDriver.findElement(By.xpath("//div[@class='memberList']/div[2]/ul/li["+i+"]/div[1]/div[2]/div[2]/div[1]")).getText().trim();
 					if(accesstypeafteraddingpostmodification.equalsIgnoreCase(accesstype)) {
@@ -1378,7 +1383,7 @@ public class KoraMessagesDRPage extends PageBase {
 	public void selectDRBasedonWSname(String Workspace, String discussionRoomName) throws Exception {
 
 		System.out.println("----------------------- selectDRBasedonWSname --------------------");
-		korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+//		korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 		moveToElement(er.kdrcidgroup + discussionRoomName+"']/..//span[@class='wsName'][text()='"+Workspace+"']", "xpath");
 
 	}	

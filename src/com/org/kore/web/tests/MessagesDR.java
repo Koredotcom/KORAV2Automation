@@ -276,7 +276,6 @@ public class MessagesDR extends DriverSetUp {
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);			
 
-
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 			String forwardtomemebers = "hana@koraqa1.com";
@@ -303,7 +302,7 @@ public class MessagesDR extends DriverSetUp {
 
 
 
-	@Test(enabled = true, priority = 44)//pass
+	@Test(enabled = true, priority = 44)
 	public void MDR_TC25_TC26_TC28_TC29_starDrandMuteDrandvaldiation() throws Exception {
 		try {
 
@@ -311,16 +310,20 @@ public class MessagesDR extends DriverSetUp {
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			String url = DriverSetUp.propsMap.get("weburl");
-			String Messages = DriverSetUp.drdataMap.get("messages");
-			String DNDStarANDOther = DriverSetUp.drdataMap.get("standarddrForOther");			
+			String Messages = DriverSetUp.drdataMap.get("messages");			
+			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 				
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			korahomepage.selectMenuOption(Messages);			
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
+			String DNDStarANDOther = "randomDR" +korahomepage.runtimehhmmss();
+			koramessagedrpage.createDRwithAccessTypefromMessages("NA",DNDStarANDOther, newparticipants, "Post Only");			
 			koramessagedrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");
 			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Star","N/A");
 			korahomepage.selectTopLeftMenuOption("Starred");
 			koramessagedrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");
+			
 			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Unstar","N/A");
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 			korahomepage.selectTopLeftMenuOption("Starred");
@@ -352,7 +355,6 @@ public class MessagesDR extends DriverSetUp {
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
-
 			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
@@ -451,8 +453,8 @@ public class MessagesDR extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
-
-			test.log(LogStatus.INFO, "Navigation url :" + url);						
+			test.log(LogStatus.INFO, "Navigation url :" + url);	
+			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 			
 			koramessagedrpage.goToGroupAndPerforminWSDR("DRDelete", false, "");								
@@ -494,8 +496,8 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 50)
-	public void MDR_TC23_TC62_TC69_TC73_TC74_TC75_TC76_TC78_createnewWSfromDRandaddDRs() throws Exception {
+	@Test(enabled = true, priority = 50) //push
+	public void MDR_TC23_TC69_TC76_TC78_createnewWSfromDRandaddDRs() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
@@ -503,23 +505,49 @@ public class MessagesDR extends DriverSetUp {
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");			
-			test.log(LogStatus.INFO, "Navigation url :" + url);
-			String aditionalmember1="alexander@koraqa1.com";
-			String aditionalmember2="dileep@koraqa1.com";			
+			test.log(LogStatus.INFO, "Navigation url :" + url);						
 			
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 			String randomWS = "WS" +korahomepage.runtimehhmmss();
 			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();
 			String randomDrwithTime2 = "randomDR" +korahomepage.runtimehhmmss()+"_2";
+			
 			koramessagedrpage.createDRwithWS(randomWS,randomDrwithTime, newparticipants);
 			koramessagedrpage.selectDRBasedonWSname(randomWS,randomDrwithTime);
 			koramessagedrpage.createDRwithAccessTypefromMessages(randomWS, randomDrwithTime2,newparticipants, "Comment Only");
-			koraworkspacepage.selectWorkspace(randomWS);			
+			koraworkspacepage.selectWorkspace(randomWS);
+			
 			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime, false, "");						
-			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime2, false, "");
-			koramessagedrpage.addnewmemebrswithaccesstype(randomDrwithTime2,aditionalmember1,aditionalmember2,"Comment only");			
-			koramessagedrpage.addnewmemebrswithaccesstypeinManageRoom(randomDrwithTime2,aditionalmember2,"Comment Only");									
+			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime2, false, "");												
+			extent.endTest(test);
+			
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to Create new Work Spae from DR and add more Discussion Rooms");
+		}
+	}
+	
+	@Test(enabled = true, priority = 51) 
+	public void MDR_TC62_TC73_TC74_TC75_addnewparticiapantstoexistingDr() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_DiscussionRooms");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.drdataMap.get("messages");
+			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
+			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+			String aditionalmember1="alexander@koraqa1.com";
+			String aditionalmember2="dileep@koraqa1.com";			
+			
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
+			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();				
+			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname, randomDrwithTime,
+					newparticipants, "Comment Only");			
+			koramessagedrpage.addnewmemebrswithaccesstype(randomDrwithTime,aditionalmember1,aditionalmember2,"Comment only");			
+			koramessagedrpage.addnewmemebrswithaccesstypeinManageRoom(randomDrwithTime,aditionalmember2,"Full Access");									
 			extent.endTest(test);
 			
 		} catch (Exception e) {
@@ -527,7 +555,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 51)
+	@Test(enabled = true, priority = 52)
 	public void MDR_TC20_TC79_TC80_createNEWDRandvalidatefrompartcipantsend() throws Exception {
 		try {
 
@@ -540,6 +568,7 @@ public class MessagesDR extends DriverSetUp {
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			
+
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages"); 
 			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();
@@ -562,7 +591,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 52)
+	@Test(enabled = true, priority = 53)
 	public void MDR_TC48_SearchforfileinChatandDR() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())

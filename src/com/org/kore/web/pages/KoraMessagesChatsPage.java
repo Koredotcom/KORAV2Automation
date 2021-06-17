@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -1799,12 +1800,39 @@ public class KoraMessagesChatsPage extends PageBase {
 						String last1;
 						last1 = (String) list.get(list.size() - 2);
 						System.out.println("I am getting empty hence performing scroll action to " + last1);
-						scrollToElement(
-								"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')][text() = '"
-										+ last1 + "']",
-								"xpath");
+			
+						/*boolean check =false;
+						check = remoteDriver
+								.findElements(By.xpath("//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')][text() = '"
+										+ last1 + "']")).size() > 0;*/
+						
+						try {
+							scrollToElement(
+									"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')][text() = '"
+											+ last1 + "']","xpath");
+						} catch (Exception e1) {
+							System.out.println("Seems General (Default name) repeated");
+							messagelist = remoteDriver.findElements(By.xpath(
+									"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
+
+							for (WebElement e2 : messagelist) {
+								String currentthread1;
+								currentthread1 = e2.getText();
+								System.out.println("Current thread is: " + currentthread);
+								list.add(e.getText().trim());
+								if (currentthread.isEmpty()) {
+									String last2;
+									last2 = (String) list.get(list.size() - 2);
+									System.out.println("I am getting empty hence performing scroll action to " + last1);
+									scrollToElement(
+											"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')][text() = '"
+													+ last2 + "']","xpath");
+								}
+						}
+						}
 						counter++;
 						if (counter > 2) {
+							Thread.sleep(2000);
 							System.out.println("Pagination counter");
 							updatedlistafterscroll = remoteDriver.findElements(By.xpath(
 									"//div[contains(@class,'userDetails')]//div[@class='drDetails']//div[contains(@class,'userNameDiv')]"));
@@ -1826,12 +1854,12 @@ public class KoraMessagesChatsPage extends PageBase {
 								+ "</b>. There could be less records or issue with Pagination".toString()
 								+ test.addScreenCapture(takeScreenShot()));
 			}
-
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
 					"Something wrong with Pagination validation".toString() + test.addScreenCapture(takeScreenShot()));
 
 		}
+		
 	}
 	
 	public void paginationValidationWithFor() throws Exception {
