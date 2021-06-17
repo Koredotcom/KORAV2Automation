@@ -5,11 +5,11 @@
 		"weburl": "https://workassist-qa.kore.ai/",
 		"tool": "Selenium"
 	},
-	"Dev": {
+	"DEV": {
 		"browser": "chrome",
 		"weburls": "https://developer.servicenow.com/dev.do#!/home",
-		"weburlqa": "https://workassist-qa.kore.ai/",
-		"webdev": "https://workassist-dev.kore.ai/",
+		"weburlqa": "https://workassist-dev.kore.ai/",
+		"weburl": "https://workassist-dev.kore.ai/",
 		"tool": "Selenium"
 	},
 	"IOSNATIVE": {
