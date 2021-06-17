@@ -9,22 +9,15 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -136,12 +129,12 @@ public class DriverSetUp {
 			DriverSetUp.dr = new DataReader();
 			er = new ElementRepository();
 			fu = new PropertyLoader();
-			// dr.getSetUpValue("Execution", className, columnHeader)
-			// App = fu.getAppProperties("App");
-			// App = System.getProperty("app.prop");
 
 			System.out.println("@@@@@@@@@@@@  " + App + "  @@@@@@@@@@@@");
 			propsMap = fu.jsonRead(App);
+			
+			workingurl = DriverSetUp.propsMap.get("weburl");
+			System.out.println(workingurl);
 
 			UtilityMap = fu.jsonRead("UTILITIES");
 			testdataMap = fu.jsonRead("CHATSTESTDATA");
@@ -150,6 +143,10 @@ public class DriverSetUp {
 			switch (App) {
 
 			case "QA":
+				er.selWeb();
+				remoteDriver = pb.startBrowser(browser);
+				break;
+			case "DEV":
 				er.selWeb();
 				remoteDriver = pb.startBrowser(browser);
 				break;
@@ -174,7 +171,7 @@ public class DriverSetUp {
 		case "QA":
 			remoteDriver.quit();
 			break;
-		case "OBSERVATIONPORTAL":
+		case "DEV":
 			remoteDriver.quit();
 			break;
 		case "IOSNATIVE":
@@ -185,9 +182,6 @@ public class DriverSetUp {
 			break;
 		case "IOSWEB":
 			appiumDriver.quit();
-			break;
-		case "IVALETWEB":
-			remoteDriver.quit();
 			break;
 		}
 	}
@@ -272,15 +266,14 @@ public class DriverSetUp {
 
 	// Here tried to change the existing extentReport Html file from Https to Http ... But still it doesn't work at all
 	public void mitigateHTML(File htmlfilepath) throws Exception {
-		workingurl =null;
 		
-		if (App.equalsIgnoreCase("QA")){
+		/*if (App.equalsIgnoreCase("QA")){
 			workingurl="https://workassist-qa.kore.ai/";
 		}else if (App.equalsIgnoreCase("Dev")){
 			workingurl="https://workassist-dev.kore.ai/";
 		}else {
 			workingurl="Please check the environment and url";
-		}
+		}*/
 		
 		StringBuilder html = new StringBuilder();
 		FileReader freader = new FileReader(htmlfilepath);
@@ -324,15 +317,15 @@ public class DriverSetUp {
 	
 	public void tcTableCreation(Map<String, String> map2) throws IOException {
 		
-		workingurl =null;
+		/*workingurl =null;
 		
 		if (App.equalsIgnoreCase("QA")){
 			workingurl="https://workassist-qa.kore.ai/";
-		}else if (App.equalsIgnoreCase("Dev")){
+		}else if (App.equalsIgnoreCase("DEV")){
 			workingurl="https://workassist-dev.kore.ai/";
 		}else {
 			workingurl="Please check the environment and url";
-		}
+		}*/
 		
 		String dir = System.getProperty("user.dir");
 		BufferedWriter writer;
@@ -350,7 +343,7 @@ public class DriverSetUp {
 			writer.write("<body><h2> </h2></body>");
 			writer.write("<table> </table>");*/
 			
-			writer.write("<body><table><table border ='1'><tr><th><b>Scope</b></th><td> <a href=https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWM=fnyhppFIds6A/edit?ts=3D5fd77590#gid=3D1327035589> Basic sanity test cases</a></td></tr><tr><th><b>Env</b>&ensp;</th><td><b>https://workassist-qa.kore.ai &emsp;</b></td> </tr></th><tr><th><b>Browser &emsp;</b></th><td>Chrome</td></tr><tr><th><b>Analysis &emsp;</b></th><td><a href=https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=252492981>For report analysis click here</a></td></tr></body>");
+			writer.write("<body><table><table border ='1'><tr><th><b>Scope</b></th><td> <a href=https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWM=fnyhppFIds6A/edit?ts=3D5fd77590#gid=3D1327035589> Basic sanity test cases</a></td></tr><tr><th><b>Env</b>&ensp;</th><td><b>"+workingurl+"&emsp;</b></td> </tr></th><tr><th><b>Browser &emsp;</b></th><td>Chrome</td></tr><tr><th><b>Analysis &emsp;</b></th><td><a href=https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=252492981>For report analysis click here</a></td></tr></body>");
 			writer.write("<body><h2> </h2></body>");
 			writer.write("<table> </table>");
 			
