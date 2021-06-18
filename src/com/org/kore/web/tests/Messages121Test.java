@@ -123,7 +123,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 4)
-	public void MC_TC12_TC34_CheckActiveParticipantAndCopy() throws Exception {
+	public void MC_TC12_CheckActiveParticipant() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -148,14 +148,13 @@ public class Messages121Test extends DriverSetUp {
 			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr1);
 			koramessagespage.getFirstActiveUser(user, true);
-			// koramessagespage.goToMessageAndPerformActionsAs(user,
-			// updatedstr1, "More", "Copy");
+			koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr, "More", "Copy");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
 		}
 	}
-
+	
 	@Test(enabled = true, priority = 5)
 	public void MC_TC28_TC29_TC43_ValidateSendLongText() throws Exception {
 		try {

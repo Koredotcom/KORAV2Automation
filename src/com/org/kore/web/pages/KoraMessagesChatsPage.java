@@ -1381,12 +1381,32 @@ public class KoraMessagesChatsPage extends PageBase {
 					test.log(LogStatus.PASS, "Message copied successfully ! text got displayed".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 					Thread.sleep(4000);
-					moveToElement(er.kcomposebar, "xpath");
-					jsClick(er.kcomposebar, "xpath");
+					moveToElement(er.kmmessages + message + er.ksinglquote, "xpath");
+				//	click(er.kcomposebar, "xpath");
 					compose.click();
 					Thread.sleep(3000);
-					click("//span[text()='Paste']", "Paste option on compose bar");
-					compose.sendKeys(Keys.ENTER);
+					Actions actions = null;
+					try {
+						actions = new Actions(remoteDriver);
+						WebElement elementLocator = remoteDriver.findElement(By.xpath(er.kcomposebar));
+					//	actions.doubleClick(elementLocator).perform();
+					//	actions.keyDown(Keys.CONTROL).sendKeys("t").keyUp(Keys.CONTROL).build().perform();
+					//	Thread.sleep(6000);*/
+						
+						actions.moveToElement(remoteDriver.findElement(By.xpath("er.kcomposebar"))).
+					      contextClick().
+					      build().perform();
+						
+						System.out.println("Waited for 3 secs");
+						click("//span[text()='Paste']", "Pasteoption on compose bar");
+						System.out.println("Paste displayed");
+						compose.sendKeys("HI");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						actions.sendKeys(Keys.ENTER);
+						click("//span[text()='Paste']", "Paste option on compose bar");
+						e.printStackTrace();
+					}
 					test.log(LogStatus.PASS,
 							"Same text pasted successfully".toString() + test.addScreenCapture(takeScreenShot()));
 				} else if (subaction.equalsIgnoreCase("Edit")) {
