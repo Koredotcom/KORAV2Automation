@@ -62,7 +62,7 @@ public class MessagesDR extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 37) 
+	@Test(enabled = true, priority = 41) 
 	public void MDR_TC11_TC40_TC41_TC42_TC46_TC58_likeCommentToAPost() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -104,7 +104,7 @@ public class MessagesDR extends DriverSetUp {
 	} 
 
 
-	@Test(enabled = true, priority = 38) //PAss
+	@Test(enabled = true, priority = 42) //PAss
 	public void MDR_TC12_TC13_TC30_validating3DotOptionsFromMidAndRightPanels() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -128,7 +128,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 39) //pass
+	@Test(enabled = true, priority = 43) //pass
 	public void MDR_TC24_DROnhoverOptionsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -159,7 +159,7 @@ public class MessagesDR extends DriverSetUp {
 	 * @throws Exception
 	 *             Pass
 	 */
-	@Test(enabled = true, priority = 40) //pass
+	@Test(enabled = true, priority = 44) //pass
 	public void MDR_TC32_TC33_TC34_TC35_TC36_TC37_createNewDRwithDifferentAccessTypes() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -200,7 +200,7 @@ public class MessagesDR extends DriverSetUp {
 	 * TC_64Delete Discussion Room with WorkSpace, without WorkSpace from
 	 * Messages Updated
 	 */
-	@Test(enabled = true, priority = 41) //pass
+	@Test(enabled = true, priority = 45) //pass
 	public void MDR_TC64_deleteWorkSpacefromMessages() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -235,7 +235,7 @@ public class MessagesDR extends DriverSetUp {
 	 * Edit,Forward,Reminder,Post Info,Delete options displayed in 3 dots to a
 	 * post
 	 */
-	@Test(enabled = true, priority = 42) //pass
+	@Test(enabled = true, priority = 46) //pass
 	public void MDR_TC53_TC56_EditaPost() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -263,7 +263,7 @@ public class MessagesDR extends DriverSetUp {
 	/**
 	 * Forward post to new conversation , Existing and DR
 	 */
-	@Test(enabled = true, priority = 43)//pass
+	@Test(enabled = true, priority = 47)//pass
 	public void MDR_TC49_TC54_TC57_forwardPostToGroupDrAndNewconv() throws Exception {
 
 		try {
@@ -302,7 +302,7 @@ public class MessagesDR extends DriverSetUp {
 
 
 
-	@Test(enabled = true, priority = 44)
+	@Test(enabled = true, priority = 48)
 	public void MDR_TC25_TC26_TC28_TC29_starDrandMuteDrandvaldiation() throws Exception {
 		try {
 
@@ -344,7 +344,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 45)//pass
+	@Test(enabled = true, priority = 49)//pass
 	public void MDR_TC14_TC15_TC71_LeaveandDeleteDRfromManageRoom() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -383,7 +383,7 @@ public class MessagesDR extends DriverSetUp {
 	 * Edit,Forward,Reminder,Post Info,Delete options displayed in 3 dots to a
 	 * post
 	 */
-	@Test(enabled = true, priority = 46) //pass
+	@Test(enabled = true, priority = 50) //pass
 	public void MDR_TC45_TC52_TC77_DeletePostandCancelnewDR() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -413,7 +413,7 @@ public class MessagesDR extends DriverSetUp {
 	 * At Mentions in posts users should display the users who are part of the
 	 * room
 	 */
-	@Test(enabled = true, priority = 47) //Fail - fix
+	@Test(enabled = true, priority = 51) //Fail - fix
 	public void MDR_TC7_TC55_TC59_TC60_TC61_atmentionUsersinDr() throws Exception {
 
 		try {
@@ -445,7 +445,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 48)//pass
+	@Test(enabled = true, priority = 52)//pass
 	public void MDR_TC39_TC72_PostviaEmailToggle() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -467,7 +467,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 49)//pass
+	@Test(enabled = true, priority = 53)//pass
 	public void MDR_TC66_TC17_TC21_TC70_creationofRoomwithoutWS() throws Exception {
 		try {
 
@@ -496,7 +496,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 50) //push
+	@Test(enabled = true, priority = 54) //push
 	public void MDR_TC23_TC69_TC76_TC78_createnewWSfromDRandaddDRs() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -527,7 +527,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 51) 
+	@Test(enabled = true, priority = 55) 
 	public void MDR_TC62_TC73_TC74_TC75_addnewparticiapantstoexistingDr() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -555,7 +555,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 52)
+	@Test(enabled = true, priority = 56)
 	public void MDR_TC20_TC79_TC80_createNEWDRandvalidatefrompartcipantsend() throws Exception {
 		try {
 
@@ -591,7 +591,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 53)
+	@Test(enabled = true, priority = 57)
 	public void MDR_TC48_SearchforfileinChatandDR() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
