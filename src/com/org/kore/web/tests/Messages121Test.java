@@ -53,7 +53,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 1)
-	public void MC_TC2_TC3_TC4_TC5_LoginRecentValidation() throws Exception {
+	public void MC_TC2_TC3_TC4_TC5_loginAndVerifyRecentSuggestions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -73,9 +73,9 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
 		}
 	}
-
+	
 	@Test(enabled = true, priority = 2)
-	public void MC_TC6_UserSuggestionValidation() throws Exception {
+	public void MC_TC6_searchSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -94,7 +94,31 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 3)
-	public void MC_TC8_TC9_TC24_TC46_OneToOneConvEdit3dotOptions() throws Exception {
+	public void MC_TC8_profileIConValidationFor121() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			korahomepage.selectMenuOption(Messages);
+			koramessagespage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
+			koramessagespage.userProfileIconValidation(user);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Profile Icon for One to One conversaton");
+		}
+	}
+			
+	
+	@Test(enabled = true, priority = 4)
+	public void MC_TC9_validate3dotOptionsFor121() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -104,6 +128,55 @@ public class Messages121Test extends DriverSetUp {
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			korahomepage.selectMenuOption(Messages);
+			/*koramessagespage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
+			koramessagespage.goToGroupAndPerform(user, false, "NA");*/
+			koramessagespage.goToGroupAndPerform(user, true, "3dots");
+			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions, "middle");
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton 3 dot options");
+		}
+	}
+	
+		@Test(enabled = true, priority = 5)
+	public void MC_TC46_verifyEditMessage() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			korahomepage.selectMenuOption(Messages);
+			koramessagespage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
+			koramessagespage.goToGroupAndPerform(user, false, "NA");
+			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Edit");
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Edit message functionality");
+		}
+	}
+	
+	@Test(enabled = true, priority = 6)
+	public void MC_TC24_activeThreadOnFocusColor() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			String expbgclr = DriverSetUp.testdataMap.get("expectedlabelbackground");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
@@ -112,18 +185,14 @@ public class Messages121Test extends DriverSetUp {
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr);
 			koramessagespage.getActiveLabelBackgroundColor(expbgclr);
-			koramessagespage.userProfileIconValidation(user);
-			koramessagespage.goToGroupAndPerform(user, true, "3dots");
-			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions, "middle");
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Edit");
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton validation");
+			test.log(LogStatus.FAIL, "Failed to validate Active thread focus colour");
 		}
 	}
 
-	@Test(enabled = true, priority = 4)
-	public void MC_TC12_CheckActiveParticipant() throws Exception {
+	@Test(enabled = true, priority = 7)
+	public void MC_TC12_checkActiveParticipant() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -148,15 +217,39 @@ public class Messages121Test extends DriverSetUp {
 			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr1);
 			koramessagespage.getFirstActiveUser(user, true);
-			koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr, "More", "Copy");
+		//	koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr, "More", "Copy");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
 		}
 	}
 	
-	@Test(enabled = true, priority = 5)
-	public void MC_TC28_TC29_TC43_ValidateSendLongText() throws Exception {
+	@Test(enabled = true, priority = 8)
+	public void MC_TC28_verifyChevronIcon() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			String updatedlongstr = onetoonetext + korahomepage.runtimehhmmss();
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagespage.startNewConversationWith("chat", newparticipants, true);
+			koramessagespage.verifyDisplayOfChevronIcon(false);
+			user = koramessagespage.enterYourMessageAs(updatedlongstr);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Chevron icon for Single participant");
+		}
+	}
+	
+	@Test(enabled = true, priority = 9)
+	public void MC_TC29_TC43_validationFordLongText() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -171,7 +264,6 @@ public class Messages121Test extends DriverSetUp {
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			koramessagespage.verifyDisplayOfChevronIcon(false);
 			user = koramessagespage.enterYourMessageAs(updatedlongstr);
 			koramessagespage.validateLongTextReadMoreTruncation();
 			extent.endTest(test);
@@ -179,8 +271,74 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate long text");
 		}
 	}
+	
+	@Test(enabled = true, priority = 10)
+	public void MC_TC38_TC57_validateTopLeftMenuChats() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-	@Test(enabled = true, priority = 6)
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Chats");
+			koramessagespage.validateChatsAndDRS(true, false);
+			koramessagespage.validateDirectChatOrDR("chat");
+			korahomepage.selectMenuOption("Workspaces");
+			korahomepage.selectMenuOption(Messages);
+			koramessagespage.validateChatsAndDRS(true, false);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate top left menu Chats");
+		}
+	}
+	
+	@Test(enabled = true, priority = 11)
+	public void MC_TC55_TC58_validateTopLeftMenuDR() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			koramessagespage.validateDirectChatOrDR("DR");
+			korahomepage.selectMenuOption("Workspaces");
+			korahomepage.selectMenuOption(Messages);
+			koramessagespage.validateChatsAndDRS(false, true);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Top left menu DR's sections");
+		}
+	}
+
+	@Test(enabled = true, priority = 12)
+	public void MC_TC56_validateTopLeftMenuAllMessages() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			korahomepage.selectMenuOption("Workspaces");
+			korahomepage.selectMenuOption(Messages);
+			koramessagespage.validateChatsAndDRS(true, true);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Top left menu All Messages sections");
+		}
+	}
+	
+	@Test(enabled = true, priority = 13)
 	public void MC_TC10_enterTextWithEmoji() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -195,47 +353,12 @@ public class Messages121Test extends DriverSetUp {
 			koramessagespage.enterYourEmojiWithText(true, " Hi Sending with emoji ");
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate Emojis with text");
+			test.log(LogStatus.FAIL, "Failed to validate Emoji's with text");
 		}
 	}
 
-	@Test(enabled = true, priority = 7)
-	public void MC_TC38_TC55_TC56_TC57_TC58_validateTopLeftMenu() throws Exception {
-		try {
-			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_Messages_Chats");
-			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
-			String Messages = DriverSetUp.testdataMap.get("messages");
-			String newparticipant = DriverSetUp.testdataMap.get("oneparticipant");
-			test.log(LogStatus.INFO, "Navigation url :" + url);
-
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagespage.validateChatsAndDRS(true, false);
-			koramessagespage.validateDirectChatOrDR("chat");
-			korahomepage.selectMenuOption("Workspaces");
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.validateChatsAndDRS(true, false);
-
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagespage.validateDirectChatOrDR("DR");
-			korahomepage.selectMenuOption("Workspaces");
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.validateChatsAndDRS(false, true);
-
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			korahomepage.selectMenuOption("Workspaces");
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.validateChatsAndDRS(true, true);
-			extent.endTest(test);
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate Chats, DR's and All Message sections");
-		}
-	}
-
-	@Test(enabled = true, priority = 8)
-	public void MC_TC60_TC66_validateGroupCoundAndSearchUserFromManage() throws Exception {
+	@Test(enabled = true, priority = 14)
+	public void MC_TC60_validateGroupMembersCount() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -254,15 +377,41 @@ public class Messages121Test extends DriverSetUp {
 			String groupcount = koramessagespage.getChatHeaderNameorCount(false);
 			koramessagespage.goToGroupAndPerform("QA Pride", true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Chat");
-			int managepartcount = koramessagespage.searchFromManageChat("hana@koraqa1.com");
+			int managepartcount = koramessagespage.searchFromManageChat(false,"hana@koraqa1.com");
 			koramessagespage.compareGroupCount(groupcount, managepartcount);
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate Group count and Manage chat Search functionality");
+			test.log(LogStatus.FAIL, "Failed to validate and compare Group members count from Header and Manage chat");
 		}
 	}
 
-	@Test(enabled = true, priority = 9)
+	@Test(enabled = true, priority = 15)
+	public void MC_TC66_searchMemberFromManageChat() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("Chats");
+			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
+			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
+
+			koramessagespage.goToGroupAndPerform("QA Pride", true, "3dots");
+			koramessagespage.operationsFrom3Dots("Manage Chat");
+			koramessagespage.searchFromManageChat(true,"hana@koraqa1.com");
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Search functionality from manage chat");
+		}
+	}
+	
+	@Test(enabled = true, priority = 16)
 	public void MC_TC35_TC47_TC67_validateReplyback() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -296,8 +445,8 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 10)
-	public void MC_TC52_validateForward() throws Exception {
+	@Test(enabled = true, priority = 17)
+	public void MC_TC52_validateDirectForward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -326,12 +475,12 @@ public class Messages121Test extends DriverSetUp {
 			koramessagespage.forwardPostOrValidation(false, false, hostuser, updatedstr, newparticipants);
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");
+			test.log(LogStatus.FAIL, "Failed to validate direct Forward functionality");
 		}
 	}
 
-	@Test(enabled = true, priority = 11)
-	public void MC_TC59_selectAndForward() throws Exception {
+	@Test(enabled = true, priority = 18)
+	public void MC_TC59_validateSelectAndForward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -363,11 +512,11 @@ public class Messages121Test extends DriverSetUp {
 			koramessagespage.forwardPostOrValidation(false, false, qapridegroup, updatedstr, "NA");
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");
+			test.log(LogStatus.FAIL, "Failed to validate select and Forward functionality");
 		}
 	}
 
-	@Test(enabled = true, priority = 12)
+	@Test(enabled = true, priority = 19)
 	public void MC_TC48_TC51_validateReactionsAndMessageInfo() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -375,7 +524,7 @@ public class Messages121Test extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			String url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
-			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+		//	String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
@@ -403,11 +552,11 @@ public class Messages121Test extends DriverSetUp {
 
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate Reactionas functionality");
+			test.log(LogStatus.FAIL, "Failed to validate Reactions and message info functionality");
 		}
 	}
 
-	@Test(enabled = true, priority = 13)
+	@Test(enabled = true, priority = 20)
 	public void MC_TC61_verifyReminderSlots() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -432,11 +581,11 @@ public class Messages121Test extends DriverSetUp {
 			koramessagespage.validateAndSelectMuteSlots("reminder", expreminderslots, false);
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate Forward functionality");
+			test.log(LogStatus.FAIL, "Failed to validate Reminder slots");
 		}
 	}
 
-	@Test(enabled = true, priority = 14)
+	@Test(enabled = true, priority = 21)
 	public void MC_TC62_TC63_TC64_DeleteMessage() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -478,7 +627,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 15)
+	@Test(enabled = true, priority = 22)
 	public void MC_TC50_MiddlepanePagination() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -495,7 +644,7 @@ public class Messages121Test extends DriverSetUp {
 			koramessagespage.middlePanePaginationValidation();
 			extent.endTest(test);
 		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
+			test.log(LogStatus.FAIL, "Failed to validate Middle pane pagination");
 		}
 	}
 }

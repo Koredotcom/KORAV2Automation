@@ -1194,7 +1194,7 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	}
 
-	public int searchFromManageChat(String usertosearch) throws Exception{
+	public int searchFromManageChat(boolean search,String usertosearch) throws Exception{
 		int manageparticipantssize =0;
 		try{
 		boolean searchresults=false;
@@ -1203,7 +1203,7 @@ public class KoraMessagesChatsPage extends PageBase {
 		manageparticipantssize =getSize("//div[@class='userDetailsElips']//div[@class='emailUi']");
 		test.log(LogStatus.INFO, "This group contains <b>" + manageparticipantssize
 				+ "</b> Participants from manage chat".toString() + test.addScreenCapture(takeScreenShot()));
-		
+		if(search){
 		enterText("//input[@placeholder='Search Members']", usertosearch, "xpath", "Enter Email");
 		searchresults = remoteDriver
 				.findElements(By.xpath("//div[@class='emailUi']"))
@@ -1215,6 +1215,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					test.log(LogStatus.FAIL,
 							"When user search with <b> "+usertosearch+" </b>Search results are notgetting displayed ".toString() + test.addScreenCapture(takeScreenShot()));
 				}
+		}
 				click(er.kmcmanageclose, "Close");
 				Thread.sleep(2000);
 		} catch (Exception e) {
