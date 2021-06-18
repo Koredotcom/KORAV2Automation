@@ -552,7 +552,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					moveToElement(er.kmcidgroup + groupname + "']/../../../../.." + er.kmc3dots, "xpath");
 					Thread.sleep(1000);
 					click(er.kmcidgroup + groupname + "']/../../../../.." + er.kmc3dots, "3dots");
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 					break;
 				case "DeleteGroup":
 					System.out.println("In Delete");

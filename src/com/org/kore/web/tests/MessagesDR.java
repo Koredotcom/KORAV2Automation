@@ -314,7 +314,6 @@ public class MessagesDR extends DriverSetUp {
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);			
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
 			String DNDStarANDOther = "randomDR" +korahomepage.runtimehhmmss();
@@ -568,7 +567,7 @@ public class MessagesDR extends DriverSetUp {
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			
-
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages"); 
 			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();
@@ -603,6 +602,7 @@ public class MessagesDR extends DriverSetUp {
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 			
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages"); 											
 			koramessagedrpage.searchforattachmentinmsgandDR("Hypertext.html");

@@ -1310,7 +1310,7 @@ public class KoraMessagesDRPage extends PageBase {
 		}
 	}
 
-	public void addnewmemebrswithaccesstypeinManageRoom(String DRname, String aditionalmember1,String accesstype)
+	public void addnewmemebrswithaccesstypeinManageRoom(String DRname, String aditionalmember1,String accesstype) throws Exception
 	{
 		try {												
 			selectoptionsfrom3dotsinRightPanelinDR(DRname, "Manage Room","N/A");			
@@ -1359,7 +1359,7 @@ public class KoraMessagesDRPage extends PageBase {
 			}			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Unable to select the mentioned participant");
-
+			click(er.kdfowradpostWindowclose, "Clicking to close forward post window");
 		}
 	}
 
