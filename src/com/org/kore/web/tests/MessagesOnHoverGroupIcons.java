@@ -48,7 +48,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 30)
+	@Test(enabled = true, priority = 33)
 	public void MC_TC41_firstGroupIconValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -69,7 +69,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 31)
+	@Test(enabled = true, priority = 34)
 	public void MC_TC23_groupChat3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -94,7 +94,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 32)
+	@Test(enabled = true, priority = 35)
 	public void MC_TC_22_TC_39_TC_40_muteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -121,7 +121,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 33)
+	@Test(enabled = true, priority = 36)
 	public void MC_TC_22_TC_36_validateStarredChats() throws Exception {
 		
 		try {
@@ -152,7 +152,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 34)
+	@Test(enabled = true, priority = 37)
 	public void MC_TC_22_TC_38_validateUnreadChats() throws Exception {
 		
 		try {
@@ -181,7 +181,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 35)
+	@Test(enabled = true, priority = 38)
 	public void MC_TC44_koraAtmentionUsers() throws Exception {
 		
 		try {

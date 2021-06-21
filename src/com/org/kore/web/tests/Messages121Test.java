@@ -53,7 +53,27 @@ public class Messages121Test extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 1)
-	public void MC_TC2_TC3_TC4_TC5_loginAndVerifyRecentSuggestions() throws Exception {
+	public void MC_TC2_loginToWorkAssist() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			// koraloginpage.launchw3(url, korajusername, korajpassword);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			korahomepage.selectMenuOption(Messages);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
+		}
+	}
+	
+	@Test(enabled = true, priority = 2)
+	public void MC_TC3_TC4_TC5_verifyRecentSuggestions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -74,7 +94,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 2)
+	@Test(enabled = true, priority = 3)
 	public void MC_TC6_searchSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -93,7 +113,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 3)
+	@Test(enabled = true, priority = 4)
 	public void MC_TC8_profileIConValidationFor121() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -105,6 +125,7 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			korahomepage.selectMenuOption("WorkSpaces");
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
@@ -117,7 +138,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 			
 	
-	@Test(enabled = true, priority = 4)
+	@Test(enabled = true, priority = 5)
 	public void MC_TC9_validate3dotOptionsFor121() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -131,10 +152,10 @@ public class Messages121Test extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
 			korahomepage.selectMenuOption(Messages);
-			/*koramessagespage.startNewConversationWith("chat", newparticipants, true);
+			koramessagespage.startNewConversationWith("chat", newparticipants, true);
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
 			user = koramessagespage.enterYourMessageAs(updatedstr);
-			koramessagespage.goToGroupAndPerform(user, false, "NA");*/
+			koramessagespage.goToGroupAndPerform(user, false, "NA");
 			koramessagespage.goToGroupAndPerform(user, true, "3dots");
 			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions, "middle");
 			extent.endTest(test);
@@ -143,7 +164,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-		@Test(enabled = true, priority = 5)
+		@Test(enabled = true, priority = 6)
 	public void MC_TC46_verifyEditMessage() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -167,7 +188,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 6)
+	@Test(enabled = true, priority = 7)
 	public void MC_TC24_activeThreadOnFocusColor() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -191,7 +212,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 7)
+	@Test(enabled = true, priority = 8)
 	public void MC_TC12_checkActiveParticipant() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -224,7 +245,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 8)
+	@Test(enabled = true, priority = 9)
 	public void MC_TC28_verifyChevronIcon() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -248,8 +269,8 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 9)
-	public void MC_TC29_TC43_validationFordLongText() throws Exception {
+	/*@Test(enabled = true, priority = 10)
+	public void MC_TC29_TC43_sendLongText() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -272,7 +293,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 10)
+	@Test(enabled = true, priority = 11)
 	public void MC_TC38_TC57_validateTopLeftMenuChats() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -295,7 +316,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 11)
+	@Test(enabled = true, priority = 12)
 	public void MC_TC55_TC58_validateTopLeftMenuDR() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -317,7 +338,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 12)
+	@Test(enabled = true, priority = 13)
 	public void MC_TC56_validateTopLeftMenuAllMessages() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -338,7 +359,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 13)
+	@Test(enabled = true, priority = 14)
 	public void MC_TC10_enterTextWithEmoji() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -357,7 +378,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 14)
+	@Test(enabled = true, priority = 15)
 	public void MC_TC60_validateGroupMembersCount() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -385,7 +406,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 15)
+	@Test(enabled = true, priority = 16)
 	public void MC_TC66_searchMemberFromManageChat() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -411,7 +432,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 16)
+	@Test(enabled = true, priority = 17)
 	public void MC_TC35_TC47_TC67_validateReplyback() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -445,7 +466,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 17)
+	@Test(enabled = true, priority = 18)
 	public void MC_TC52_validateDirectForward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -479,7 +500,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 18)
+	@Test(enabled = true, priority = 19)
 	public void MC_TC59_validateSelectAndForward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -516,7 +537,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 19)
+	@Test(enabled = true, priority = 20)
 	public void MC_TC48_TC51_validateReactionsAndMessageInfo() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -556,7 +577,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 20)
+	@Test(enabled = true, priority = 21)
 	public void MC_TC61_verifyReminderSlots() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -585,7 +606,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 21)
+	@Test(enabled = true, priority = 22)
 	public void MC_TC62_TC63_TC64_DeleteMessage() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -627,7 +648,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 22)
+	@Test(enabled = true, priority = 23)
 	public void MC_TC50_MiddlepanePagination() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -646,5 +667,5 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Middle pane pagination");
 		}
-	}
+	}*/
 }

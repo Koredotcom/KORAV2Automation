@@ -325,6 +325,7 @@ public class KoraMessagesChatsPage extends PageBase {
 
 	public String getActiveLabelBackgroundColor(String expected) throws Exception {
 		String actbckgclr = null;
+		Thread.sleep(5000);
 		try {
 			String cted = "rgba(231, 241, 255, 1)";
 			actbckgclr = remoteDriver.findElement(By.xpath(er.kmcactivebackground))

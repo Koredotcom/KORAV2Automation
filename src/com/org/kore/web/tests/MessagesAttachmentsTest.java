@@ -56,7 +56,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		directory = System.getProperty("user.dir");
 	}
 
-	@Test(enabled = true, priority = 37)
+	/*@Test(enabled = true, priority = 37)
 	public void MC_TC11_TC30_uploadAllIndividualFilesBelow25MB() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -215,6 +215,6 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate DR post /comment with attachments");
 		}
-	} 
+	} */
 	
 }
