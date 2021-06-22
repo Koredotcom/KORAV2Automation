@@ -1036,7 +1036,7 @@ public class KoraMessagesChatsPage extends PageBase {
 					timelines.add(e.getText());
 				}
 				test.log(LogStatus.INFO, "Timeline displayed as " + timelines);
-				test.log(LogStatus.WARNING, "Cross check the time lines from below screenshot".toString()
+				test.log(LogStatus.PASS, "Cross check the time lines from below screenshot".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 			} else {
 				test.log(LogStatus.FAIL, typeofAmend + " timeline was not updated in the group".toString()

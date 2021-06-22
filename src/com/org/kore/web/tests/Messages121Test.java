@@ -83,8 +83,6 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			// koraloginpage.launchw3(url, korajusername, korajpassword);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.checkDefaultFocus_Recents();
@@ -105,6 +103,7 @@ public class Messages121Test extends DriverSetUp {
 			String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			korahomepage.selectMenuOption("WorkSpaces");
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.checkMatchesWith(checkmatch);
 			extent.endTest(test);
@@ -269,7 +268,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	/*@Test(enabled = true, priority = 10)
+	@Test(enabled = true, priority = 10)
 	public void MC_TC29_TC43_sendLongText() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -667,5 +666,5 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Middle pane pagination");
 		}
-	}*/
+	}
 }
