@@ -595,11 +595,15 @@ public class MessagesDR extends DriverSetUp {
 			koramessagedrpage.searchforattachmentinmsgandDR("ZipperZip.zip");
 			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
 			koramessagedrpage.searchforattachmentinmsgandDR("ZipperZip.zip");
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages"); 
 
 			extent.endTest(test);
 			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to Search for file in Chat and DR");
+			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages"); 
 		}
 	}
 	
@@ -641,11 +645,15 @@ public class MessagesDR extends DriverSetUp {
 
 			koramessagedrpage.goToGroupAndPerforminWSDR(newDrrandom, true, "3dots");
 			koramessagedrpage.deletDiscRoomandWorkSpace(newDrrandom,"NA");
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages"); 
 
 			extent.endTest(test);
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed at like Comment To A Post");
+			korahomepage.selectMenuOption("Messages");
+			korahomepage.selectTopLeftMenuOption("All Messages"); 
 		}
 	} 
 	

@@ -221,7 +221,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 31)
-	public void MC_TC_27_deleteConversation() throws Exception {
+	public void MC_TC_27_deleteChatsGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
