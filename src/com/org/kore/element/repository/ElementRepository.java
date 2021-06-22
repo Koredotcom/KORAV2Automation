@@ -50,7 +50,7 @@ public class ElementRepository {
 			kdrclosenewdrcreation = null, kdrdiscardmsg = null, kdpostviaemailtoggle = null, kdrtoggleemaillink = null,
 			kdrtoggleedit = null, kdrtogglecopy = null, kdrmembers = null, kdrsettingallmembers = null,
 			kdrcreatenewWsplus = null, kdrnewWorkspacename = null, kdrnewwsdonebtn = null,
-			kdrcountofmembersrightpanel = null, kdradduserfromrightpanel = null,kdruaccesstype=null;
+			kdrcountofmembersrightpanel = null, kdradduserfromrightpanel = null,kdruaccesstype=null,kdrtypecommentbar=null;
 
 	public void repoIOS() {
 
@@ -233,6 +233,7 @@ public class ElementRepository {
 		kdrcountofmembersrightpanel = "//i[@class='p-icon _choI kr-members usersCountBox ']/span";
 		kdradduserfromrightpanel = "//i[@class='p-icon kr-add_user_male']";
 		kdruaccesstype="//div[@class='input-group']/div[1]";
+		kdrtypecommentbar="//div[@id='discInput' and @placeholder='Type your comment']";
 
 	}
 

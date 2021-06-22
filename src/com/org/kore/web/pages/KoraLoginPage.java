@@ -151,21 +151,23 @@ public class KoraLoginPage extends PageBase {
 		o365url="https://www.office.com/";
 		remoteDriver.get(o365url);	
 		boolean logout=false;
+		Thread.sleep(2000);
 		logout=remoteDriver.findElements(By.xpath("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']")).size()>0;
 		test.log(LogStatus.INFO, "Office 365 account loaded ".toString() + test.addScreenCapture(takeScreenShot()));
 		System.out.println("https://www.office.com/ loaded successfully");
 		waitToappearIgnoreFail("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']", "xpath", "profile");
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		boolean extraheader =false;
 		extraheader=remoteDriver.findElements(By.xpath("//div[@class='mectrl_topHeader']")).size()>0;
 		if (extraheader){
 			System.out.println("Had extra header for O 365 logout");
 			click("//div[@class='mectrl_topHeader']", "extra header profile");
+			Thread.sleep(3000);
 			waitToappear("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']", "xpath", "profile");
 		}
 		
 		click("//div[@id='O365_MainLink_MePhoto']", "profile");
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		// need to check this
 		waitToappearIgnoreFail("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "xpath", "wait for signout");
 		Thread.sleep(1000);

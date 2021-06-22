@@ -647,7 +647,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 23)
+	/*@Test(enabled = true, priority = 23)
 	public void MC_TC50_MiddlepanePagination() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -666,5 +666,5 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Middle pane pagination");
 		}
-	}
+	}*/
 }

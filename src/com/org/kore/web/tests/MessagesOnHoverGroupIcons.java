@@ -95,7 +95,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 	}
 	
 	@Test(enabled = true, priority = 35)
-	public void MC_TC_22_TC_39_TC_40_muteSlotsVerification() throws Exception {
+	public void MC_TC_22_TC_40_TC_41_muteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -122,7 +122,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 	}
 	
 	@Test(enabled = true, priority = 36)
-	public void MC_TC_22_TC_36_validateStarredChats() throws Exception {
+	public void MC_TC_22_TC_37_validateStarredChats() throws Exception {
 		
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -153,7 +153,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 	}
 	
 	@Test(enabled = true, priority = 37)
-	public void MC_TC_22_TC_38_validateUnreadChats() throws Exception {
+	public void MC_TC_22_TC_39_validateUnreadChats() throws Exception {
 		
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())

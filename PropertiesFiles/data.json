@@ -99,6 +99,7 @@
 		"commentonaPost":"Automation Comment",
 		"drcomment": "comment on a post",
 		"drexpected3dotsforPostinrightpanel": "Edit, Forward, Reminder, Post Info, Delete",
-		"sampleurl":"https://techiesindiainc.com/"
+		"sampleurl":"https://techiesindiainc.com/",
+		"multipleparticipants":"hana@koraqa1.com,dileep@koraqa1.com"
 	}
 }
