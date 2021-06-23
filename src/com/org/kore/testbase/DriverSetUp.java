@@ -266,15 +266,6 @@ public class DriverSetUp {
 
 	// Here tried to change the existing extentReport Html file from Https to Http ... But still it doesn't work at all
 	public void mitigateHTML(File htmlfilepath) throws Exception {
-		
-		/*if (App.equalsIgnoreCase("QA")){
-			workingurl="https://workassist-qa.kore.ai/";
-		}else if (App.equalsIgnoreCase("Dev")){
-			workingurl="https://workassist-dev.kore.ai/";
-		}else {
-			workingurl="Please check the environment and url";
-		}*/
-		
 		StringBuilder html = new StringBuilder();
 		FileReader freader = new FileReader(htmlfilepath);
 		try {
@@ -317,16 +308,6 @@ public class DriverSetUp {
 	
 	public void tcTableCreation(Map<String, String> map2) throws IOException {
 		
-		/*workingurl =null;
-		
-		if (App.equalsIgnoreCase("QA")){
-			workingurl="https://workassist-qa.kore.ai/";
-		}else if (App.equalsIgnoreCase("DEV")){
-			workingurl="https://workassist-dev.kore.ai/";
-		}else {
-			workingurl="Please check the environment and url";
-		}*/
-		
 		String dir = System.getProperty("user.dir");
 		BufferedWriter writer;
 		File file;
@@ -338,10 +319,6 @@ public class DriverSetUp {
 			writer.write(
 					"<html><head></head>");
 			writer.write("<body><h2> WorkAssist: "+App+" Env</b> WebApp Automation Results</h2></body>");
-			
-			/*writer.write("<body><table><table border ='1'><tr><th><b>Scope</b></th><td> <a href=https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWM=fnyhppFIds6A/edit?ts=3D5fd77590#gid=3D1327035589> Basic sanity test cases</a></td><tr><th><b>Env</b>&emsp;</th><td><b>https://workassist-qa.kore.ai/ (QA)</b></td> </tr><tr><th><b>Browser</b></th><td>Chrome</td></tr></body>");
-			writer.write("<body><h2> </h2></body>");
-			writer.write("<table> </table>");*/
 			
 			writer.write("<body><table><table border ='1'><tr><th><b>Scope</b></th><td> <a href=https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWM=fnyhppFIds6A/edit?ts=3D5fd77590#gid=3D1327035589> Basic sanity test cases</a></td></tr><tr><th><b>Env</b>&ensp;</th><td><b>"+workingurl+"&emsp;</b></td> </tr></th><tr><th><b>Browser &emsp;</b></th><td>Chrome</td></tr><tr><th><b>Analysis &emsp;</b></th><td><a href=https://docs.google.com/spreadsheets/d/1Q3aIa9lp_im-4k6athtNH8RVgJ9KfWMfnyhppFIds6A/edit?ts=5fd77590#gid=252492981>For report analysis click here</a></td></tr></body>");
 			writer.write("<body><h2> </h2></body>");
@@ -355,10 +332,6 @@ public class DriverSetUp {
 			
 			writer.write("<body><table><table border ='1'>" + "<tr bgcolor="+"#02c8ff"+">" + "<th><font color="+"white"+"><b>Module</b></th>" +"<th><font color="+"white"+"><b>Scenario</b></th>"+ "<th><font color="+"white"+"><b>TC ID</b></th>"+"<th><font color="+"white"+"><b>Description</b></th>"
                     + "<th><font color="+"white"+"><b>Status</b></th>");
-		//	writer.write("<body><h2> </h2></body>");
-		//	writer.write("<table> </table>");
-			
-			// for (int i=0; i<totaltc;i++){
 			
 			int cnt=1;
 			for (Entry<String, String> entry : map.entrySet()) {
@@ -427,6 +400,44 @@ public class DriverSetUp {
 		}
 	}
 	
+	/*public void createPieChart()  throws Exception {
+			File f = new File("ConsolidatedReport.html");
+			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+			bw.write(
+					"<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Work Assist Results Segregation'],
+          ['PASS',     40],
+          ['FAIL',      5],
+          ['WARNING',  9]
+        ]);
+
+        var options = {
+          title: 'Work Assist Report',
+		  slices: {0: {color: 'green'}, 1:{color: 'red'}, 2:{color: 'orange'}}
+		  
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 400px; height: 400px;"></div>
+  </body>
+</html>");
+			
+			bw.close();
+			Desktop.getDesktop().browse(f.toURI());
+		}*/
+	
 	@AfterSuite // This is working, before moving the report to other location
 	public void closeConnections() throws Exception {
 		SimpleDateFormat sdfDateReport = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");// dd/MM/yyyy
@@ -435,15 +446,9 @@ public class DriverSetUp {
 			String dir = System.getProperty("user.dir");
 			// stopServer();
 			File htmlFile = new File(ExtentReportUtility.s);
-			// System.out.println("_______________ Original report
-			// path_______________" + htmlFile);
 			Desktop.getDesktop().browse(htmlFile.toURI());
 			System.out.println("Report Path : " + dir + "/ReportGenerator/" + reportFolder);
-			// zipFolder(dir + "/ReportGenerator/"+reportFolder, dir +
-			// "/ReportGenerator/WorkAssistReport.zip");
-			// customReport();
 			tcTableCreation(map);
-
 			if (buildNumber == null) {
 				zipFolder(dir + "/ReportGenerator/" + reportFolder,
 						"D:/WorkAssist_AUTBackUPResults/WorkAssist" + sdfDateReport.format(now) + ".zip");
