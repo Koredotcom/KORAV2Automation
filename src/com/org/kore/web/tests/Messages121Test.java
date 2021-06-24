@@ -150,6 +150,7 @@ public class Messages121Test extends DriverSetUp {
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			korahomepage.selectMenuOption("WorkSpaces");
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
@@ -175,6 +176,7 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			korahomepage.selectMenuOption("WorkSpaces");
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
@@ -200,6 +202,7 @@ public class Messages121Test extends DriverSetUp {
 			String expbgclr = DriverSetUp.testdataMap.get("expectedlabelbackground");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			korahomepage.selectMenuOption("WorkSpaces");
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);
 			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
@@ -223,6 +226,7 @@ public class Messages121Test extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			korahomepage.selectMenuOption("WorkSpaces");
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);
