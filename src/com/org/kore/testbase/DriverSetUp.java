@@ -455,13 +455,13 @@ public class DriverSetUp {
 			Desktop.getDesktop().browse(htmlFile.toURI());
 			System.out.println("Report Path : " + dir + "/ReportGenerator/" + reportFolder);
 			tcTableCreation(map);
-			if (buildNumber == null) {
+			/*if (buildNumber == null) {
 				zipFolder(dir + "/ReportGenerator/" + reportFolder,
 						"D:/WorkAssist_AUTBackUPResults/WorkAssist" + sdfDateReport.format(now) + ".zip");
 			} else {
 				zipFolder(dir + "/ReportGenerator/" + reportFolder,
 						"D:/WorkAssist_AUTBackUPResults/" + buildNumber +"_"+ sdfDateReport.format(now) + ".zip");
-			}
+			}*/
 
 		} catch (Exception e) {
 			System.out.println("End with issues in @Aftersuite");
