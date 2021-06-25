@@ -533,6 +533,7 @@ public class KoraMessagesChatsPage extends PageBase {
 							"xpath");
 					Thread.sleep(1000);
 					click(er.kmcidgroup + groupname + "']/../../../..//i[@class='icon __i kr-eyeLash']", "Un-Read");
+					Thread.sleep(1000);
 					moveToElement(er.klogo, "Work Assist Logo");
 					click(er.klogo, "Work Assist Logo");
 					Thread.sleep(2000);
