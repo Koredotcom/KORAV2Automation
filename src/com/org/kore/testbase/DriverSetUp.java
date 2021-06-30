@@ -316,6 +316,7 @@ public class DriverSetUp {
 		try {
 			file = new File(dir+"/ReportGenerator/"+reportFolder+"/CustomReport.html");
 			writer = new BufferedWriter(new FileWriter(file));
+			
 			writer.write(
 					"<html><head></head>");
 			writer.write("<body><h2> WorkAssist: "+App+" Env</b> WebApp Automation Results</h2></body>");
@@ -399,6 +400,10 @@ public class DriverSetUp {
 				writer.write("</tr> ");
 			}
 			writer.write("</tr></table>" + "</body>" + "</html>");
+			
+			writer.write(
+					"<html><body><p style= \"color:orange;\"><i><b>NOTE: Warning test cases requires manual UI validation</i></p></body></html>");
+			
 			writer.close();
 			Desktop.getDesktop().browse(file.toURI());
 		} catch (IOException e) {
