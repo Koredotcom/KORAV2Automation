@@ -72,7 +72,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 2)
+	/*@Test(enabled = true, priority = 2)
 	public void MC_TC3_TC4_TC5_verifyRecentSuggestions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -649,7 +649,7 @@ public class Messages121Test extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
 		}
-	}
+	}*/
 
 	/*@Test(enabled = true, priority = 23)
 	public void MC_TC50_MiddlepanePagination() throws Exception {

@@ -333,8 +333,8 @@ public class DriverSetUp {
 			writer.write("<body><table><table border ='1'>" + "<tr bgcolor="+"#02c8ff"+">" + "<th><font color="+"white"+"><b>Module</b></th>" +"<th><font color="+"white"+"><b>Scenario</b></th>"+ "<th><font color="+"white"+"><b>TC ID</b></th>"+"<th><font color="+"white"+"><b>Description</b></th>"
                     + "<th><font color="+"white"+"><b>Status</b></th>");
 			
-			writer.write(
-					"<html><body><p><I><b>NOTE: </I></b>Warning test cases requires manual UI validation</i></p></body></html>");
+			/*writer.write(
+					"<html><body><p><I><b>NOTE: </I></b>Warning test cases requires manual UI validation</i></p></body></html>");*/
 			
 			/*writer.write(
 					"<html><body><p style= \"color:orange;\"><i><b>NOTE: Warning test cases requires manual UI validation</i></p></body></html>");*/
