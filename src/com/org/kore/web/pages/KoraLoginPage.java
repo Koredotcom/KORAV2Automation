@@ -162,7 +162,7 @@ public class KoraLoginPage extends PageBase {
 		if (extraheader){
 			System.out.println("Had extra header for O 365 logout");
 			click("//div[@class='mectrl_topHeader']", "extra header profile");
-			Thread.sleep(3000);
+			Thread.sleep(10000);
 			waitToappear("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']", "xpath", "profile");
 		}
 		
@@ -171,10 +171,16 @@ public class KoraLoginPage extends PageBase {
 		// need to check this
 		waitToappearIgnoreFail("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "xpath", "wait for signout");
 		Thread.sleep(1000);
-		clickNIgnoreFail("//a[@id='mectrl_body_signOut'] | //a[@id='meControlSignoutLink']", "click signout");
+		try{
+			clickNIgnoreFail("//a[@id='mectrl_body_signOut']", "Signout of mectrl");
+		}catch (Exception e){
+			clickNIgnoreFail("//a[@id='meControlSignoutLink']", "Signout of meControlSignout");
+		}
 		Thread.sleep(5000);
 		test.log(LogStatus.INFO, "Logged out from office 365".toString() + test.addScreenCapture(takeScreenShot()));
-		waitToappearIgnoreFail("//div[@id='switch-account'] | //div[@class='personalization__buttons-container']", "xpath", "logout");
+		waitToappearIgnoreFail("//div[@id='switch-account']", "xpath", "logout");
+		test.log(LogStatus.INFO, "Logged out from office 365".toString() + test.addScreenCapture(takeScreenShot()));
+	//	waitToappearIgnoreFail("//div[@id='switch-account'] | //div[@class='personalization__buttons-container']", "xpath", "logout");
 	}
 
 	public String getUserDetails() throws Exception {
