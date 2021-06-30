@@ -404,6 +404,9 @@ public class DriverSetUp {
 			writer.write(
 					"<html><body><p style= \"color:orange;\"><i><b>NOTE: Warning test cases requires manual UI validation</i></p></body></html>");
 			
+			writer.write(
+					"<html><body><p><a href=http://jenkins.kora.ai/> Click here to access Jenkins</a><br>UserName: koraautomation<br>Password: Kore@123#</p></body></html>");
+			
 			writer.close();
 			Desktop.getDesktop().browse(file.toURI());
 		} catch (IOException e) {
