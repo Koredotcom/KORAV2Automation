@@ -63,9 +63,9 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-		//	koraloginpage.launchw3(url, korajusername, korajpassword);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
+			koraloginpage.launchw3(url, korajusername, korajpassword);
+			/*koraloginpage.loginToKora(url, korajusername, korajpassword);
+			korahomepage.selectMenuOption(Messages);*/
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
@@ -436,6 +436,35 @@ public class Messages121Test extends DriverSetUp {
 	}
 	
 	@Test(enabled = true, priority = 17)
+	public void MC_TC61_verifyReminderSlots() throws Exception {
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Messages_Chats");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+			String url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.testdataMap.get("messages");
+			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			String expreminderslots = DriverSetUp.testdataMap.get("expectedreminderslots");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			korahomepage.selectMenuOption("Workspaces");
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			koramessagespage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
+			user = koramessagespage.enterYourMessageAs(updatedstr);
+			koramessagespage.goToGroupAndPerform(user, false, "NA");
+			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Reminder");
+
+			koramessagespage.validateAndSelectMuteSlots("reminder", expreminderslots, false);
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate Reminder slots");
+		}
+	}
+	
+	@Test(enabled = true, priority = 18)
 	public void MC_TC35_TC47_TC67_validateReplyback() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -469,8 +498,8 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 18)
-	public void MC_TC52_validateDirectForward() throws Exception {
+	@Test(enabled = true, priority = 19)
+	public void MC_TC52_validateForwardFromStartNewChat() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -503,7 +532,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 19)
+	@Test(enabled = true, priority = 20)
 	public void MC_TC59_validateSelectAndForward() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -540,7 +569,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 20)
+	@Test(enabled = true, priority = 21)
 	public void MC_TC48_TC51_validateReactionsAndMessageInfo() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -577,35 +606,6 @@ public class Messages121Test extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Reactions and message info functionality");
-		}
-	}
-
-	@Test(enabled = true, priority = 21)
-	public void MC_TC61_verifyReminderSlots() throws Exception {
-		try {
-			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_Messages_Chats");
-			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
-			String Messages = DriverSetUp.testdataMap.get("messages");
-			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
-			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-			String expreminderslots = DriverSetUp.testdataMap.get("expectedreminderslots");
-			test.log(LogStatus.INFO, "Navigation url :" + url);
-
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
-			koramessagespage.goToGroupAndPerform(user, false, "NA");
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Reminder");
-
-			koramessagespage.validateAndSelectMuteSlots("reminder", expreminderslots, false);
-			extent.endTest(test);
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate Reminder slots");
 		}
 	}
 

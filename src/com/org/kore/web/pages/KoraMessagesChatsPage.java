@@ -1656,6 +1656,7 @@ public class KoraMessagesChatsPage extends PageBase {
 	public void forwardPostOrValidation(boolean forwardpost,boolean oneToOne, String chatheadername, String forwardedmsg,
 			String newparticipantsorroupname) throws Exception {
 		boolean forwardmsg=false;
+		boolean closebutton=false;
 		try {
 			if ((forwardpost)&&(oneToOne)) {
 				if (elementIsDisplayed(er.kmforwardmsgpopup, "xpath")) {
@@ -1671,6 +1672,11 @@ public class KoraMessagesChatsPage extends PageBase {
 						select(newparticipantsorroupname);
 					}
 					click(er.kdcreatenforwardpost, "click on  Create & Forward");
+					
+				if(closebutton = remoteDriver.findElements(By.xpath(er.kdfowradpostWindowclose)).size()>0){
+					test.log(LogStatus.FAIL, "Forward message for <b>Start a New Chat flow </b>is not working" + test.addScreenCapture(takeScreenShot()));
+					clickNIgnoreFail(er.kdfowradpostWindowclose, "Clicking to close button of forward message window");
+				}
 					Thread.sleep(2000);
 				}
 				
@@ -1702,13 +1708,13 @@ public class KoraMessagesChatsPage extends PageBase {
 				test.log(LogStatus.PASS, "<b>"+forwardedmsg+" </b>got displayed as a Forwarded message" + test.addScreenCapture(takeScreenShot()));
 			} else {
 				test.log(LogStatus.FAIL,
-						"After forward, forward placeholder or <b>"+ forwardedmsg+" <b> text is not displayed completely .Seems it is not scrolled completely to the bottom"
+						"After forward, forward placeholder is not displayed for <b>"+ forwardedmsg+" <b> message. Seems it is not scrolled completely to the bottom"
 								.toString() + test.addScreenCapture(takeScreenShot()));
 			}
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
-					"Forward message pop up is not displayedor unable to select the provided participant".toString()
+					"Forward message pop up is not displayed or unable to select the provided participant".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 		}
 	}
