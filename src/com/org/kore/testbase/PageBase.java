@@ -1552,7 +1552,6 @@ public class PageBase extends DriverSetUp {
 		// Added to avaoid Absolute path dependency
 		String result[] = completepath.trim().split("Screenshots");
 		String finalwithscr = "Screenshots" + result[1];
-		finalwithscr="http://jenkins.kora.ai//job/WorkAssist//ws//ReportGenerator//WorkAssistReport//"+finalwithscr;
 		return finalwithscr;
 
 	}
