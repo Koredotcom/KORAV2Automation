@@ -575,7 +575,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 56)
+	/*@Test(enabled = true, priority = 56)
 	public void MDR_TC48_SearchforfileinChatandDR() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -692,5 +692,5 @@ public class MessagesDR extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate messageInfo");
 		}
-	}
+	}*/
 }
