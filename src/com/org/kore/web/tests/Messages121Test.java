@@ -63,16 +63,16 @@ public class Messages121Test extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.launchw3(url, korajusername, korajpassword);
-			/*koraloginpage.loginToKora(url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);*/
+		//	koraloginpage.launchw3(url, korajusername, korajpassword);
+			koraloginpage.loginToKora(url, korajusername, korajpassword);
+			korahomepage.selectMenuOption(Messages);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
 		}
 	}
 	
-	/*@Test(enabled = true, priority = 2)
+	@Test(enabled = true, priority = 2)
 	public void MC_TC3_TC4_TC5_verifyRecentSuggestions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -92,7 +92,7 @@ public class Messages121Test extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 3)
+		@Test(enabled = true, priority = 3)
 	public void MC_TC6_searchSuggestionValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -137,7 +137,7 @@ public class Messages121Test extends DriverSetUp {
 	}
 			
 	
-	@Test(enabled = true, priority = 5)
+	/*	@Test(enabled = true, priority = 5)
 	public void MC_TC9_validate3dotOptionsFor121() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())

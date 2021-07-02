@@ -1550,9 +1550,10 @@ public class PageBase extends DriverSetUp {
 		// return srcFile.getAbsolutePath();
 
 		// Added to avaoid Absolute path dependency
-		String result[] = completepath.trim().split("Screenshots");
+		/*String result[] = completepath.trim().split("Screenshots");
 		String finalwithscr = "Screenshots" + result[1];
-		return finalwithscr;
+		return finalwithscr;*/
+		return "data:image/png;base64, "+encodedBase64;
 
 	}
 
