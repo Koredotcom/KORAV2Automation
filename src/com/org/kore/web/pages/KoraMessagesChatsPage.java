@@ -1716,6 +1716,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			test.log(LogStatus.FAIL,
 					"Forward message pop up is not displayed or unable to select the provided participant".toString()
 							+ test.addScreenCapture(takeScreenShot()));
+			click(er.kdfowradpostWindowclose, "Clicking to close forward message window");
 		}
 	}
 	

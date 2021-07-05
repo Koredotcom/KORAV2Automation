@@ -48,7 +48,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 
 	}
 
-	@Test(enabled = true, priority = 33)
+	@Test(enabled = true, priority = 31)
 	public void MC_TC41_firstGroupIconValidation() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -69,7 +69,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 34)
+	@Test(enabled = true, priority = 32)
 	public void MC_TC23_groupChat3dotOptions() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -94,7 +94,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 35)
+	@Test(enabled = true, priority = 33)
 	public void MC_TC_22_TC_40_TC_41_muteSlotsVerification() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -121,7 +121,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 36)
+	@Test(enabled = true, priority = 34)
 	public void MC_TC_22_TC_37_validateStarredChats() throws Exception {
 		
 		try {
@@ -152,7 +152,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 37)
+	@Test(enabled = true, priority = 35)
 	public void MC_TC_22_TC_39_validateUnreadChats() throws Exception {
 		
 		try {
@@ -181,7 +181,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 38)
+	@Test(enabled = true, priority = 36)
 	public void MC_TC44_koraAtmentionUsers() throws Exception {
 		
 		try {
@@ -204,28 +204,4 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
 		}
 	}
-	
-	/**
-	 * This will become NA since Group onHover count functionality got removed
-	 * @throws Exception
-	 */
-	/*@Test(enabled = true, priority = 36)
-	public void MC_TC35_koraOnHoverParticipantsValidation() throws Exception {
-		try {
-			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_Messages_Chats");
-			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
-			String Messages = DriverSetUp.testdataMap.get("messages");
-			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
-			test.log(LogStatus.INFO, "Navigation url :" + url);
-			
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.getOnHoverParticipantsCount(groupname, korajusername);
-			extent.endTest(test);
-		} catch (Exception e) {
-			test.log(LogStatus.FAIL, "Failed to validate on hover participants count");
-		}
-	}*/
 }

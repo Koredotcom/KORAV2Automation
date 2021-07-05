@@ -60,11 +60,11 @@ public class WorkspacesTest extends DriverSetUp {
 
 	}
 
-	@Test(enabled = false, priority = 33)
-	public void MDR_TC1_TC2_TC3_TC65_createNewWorkspaceAndDelete() throws Exception {
+	@Test(enabled = false, priority = 61)
+	public void MDR_createNewWorkspaceAndDelete() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_DiscussionRooms");
+					.assignCategory("WorkAssist_Workspaces");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String url = DriverSetUp.propsMap.get("weburl");
@@ -83,8 +83,8 @@ public class WorkspacesTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = false, priority = 34)
-	public void MDR_TC4_TC5_inviteMembersToWorkspaceAndManage() throws Exception {
+	@Test(enabled = false, priority = 62)
+	public void MDR_inviteMembersToWorkspaceAndManage() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
@@ -111,8 +111,8 @@ public class WorkspacesTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = false, priority = 35)
-	public void MDR_TC8_filterByWorkspace() throws Exception {
+	@Test(enabled = false, priority = 63)
+	public void MDR_filterByWorkspace() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
@@ -141,8 +141,8 @@ public class WorkspacesTest extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = false, priority = 36)
-	public void MDR_TC9_TC10_defaultDRAndTimeline() throws Exception {
+	@Test(enabled = false, priority = 64)
+	public void MDR_defaultDRAndTimeline() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
