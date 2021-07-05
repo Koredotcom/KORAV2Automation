@@ -1518,6 +1518,8 @@ public class PageBase extends DriverSetUp {
 	}
 
 	public String takeScreenShot() throws IOException {
+		String encodedBase64 = null;
+		FileInputStream fileInputStreamReader = null;
 		Calendar cal = Calendar.getInstance();
 		long s = cal.getTimeInMillis();
 		File screen = null;
@@ -1536,8 +1538,6 @@ public class PageBase extends DriverSetUp {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		String encodedBase64 = null;
-		FileInputStream fileInputStreamReader = null;
 		File srcFile = new File(
 				"ReportGenerator/" + ExtentReportUtility.reportFolder + "/Screenshots/image" + s + ".png");
 		fileInputStreamReader = new FileInputStream(
@@ -1550,10 +1550,13 @@ public class PageBase extends DriverSetUp {
 		// return srcFile.getAbsolutePath();
 
 		// Added to avaoid Absolute path dependency
-		/*String result[] = completepath.trim().split("Screenshots");
+		String result[] = completepath.trim().split("Screenshots");
 		String finalwithscr = "Screenshots" + result[1];
-		return finalwithscr;*/
-		return "data:image/png;base64, "+encodedBase64;
+		fileInputStreamReader.close();
+		return finalwithscr;
+		
+	//	return encodedBase64;
+	//	return "data:image/png;base64, "+encodedBase64;
 
 	}
 

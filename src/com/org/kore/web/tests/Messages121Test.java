@@ -150,6 +150,7 @@ public class Messages121Test extends DriverSetUp {
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			korahomepage.selectMenuOption("WorkSpaces");
 			korahomepage.selectMenuOption(Messages);
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);
