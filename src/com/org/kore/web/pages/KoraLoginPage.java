@@ -122,8 +122,13 @@ public class KoraLoginPage extends PageBase {
 		}
 	}
 
+	public void backToHomePage(String url){
+		remoteDriver.get(url);
+	}
+	
 	public void logoutAndReLogin(boolean relogin, String url, String userName, String password) throws Exception {
 		try {
+			remoteDriver.get(url);
 			boolean loadingflag=false;
 			loadingflag=remoteDriver.findElements(By.xpath("//div[@class='lds-ring']")).size()>0;
 			if(loadingflag)
@@ -151,7 +156,7 @@ public class KoraLoginPage extends PageBase {
 		o365url="https://www.office.com/";
 		remoteDriver.get(o365url);	
 		boolean logout=false;
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		logout=remoteDriver.findElements(By.xpath("//div[@id='O365_MainLink_MePhoto'] | //div[@class='mectrl_topHeader']")).size()>0;
 		test.log(LogStatus.INFO, "Office 365 account loaded ".toString() + test.addScreenCapture(takeScreenShot()));
 		System.out.println("https://www.office.com/ loaded successfully");

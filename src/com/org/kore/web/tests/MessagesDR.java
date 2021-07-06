@@ -63,11 +63,12 @@ public class MessagesDR extends DriverSetUp {
 
 	@Test(enabled = true, priority = 41)  
 	public void MDR_TC12_TC13_TC30_validating3DotOptionsFromMidAndRightPanels() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String standarddiscroom = DriverSetUp.drdataMap.get("standarddr"); 
 			String expWDRmiddle3dotoptions = DriverSetUp.drdataMap.get("wexpected3dotoptionsmiddle");
@@ -84,16 +85,18 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate 3DotOptions From MidAndRight Panel");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 42) 
 	public void MDR_TC24_DROnhoverOptionsVerification() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -108,6 +111,7 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate  On hover Options Verification");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
@@ -120,11 +124,12 @@ public class MessagesDR extends DriverSetUp {
 	 */
 	@Test(enabled = true, priority = 43)  
 	public void MDR_TC32_TC33_TC34_TC35_TC36_TC37_createNewDRwithDifferentAccessTypes() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
@@ -158,6 +163,7 @@ public class MessagesDR extends DriverSetUp {
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate create New DR with Different AccessTypes");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
@@ -167,11 +173,12 @@ public class MessagesDR extends DriverSetUp {
 	 */
 	@Test(enabled = true, priority = 44)  
 	public void MDR_TC64_deleteWorkSpacefromMessages() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
@@ -192,6 +199,7 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate delete WorkSpace from Messages");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
@@ -202,11 +210,12 @@ public class MessagesDR extends DriverSetUp {
 	 */
 	@Test(enabled = true, priority = 45)  
 	public void MDR_TC53_TC56_EditaPost() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 			String expWDpost3dotoptions = DriverSetUp.drdataMap.get("drexpected3dotsforPostinrightpanel");
@@ -222,6 +231,7 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Edit post");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
@@ -230,13 +240,13 @@ public class MessagesDR extends DriverSetUp {
 	 */
 	@Test(enabled = true, priority = 46) 
 	public void MDR_TC49_TC54_TC55_TC57_forwardPostToGroupDrAndNewconv() throws Exception {
-
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);			
@@ -263,17 +273,18 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate forward Post To Group DR And New  Conversation");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 47)
 	public void MDR_TC25_TC26_TC28_TC29_starDrandMuteDrandvaldiation() throws Exception {
+		String url =null;
 		try {
-
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");			
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -309,16 +320,18 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate star Discussion Room and Mute DR ");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 48) 
 	public void MDR_TC14_TC15_TC71_LeaveandDeleteDRfromManageRoom() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
@@ -343,6 +356,7 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to  Leave and Delete DR from ManageRoom");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
@@ -353,11 +367,12 @@ public class MessagesDR extends DriverSetUp {
 	 */
 	@Test(enabled = true, priority = 49)  
 	public void MDR_TC45_TC52_TC77_DeletePostandCancelnewDR() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");			
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -374,6 +389,7 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Delete Post and Cancel new DR");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
@@ -383,12 +399,12 @@ public class MessagesDR extends DriverSetUp {
 	 */
 	@Test(enabled = true, priority = 50) 
 	public void MDR_TC7_TC59_TC60_TC61_atmentionUsersinDr() throws Exception {
-
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -411,16 +427,18 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate atmention Users in Discussion Room");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 51) 
 	public void MDR_TC39_TC72_PostviaEmailToggle() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 			test.log(LogStatus.INFO, "Navigation url :" + url);	
@@ -434,17 +452,18 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to  validate Postvia Email Toggle");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 52) 
 	public void MDR_TC66_TC17_TC21_TC70_creationofRoomwithoutWS() throws Exception {
+		String url =null;
 		try {
-
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
@@ -468,16 +487,18 @@ public class MessagesDR extends DriverSetUp {
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to creation of Room without Work Space");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 53)  
 	public void MDR_TC23_TC69_TC76_TC78_createnewWSfromDRandaddDRs() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);						
@@ -505,16 +526,18 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to Create new Work Spae from DR and add more Discussion Rooms");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 54) 
 	public void MDR_TC62_TC73_TC74_TC75_addnewparticiapantstoexistingDr() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
@@ -537,17 +560,18 @@ public class MessagesDR extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to Create new Work Spae from DR and add more Discussion Rooms");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 55)
 	public void MDR_TC20_TC79_TC80_createNEWDRandvalidatefrompartcipantsend() throws Exception {
+		String url =null;
 		try {
-
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String newparticipants = "hana@koraqa1.com";
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
@@ -572,16 +596,18 @@ public class MessagesDR extends DriverSetUp {
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate create new Dr and valdiate from partipates end");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 56)
 	public void MDR_TC48_SearchforfileinChatandDR() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
@@ -602,19 +628,19 @@ public class MessagesDR extends DriverSetUp {
 			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to Search for file in Chat and DR");
-			korahomepage.selectMenuOption("Messages");
-			korahomepage.selectTopLeftMenuOption("All Messages"); 
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 
 	@Test(enabled = true, priority = 57) 
 	public void MDR_TC11_TC40_TC41_TC42_TC46_TC58_likeCommentToAPost() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 
 			String Messages = DriverSetUp.drdataMap.get("messages");			
 			String drcomment = DriverSetUp.drdataMap.get("drcomment");
@@ -652,18 +678,17 @@ public class MessagesDR extends DriverSetUp {
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed at like Comment To A Post");
-			korahomepage.selectMenuOption("Messages");
-			korahomepage.selectTopLeftMenuOption("All Messages"); 
-		}
+			koraloginpage.backToHomePage(url);		}
 	} 
 	
 	@Test(enabled = true, priority = 58) 
 	public void MDR_TC67_messageInfo() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.drdataMap.get("messages");								
 			test.log(LogStatus.INFO, "Navigation url :" + url);	
 
@@ -691,6 +716,7 @@ public class MessagesDR extends DriverSetUp {
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate messageInfo");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 }

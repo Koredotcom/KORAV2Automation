@@ -54,12 +54,13 @@ public class MessagesChat121 extends DriverSetUp {
 
 	@Test(enabled = true, priority = 1)
 	public void MC_TC2_loginToWorkAssist() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
@@ -69,17 +70,19 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 2)
 	public void MC_TC3_TC4_TC5_verifyRecentSuggestions() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
@@ -89,16 +92,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 		@Test(enabled = true, priority = 3)
 	public void MC_TC6_searchSuggestionValidation() throws Exception {
+			String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -109,16 +114,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate user suggestion validation");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 4)
 	public void MC_TC8_profileIConValidationFor121() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -133,17 +140,19 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Profile Icon for One to One conversaton");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 			
 	
 		@Test(enabled = true, priority = 5)
 	public void MC_TC9_validate3dotOptionsFor121() throws Exception {
+			String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -162,16 +171,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton 3 dot options");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 		@Test(enabled = true, priority = 6)
 	public void MC_TC46_verifyEditMessage() throws Exception {
+			String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -187,16 +198,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Edit message functionality");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 7)
 	public void MC_TC24_activeThreadOnFocusColor() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -212,16 +225,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active thread focus colour");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 8)
 	public void MC_TC12_checkActiveParticipant() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -246,16 +261,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 9)
 	public void MC_TC28_verifyChevronIcon() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -270,16 +287,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Chevron icon for Single participant");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 10)
 	public void MC_TC29_TC43_sendLongText() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonlongtext = "Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend";
@@ -294,16 +313,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate long text");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 11)
 	public void MC_TC38_TC57_validateTopLeftMenuChats() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
@@ -317,16 +338,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate top left menu Chats");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 12)
 	public void MC_TC55_TC58_validateTopLeftMenuDR() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
@@ -339,16 +362,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Top left menu DR's sections");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 13)
 	public void MC_TC56_validateTopLeftMenuAllMessages() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
@@ -360,16 +385,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Top left menu All Messages sections");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 14)
 	public void MC_TC10_enterTextWithEmoji() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
@@ -379,16 +406,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Emoji's with text");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 15)
 	public void MC_TC60_validateGroupMembersCount() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -407,16 +436,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate and compare Group members count from Header and Manage chat");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 16)
 	public void MC_TC66_searchMemberFromManageChat() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -433,16 +464,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Search functionality from manage chat");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 17)
 	public void MC_TC61_verifyReminderSlots() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -462,16 +495,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Reminder slots");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 18)
 	public void MC_TC35_TC47_TC67_validateReplyback() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -496,16 +531,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate reply back functionality");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 19)
 	public void MC_TC52_validateForwardFromStartNewChat() throws Exception {
+		String url = null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -530,16 +567,19 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate direct Forward functionality");
+			koraloginpage.backToHomePage(url);
+			
 		}
 	}
 
 	@Test(enabled = true, priority = 20)
 	public void MC_TC59_validateSelectAndForward() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String qapridegroup = DriverSetUp.testdataMap.get("standardgroupname");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -567,16 +607,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate select and Forward functionality");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 21)
 	public void MC_TC48_TC51_validateReactionsAndMessageInfo() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 		//	String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -607,16 +649,18 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Reactions and message info functionality");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 22)
 	public void MC_TC62_TC63_TC64_DeleteMessage() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String qapridegroup = DriverSetUp.testdataMap.get("standardgroupname");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -649,6 +693,7 @@ public class MessagesChat121 extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 

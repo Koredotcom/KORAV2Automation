@@ -62,12 +62,13 @@ public class WorkspacesTest extends DriverSetUp {
 
 	@Test(enabled = false, priority = 61)
 	public void MDR_createNewWorkspaceAndDelete() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Workspaces");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
 			String workspacename = DriverSetUp.drdataMap.get("workspacename123");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -80,17 +81,19 @@ public class WorkspacesTest extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate create new workspace and validations");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = false, priority = 62)
 	public void MDR_inviteMembersToWorkspaceAndManage() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
 			String workspaceauto = DriverSetUp.drdataMap.get("workspaceauto");
 			String invitemems = DriverSetUp.drdataMap.get("workspacemems");
@@ -108,17 +111,19 @@ public class WorkspacesTest extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to invite members to workspace");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = false, priority = 63)
 	public void MDR_filterByWorkspace() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
 			String Messages = DriverSetUp.drdataMap.get("messages");
 			String workspacename = DriverSetUp.drdataMap.get("workspacename8");
@@ -138,17 +143,19 @@ public class WorkspacesTest extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = false, priority = 64)
 	public void MDR_defaultDRAndTimeline() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_DiscussionRooms");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
 			String workspacename = DriverSetUp.drdataMap.get("workspacename910");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -164,6 +171,7 @@ public class WorkspacesTest extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate default DR and Timeline (General name might got changed)");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 }

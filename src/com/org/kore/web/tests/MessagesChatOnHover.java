@@ -50,11 +50,12 @@ public class MessagesChatOnHover extends DriverSetUp {
 
 	@Test(enabled = true, priority = 31)
 	public void MC_TC41_firstGroupIconValidation() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -66,17 +67,19 @@ public class MessagesChatOnHover extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 32)
 	public void MC_TC23_groupChat3dotOptions() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsforgroup");
@@ -91,17 +94,19 @@ public class MessagesChatOnHover extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate 3 dot options for a group");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 33)
 	public void MC_TC_22_TC_40_TC_41_muteSlotsVerification() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 			String muteslots = DriverSetUp.testdataMap.get("expectedmuteslots");
@@ -118,18 +123,19 @@ public class MessagesChatOnHover extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate/select mute slots");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 34)
 	public void MC_TC_22_TC_37_validateStarredChats() throws Exception {
-		
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String Starred = DriverSetUp.testdataMap.get("kmstarred");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
@@ -149,18 +155,19 @@ public class MessagesChatOnHover extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate on hover star/unstar actions");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 35)
 	public void MC_TC_22_TC_39_validateUnreadChats() throws Exception {
-		
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
@@ -178,18 +185,19 @@ public class MessagesChatOnHover extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate on hover actions");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 	
 	@Test(enabled = true, priority = 36)
 	public void MC_TC44_koraAtmentionUsers() throws Exception {
-		
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("standardgroupname");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -202,6 +210,7 @@ public class MessagesChatOnHover extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate shuffling of first group icon");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 }

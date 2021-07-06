@@ -50,13 +50,14 @@ public class MessagesChatGroups extends DriverSetUp {
 
 	@Test(enabled = true, priority = 24)
 	public void MC_TC13_createAndDeleteGroupWithNoName() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String groupname, groupcount = null;
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("groupparticipants");
 			String grouptext = DriverSetUp.testdataMap.get("groupchat");
@@ -89,17 +90,19 @@ public class MessagesChatGroups extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
 					"Failed to validate group creation with no name and delete the same conversation flow");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 25)
 	public void MC_TC14_TC15_TC16_TC20_TC21_createNewGroupWithName() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("groupparticipants");
 			String groupname = DriverSetUp.testdataMap.get("groupname");
@@ -120,17 +123,19 @@ public class MessagesChatGroups extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate create new group conversation flow");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 26)
 	public void MC_TC17_TC18_TC19_addMemberToExistingGroup() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String groupname = DriverSetUp.testdataMap.get("groupname");
 			String updatedgroupmems = DriverSetUp.testdataMap.get("updateparticipant");
@@ -146,18 +151,20 @@ public class MessagesChatGroups extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Add members to group flow");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 27)
 	public void MC_TC17_renameExistingGroup() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			String updatedname;
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String renameto = DriverSetUp.testdataMap.get("renamegroupto");
 			String groupname = DriverSetUp.testdataMap.get("groupname");
@@ -174,17 +181,19 @@ public class MessagesChatGroups extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate rename existing group flow");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 28)
 	public void MC_TC17_removeParticipantsFromGroup() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -199,17 +208,19 @@ public class MessagesChatGroups extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate remove participants flow");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 39)
 	public void MC_TC25_TC26_clearChatHistory() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -224,17 +235,19 @@ public class MessagesChatGroups extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate clear conversation history flow");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 
 	@Test(enabled = true, priority = 30)
 	public void MC_TC_27_deleteChatsGroup() throws Exception {
+		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
-			String url = DriverSetUp.propsMap.get("weburl");
+			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
@@ -250,6 +263,7 @@ public class MessagesChatGroups extends DriverSetUp {
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate delete conversation flow");
+			koraloginpage.backToHomePage(url);
 		}
 	}
 

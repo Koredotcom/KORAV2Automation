@@ -99,7 +99,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			} else {
 				test.log(LogStatus.FAIL, "For a new chat displayed " + recents.size() + " Recent suggestions".toString()
 						+ test.addScreenCapture(takeScreenShot()));
-				test.log(LogStatus.FAIL, "For a new chat default cursor focus is not on Enter Participant name field");
+				test.log(LogStatus.FAIL, "For a new chat default cursor focus is not on Add people");
 			}
 			click(er.kmcloseconversation, "Close");
 		} catch (Exception e) {
