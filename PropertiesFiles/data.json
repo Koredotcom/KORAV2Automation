@@ -8,10 +8,17 @@
 	"DEV": {
 		"browser": "chrome",
 		"weburls": "https://developer.servicenow.com/dev.do#!/home",
-		"weburlqa": "https://workassist-dev.kore.ai/",
 		"weburl": "https://workassist-dev.kore.ai/",
 		"tool": "Selenium"
 	},
+	
+	"PROD": {
+		"browser": "chrome",
+		"weburls": "https://developer.servicenow.com/dev.do#!/home",
+		"weburl": "https://workassist.kore.ai/",
+		"tool": "Selenium"
+	},
+	
 	"IOSNATIVE": {
 		"tool": "Appium",
 		"device_UDID": "db7c046175ac287147dfa117edefe4836bf149fa",
