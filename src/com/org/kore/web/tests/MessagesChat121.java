@@ -16,7 +16,7 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 
-public class Messages121Test extends DriverSetUp {
+public class MessagesChat121 extends DriverSetUp {
 
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
@@ -31,7 +31,7 @@ public class Messages121Test extends DriverSetUp {
 
 	static String user = null;
 
-	public Messages121Test() throws Exception {
+	public MessagesChat121() throws Exception {
 		super();
 
 	}

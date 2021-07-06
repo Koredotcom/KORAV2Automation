@@ -15,7 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 
-public class MessagesGroupNameTest extends DriverSetUp {
+public class MessagesChatGroups extends DriverSetUp {
 
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
@@ -27,7 +27,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 	String korahusername;
 	String korahpassword;
 
-	public MessagesGroupNameTest() throws Exception {
+	public MessagesChatGroups() throws Exception {
 		super();
 
 	}
@@ -68,6 +68,9 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			koramessagespage.startNewConversationWith("Chat", newparticipants, true);
 			groupname = koramessagespage.enterYourMessageAs(grouptext);
 
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages");
+			
 			koramessagespage.goToGroupAndPerform(groupname, false, "NA");
 			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
 			koramessagespage.operationsFrom3Dots("Manage Chat");
@@ -90,7 +93,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 25)
-	public void MC_TC14_TC15_TC16_TC20_TC21_createNewGroupConversation() throws Exception {
+	public void MC_TC14_TC15_TC16_TC20_TC21_createNewGroupWithName() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");
@@ -109,6 +112,8 @@ public class MessagesGroupNameTest extends DriverSetUp {
 			koramessagespage.startNewConversationWith("chat", newparticipants, true);
 			koramessagespage.createGroupAs(groupname);
 			koramessagespage.enterYourMessageAs(grouptext);
+			korahomepage.selectMenuOption(Messages);
+			korahomepage.selectTopLeftMenuOption("All Messages");
 			koramessagespage.goToGroupAndPerform(groupname, false, "NA");
 			koramessagespage.verifyGroupCreationTimeline(korajusername);
 			koramessagespage.getGroupTimestamp(groupname);
@@ -119,7 +124,7 @@ public class MessagesGroupNameTest extends DriverSetUp {
 	}
 
 	@Test(enabled = true, priority = 26)
-	public void MC_TC17_TC18_TC19_addMemberToGroup() throws Exception {
+	public void MC_TC17_TC18_TC19_addMemberToExistingGroup() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
 					.assignCategory("WorkAssist_Messages_Chats");

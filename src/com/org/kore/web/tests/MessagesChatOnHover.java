@@ -15,7 +15,7 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 
-public class MessagesOnHoverGroupIcons extends DriverSetUp {
+public class MessagesChatOnHover extends DriverSetUp {
 
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
@@ -27,7 +27,7 @@ public class MessagesOnHoverGroupIcons extends DriverSetUp {
 	String korahusername;
 	String korahpassword;
 
-	public MessagesOnHoverGroupIcons() throws Exception {
+	public MessagesChatOnHover() throws Exception {
 		super();
 
 	}

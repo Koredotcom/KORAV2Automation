@@ -17,7 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 
-public class MessagesAttachmentsTest extends DriverSetUp {
+public class MessagesAttachments extends DriverSetUp {
 
 	KoraLoginPage koraloginpage;
 	KoraHomePage korahomepage;
@@ -33,7 +33,7 @@ public class MessagesAttachmentsTest extends DriverSetUp {
 	static String user = null;
 	static String directory =null;
 
-	public MessagesAttachmentsTest() throws Exception {
+	public MessagesAttachments() throws Exception {
 		super();
 
 	}

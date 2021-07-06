@@ -264,7 +264,7 @@ public class KoraMessagesChatsPage extends PageBase {
 			test.log(LogStatus.WARNING,
 					"Emojis displayed, requires human eye to check the UI from the below screenshot".toString()
 							+ test.addScreenCapture(takeScreenShot()));
-			click(er.kmsmiley, "Smiley Emoju");
+			click(er.kmsmiley, "Smiley Emoji");
 			if (withtext)
 				compose.sendKeys(enterthistext, Keys.ENTER);
 			compose.sendKeys(Keys.ENTER);
