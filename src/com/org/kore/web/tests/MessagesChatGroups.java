@@ -212,7 +212,7 @@ public class MessagesChatGroups extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 39)
+	@Test(enabled = true, priority = 29)
 	public void MC_TC25_TC26_clearChatHistory() throws Exception {
 		String url =null;
 		try {

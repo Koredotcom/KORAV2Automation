@@ -137,6 +137,7 @@ public class KoraLoginPage extends PageBase {
 			waitAndContinue(er.klogo, "xpath", "Top left menu");
 			clickNIgnoreFail(er.kuserprofileicon, "Click on User profile icon");
 			clickNIgnoreFail(er.klogout, "Logout");
+			test.log(LogStatus.INFO, "Selected Logout from work assist".toString() + test.addScreenCapture(takeScreenShot()));
 			clickNIgnoreFail(er.klogoutyes, "Logout Confirmation Popup Yes");
 			test.log(LogStatus.INFO, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
 			waitTillappear(er.ko365, "xpath", "Choose ur account type");
@@ -184,7 +185,7 @@ public class KoraLoginPage extends PageBase {
 		Thread.sleep(5000);
 		test.log(LogStatus.INFO, "Logged out from office 365".toString() + test.addScreenCapture(takeScreenShot()));
 		waitToappearIgnoreFail("//div[@id='switch-account']", "xpath", "logout");
-		test.log(LogStatus.INFO, "Logged out from office 365".toString() + test.addScreenCapture(takeScreenShot()));
+		test.log(LogStatus.INFO, "Logged out from office 365 and Home screen got displayed".toString() + test.addScreenCapture(takeScreenShot()));
 	//	waitToappearIgnoreFail("//div[@id='switch-account'] | //div[@class='personalization__buttons-container']", "xpath", "logout");
 	}
 

@@ -261,10 +261,12 @@ public class KoraMessagesChatsPage extends PageBase {
 			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
 			click(er.kmemoji, "Emoji");
 			Thread.sleep(2000);
-			test.log(LogStatus.WARNING,
+			test.log(LogStatus.INFO,
 					"Emojis displayed, requires human eye to check the UI from the below screenshot".toString()
 							+ test.addScreenCapture(takeScreenShot()));
 			click(er.kmsmiley, "Smiley Emoji");
+		//	click("//span[@class='joypixels joypixels-24-people _2639']", "Smiley Emoji");
+			
 			if (withtext)
 				compose.sendKeys(enterthistext, Keys.ENTER);
 			compose.sendKeys(Keys.ENTER);

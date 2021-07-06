@@ -398,11 +398,13 @@ public class MessagesChat121 extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
+			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
+			String textmsg = onetoonetext + korahomepage.runtimehhmmss();
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
 			korahomepage.selectMenuOption(Messages);
 			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.enterYourEmojiWithText(true, " Hi Sending with emoji ");
+			koramessagespage.enterYourEmojiWithText(true, textmsg);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Emoji's with text");
