@@ -2,7 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="My Test Suite" parallel="tests">
 	<test name="Sequential Tests">
-		<parameter name="environment" value="PROD" />
+	
+	<!-- <parameter name="environment" value="${prodType}" /> -->
+		<parameter name="environment" value="QA" />
 		<parameter name="browser" value="chrome" />
 		<classes>
 
