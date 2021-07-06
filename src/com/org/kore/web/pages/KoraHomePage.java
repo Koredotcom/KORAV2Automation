@@ -44,6 +44,9 @@ public class KoraHomePage extends PageBase {
 	public void selectMenuOption(String menuoption) throws Exception {
 		boolean flag = false;
 		boolean hmenu = false;
+		boolean discard =false;
+		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0)
+			click("//span[@class='p-button-text p-c'][text()='Yes']", "Discard Popup");
 		waittillpageload();
 		waitTillappear(er.klogo, "xpath", "Top left menu");
 		System.out.println("Work Assist home screen displayed");
@@ -81,6 +84,11 @@ public class KoraHomePage extends PageBase {
 	 */
 
 	public void selectTopLeftMenuOption(String menuoption) throws Exception {
+		boolean discard =false;
+		
+		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0)
+			click("//span[@class='p-button-text p-c'][text()='Yes']", "Discard Popup");
+		
 		boolean flag = false;
 		waitTillappear(er.kmctopleftmenu, "xpath", "Top header");
 		WebElement ele= remoteDriver.findElement(By.xpath(er.kmctopleftmenu));
@@ -338,6 +346,7 @@ public class KoraHomePage extends PageBase {
 	 */
 	public void clickOn(String option, boolean screenshot) throws Exception {
 		click(er.ktext + option + "']", option + " option");
+		Thread.sleep(3000);
 		if (screenshot)
 			test.log(LogStatus.PASS, "Clicked on " + option+" Popup".toString(), test.addScreenCapture(takeScreenShot()));
 

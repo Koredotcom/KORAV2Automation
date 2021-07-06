@@ -588,7 +588,7 @@ public class PageBase extends DriverSetUp {
 		} catch (Exception exc) {
 			System.out.println("Failed to find " + locator + " i.e." + elementName);
 			test.log(LogStatus.FAIL,
-					locator + " element is not displayed ".toString() + test.addScreenCapture(takeScreenShot()));
+					locator + " i.e. "+elementName+ " element is not displayed ".toString() + test.addScreenCapture(takeScreenShot()));
 			throw new Exception(exc);
 		}
 	}
