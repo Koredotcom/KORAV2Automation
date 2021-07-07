@@ -19,11 +19,11 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class Workspaces extends DriverSetUp {
 
-	WALoginPage koraloginpage;
-	WAHomePage korahomepage;
-	WAMessagesChatsPage koramessagespage;
-	WAWorkspacesPage koraworkspacepage;
-	WAMessagesDRPage koramessagedrpage;
+	WALoginPage waloginpage;
+	WAHomePage wahomepage;
+	WAMessagesChatsPage wamessageschatspage;
+	WAMessagesDRPage wamessagesdrpage;
+	WAWorkspacesPage waworkspacepage;
 
 	String korajusername;
 	String korajpassword;
@@ -42,11 +42,11 @@ public class Workspaces extends DriverSetUp {
 	public void getDriver() throws Exception {
 		System.out.println("About to execute Group test");
 
-		koraloginpage = new WALoginPage(remoteDriver);
-		korahomepage = new WAHomePage(remoteDriver);
-		koramessagespage = new WAMessagesChatsPage(remoteDriver);
-		koraworkspacepage = new WAWorkspacesPage(remoteDriver);
-		koramessagedrpage = new WAMessagesDRPage(remoteDriver);
+		waloginpage = new WALoginPage(remoteDriver);
+		wahomepage = new WAHomePage(remoteDriver);
+		wamessageschatspage = new WAMessagesChatsPage(remoteDriver);
+		waworkspacepage = new WAWorkspacesPage(remoteDriver);
+		wamessagesdrpage = new WAMessagesDRPage(remoteDriver);
 		// pagebase = new PageBase(remoteDriver);
 
 		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
@@ -72,15 +72,16 @@ public class Workspaces extends DriverSetUp {
 			String workspacename = DriverSetUp.drdataMap.get("workspacename123");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			// koraloginpage.launchw3(url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Workspaces);
-			koraworkspacepage.createNewWorkspaceAndCheckDefault(workspacename);
-			koraworkspacepage.clickOnWorkspace3Dots(workspacename);
-			koraworkspacepage.operationsFromWS3Dots(workspacename, "Delete");
+			// waloginpage.launchw3(url, korajusername, korajpassword);
+			waloginpage.loginToKora(url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Workspaces);
+			waworkspacepage.createNewWorkspaceAndCheckDefault(workspacename);
+			waworkspacepage.clickOnWorkspace3Dots(workspacename);
+			waworkspacepage.operationsFromWS3Dots(workspacename, "Delete");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate create new workspace and validations");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -98,19 +99,19 @@ public class Workspaces extends DriverSetUp {
 			String invitemems = DriverSetUp.drdataMap.get("workspacemems");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Workspaces);
-			koraworkspacepage.createNewWorkspaceAs(workspaceauto);
-			koraworkspacepage.workspaceDirectInvite(invitemems);
-			koraworkspacepage.clickOnWorkspace3Dots(workspaceauto);
-			koraworkspacepage.operationsFromWS3Dots(workspaceauto, "Manage");
-			koramessagespage.clickOn("Members", true);
-			koraworkspacepage.validateRecentInvites(invitemems);
-			koraworkspacepage.clickOnWorkspace3Dots(workspaceauto);
-			koraworkspacepage.operationsFromWS3Dots(workspaceauto, "Delete");
+			wahomepage.selectMenuOption(Workspaces);
+			waworkspacepage.createNewWorkspaceAs(workspaceauto);
+			waworkspacepage.workspaceDirectInvite(invitemems);
+			waworkspacepage.clickOnWorkspace3Dots(workspaceauto);
+			waworkspacepage.operationsFromWS3Dots(workspaceauto, "Manage");
+			wamessageschatspage.clickOn("Members", true);
+			waworkspacepage.validateRecentInvites(invitemems);
+			waworkspacepage.clickOnWorkspace3Dots(workspaceauto);
+			waworkspacepage.operationsFromWS3Dots(workspaceauto, "Delete");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to invite members to workspace");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -128,21 +129,21 @@ public class Workspaces extends DriverSetUp {
 			String workspacename = DriverSetUp.drdataMap.get("workspacename8");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Workspaces);
-			koraworkspacepage.createNewWorkspaceAs(workspacename);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.getActiveOptionFromLeftNav("All Messages");
-			koraworkspacepage.selectWorkspace(workspacename);
-			// koramessagespage.getChatHeaderName();
-			String wsname = koramessagespage.enterYourMessageAs("My post in " + workspacename);
-			koraworkspacepage.compareActualExpected(wsname, "General", "Default selected workspace is : ");
-			korahomepage.selectMenuOption(Workspaces);
-			koraworkspacepage.clickOnWorkspace3Dots(workspacename);
-			koraworkspacepage.operationsFromWS3Dots(workspacename, "Delete");
+			wahomepage.selectMenuOption(Workspaces);
+			waworkspacepage.createNewWorkspaceAs(workspacename);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.getActiveOptionFromLeftNav("All Messages");
+			waworkspacepage.selectWorkspace(workspacename);
+			// wamessageschatspage.getChatHeaderName();
+			String wsname = wamessageschatspage.enterYourMessageAs("My post in " + workspacename);
+			waworkspacepage.compareActualExpected(wsname, "General", "Default selected workspace is : ");
+			wahomepage.selectMenuOption(Workspaces);
+			waworkspacepage.clickOnWorkspace3Dots(workspacename);
+			waworkspacepage.operationsFromWS3Dots(workspacename, "Delete");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -159,18 +160,18 @@ public class Workspaces extends DriverSetUp {
 			String workspacename = DriverSetUp.drdataMap.get("workspacename910");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Workspaces);
-			koraworkspacepage.createNewWorkspaceAs(workspacename);
-			koraworkspacepage.selectDefaultDR();
-			koramessagespage.visibilityOfComposeBar(true);
-			koramessagespage.verifyGroupCreationTimeline(korajusername);
-			korahomepage.selectMenuOption(Workspaces);
-			koraworkspacepage.clickOnWorkspace3Dots(workspacename);
-			koraworkspacepage.operationsFromWS3Dots(workspacename, "Delete");
+			wahomepage.selectMenuOption(Workspaces);
+			waworkspacepage.createNewWorkspaceAs(workspacename);
+			waworkspacepage.selectDefaultDR();
+			wamessageschatspage.visibilityOfComposeBar(true);
+			wamessageschatspage.verifyGroupCreationTimeline(korajusername);
+			wahomepage.selectMenuOption(Workspaces);
+			waworkspacepage.clickOnWorkspace3Dots(workspacename);
+			waworkspacepage.operationsFromWS3Dots(workspacename, "Delete");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate default DR and Timeline (General name might got changed)");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 }
