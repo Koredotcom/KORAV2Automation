@@ -4,10 +4,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.org.kore.testbase.DriverSetUp;
-import com.org.kore.web.pages.KoraHomePage;
-import com.org.kore.web.pages.KoraLoginPage;
-import com.org.kore.web.pages.KoraMessagesChatsPage;
-import com.org.kore.web.pages.KoraMessagesDRPage;
+import com.org.kore.web.pages.WAHomePage;
+import com.org.kore.web.pages.WALoginPage;
+import com.org.kore.web.pages.WAMessagesChatsPage;
+import com.org.kore.web.pages.WAMessagesDRPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
@@ -18,10 +18,10 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class MessagesChat121 extends DriverSetUp {
 
-	KoraLoginPage koraloginpage;
-	KoraHomePage korahomepage;
-	KoraMessagesChatsPage koramessagespage;
-	KoraMessagesDRPage koramessagedrpage;
+	WALoginPage waloginpage;
+	WAHomePage wahomepage;
+	WAMessagesChatsPage wamessageschatspage;
+	WAMessagesDRPage wamessagesdrpage;
 
 	String korajusername;
 	String korajpassword;
@@ -40,10 +40,10 @@ public class MessagesChat121 extends DriverSetUp {
 	public void getDriver() throws Exception {
 		System.out.println("About to execute 121 test");
 
-		koraloginpage = new KoraLoginPage(remoteDriver);
-		korahomepage = new KoraHomePage(remoteDriver);
-		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
-		koramessagedrpage = new KoraMessagesDRPage(remoteDriver);
+		waloginpage = new WALoginPage(remoteDriver);
+		wahomepage = new WAHomePage(remoteDriver);
+		wamessageschatspage = new WAMessagesChatsPage(remoteDriver);
+		wamessagesdrpage = new WAMessagesDRPage(remoteDriver);
 
 		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
 		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
@@ -64,13 +64,13 @@ public class MessagesChat121 extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-		//	koraloginpage.launchw3(url, korajusername, korajpassword);
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
+		//	waloginpage.launchw3(url, korajusername, korajpassword);
+			waloginpage.loginToKora(url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Messages);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -86,17 +86,17 @@ public class MessagesChat121 extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.checkDefaultFocus_Recents();
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.checkDefaultFocus_Recents();
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
-		@Test(enabled = true, priority = 3)
+	@Test(enabled = true, priority = 3)
 	public void MC_TC6_searchSuggestionValidation() throws Exception {
 			String url =null;
 		try {
@@ -108,13 +108,13 @@ public class MessagesChat121 extends DriverSetUp {
 			String checkmatch = DriverSetUp.testdataMap.get("checkmatchwith");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption("WorkSpaces");
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.checkMatchesWith(checkmatch);
+			wahomepage.selectMenuOption("WorkSpaces");
+			wahomepage.selectMenuOption(Messages);
+			wamessageschatspage.checkMatchesWith(checkmatch);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate user suggestion validation");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -131,16 +131,16 @@ public class MessagesChat121 extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption("WorkSpaces");
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
-			koramessagespage.userProfileIconValidation(user);
+			wahomepage.selectMenuOption("WorkSpaces");
+			wahomepage.selectMenuOption(Messages);
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
+			wamessageschatspage.userProfileIconValidation(user);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Profile Icon for One to One conversaton");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 			
@@ -159,19 +159,19 @@ public class MessagesChat121 extends DriverSetUp {
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption("WorkSpaces");
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
-			koramessagespage.goToGroupAndPerform(user, false, "NA");
-			koramessagespage.goToGroupAndPerform(user, true, "3dots");
-			koramessagespage.optionsDisplayedOn3Dots("One to One", expected3dotoptions, "middle");
+			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			wahomepage.selectMenuOption("WorkSpaces");
+			wahomepage.selectMenuOption(Messages);
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
+			wamessageschatspage.goToGroupAndPerform(user, false, "NA");
+			wamessageschatspage.goToGroupAndPerform(user, true, "3dots");
+			wamessageschatspage.optionsDisplayedOn3Dots("One to One", expected3dotoptions, "middle");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate one to one conversaton 3 dot options");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -188,17 +188,17 @@ public class MessagesChat121 extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption("WorkSpaces");
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
-			koramessagespage.goToGroupAndPerform(user, false, "NA");
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Edit");
+			wahomepage.selectMenuOption("WorkSpaces");
+			wahomepage.selectMenuOption(Messages);
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
+			wamessageschatspage.goToGroupAndPerform(user, false, "NA");
+			wamessageschatspage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Edit");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Edit message functionality");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -216,16 +216,16 @@ public class MessagesChat121 extends DriverSetUp {
 			String expbgclr = DriverSetUp.testdataMap.get("expectedlabelbackground");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption("WorkSpaces");
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
-			koramessagespage.getActiveLabelBackgroundColor(expbgclr);
+			wahomepage.selectMenuOption("WorkSpaces");
+			wahomepage.selectMenuOption(Messages);
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
+			wamessageschatspage.getActiveLabelBackgroundColor(expbgclr);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active thread focus colour");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -242,26 +242,26 @@ public class MessagesChat121 extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption("WorkSpaces");
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
-			koramessagespage.getFirstActiveUser(user, true);
-			koramessagespage.goToGroupAndPerform(user, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Delete Chat");
-			korahomepage.clickOn("Delete", true);
-			koramessagespage.getFirstActiveUser(user, false);
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr1);
-			koramessagespage.getFirstActiveUser(user, true);
-		//	koramessagespage.goToMessageAndPerformActionsAs(user,updatedstr, "More", "Copy");
+			wahomepage.selectMenuOption("WorkSpaces");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
+			wamessageschatspage.getFirstActiveUser(user, true);
+			wamessageschatspage.goToGroupAndPerform(user, true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Delete Chat");
+			wahomepage.clickOn("Delete", true);
+			wamessageschatspage.getFirstActiveUser(user, false);
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr1 = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr1);
+			wamessageschatspage.getFirstActiveUser(user, true);
+		//	wamessageschatspage.goToMessageAndPerformActionsAs(user,updatedstr, "More", "Copy");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Active participant after deleting the conversation");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -276,18 +276,18 @@ public class MessagesChat121 extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-			String updatedlongstr = onetoonetext + korahomepage.runtimehhmmss();
+			String updatedlongstr = onetoonetext + wahomepage.runtimehhmmss();
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			koramessagespage.verifyDisplayOfChevronIcon(false);
-			user = koramessagespage.enterYourMessageAs(updatedlongstr);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			wamessageschatspage.verifyDisplayOfChevronIcon(false);
+			user = wamessageschatspage.enterYourMessageAs(updatedlongstr);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Chevron icon for Single participant");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -302,18 +302,18 @@ public class MessagesChat121 extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String newparticipants = DriverSetUp.testdataMap.get("oneparticipant");
 			String onetoonlongtext = "Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend Not that our leaders seemed to notice. Last month the world’s nations, meeting in Rio for the 20th-anniversary reprise of a massive 1992 environmental summit, accomplished nothing. Unlike George H.W. Bush, who flew in for the first conclave, Barack Obama didn’t even attend";
-			String updatedlongstr = onetoonlongtext + korahomepage.runtimehhmmss();
+			String updatedlongstr = onetoonlongtext + wahomepage.runtimehhmmss();
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			user = koramessagespage.enterYourMessageAs(updatedlongstr);
-			koramessagespage.validateLongTextReadMoreTruncation();
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			user = wamessageschatspage.enterYourMessageAs(updatedlongstr);
+			wamessageschatspage.validateLongTextReadMoreTruncation();
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate long text");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -328,17 +328,17 @@ public class MessagesChat121 extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagespage.validateChatsAndDRS(true, false);
-			koramessagespage.validateDirectChatOrDR("chat");
-			korahomepage.selectMenuOption("Workspaces");
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.validateChatsAndDRS(true, false);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Chats");
+			wamessageschatspage.validateChatsAndDRS(true, false);
+			wamessageschatspage.validateDirectChatOrDR("chat");
+			wahomepage.selectMenuOption("Workspaces");
+			wahomepage.selectMenuOption(Messages);
+			wamessageschatspage.validateChatsAndDRS(true, false);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate top left menu Chats");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -353,16 +353,16 @@ public class MessagesChat121 extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagespage.validateDirectChatOrDR("DR");
-			korahomepage.selectMenuOption("Workspaces");
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.validateChatsAndDRS(false, true);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessageschatspage.validateDirectChatOrDR("DR");
+			wahomepage.selectMenuOption("Workspaces");
+			wahomepage.selectMenuOption(Messages);
+			wamessageschatspage.validateChatsAndDRS(false, true);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Top left menu DR's sections");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -377,15 +377,15 @@ public class MessagesChat121 extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			korahomepage.selectMenuOption("Workspaces");
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.validateChatsAndDRS(true, true);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wahomepage.selectMenuOption("Workspaces");
+			wahomepage.selectMenuOption(Messages);
+			wamessageschatspage.validateChatsAndDRS(true, true);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Top left menu All Messages sections");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -399,16 +399,16 @@ public class MessagesChat121 extends DriverSetUp {
 			url = DriverSetUp.propsMap.get("weburl");
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
-			String textmsg = onetoonetext + korahomepage.runtimehhmmss();
+			String textmsg = onetoonetext + wahomepage.runtimehhmmss();
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.enterYourEmojiWithText(true, textmsg);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.enterYourEmojiWithText(true, textmsg);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Emoji's with text");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -424,21 +424,21 @@ public class MessagesChat121 extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Chats");
+			wamessageschatspage.goToGroupAndPerform("QA Pride", false, "NA");
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
 
-			String groupcount = koramessagespage.getChatHeaderNameorCount(false);
-			koramessagespage.goToGroupAndPerform("QA Pride", true, "3dots");
-			koramessagespage.operationsFrom3Dots("Manage Chat");
-			int managepartcount = koramessagespage.searchFromManageChat(false,"hana@koraqa1.com");
-			koramessagespage.compareGroupCount(groupcount, managepartcount);
+			String groupcount = wamessageschatspage.getChatHeaderNameorCount(false);
+			wamessageschatspage.goToGroupAndPerform("QA Pride", true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Manage Chat");
+			int managepartcount = wamessageschatspage.searchFromManageChat(false,"hana@koraqa1.com");
+			wamessageschatspage.compareGroupCount(groupcount, managepartcount);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate and compare Group members count from Header and Manage chat");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -454,19 +454,19 @@ public class MessagesChat121 extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Chats");
+			wamessageschatspage.goToGroupAndPerform("QA Pride", false, "NA");
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
 
-			koramessagespage.goToGroupAndPerform("QA Pride", true, "3dots");
-			koramessagespage.operationsFrom3Dots("Manage Chat");
-			koramessagespage.searchFromManageChat(true,"hana@koraqa1.com");
+			wamessageschatspage.goToGroupAndPerform("QA Pride", true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Manage Chat");
+			wamessageschatspage.searchFromManageChat(true,"hana@koraqa1.com");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Search functionality from manage chat");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -484,20 +484,20 @@ public class MessagesChat121 extends DriverSetUp {
 			String expreminderslots = DriverSetUp.testdataMap.get("expectedreminderslots");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption("Workspaces");
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
-			koramessagespage.goToGroupAndPerform(user, false, "NA");
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Reminder");
+			wahomepage.selectMenuOption("Workspaces");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
+			wamessageschatspage.goToGroupAndPerform(user, false, "NA");
+			wamessageschatspage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Reminder");
 
-			koramessagespage.validateAndSelectMuteSlots("reminder", expreminderslots, false);
+			wamessageschatspage.validateAndSelectMuteSlots("reminder", expreminderslots, false);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Reminder slots");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -515,25 +515,25 @@ public class MessagesChat121 extends DriverSetUp {
 			String replymsg = "It is Reply";
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "Reply Back", replymsg);
+			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
+			wamessageschatspage.goToMessageAndPerformActionsAs(user, updatedstr, "Reply Back", replymsg);
 
-			koramessagespage.verifyJumbBackTomessage(updatedstr);
+			wamessageschatspage.verifyJumbBackTomessage(updatedstr);
 
-			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform("James Middleton", false, "NA");
-			koramessagespage.validateFromRecepientEnd(updatedstr, replymsg);
+			waloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.goToGroupAndPerform("James Middleton", false, "NA");
+			wamessageschatspage.validateFromRecepientEnd(updatedstr, replymsg);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate reply back functionality");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -550,26 +550,26 @@ public class MessagesChat121 extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
-			koramessagespage.goToGroupAndPerform(user, false, "NA");
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Forward");
-			koramessagespage.forwardPostOrValidation(true, true, user, updatedstr, newparticipants);
+			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
+			wamessageschatspage.goToGroupAndPerform(user, false, "NA");
+			wamessageschatspage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Forward");
+			wamessageschatspage.forwardPostOrValidation(true, true, user, updatedstr, newparticipants);
 
-			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
+			waloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
 			String hostuser = "James Middleton";
-			koramessagespage.goToGroupAndPerform(hostuser, false, "NA");
-			koramessagespage.forwardPostOrValidation(false, false, hostuser, updatedstr, newparticipants);
+			wamessageschatspage.goToGroupAndPerform(hostuser, false, "NA");
+			wamessageschatspage.forwardPostOrValidation(false, false, hostuser, updatedstr, newparticipants);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate direct Forward functionality");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 			
 		}
 	}
@@ -587,29 +587,29 @@ public class MessagesChat121 extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagespage.goToGroupAndPerform(qapridegroup, false, "NA");
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
+			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Chats");
+			wamessageschatspage.goToGroupAndPerform(qapridegroup, false, "NA");
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
 
-			koramessagespage.selectOptionFromRightNav3Dots(user, "Select Messages");
-			koramessagespage.selectMessages(qapridegroup, updatedstr);
-			koramessagespage.forwardPostOrValidation(true, false, user, updatedstr, qapridegroup);
+			wamessageschatspage.selectOptionFromRightNav3Dots(user, "Select Messages");
+			wamessageschatspage.selectMessages(qapridegroup, updatedstr);
+			wamessageschatspage.forwardPostOrValidation(true, false, user, updatedstr, qapridegroup);
 
-			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
-			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
-			koramessagespage.enterYourMessageAs(updatedstr1);
+			waloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.goToGroupAndPerform("QA Pride", false, "NA");
+			String updatedstr1 = onetoonetext + wahomepage.runtimehhmmss();
+			wamessageschatspage.enterYourMessageAs(updatedstr1);
 
-			koramessagespage.forwardPostOrValidation(false, false, qapridegroup, updatedstr, "NA");
+			wamessageschatspage.forwardPostOrValidation(false, false, qapridegroup, updatedstr, "NA");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate select and Forward functionality");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -626,32 +626,32 @@ public class MessagesChat121 extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
+			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Chats");
+			wamessageschatspage.goToGroupAndPerform("QA Pride", false, "NA");
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
 
-			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
-			korahomepage.selectMenuOption(Messages);
-			String ReactedUserName = koraloginpage.getUserDetails();
-			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
-			koramessagespage.goToMessageAndPerformActionsAs("QA Pride", updatedstr, "Reactions", "Like");
+			waloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
+			wahomepage.selectMenuOption(Messages);
+			String ReactedUserName = waloginpage.getUserDetails();
+			wahomepage.selectTopLeftMenuOption("Chats");
+			wamessageschatspage.goToGroupAndPerform("QA Pride", false, "NA");
+			wamessageschatspage.goToMessageAndPerformActionsAs("QA Pride", updatedstr, "Reactions", "Like");
 
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagespage.goToGroupAndPerform("QA Pride", false, "NA");
-			koramessagespage.goToMessageAndPerformActionsAs("QA Pride", updatedstr, "More", "Message Info");
+			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Chats");
+			wamessageschatspage.goToGroupAndPerform("QA Pride", false, "NA");
+			wamessageschatspage.goToMessageAndPerformActionsAs("QA Pride", updatedstr, "More", "Message Info");
 
-			koramessagedrpage.messagesreadinPostinfandMsginfo(ReactedUserName, false);
+			wamessagesdrpage.messagesreadinPostinfandMsginfo(ReactedUserName, false);
 
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Reactions and message info functionality");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -668,38 +668,38 @@ public class MessagesChat121 extends DriverSetUp {
 			String onetoonetext = DriverSetUp.testdataMap.get("onetoonechat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform(qapridegroup, false, "NA");
-			String updatedstr = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr);
+			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.goToGroupAndPerform(qapridegroup, false, "NA");
+			String updatedstr = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr);
 
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Delete");
-			koramessagespage.clickOn("Cancel", true);
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Delete");
-			koramessagespage.clickOn("Delete for everyone", true);
-			koramessagespage.validateDeleteMessageFromSelfUser(true, user, updatedstr);
-			String updatedstr1 = onetoonetext + korahomepage.runtimehhmmss();
-			user = koramessagespage.enterYourMessageAs(updatedstr1);
-			koramessagespage.goToMessageAndPerformActionsAs(user, updatedstr1, "More", "Delete");
-			koramessagespage.clickOn("Delete for myself", true);
-			koramessagespage.validateDeleteMessageforMyself(true, user, updatedstr1);
+			wamessageschatspage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Delete");
+			wamessageschatspage.clickOn("Cancel", true);
+			wamessageschatspage.goToMessageAndPerformActionsAs(user, updatedstr, "More", "Delete");
+			wamessageschatspage.clickOn("Delete for everyone", true);
+			wamessageschatspage.validateDeleteMessageFromSelfUser(true, user, updatedstr);
+			String updatedstr1 = onetoonetext + wahomepage.runtimehhmmss();
+			user = wamessageschatspage.enterYourMessageAs(updatedstr1);
+			wamessageschatspage.goToMessageAndPerformActionsAs(user, updatedstr1, "More", "Delete");
+			wamessageschatspage.clickOn("Delete for myself", true);
+			wamessageschatspage.validateDeleteMessageforMyself(true, user, updatedstr1);
 
-			koraloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
-			korahomepage.selectMenuOption(Messages);
-			koramessagespage.goToGroupAndPerform(qapridegroup, false, "NA");
-			koramessagespage.validateDeleteMessageFromSelfUser(false, user, updatedstr);
-			koramessagespage.validateDeleteMessageforMyself(false, user, updatedstr1);
+			waloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
+			wahomepage.selectMenuOption(Messages);
+			wamessageschatspage.goToGroupAndPerform(qapridegroup, false, "NA");
+			wamessageschatspage.validateDeleteMessageFromSelfUser(false, user, updatedstr);
+			wamessageschatspage.validateDeleteMessageforMyself(false, user, updatedstr1);
 
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
-	/*@Test(enabled = true, priority = 23)
+	@Test(enabled = false, priority = 23)
 	public void MC_TC50_MiddlepanePagination() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -709,14 +709,14 @@ public class MessagesChat121 extends DriverSetUp {
 			String Messages = DriverSetUp.testdataMap.get("messages");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption("Workspaces");
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.middlePanePaginationValidation();
+			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			wahomepage.selectMenuOption("Workspaces");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.middlePanePaginationValidation();
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Middle pane pagination");
 		}
-	}*/
+	} 
 }

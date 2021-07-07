@@ -19,12 +19,12 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 
-public class KoraWorkspacesPage extends PageBase {
+public class WAWorkspacesPage extends PageBase {
 	CPCommonFunctions cf;
 	ElementRepository er = DriverSetUp.er;
 	SoftAssert softAssertion = new SoftAssert();
 
-	public KoraWorkspacesPage(RemoteWebDriver remoteWebDriver) {
+	public WAWorkspacesPage(RemoteWebDriver remoteWebDriver) {
 		super(remoteWebDriver);
 		cf = new CPCommonFunctions(remoteWebDriver);
 		// TODO Auto-generated constructor stub

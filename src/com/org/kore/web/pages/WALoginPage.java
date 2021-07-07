@@ -17,11 +17,11 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 
-public class KoraLoginPage extends PageBase {
+public class WALoginPage extends PageBase {
 	CPCommonFunctions cf;
 	ElementRepository er = DriverSetUp.er;
 
-	public KoraLoginPage(RemoteWebDriver remoteWebDriver) {
+	public WALoginPage(RemoteWebDriver remoteWebDriver) {
 		super(remoteWebDriver);
 		cf = new CPCommonFunctions(remoteWebDriver);
 		// TODO Auto-generated constructor stub

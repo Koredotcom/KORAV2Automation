@@ -4,11 +4,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.org.kore.testbase.DriverSetUp;
-import com.org.kore.web.pages.KoraHomePage;
-import com.org.kore.web.pages.KoraLoginPage;
-import com.org.kore.web.pages.KoraMessagesChatsPage;
-import com.org.kore.web.pages.KoraMessagesDRPage;
-import com.org.kore.web.pages.KoraWorkspacesPage;
+import com.org.kore.web.pages.WAHomePage;
+import com.org.kore.web.pages.WALoginPage;
+import com.org.kore.web.pages.WAMessagesChatsPage;
+import com.org.kore.web.pages.WAMessagesDRPage;
+import com.org.kore.web.pages.WAWorkspacesPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
@@ -17,14 +17,13 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 
-public class WorkspacesTest extends DriverSetUp {
+public class Workspaces extends DriverSetUp {
 
-	KoraLoginPage koraloginpage;
-	KoraHomePage korahomepage;
-	KoraMessagesChatsPage koramessagespage;
-	KoraWorkspacesPage koraworkspacepage;
-	KoraMessagesDRPage koramessagedrpage;
-	// PageBase pagebase;
+	WALoginPage koraloginpage;
+	WAHomePage korahomepage;
+	WAMessagesChatsPage koramessagespage;
+	WAWorkspacesPage koraworkspacepage;
+	WAMessagesDRPage koramessagedrpage;
 
 	String korajusername;
 	String korajpassword;
@@ -34,7 +33,7 @@ public class WorkspacesTest extends DriverSetUp {
 
 	static String directory = null;
 
-	public WorkspacesTest() throws Exception {
+	public Workspaces() throws Exception {
 		super();
 
 	}
@@ -43,11 +42,11 @@ public class WorkspacesTest extends DriverSetUp {
 	public void getDriver() throws Exception {
 		System.out.println("About to execute Group test");
 
-		koraloginpage = new KoraLoginPage(remoteDriver);
-		korahomepage = new KoraHomePage(remoteDriver);
-		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
-		koraworkspacepage = new KoraWorkspacesPage(remoteDriver);
-		koramessagedrpage = new KoraMessagesDRPage(remoteDriver);
+		koraloginpage = new WALoginPage(remoteDriver);
+		korahomepage = new WAHomePage(remoteDriver);
+		koramessagespage = new WAMessagesChatsPage(remoteDriver);
+		koraworkspacepage = new WAWorkspacesPage(remoteDriver);
+		koramessagedrpage = new WAMessagesDRPage(remoteDriver);
 		// pagebase = new PageBase(remoteDriver);
 
 		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");

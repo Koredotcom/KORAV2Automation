@@ -24,11 +24,11 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 
-public class KoraHomePage extends PageBase {
+public class WAHomePage extends PageBase {
 	CPCommonFunctions cf;
 	ElementRepository er = DriverSetUp.er;
 
-	public KoraHomePage(RemoteWebDriver remoteWebDriver) {
+	public WAHomePage(RemoteWebDriver remoteWebDriver) {
 		super(remoteWebDriver);
 		cf = new CPCommonFunctions(remoteWebDriver);
 		// TODO Auto-generated constructor stub

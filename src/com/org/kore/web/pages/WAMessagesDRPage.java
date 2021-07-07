@@ -22,21 +22,21 @@ import com.relevantcodes.extentreports.LogStatus;
  *
  */
 
-public class KoraMessagesDRPage extends PageBase {
+public class WAMessagesDRPage extends PageBase {
 	CPCommonFunctions cf;
 	ElementRepository er = DriverSetUp.er;
-	KoraMessagesChatsPage koramessagespage;
-	KoraHomePage korahomepage;
-	KoraWorkspacesPage Koraworkspacespage;
+	WAMessagesChatsPage koramessagespage;
+	WAHomePage korahomepage;
+	WAWorkspacesPage Koraworkspacespage;
 
 
 	List<String> totalmemebersinRoom = new ArrayList<String>() ;
-	public KoraMessagesDRPage(RemoteWebDriver remoteWebDriver) {
+	public WAMessagesDRPage(RemoteWebDriver remoteWebDriver) {
 		super(remoteWebDriver);
 		cf = new CPCommonFunctions(remoteWebDriver);
-		koramessagespage = new KoraMessagesChatsPage(remoteWebDriver);
-		korahomepage = new KoraHomePage(remoteWebDriver);
-		Koraworkspacespage =new KoraWorkspacesPage(remoteWebDriver);
+		koramessagespage = new WAMessagesChatsPage(remoteWebDriver);
+		korahomepage = new WAHomePage(remoteWebDriver);
+		Koraworkspacespage =new WAWorkspacesPage(remoteWebDriver);
 	}
 
 	/**

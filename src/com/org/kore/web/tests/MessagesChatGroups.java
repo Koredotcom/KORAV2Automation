@@ -4,9 +4,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.org.kore.testbase.DriverSetUp;
-import com.org.kore.web.pages.KoraHomePage;
-import com.org.kore.web.pages.KoraLoginPage;
-import com.org.kore.web.pages.KoraMessagesChatsPage;
+import com.org.kore.web.pages.WAHomePage;
+import com.org.kore.web.pages.WALoginPage;
+import com.org.kore.web.pages.WAMessagesChatsPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
@@ -17,9 +17,9 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class MessagesChatGroups extends DriverSetUp {
 
-	KoraLoginPage koraloginpage;
-	KoraHomePage korahomepage;
-	KoraMessagesChatsPage koramessagespage;
+	WALoginPage waloginpage;
+	WAHomePage wahomepage;
+	WAMessagesChatsPage wamessageschatspage;
 
 	String korajusername;
 	String korajpassword;
@@ -36,9 +36,9 @@ public class MessagesChatGroups extends DriverSetUp {
 	public void getDriver() throws Exception {
 		System.out.println("About to execute Group test");
 
-		koraloginpage = new KoraLoginPage(remoteDriver);
-		korahomepage = new KoraHomePage(remoteDriver);
-		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
+		waloginpage = new WALoginPage(remoteDriver);
+		wahomepage = new WAHomePage(remoteDriver);
+		wamessageschatspage = new WAMessagesChatsPage(remoteDriver);
 
 		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
 		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
@@ -63,34 +63,34 @@ public class MessagesChatGroups extends DriverSetUp {
 			String grouptext = DriverSetUp.testdataMap.get("groupchat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("Chat", newparticipants, true);
-			groupname = koramessagespage.enterYourMessageAs(grouptext);
+			waloginpage.loginToKora(url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.startNewConversationWith("Chat", newparticipants, true);
+			groupname = wamessageschatspage.enterYourMessageAs(grouptext);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
 			
-			koramessagespage.goToGroupAndPerform(groupname, false, "NA");
-			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Manage Chat");
-			koramessagespage.removeParticipantsAndClose();
-			groupname = koramessagespage.enterYourMessageAs("Removed participants");
-			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Clear Chat History");
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Leave Chat");
-			koramessagespage.clickOn("Leave", true);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			groupname = koramessagespage.getChatHeaderNameorCount(true);
-			koramessagespage.goToGroupAndPerform(groupname, true, "DeleteGroup");
+			wamessageschatspage.goToGroupAndPerform(groupname, false, "NA");
+			wamessageschatspage.goToGroupAndPerform(groupname, true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Manage Chat");
+			wamessageschatspage.removeParticipantsAndClose();
+			groupname = wamessageschatspage.enterYourMessageAs("Removed participants");
+			wamessageschatspage.goToGroupAndPerform(groupname, true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Clear Chat History");
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.goToGroupAndPerform(groupname, true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Leave Chat");
+			wamessageschatspage.clickOn("Leave", true);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			groupname = wamessageschatspage.getChatHeaderNameorCount(true);
+			wamessageschatspage.goToGroupAndPerform(groupname, true, "DeleteGroup");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL,
 					"Failed to validate group creation with no name and delete the same conversation flow");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -109,21 +109,21 @@ public class MessagesChatGroups extends DriverSetUp {
 			String grouptext = DriverSetUp.testdataMap.get("groupchat");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			koraloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.startNewConversationWith("chat", newparticipants, true);
-			koramessagespage.createGroupAs(groupname);
-			koramessagespage.enterYourMessageAs(grouptext);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform(groupname, false, "NA");
-			koramessagespage.verifyGroupCreationTimeline(korajusername);
-			koramessagespage.getGroupTimestamp(groupname);
+			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);
+			wamessageschatspage.createGroupAs(groupname);
+			wamessageschatspage.enterYourMessageAs(grouptext);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.goToGroupAndPerform(groupname, false, "NA");
+			wamessageschatspage.verifyGroupCreationTimeline(korajusername);
+			wamessageschatspage.getGroupTimestamp(groupname);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate create new group conversation flow");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -141,17 +141,17 @@ public class MessagesChatGroups extends DriverSetUp {
 			String updatedgroupmems = DriverSetUp.testdataMap.get("updateparticipant");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Manage Chat");
-			koramessagespage.manageConversationValidations();
-			koramessagespage.AddParticipantsFromManage(updatedgroupmems, false);
-			koramessagespage.verifyGroupUpdateTimelines("added");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.goToGroupAndPerform(groupname, true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Manage Chat");
+			wamessageschatspage.manageConversationValidations();
+			wamessageschatspage.AddParticipantsFromManage(updatedgroupmems, false);
+			wamessageschatspage.verifyGroupUpdateTimelines("added");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Add members to group flow");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -170,18 +170,18 @@ public class MessagesChatGroups extends DriverSetUp {
 			String groupname = DriverSetUp.testdataMap.get("groupname");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform(groupname, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Manage Chat");
-			updatedname = koramessagespage.renameGroupAndClose(renameto);
-			koramessagespage.goToGroupAndPerform(updatedname, false, "NA");
-			koramessagespage.verifyGroupUpdateTimelines("updated");
-			koramessagespage.enterYourMessageAs("Sending text message after updating the Group");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.goToGroupAndPerform(groupname, true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Manage Chat");
+			updatedname = wamessageschatspage.renameGroupAndClose(renameto);
+			wamessageschatspage.goToGroupAndPerform(updatedname, false, "NA");
+			wamessageschatspage.verifyGroupUpdateTimelines("updated");
+			wamessageschatspage.enterYourMessageAs("Sending text message after updating the Group");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate rename existing group flow");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -198,17 +198,17 @@ public class MessagesChatGroups extends DriverSetUp {
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Manage Chat");
-			koramessagespage.removeParticipantsAndClose();
-			koramessagespage.enterYourMessageAs("Removed participants");
-			koramessagespage.verifyGroupUpdateTimelines("removed");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.goToGroupAndPerform(renamedgroup, true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Manage Chat");
+			wamessageschatspage.removeParticipantsAndClose();
+			wamessageschatspage.enterYourMessageAs("Removed participants");
+			wamessageschatspage.verifyGroupUpdateTimelines("removed");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate remove participants flow");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -225,17 +225,17 @@ public class MessagesChatGroups extends DriverSetUp {
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Clear Chat History");
-			koramessagespage.verifyGroupUpdateTimelines("cleared");
-			koramessagespage.checkEmptyScreen(renamedgroup, "Removed participants");
-			koramessagespage.visibilityOfComposeBar(true);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.goToGroupAndPerform(renamedgroup, true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Clear Chat History");
+			wamessageschatspage.verifyGroupUpdateTimelines("cleared");
+			wamessageschatspage.checkEmptyScreen(renamedgroup, "Removed participants");
+			wamessageschatspage.visibilityOfComposeBar(true);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate clear conversation history flow");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -252,18 +252,18 @@ public class MessagesChatGroups extends DriverSetUp {
 			String renamedgroup = DriverSetUp.testdataMap.get("renamegroupto");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagespage.goToGroupAndPerform(renamedgroup, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Leave Chat");
-			koramessagespage.clickOn("Leave", true);
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			renamedgroup = koramessagespage.getChatHeaderNameorCount(true);
-			koramessagespage.goToGroupAndPerform(renamedgroup, true, "DeleteGroup");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessageschatspage.goToGroupAndPerform(renamedgroup, true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Leave Chat");
+			wamessageschatspage.clickOn("Leave", true);
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			renamedgroup = wamessageschatspage.getChatHeaderNameorCount(true);
+			wamessageschatspage.goToGroupAndPerform(renamedgroup, true, "DeleteGroup");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate delete conversation flow");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 

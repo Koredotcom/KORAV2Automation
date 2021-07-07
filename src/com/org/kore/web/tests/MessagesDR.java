@@ -6,11 +6,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.org.kore.testbase.DriverSetUp;
-import com.org.kore.web.pages.KoraHomePage;
-import com.org.kore.web.pages.KoraLoginPage;
-import com.org.kore.web.pages.KoraMessagesChatsPage;
-import com.org.kore.web.pages.KoraMessagesDRPage;
-import com.org.kore.web.pages.KoraWorkspacesPage;
+import com.org.kore.web.pages.WAHomePage;
+import com.org.kore.web.pages.WALoginPage;
+import com.org.kore.web.pages.WAMessagesChatsPage;
+import com.org.kore.web.pages.WAMessagesDRPage;
+import com.org.kore.web.pages.WAWorkspacesPage;
 import com.relevantcodes.extentreports.LogStatus;
 
 /**
@@ -21,11 +21,11 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class MessagesDR extends DriverSetUp {
 
-	KoraLoginPage koraloginpage;
-	KoraHomePage korahomepage;
-	KoraMessagesChatsPage koramessagespage;
-	KoraWorkspacesPage koraworkspacepage;
-	KoraMessagesDRPage koramessagedrpage;
+	WALoginPage waloginpage;
+	WAHomePage wahomepage;
+	WAMessagesChatsPage wamessageschatspage;
+	WAMessagesDRPage wamessagesdrpage;
+	WAWorkspacesPage waworkspacepage;
 
 	String korajusername;
 	String korajpassword;
@@ -44,11 +44,11 @@ public class MessagesDR extends DriverSetUp {
 	public void getDriver() throws Exception {
 		System.out.println("About to execute Group test");
 
-		koraloginpage = new KoraLoginPage(remoteDriver);
-		korahomepage = new KoraHomePage(remoteDriver);
-		koramessagespage = new KoraMessagesChatsPage(remoteDriver);
-		koraworkspacepage = new KoraWorkspacesPage(remoteDriver);
-		koramessagedrpage = new KoraMessagesDRPage(remoteDriver);
+		waloginpage = new WALoginPage(remoteDriver);
+		wahomepage = new WAHomePage(remoteDriver);
+		wamessageschatspage = new WAMessagesChatsPage(remoteDriver);
+		waworkspacepage = new WAWorkspacesPage(remoteDriver);
+		wamessagesdrpage = new WAMessagesDRPage(remoteDriver);
 
 		korajusername = dr.getValue("KORAV2", "KoraV2james", "Username");
 		korajpassword = dr.getValue("KORAV2", "KoraV2james", "Password");
@@ -75,17 +75,17 @@ public class MessagesDR extends DriverSetUp {
 			String expWDRright3dotoptions = DriverSetUp.drdataMap.get("wexpected3dotoptionsright");
 			test.log(LogStatus.INFO, "Navigation url :" + url);			
 
-			koraloginpage.loginToKora(url, korajusername, korajpassword);
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.goToGroupAndPerforminWSDR("DRDelete", true, "3dots"); 
-			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expWDRmiddle3dotoptions, "middlePanel");
-			koramessagespage.optionsDisplayedOn3Dots("GroupConversation", expWDRright3dotoptions, "rightPanel");
+			waloginpage.loginToKora(url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessagesdrpage.goToGroupAndPerforminWSDR("DRDelete", true, "3dots"); 
+			wamessageschatspage.optionsDisplayedOn3Dots("GroupConversation", expWDRmiddle3dotoptions, "middlePanel");
+			wamessageschatspage.optionsDisplayedOn3Dots("GroupConversation", expWDRright3dotoptions, "rightPanel");
 			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate 3DotOptions From MidAndRight Panel");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -101,17 +101,17 @@ public class MessagesDR extends DriverSetUp {
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
 			String validationelmenets[] = { "Star", "Mute", "UnRead" };
 			for (String value : validationelmenets) {
-				koramessagedrpage.verifytheoptionsonDRandperfromAction(standarddrname, value, "SelectNOT");
+				wamessagesdrpage.verifytheoptionsonDRandperfromAction(standarddrname, value, "SelectNOT");
 			}
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate  On hover Options Verification");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -135,35 +135,35 @@ public class MessagesDR extends DriverSetUp {
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages"); 
-			String newRandomDr = "random"+korahomepage.runtimehhmmss();
-			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname, newRandomDr,
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages"); 
+			String newRandomDr = "random"+wahomepage.runtimehhmmss();
+			wamessagesdrpage.createDRwithAccessTypefromMessages(standardwsname, newRandomDr,
 					newparticipants, "Comment Only");			
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagedrpage.goToGroupAndPerforminWSDR(newRandomDr, true, "Star");
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(newRandomDr, true, "Star");
 
 			// To Create DR From Bottom Left Panel
-			String newRandomDr2 = "random"+korahomepage.runtimehhmmss();
-			korahomepage.selectBottomLeftMenuWorkSpace(standardwsname);
-			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname, newRandomDr2,
+			String newRandomDr2 = "random"+wahomepage.runtimehhmmss();
+			wahomepage.selectBottomLeftMenuWorkSpace(standardwsname);
+			wamessagesdrpage.createDRwithAccessTypefromMessages(standardwsname, newRandomDr2,
 					newparticipants, "Full Access");			
 
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagedrpage.goToGroupAndPerforminWSDR(newRandomDr2, true, "Star");
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(newRandomDr2, true, "Star");
 
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.goToGroupAndPerforminWSDR(newRandomDr, true, "3dots");
-			koramessagedrpage.deletDiscRoomandWorkSpace(newRandomDr,"NA");
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(newRandomDr, true, "3dots");
+			wamessagesdrpage.deletDiscRoomandWorkSpace(newRandomDr,"NA");
 
-			koramessagedrpage.goToGroupAndPerforminWSDR(newRandomDr2, true, "3dots");
-			koramessagedrpage.deletDiscRoomandWorkSpace(newRandomDr2,"NA");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(newRandomDr2, true, "3dots");
+			wamessagesdrpage.deletDiscRoomandWorkSpace(newRandomDr2,"NA");
 
 			extent.endTest(test);
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate create New DR with Different AccessTypes");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -184,22 +184,22 @@ public class MessagesDR extends DriverSetUp {
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
-			String newDrrandom = "random"+korahomepage.runtimehhmmss();
-			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname, newDrrandom,
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
+			String newDrrandom = "random"+wahomepage.runtimehhmmss();
+			wamessagesdrpage.createDRwithAccessTypefromMessages(standardwsname, newDrrandom,
 					newparticipants, "Comment Only");
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
-			koramessagedrpage.goToGroupAndPerforminWSDR(newDrrandom, true, "3dots");
-			koramessagespage.operationsFrom3Dots("Delete Discussion");
-			korahomepage.clickOn("Delete", true);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.valdiatedeletedMsgorDR(newDrrandom);			
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
+			wamessagesdrpage.goToGroupAndPerforminWSDR(newDrrandom, true, "3dots");
+			wamessageschatspage.operationsFrom3Dots("Delete Discussion");
+			wahomepage.clickOn("Delete", true);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessagesdrpage.valdiatedeletedMsgorDR(newDrrandom);			
 			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate delete WorkSpace from Messages");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -221,17 +221,17 @@ public class MessagesDR extends DriverSetUp {
 			String expWDpost3dotoptions = DriverSetUp.drdataMap.get("drexpected3dotsforPostinrightpanel");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
-			String newDrrandom = korahomepage.runtimehhmmss();
-			koramessagedrpage.EditingPostinDiscussionRoom(standarddrname, "Post" + newDrrandom,
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
+			String newDrrandom = wahomepage.runtimehhmmss();
+			wamessagesdrpage.EditingPostinDiscussionRoom(standarddrname, "Post" + newDrrandom,
 					"Editing Post" + newDrrandom, expWDpost3dotoptions);
 
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Edit post");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -251,29 +251,29 @@ public class MessagesDR extends DriverSetUp {
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);			
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
 			String forwardtomemebers = "hana@koraqa1.com";
 			String searchwithEmailAddress="dileep@koraqa1.com";
-			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
-			String post = "forwardingpost" + korahomepage.runtimehhmmss();
-			koramessagespage.enterYourMessageAs(post);
-			koramessagedrpage.movetoaPostandClickon3dots(standarddrname, post, true);
-			koramessagedrpage.forwardPosttonewconvorexisting(post, forwardtomemebers, "NA", "NA");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
+			String post = "forwardingpost" + wahomepage.runtimehhmmss();
+			wamessageschatspage.enterYourMessageAs(post);
+			wamessagesdrpage.movetoaPostandClickon3dots(standarddrname, post, true);
+			wamessagesdrpage.forwardPosttonewconvorexisting(post, forwardtomemebers, "NA", "NA");
 
-			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
-			koramessagedrpage.movetoaPostandClickon3dots(standarddrname, post, true);			
-			koramessagedrpage.forwardPosttonewconvorexisting(post, "NA", "DRDelete", "NA");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
+			wamessagesdrpage.movetoaPostandClickon3dots(standarddrname, post, true);			
+			wamessagesdrpage.forwardPosttonewconvorexisting(post, "NA", "DRDelete", "NA");
 
 			/** when we search with Email address application not showing results temporarily .
-			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
-			koramessagedrpage.movetoaPostandClickon3dots(standarddrname, post, true);
-			koramessagedrpage.forwardPosttonewconvorexisting(post, "NA", "NA", searchwithEmailAddress);
+			wamessagesdrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
+			wamessagesdrpage.movetoaPostandClickon3dots(standarddrname, post, true);
+			wamessagesdrpage.forwardPosttonewconvorexisting(post, "NA", "NA", searchwithEmailAddress);
 			 */
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate forward Post To Group DR And New  Conversation");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -289,38 +289,38 @@ public class MessagesDR extends DriverSetUp {
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);			
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
-			String DNDStarANDOther = "randomDR" +korahomepage.runtimehhmmss();
+			wahomepage.selectMenuOption(Messages);			
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
+			String DNDStarANDOther = "randomDR" +wahomepage.runtimehhmmss();
 
-			koramessagedrpage.createDRwithAccessTypefromMessages("NA",DNDStarANDOther, newparticipants, "Post Only");			
-			koramessagedrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");
-			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Star","N/A");
-			korahomepage.selectTopLeftMenuOption("Starred");
-			koramessagedrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");
+			wamessagesdrpage.createDRwithAccessTypefromMessages("NA",DNDStarANDOther, newparticipants, "Post Only");			
+			wamessagesdrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");
+			wamessagesdrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Star","N/A");
+			wahomepage.selectTopLeftMenuOption("Starred");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");
 
-			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Unstar","N/A");
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			korahomepage.selectTopLeftMenuOption("Starred");
-			koramessagedrpage.valdiatedeletedMsgorDR(DNDStarANDOther);
+			wamessagesdrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Unstar","N/A");
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wahomepage.selectTopLeftMenuOption("Starred");
+			wamessagesdrpage.valdiatedeletedMsgorDR(DNDStarANDOther);
 
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
-			koramessagedrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");
-			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Mute","4 hours");
-			korahomepage.selectTopLeftMenuOption("Muted");
-			koramessagedrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");			
-			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Unmute","");			
-			korahomepage.selectTopLeftMenuOption("Muted"); 
-			koramessagedrpage.valdiatedeletedMsgorDR(DNDStarANDOther);	
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");			
+			wamessagesdrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");
+			wamessagesdrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Mute","4 hours");
+			wahomepage.selectTopLeftMenuOption("Muted");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, false, "");			
+			wamessagesdrpage.selectoptionsfrom3dotsinRightPanelinDR(DNDStarANDOther, "Unmute","");			
+			wahomepage.selectTopLeftMenuOption("Muted"); 
+			wamessagesdrpage.valdiatedeletedMsgorDR(DNDStarANDOther);	
 
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, true, "3dots");
-			koramessagedrpage.deletDiscRoomandWorkSpace(DNDStarANDOther,"NA");
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(DNDStarANDOther, true, "3dots");
+			wamessagesdrpage.deletDiscRoomandWorkSpace(DNDStarANDOther,"NA");
 			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate star Discussion Room and Mute DR ");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -337,26 +337,26 @@ public class MessagesDR extends DriverSetUp {
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
-			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();
-			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime, newparticipants, "Post Only");								
-			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime, false, "");						
-			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(randomDrwithTime, "Manage Room","N/A");						
-			koramessagedrpage.rename_LeaveRoom_DeleteRoom("Rename","Leave");
-			koramessagedrpage.valdiatedeletedMsgorDR("Rename"+randomDrwithTime);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
+			String randomDrwithTime = "randomDR" +wahomepage.runtimehhmmss();
+			wamessagesdrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime, newparticipants, "Post Only");								
+			wamessagesdrpage.goToGroupAndPerforminWSDR(randomDrwithTime, false, "");						
+			wamessagesdrpage.selectoptionsfrom3dotsinRightPanelinDR(randomDrwithTime, "Manage Room","N/A");						
+			wamessagesdrpage.rename_LeaveRoom_DeleteRoom("Rename","Leave");
+			wamessagesdrpage.valdiatedeletedMsgorDR("Rename"+randomDrwithTime);
 
-			String randomDrwithTime2 = "randomDR" +korahomepage.runtimehhmmss();
-			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime2, newparticipants, "Post Only");								
-			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime2, false, "");						
-			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(randomDrwithTime2, "Manage Room","N/A");						
-			koramessagedrpage.rename_LeaveRoom_DeleteRoom("N/A","Delete");
-			koramessagedrpage.valdiatedeletedMsgorDR(randomDrwithTime2);			
+			String randomDrwithTime2 = "randomDR" +wahomepage.runtimehhmmss();
+			wamessagesdrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime2, newparticipants, "Post Only");								
+			wamessagesdrpage.goToGroupAndPerforminWSDR(randomDrwithTime2, false, "");						
+			wamessagesdrpage.selectoptionsfrom3dotsinRightPanelinDR(randomDrwithTime2, "Manage Room","N/A");						
+			wamessagesdrpage.rename_LeaveRoom_DeleteRoom("N/A","Delete");
+			wamessagesdrpage.valdiatedeletedMsgorDR(randomDrwithTime2);			
 
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to  Leave and Delete DR from ManageRoom");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -377,19 +377,19 @@ public class MessagesDR extends DriverSetUp {
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");						
-			String newDRrandom = "random"+korahomepage.runtimehhmmss();						
-			koramessagedrpage.cancledrcreationanddiscardmsg(newDRrandom,newparticipants);		
-			String drpost="postforLiknComment"+korahomepage.runtimehhmmss();
-			koramessagedrpage.goToGroupAndPerforminWSDR("DRDelete", false, "");
-			koramessagespage.enterYourMessageAs(drpost);
-			koramessagedrpage.deletepostandreactcount("DRDelete", drpost);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");						
+			String newDRrandom = "random"+wahomepage.runtimehhmmss();						
+			wamessagesdrpage.cancledrcreationanddiscardmsg(newDRrandom,newparticipants);		
+			String drpost="postforLiknComment"+wahomepage.runtimehhmmss();
+			wamessagesdrpage.goToGroupAndPerforminWSDR("DRDelete", false, "");
+			wamessageschatspage.enterYourMessageAs(drpost);
+			wamessagesdrpage.deletepostandreactcount("DRDelete", drpost);
 
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Delete Post and Cancel new DR");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -409,25 +409,25 @@ public class MessagesDR extends DriverSetUp {
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");
-			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(standarddrname, "Manage Room","N/A");
-			List<String> membersingroup=koramessagedrpage.addandremovepeoplefromdiscussionRoom(standarddrname,"N/A","N/A");
-			String atmentionmsg = "at_mention_Automation_post"+korahomepage.runtimehhmmss();
-			koramessagedrpage.atMentionValidationinDR(membersingroup,"james@koraqa1.com", atmentionmsg,"post");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(standarddrname, false, "NA");
+			wamessagesdrpage.selectoptionsfrom3dotsinRightPanelinDR(standarddrname, "Manage Room","N/A");
+			List<String> membersingroup=wamessagesdrpage.addandremovepeoplefromdiscussionRoom(standarddrname,"N/A","N/A");
+			String atmentionmsg = "at_mention_Automation_post"+wahomepage.runtimehhmmss();
+			wamessagesdrpage.atMentionValidationinDR(membersingroup,"james@koraqa1.com", atmentionmsg,"post");
 
-			String drpost="postforComment"+korahomepage.runtimehhmmss();
-			koramessagespage.enterYourMessageAs(drpost);
-			koramessagedrpage.perfromreactionsonPost(standarddrname, drpost, "", true,"NA");
-			koramessagedrpage.atMentionsinComments(standarddrname, drpost, "@");		
-			String atmentionincomment = "atMentioninComment"+korahomepage.runtimehhmmss();
-			koramessagedrpage.atMentionValidationinDR(membersingroup,"hana@koraqa1.com", atmentionincomment,"comment");
+			String drpost="postforComment"+wahomepage.runtimehhmmss();
+			wamessageschatspage.enterYourMessageAs(drpost);
+			wamessagesdrpage.perfromreactionsonPost(standarddrname, drpost, "", true,"NA");
+			wamessagesdrpage.atMentionsinComments(standarddrname, drpost, "@");		
+			String atmentionincomment = "atMentioninComment"+wahomepage.runtimehhmmss();
+			wamessagesdrpage.atMentionValidationinDR(membersingroup,"hana@koraqa1.com", atmentionincomment,"comment");
 
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate atmention Users in Discussion Room");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -443,16 +443,16 @@ public class MessagesDR extends DriverSetUp {
 			String standarddrname = DriverSetUp.drdataMap.get("standarddr");
 			test.log(LogStatus.INFO, "Navigation url :" + url);	
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms"); 			
-			koramessagedrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");								
-			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(standarddrname, "Manage Room","N/A");
-			koramessagedrpage.validatePostviaemailandAllmemebrsemail();						
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms"); 			
+			wamessagesdrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");								
+			wamessagesdrpage.selectoptionsfrom3dotsinRightPanelinDR(standarddrname, "Manage Room","N/A");
+			wamessagesdrpage.validatePostviaemailandAllmemebrsemail();						
 			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to  validate Postvia Email Toggle");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -469,25 +469,25 @@ public class MessagesDR extends DriverSetUp {
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages"); 
-			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();
-			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime, newparticipants, "Post Only");			
-			korahomepage.selectTopLeftMenuOption("All Messages");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages"); 
+			String randomDrwithTime = "randomDR" +wahomepage.runtimehhmmss();
+			wamessagesdrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime, newparticipants, "Post Only");			
+			wahomepage.selectTopLeftMenuOption("All Messages");
 			Thread.sleep(4000);
-			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime, false, "");						
-			koramessagedrpage.selectoptionsfrom3dotsinRightPanelinDR(randomDrwithTime, "Manage Room","N/A");
-			koramessagedrpage.addandremovepeoplefromdiscussionRoom(randomDrwithTime,"alexander@koraqa1.com",newparticipants);
+			wamessagesdrpage.goToGroupAndPerforminWSDR(randomDrwithTime, false, "");						
+			wamessagesdrpage.selectoptionsfrom3dotsinRightPanelinDR(randomDrwithTime, "Manage Room","N/A");
+			wamessagesdrpage.addandremovepeoplefromdiscussionRoom(randomDrwithTime,"alexander@koraqa1.com",newparticipants);
 
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime, true, "3dots");
-			koramessagedrpage.deletDiscRoomandWorkSpace(randomDrwithTime,"NA");
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(randomDrwithTime, true, "3dots");
+			wamessagesdrpage.deletDiscRoomandWorkSpace(randomDrwithTime,"NA");
 
 			extent.endTest(test);
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to creation of Room without Work Space");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -503,30 +503,30 @@ public class MessagesDR extends DriverSetUp {
 			String newparticipants = DriverSetUp.drdataMap.get("oneparticipant");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);						
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			String randomWS = "WS" +korahomepage.runtimehhmmss();
-			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();
-			String randomDrwithTime2 = "randomDR" +korahomepage.runtimehhmmss()+"_2";
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			String randomWS = "WS" +wahomepage.runtimehhmmss();
+			String randomDrwithTime = "randomDR" +wahomepage.runtimehhmmss();
+			String randomDrwithTime2 = "randomDR" +wahomepage.runtimehhmmss()+"_2";
 
-			koramessagedrpage.createDRwithWS(randomWS,randomDrwithTime, newparticipants);
-			koramessagedrpage.selectDRBasedonWSname(randomWS,randomDrwithTime);
-			koramessagedrpage.createDRwithAccessTypefromMessages(randomWS, randomDrwithTime2,newparticipants, "Comment Only");
-			koraworkspacepage.selectWorkspace(randomWS);
+			wamessagesdrpage.createDRwithWS(randomWS,randomDrwithTime, newparticipants);
+			wamessagesdrpage.selectDRBasedonWSname(randomWS,randomDrwithTime);
+			wamessagesdrpage.createDRwithAccessTypefromMessages(randomWS, randomDrwithTime2,newparticipants, "Comment Only");
+			waworkspacepage.selectWorkspace(randomWS);
 			
-			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime, true, "3dots");
-			koramessagedrpage.deletDiscRoomandWorkSpace(randomDrwithTime,"NA");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(randomDrwithTime, true, "3dots");
+			wamessagesdrpage.deletDiscRoomandWorkSpace(randomDrwithTime,"NA");
 
-			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime2, true, "3dots");
-			koramessagedrpage.deletDiscRoomandWorkSpace(randomDrwithTime2,"NA");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(randomDrwithTime2, true, "3dots");
+			wamessagesdrpage.deletDiscRoomandWorkSpace(randomDrwithTime2,"NA");
 
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.deletDiscRoomandWorkSpace("NA",randomWS);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessagesdrpage.deletDiscRoomandWorkSpace("NA",randomWS);
 			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to Create new Work Spae from DR and add more Discussion Rooms");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -545,22 +545,22 @@ public class MessagesDR extends DriverSetUp {
 			String aditionalmember1="alexander@koraqa1.com";
 			String aditionalmember2="dileep@koraqa1.com";			
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
-			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();				
-			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname, randomDrwithTime,
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");			
+			String randomDrwithTime = "randomDR" +wahomepage.runtimehhmmss();				
+			wamessagesdrpage.createDRwithAccessTypefromMessages(standardwsname, randomDrwithTime,
 					newparticipants, "Comment Only");	
 
-			koramessagedrpage.addnewmemebrswithaccesstype(randomDrwithTime,aditionalmember1,aditionalmember2,"Comment only");			
-			koramessagedrpage.addnewmemebrswithaccesstypeinManageRoom(randomDrwithTime,aditionalmember2,"Full Access");
+			wamessagesdrpage.addnewmemebrswithaccesstype(randomDrwithTime,aditionalmember1,aditionalmember2,"Comment only");			
+			wamessagesdrpage.addnewmemebrswithaccesstypeinManageRoom(randomDrwithTime,aditionalmember2,"Full Access");
 
-			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime, true, "3dots");
-			koramessagedrpage.deletDiscRoomandWorkSpace(randomDrwithTime,"NA");					
+			wamessagesdrpage.goToGroupAndPerforminWSDR(randomDrwithTime, true, "3dots");
+			wamessagesdrpage.deletDiscRoomandWorkSpace(randomDrwithTime,"NA");					
 			
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to Create new Work Spae from DR and add more Discussion Rooms");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -577,26 +577,26 @@ public class MessagesDR extends DriverSetUp {
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages"); 
-			String randomDrwithTime = "randomDR" +korahomepage.runtimehhmmss();
-			koramessagedrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime, newparticipants, "Post Only");			
-			korahomepage.selectTopLeftMenuOption("All Messages");						
-			koramessagedrpage.searchforDRorchatfromallmsgDRnChat(randomDrwithTime,"NA");	
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagedrpage.searchforDRorchatfromallmsgDRnChat("NA","QA Pride");
-			korahomepage.selectTopLeftMenuOption("All Messages");
-			koramessagedrpage.searchforDRorchatfromallmsgDRnChat("NA","Hana Yori");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages"); 
+			String randomDrwithTime = "randomDR" +wahomepage.runtimehhmmss();
+			wamessagesdrpage.createDRwithAccessTypefromMessages(standardwsname,randomDrwithTime, newparticipants, "Post Only");			
+			wahomepage.selectTopLeftMenuOption("All Messages");						
+			wamessagesdrpage.searchforDRorchatfromallmsgDRnChat(randomDrwithTime,"NA");	
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessagesdrpage.searchforDRorchatfromallmsgDRnChat("NA","QA Pride");
+			wahomepage.selectTopLeftMenuOption("All Messages");
+			wamessagesdrpage.searchforDRorchatfromallmsgDRnChat("NA","Hana Yori");
 
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.goToGroupAndPerforminWSDR(randomDrwithTime, true, "3dots");
-			koramessagedrpage.deletDiscRoomandWorkSpace(randomDrwithTime,"NA");
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessagesdrpage.goToGroupAndPerforminWSDR(randomDrwithTime, true, "3dots");
+			wamessagesdrpage.deletDiscRoomandWorkSpace(randomDrwithTime,"NA");
 
 			extent.endTest(test);
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate create new Dr and valdiate from partipates end");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 
@@ -611,24 +611,24 @@ public class MessagesDR extends DriverSetUp {
 			String Messages = DriverSetUp.drdataMap.get("messages");			
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages"); 											
-			koramessagedrpage.searchforattachmentinmsgandDR("Hypertext.html");
-			korahomepage.selectTopLeftMenuOption("Chats");
-			koramessagedrpage.searchforattachmentinmsgandDR("Hypertext.html");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages"); 											
+			wamessagesdrpage.searchforattachmentinmsgandDR("Hypertext.html");
+			wahomepage.selectTopLeftMenuOption("Chats");
+			wamessagesdrpage.searchforattachmentinmsgandDR("Hypertext.html");
 
-			korahomepage.selectTopLeftMenuOption("All Messages"); 											
-			koramessagedrpage.searchforattachmentinmsgandDR("ZipperZip.zip");
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");
-			koramessagedrpage.searchforattachmentinmsgandDR("ZipperZip.zip");
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages"); 
+			wahomepage.selectTopLeftMenuOption("All Messages"); 											
+			wamessagesdrpage.searchforattachmentinmsgandDR("ZipperZip.zip");
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");
+			wamessagesdrpage.searchforattachmentinmsgandDR("ZipperZip.zip");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages"); 
 
 			extent.endTest(test);
 			
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to Search for file in Chat and DR");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 	
@@ -647,38 +647,38 @@ public class MessagesDR extends DriverSetUp {
 			String newparticipants = DriverSetUp.drdataMap.get("multipleparticipants");
 			test.log(LogStatus.INFO, "Navigation url :" + url);	
 
-			koraloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);	
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");						
-			String newDrrandom = "randomDR"+korahomepage.runtimehhmmss();
-			koramessagedrpage.createDRwithAccessTypefromMessages
+			waloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);	
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");						
+			String newDrrandom = "randomDR"+wahomepage.runtimehhmmss();
+			wamessagesdrpage.createDRwithAccessTypefromMessages
 			               ("NA", newDrrandom,newparticipants,"Comment Only");						
-			koramessagedrpage.goToGroupAndPerforminWSDR(newDrrandom, false, "NA");
-			String drpost="postforLiknComment"+korahomepage.runtimehhmmss();
-			koramessagespage.enterYourMessageAs(drpost);					
+			wamessagesdrpage.goToGroupAndPerforminWSDR(newDrrandom, false, "NA");
+			String drpost="postforLiknComment"+wahomepage.runtimehhmmss();
+			wamessageschatspage.enterYourMessageAs(drpost);					
 
-			koraloginpage.logoutAndReLogin(true,url, korahusername, korahpassword);			
-			String ReactedUserName=koraloginpage.getUserDetails();
-			korahomepage.selectMenuOption(Messages);			
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
-			koramessagedrpage.perfromreactionsonPost(newDrrandom, drpost, "Like", false,"NA");			
-			koramessagedrpage.perfromreactionsonPost(newDrrandom, drpost, "", true,drcomment);  
+			waloginpage.logoutAndReLogin(true,url, korahusername, korahpassword);			
+			String ReactedUserName=waloginpage.getUserDetails();
+			wahomepage.selectMenuOption(Messages);			
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");			
+			wamessagesdrpage.perfromreactionsonPost(newDrrandom, drpost, "Like", false,"NA");			
+			wamessagesdrpage.perfromreactionsonPost(newDrrandom, drpost, "", true,drcomment);  
 						
-			koraloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);							
-			korahomepage.selectMenuOption(Messages);			
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
-			koramessagedrpage.validatingreactionsandCommentsonPost(newDrrandom,drpost,ReactedUserName,drcomment);
+			waloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);							
+			wahomepage.selectMenuOption(Messages);			
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");			
+			wamessagesdrpage.validatingreactionsandCommentsonPost(newDrrandom,drpost,ReactedUserName,drcomment);
 
-			koramessagedrpage.goToGroupAndPerforminWSDR(newDrrandom, true, "3dots");
-			koramessagedrpage.deletDiscRoomandWorkSpace(newDrrandom,"NA");
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("All Messages"); 
+			wamessagesdrpage.goToGroupAndPerforminWSDR(newDrrandom, true, "3dots");
+			wamessagesdrpage.deletDiscRoomandWorkSpace(newDrrandom,"NA");
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages"); 
 
 			extent.endTest(test);
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed at like Comment To A Post");
-			koraloginpage.backToHomePage(url);		}
+			waloginpage.backToHomePage(url);		}
 	} 
 	
 	@Test(enabled = true, priority = 58) 
@@ -692,31 +692,31 @@ public class MessagesDR extends DriverSetUp {
 			String Messages = DriverSetUp.drdataMap.get("messages");								
 			test.log(LogStatus.INFO, "Navigation url :" + url);	
 
-			koraloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);			
-			korahomepage.selectMenuOption(Messages);
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");						
-			koramessagedrpage.goToGroupAndPerforminWSDR("DRDelete", false, "");			
-			String drpost="postforLiknComment"+korahomepage.runtimehhmmss();
-			koramessagespage.enterYourMessageAs(drpost);					
+			waloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);			
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");						
+			wamessagesdrpage.goToGroupAndPerforminWSDR("DRDelete", false, "");			
+			String drpost="postforLiknComment"+wahomepage.runtimehhmmss();
+			wamessageschatspage.enterYourMessageAs(drpost);					
 			
-			koraloginpage.logoutAndReLogin(true,url, korahusername, korahpassword);			
-			String ReactedUserName=koraloginpage.getUserDetails();
-			korahomepage.selectMenuOption(Messages);			
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");			
-			koramessagedrpage.goToGroupAndPerforminWSDR("DRDelete", false, "");
-			koramessagedrpage.perfromreactionsonPost("DRDelete", drpost, "Like", false,"NA");			
+			waloginpage.logoutAndReLogin(true,url, korahusername, korahpassword);			
+			String ReactedUserName=waloginpage.getUserDetails();
+			wahomepage.selectMenuOption(Messages);			
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");			
+			wamessagesdrpage.goToGroupAndPerforminWSDR("DRDelete", false, "");
+			wamessagesdrpage.perfromreactionsonPost("DRDelete", drpost, "Like", false,"NA");			
 			
-			koraloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);							
-			korahomepage.selectMenuOption(Messages);			
-			korahomepage.selectTopLeftMenuOption("Discussion Rooms");					
-			koramessagedrpage.perfromreactionsonPost("DRDelete", drpost, "More", false,"NA");
-			koramessagedrpage.messagesreadinPostinfandMsginfo(ReactedUserName, true);			
+			waloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);							
+			wahomepage.selectMenuOption(Messages);			
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms");					
+			wamessagesdrpage.perfromreactionsonPost("DRDelete", drpost, "More", false,"NA");
+			wamessagesdrpage.messagesreadinPostinfandMsginfo(ReactedUserName, true);			
 		
 			extent.endTest(test);
 
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate messageInfo");
-			koraloginpage.backToHomePage(url);
+			waloginpage.backToHomePage(url);
 		}
 	}
 }
