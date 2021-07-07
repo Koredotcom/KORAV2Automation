@@ -59,8 +59,8 @@ public class Workspaces extends DriverSetUp {
 
 	}
 
-	@Test(enabled = false, priority = 61)
-	public void MDR_createNewWorkspaceAndDelete() throws Exception {
+	@Test(enabled = true, priority = 61)
+	public void WS_TC1_verifyWorkspaceAccordions() throws Exception {
 		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -68,16 +68,38 @@ public class Workspaces extends DriverSetUp {
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			url = DriverSetUp.propsMap.get("weburl");
-			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
-			String workspacename = DriverSetUp.drdataMap.get("workspacename123");
+			String Workspaces = DriverSetUp.wsdataMap.get("workspaces");
+			String wsactaccordions = DriverSetUp.wsdataMap.get("wsccordions");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			// waloginpage.launchw3(url, korajusername, korajpassword);
 			waloginpage.loginToKora(url, korajusername, korajpassword);
 			wahomepage.selectMenuOption(Workspaces);
-			waworkspacepage.createNewWorkspaceAndCheckDefault(workspacename);
-			waworkspacepage.clickOnWorkspace3Dots(workspacename);
-			waworkspacepage.operationsFromWS3Dots(workspacename, "Delete");
+			waworkspacepage.verifyDisplayOfAccordions(er.kwhomeaccordions,wsactaccordions);
+			
+			extent.endTest(test);
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, "Failed to validate create new workspace and validations");
+			waloginpage.backToHomePage(url);
+		}
+	}
+	
+	@Test(enabled = true, priority = 61)
+	public void WS_TC2_createWorkspaceAnddeleteWorkspace() throws Exception {
+		String url =null;
+		try {
+			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
+					.assignCategory("WorkAssist_Workspaces");
+			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+			url = DriverSetUp.propsMap.get("weburl");
+			String Messages = DriverSetUp.wsdataMap.get("messages");
+			String wsname = DriverSetUp.wsdataMap.get("workspaceauto");
+			test.log(LogStatus.INFO, "Navigation url :" + url);
+
+			waworkspacepage.createNewWorkspaceAndCheckDefault(wsname);
+			wahomepage.selectMenuOption(Messages);
+			waworkspacepage.clickOnWorkspace3Dots(wsname);
+			waworkspacepage.operationsFromWS3Dots(wsname, "Delete");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate create new workspace and validations");
@@ -90,13 +112,13 @@ public class Workspaces extends DriverSetUp {
 		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_DiscussionRooms");
+					.assignCategory("WorkAssist_Workspaces");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			url = DriverSetUp.propsMap.get("weburl");
-			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
-			String workspaceauto = DriverSetUp.drdataMap.get("workspaceauto");
-			String invitemems = DriverSetUp.drdataMap.get("workspacemems");
+			String Workspaces = DriverSetUp.wsdataMap.get("workspaces");
+			String workspaceauto = DriverSetUp.wsdataMap.get("workspaceauto");
+			String invitemems = DriverSetUp.wsdataMap.get("workspacemems");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
 			wahomepage.selectMenuOption(Workspaces);
@@ -120,26 +142,26 @@ public class Workspaces extends DriverSetUp {
 		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_DiscussionRooms");
+					.assignCategory("WorkAssist_Workspaces");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			url = DriverSetUp.propsMap.get("weburl");
-			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
-			String Messages = DriverSetUp.drdataMap.get("messages");
-			String workspacename = DriverSetUp.drdataMap.get("workspacename8");
+			String Workspaces = DriverSetUp.wsdataMap.get("workspaces");
+			String Messages = DriverSetUp.wsdataMap.get("messages");
+			String wsname = DriverSetUp.wsdataMap.get("workspaceauto");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
 			wahomepage.selectMenuOption(Workspaces);
-			waworkspacepage.createNewWorkspaceAs(workspacename);
+			waworkspacepage.createNewWorkspaceAs(wsname);
 			wahomepage.selectMenuOption(Messages);
 			wahomepage.getActiveOptionFromLeftNav("All Messages");
-			waworkspacepage.selectWorkspace(workspacename);
+			waworkspacepage.selectWorkspace(wsname);
 			// wamessageschatspage.getChatHeaderName();
-			String wsname = wamessageschatspage.enterYourMessageAs("My post in " + workspacename);
+		//	String wsname = wamessageschatspage.enterYourMessageAs("My post in " + wsname);
 			waworkspacepage.compareActualExpected(wsname, "General", "Default selected workspace is : ");
 			wahomepage.selectMenuOption(Workspaces);
-			waworkspacepage.clickOnWorkspace3Dots(workspacename);
-			waworkspacepage.operationsFromWS3Dots(workspacename, "Delete");
+			waworkspacepage.clickOnWorkspace3Dots(wsname);
+			waworkspacepage.operationsFromWS3Dots(wsname, "Delete");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate from filter by workspace");
@@ -152,12 +174,12 @@ public class Workspaces extends DriverSetUp {
 		String url =null;
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
-					.assignCategory("WorkAssist_DiscussionRooms");
+					.assignCategory("WorkAssist_Workspaces");
 			System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
 
 			url = DriverSetUp.propsMap.get("weburl");
-			String Workspaces = DriverSetUp.drdataMap.get("workspaces");
-			String workspacename = DriverSetUp.drdataMap.get("workspacename910");
+			String Workspaces = DriverSetUp.wsdataMap.get("workspaces");
+			String workspacename = DriverSetUp.wsdataMap.get("workspacename910");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
 			wahomepage.selectMenuOption(Workspaces);

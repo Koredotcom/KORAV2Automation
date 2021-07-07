@@ -73,6 +73,8 @@ public class DriverSetUp {
 	public static LinkedHashMap<String, String> UtilityMap = new LinkedHashMap<>();
 	public static LinkedHashMap<String, String> testdataMap = new LinkedHashMap<>();
 	public static LinkedHashMap<String, String> drdataMap = new LinkedHashMap<>();
+	public static LinkedHashMap<String, String> wsdataMap = new LinkedHashMap<>();
+	
 	public static DataReader dr;
 	PageBase pb;
 	public String workingurl;
@@ -138,7 +140,8 @@ public class DriverSetUp {
 
 			UtilityMap = fu.jsonRead("UTILITIES");
 			testdataMap = fu.jsonRead("CHATSTESTDATA");
-			drdataMap = fu.jsonRead("WSTESTDATA");
+			drdataMap = fu.jsonRead("DRTESTDATA");
+			wsdataMap = fu.jsonRead("WSTESTDATA");
 
 			switch (App) {
 

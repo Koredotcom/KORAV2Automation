@@ -87,7 +87,7 @@
 		"expectedreminderslots": "15 mins, 1 hr, 2 hrs,4 hrs,1 Day,2 Days,1 Week"
 	},
 	
-	"WSTESTDATA": {
+	"DRTESTDATA": {
 		"workspaces": "Workspaces",
 		"messages": "Messages",
 		"workspacename123": "Automation123",
@@ -108,5 +108,12 @@
 		"drexpected3dotsforPostinrightpanel": "Edit, Forward, Reminder, Post Info, Delete",
 		"sampleurl":"https://techiesindiainc.com/",
 		"multipleparticipants":"hana@koraqa1.com,dileep@koraqa1.com"
+	},
+	"WSTESTDATA": {
+		"workspaces": "Workspaces",
+		"messages": "Messages",
+		"workspaceauto": "AutomationWS",
+		"wsccordions":"Starred, Workspaces, Shared Boards",
+		"workspacemems": "hana@koraqa1.com"
 	}
 }

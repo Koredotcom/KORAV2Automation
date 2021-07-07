@@ -13,6 +13,8 @@
 			<class name="com.org.kore.web.tests.MessagesChatOnHover" />
 			<class name="com.org.kore.web.tests.MessagesDR"/>
 			
+			<class name="com.org.kore.web.tests.Workspaces"/>
+			
 			<!-- <class name="com.org.kore.web.tests.MessagesAttachments" /> -->
 			
 			

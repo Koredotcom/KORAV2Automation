@@ -33,9 +33,7 @@ public class WAWorkspacesPage extends PageBase {
 	public void createNewWorkspaceAndCheckDefault(String createas) throws Exception {
 		String workspacename = null;
 		try {
-			click(er.kwplusicon, "Plus icon in workspace ");
 			click(er.kwcreatenew, "Create new workspace ");
-			click(er.kworkplaceholder, "Placeholder Workspace or board");
 			Thread.sleep(2000);
 			workspacename = getText(er.kwdefaulworkspace);
 			if (workspacename.contains("Workspace")) {
@@ -47,7 +45,6 @@ public class WAWorkspacesPage extends PageBase {
 			}
 
 			clearAndenterText(er.kwdefaulworkspace, createas, " Default workspace name");
-			click(er.kworkplaceholder, "Placeholder Workspace or board");
 			String updatedworkspace = getText(er.kwdefaulworkspace);
 			compareActualExpected(updatedworkspace, createas, "Workspace is : ");
 			boolean displayed = elementIsDisplayed(er.kwdrheader, "xpath");
@@ -64,11 +61,9 @@ public class WAWorkspacesPage extends PageBase {
 
 	public String createNewWorkspaceAs(String createas) throws Exception {
 		String updatedws = null;
-		click(er.kwplusicon, "Plus icon in workspace ");
 		click(er.kwcreatenew, "Create new workspace ");
 		Thread.sleep(2000);
 		clearAndenterText(er.kwdefaulworkspace, createas, " New Workspace");
-		click(er.kworkplaceholder, "Placeholder Workspace or board");
 		updatedws = getText(er.kwdefaulworkspace);
 		return updatedws;
 	}
@@ -105,7 +100,7 @@ public class WAWorkspacesPage extends PageBase {
 
 	public void clickOnWorkspace3Dots(String workspacename) throws Exception {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			moveToElement(er.kworkspacename + workspacename + er.ksinglquote, "xpath");
 			click(er.kworkspacename + workspacename + er.ksinglquote, workspacename + " Workspace ");
 			click(er.kworkspacename + workspacename + er.ksinglquote + er.kwleft3dots, "3 dots");
@@ -263,4 +258,32 @@ public class WAWorkspacesPage extends PageBase {
 
 	}
 
+	public void verifyDisplayOfAccordions(String webelements, String expectedmuteslots) throws Exception {
+		String[] exp = cf.convertStringstoArray(expectedmuteslots);
+		int i = 0;
+		boolean check = false;
+	//	String accordion = "//div[@class='acc-title']";
+		
+		try {
+			List<WebElement> options = remoteDriver.findElements(By.xpath(webelements));
+			for (WebElement ele : options) {
+				Thread.sleep(500);
+				String act = ele.getText();
+				check = exp[i].trim().equals(act);
+				if (check) {
+					test.log(LogStatus.PASS, "Expected option : " + exp[i] + " --> Displayed option : " + act);
+				} else {
+					test.log(LogStatus.FAIL, "Expected option : " + exp[i] + " --> But, displayed option : " + act);
+				}
+				i++;
+			}
+
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL,
+					"Failed to validate/select mute slots".toString() + test.addScreenCapture(takeScreenShot()));
+
+		}
+
+	}
+	
 }

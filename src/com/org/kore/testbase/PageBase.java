@@ -123,8 +123,8 @@ public class PageBase extends DriverSetUp {
 
 			if (browser.equalsIgnoreCase("chrome")) {
 
-				System.out.println("In ChromeDriver");
 				if (System.getProperty("os.name").contains("Mac OS")) {
+					System.out.println("Running in MAC Chrome");
 					System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("macchromeDriverPath"));
 					ChromeOptions options = new ChromeOptions();
 					// options.addArguments("user-data-dir=/path/to/your/custom/profile");
@@ -139,6 +139,7 @@ public class PageBase extends DriverSetUp {
 					remoteDriver = new ChromeDriver();
 					System.out.println("chrome started in Mac");
 				} else {
+					System.out.println("Running in Windows Chrome");
 					System.setProperty("webdriver.chrome.driver", DriverSetUp.UtilityMap.get("winchromeDriverPath"));
 					ChromeOptions options = new ChromeOptions();
 					// options.addArguments("user-data-dir=/path/to/your/custom/profile");
@@ -1157,7 +1158,7 @@ public class PageBase extends DriverSetUp {
 				WebElement ele = remoteDriver.findElement(By.xpath(locator));
 
 				String os = System.getProperty("os.name");
-				if (os.equalsIgnoreCase("WINDOWS")) {
+				if (os.contains("Windows")) {
 					ele.sendKeys(Keys.CONTROL + "a");
 					ele.sendKeys(Keys.DELETE);
 				} else {
@@ -1549,7 +1550,7 @@ public class PageBase extends DriverSetUp {
 		String completepath = srcFile.getAbsolutePath();
 		// return srcFile.getAbsolutePath();
 
-		// Added to avaoid Absolute path dependency
+		// Added to avoid Absolute path dependency
 		String result[] = completepath.trim().split("Screenshots");
 		String finalwithscr = "Screenshots" + result[1];
 		fileInputStreamReader.close();
