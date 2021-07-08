@@ -148,7 +148,7 @@ public class PageBase extends DriverSetUp {
 					options.addArguments("--disable-plugins-discovery");
 					options.addArguments("--disable-extensions");
 					options.addArguments("--test-type");
-					options.addArguments("start-maximized");
+					
 					// options.addArguments("--start-fullscreen");
 					// options.addArguments("window-size=1382,744");
 					// options.setExperimentalOption("useAutomationExtension",
@@ -166,7 +166,7 @@ public class PageBase extends DriverSetUp {
 					options.addArguments("--disable-gpu", "--window-size=1382,744",
 							"--ignore-certificate-errors", "--disable-extensions", "--no-sandbox",
 							"--disable-dev-shm-usage");
-
+					options.addArguments("start-maximized");
 					DesiredCapabilities cap = DesiredCapabilities.chrome();
 					cap.setCapability("ignoreZoomSetting", true);
 					cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
