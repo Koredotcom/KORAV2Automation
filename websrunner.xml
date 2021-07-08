@@ -12,9 +12,8 @@
 			<class name="com.org.kore.web.tests.MessagesChatGroups" />
 			<class name="com.org.kore.web.tests.MessagesChatOnHover" />
 			<class name="com.org.kore.web.tests.MessagesDR"/>
-			<class name="com.org.kore.web.tests.Workspaces"/> -->
-			
 			<class name="com.org.kore.web.tests.MessagesAttachments" />
+			<class name="com.org.kore.web.tests.Workspaces"/> -->
 			
 			
 		</classes>
