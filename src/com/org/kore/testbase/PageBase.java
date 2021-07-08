@@ -1606,7 +1606,7 @@ public class PageBase extends DriverSetUp {
 			test.log(LogStatus.PASS, "About to clear browser cache".toString()
 					+ test.addScreenCapture(takeScreenShot()));
 			js.executeScript(clickcleardata);
-			test.log(LogStatus.INFO,
+			test.log(LogStatus.PASS,
 					" Browser cache cleared successfully to login with different user with in the same session");
 
 		} catch (Exception e) {
