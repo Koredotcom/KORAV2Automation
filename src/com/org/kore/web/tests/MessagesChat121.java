@@ -68,7 +68,12 @@ public class MessagesChat121 extends DriverSetUp {
 			waloginpage.loginToKora(url, korajusername, korajpassword);
 			wahomepage.selectMenuOption(Messages);
 			wahomepage.selectTopLeftMenuOption("All Messages");
+			waloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
 			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
+			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("All Messages");
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
