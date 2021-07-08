@@ -98,7 +98,7 @@ public class MessagesAttachments extends DriverSetUp {
 		}
 	}
 
-	/*@Test(enabled = true, priority = 38)
+	@Test(enabled = true, priority = 38)
 	public void MC_TC31_TC49_uploadMultipleFilesAndView() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -212,6 +212,6 @@ public class MessagesAttachments extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate DR post /comment with attachments");
 		}
-	}*/
+	}
 
 }
