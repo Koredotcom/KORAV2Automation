@@ -159,6 +159,10 @@ public class PageBase extends DriverSetUp {
 					// "--window-size=1382,744", "--disable-gpu",
 					// "--disable-extensions", "--no-sandbox", "-incognito");*/
 
+					/*options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744",
+							"--ignore-certificate-errors", "--disable-extensions", "--no-sandbox",
+							"--disable-dev-shm-usage");*/
+					
 					options.addArguments("--headless", "--disable-gpu", "--window-size=1382,744",
 							"--ignore-certificate-errors", "--disable-extensions", "--no-sandbox",
 							"--disable-dev-shm-usage");
@@ -1596,7 +1600,6 @@ public class PageBase extends DriverSetUp {
 		try {
 			remoteDriver.get("chrome://settings/clearBrowserData");
 			Thread.sleep(3000);
-
 			JavascriptExecutor js = (JavascriptExecutor) remoteDriver;
 			String clickcleardata = "document.querySelector('body > settings-ui').shadowRoot.querySelector('#main').shadowRoot.querySelector('settings-basic-page').shadowRoot.querySelector('settings-section > settings-privacy-page').shadowRoot.querySelector('settings-clear-browsing-data-dialog').shadowRoot.querySelectorAll('cr-button')[1]"
 					+ ".click()";

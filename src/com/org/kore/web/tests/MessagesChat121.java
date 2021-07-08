@@ -74,7 +74,7 @@ public class MessagesChat121 extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 2)
+	/*@Test(enabled = true, priority = 2)
 	public void MC_TC3_TC4_TC5_verifyRecentSuggestions() throws Exception {
 		String url =null;
 		try {
@@ -718,5 +718,5 @@ public class MessagesChat121 extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Middle pane pagination");
 		}
-	} 
+	} */
 }
