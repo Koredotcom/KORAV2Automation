@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.org.kore.element.repository.ElementRepository;
@@ -58,7 +59,8 @@ public class CPCommonFunctions extends PageBase {
 		if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Appium")) {
 			appiumDriver.get(url);
 		} else if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Selenium")) {
-			remoteDriver.get(url);			
+			remoteDriver.get(url);	
+			remoteDriver.manage().window().setPosition(new Point(0,0));
 		//	remoteDriver.manage().window().maximize();
 			System.out.println("Loading work assist url");
 		//	System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
