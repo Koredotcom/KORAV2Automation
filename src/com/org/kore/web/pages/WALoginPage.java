@@ -142,8 +142,8 @@ public class WALoginPage extends PageBase {
 			test.log(LogStatus.INFO, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
 			waitTillappear(er.ko365, "xpath", "Choose ur account type");
 			if (relogin) {
-			//	clearChromeCache();
-				launchAndLogoutFrom0365("https://www.office.com/");
+				clearChromeCache();
+			//	launchAndLogoutFrom0365("https://www.office.com/");
 				loginToKora(url, userName, password);
 			}
 		} catch (Exception e) {
