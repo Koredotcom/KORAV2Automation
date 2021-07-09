@@ -54,7 +54,7 @@ public class WAWorkspacesPage extends PageBase {
 
 		} catch (Exception e) {
 
-			test.log(LogStatus.FAIL, "Filed in creation or verification of workspaces".toString()
+			test.log(LogStatus.FAIL, "Filed in creation or verification of new workspace".toString()
 					+ test.addScreenCapture(takeScreenShot()));
 		}
 	}

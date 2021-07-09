@@ -58,6 +58,11 @@ public class WAMessagesDRPage extends PageBase {
 		System.out.println("----------------------- goToGroupAndPerforminWSDR --------------------");
 		moveToElement(er.kdrcidgroup + discussionRoomName + "']", "xpath");
 		click(er.kdrcidgroup + discussionRoomName + "']", discussionRoomName + " chat");
+		
+		boolean discard = false;
+		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0)
+			click("//span[@class='p-button-text p-c'][text()='Yes']", "Discard Popup");
+		
 		try {
 			if (check) {
 				switch (action.trim()) {

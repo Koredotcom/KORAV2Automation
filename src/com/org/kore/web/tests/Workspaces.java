@@ -40,7 +40,7 @@ public class Workspaces extends DriverSetUp {
 
 	@BeforeMethod
 	public void getDriver() throws Exception {
-		System.out.println("About to execute Group test");
+		System.out.println("About to execute Before Methos");
 
 		waloginpage = new WALoginPage(remoteDriver);
 		wahomepage = new WAHomePage(remoteDriver);
