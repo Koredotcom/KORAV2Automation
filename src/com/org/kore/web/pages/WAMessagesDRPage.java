@@ -438,6 +438,7 @@ public class WAMessagesDRPage extends PageBase {
 			String AccessType) throws Exception {
 		try {
 			System.out.println("---------------------- createDRwithAccessTypefromMessages -------------");
+			System.out.println("About to click on kmcplusicon");
 			click(er.kmcplusicon, "Plus icon to start new Dsicussion Room");
 			if (getAttributeValue(er.kdSearchboxinmsgnDR, "placeholder").equalsIgnoreCase("Search Messages"))
 				click(er.kmdiscussion, "Create a Discussion Room");

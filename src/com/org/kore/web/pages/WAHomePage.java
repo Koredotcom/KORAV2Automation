@@ -45,8 +45,13 @@ public class WAHomePage extends PageBase {
 		boolean flag = false;
 		boolean hmenu = false;
 		boolean discard =false;
-		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0)
+		Thread.sleep(2000);
+		
+		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0){
 			click("//span[@class='p-button-text p-c'][text()='Yes']", "Discard Popup");
+		test.log(LogStatus.INFO, "Selected yes to discard popup".toString()
+				+ test.addScreenCapture(takeScreenShot()));
+		}
 		waittillpageload();
 		waitTillappear(er.klogo, "xpath", "Top left menu");
 		System.out.println("Work Assist home screen displayed");
@@ -85,9 +90,13 @@ public class WAHomePage extends PageBase {
 
 	public void selectTopLeftMenuOption(String menuoption) throws Exception {
 		boolean discard =false;
+		Thread.sleep(2000);
 		
-		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0)
+		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0){
 			click("//span[@class='p-button-text p-c'][text()='Yes']", "Discard Popup");
+		test.log(LogStatus.INFO, "Selected yes to discard popup".toString()
+				+ test.addScreenCapture(takeScreenShot()));
+		}
 		
 		boolean flag = false;
 		waitTillappear(er.kmctopleftmenu, "xpath", "Top header");

@@ -122,8 +122,15 @@ public class WALoginPage extends PageBase {
 		}
 	}
 
-	public void backToHomePage(String url){
+	public void backToHomePage(String url) throws Exception{
 		remoteDriver.get(url);
+		boolean discard =false;
+		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0){
+			click("//span[@class='p-button-text p-c'][text()='Yes']", "Discard Popup");
+		test.log(LogStatus.INFO, "Selected yes to discard popup".toString()
+				+ test.addScreenCapture(takeScreenShot()));
+		}
+		
 	}
 	
 	public void logoutAndReLogin(boolean relogin, String url, String userName, String password) throws Exception {
