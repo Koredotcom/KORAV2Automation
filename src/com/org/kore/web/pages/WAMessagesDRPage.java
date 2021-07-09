@@ -56,12 +56,13 @@ public class WAMessagesDRPage extends PageBase {
 	public void goToGroupAndPerforminWSDR(String discussionRoomName, boolean check, String action) throws Exception {
 
 		System.out.println("----------------------- goToGroupAndPerforminWSDR --------------------");
-		moveToElement(er.kdrcidgroup + discussionRoomName + "']", "xpath");
-		click(er.kdrcidgroup + discussionRoomName + "']", discussionRoomName + " chat");
-		
 		boolean discard = false;
-		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0)
+		moveToElement(er.kdrcidgroup + discussionRoomName + "']", "xpath");
+		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0){
 			click("//span[@class='p-button-text p-c'][text()='Yes']", "Discard Popup");
+		moveToElement(er.kdrcidgroup + discussionRoomName + "']", "xpath");
+		}
+		click(er.kdrcidgroup + discussionRoomName + "']", discussionRoomName + " chat");
 		
 		try {
 			if (check) {
