@@ -135,7 +135,6 @@ public class MessagesDR extends DriverSetUp {
 			String standardwsname = DriverSetUp.drdataMap.get("standardworkspace");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			waloginpage.loginToKora(url, korajusername, korajpassword);
 			wahomepage.selectMenuOption(Messages);
 			wahomepage.selectTopLeftMenuOption("All Messages"); 
 			String newRandomDr = "random"+wahomepage.runtimehhmmss();
