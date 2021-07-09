@@ -122,7 +122,7 @@ public class MessagesDR extends DriverSetUp {
 	 * @throws Exception
 	 *             Pass
 	 */
-	/*@Test(enabled = true, priority = 43)  
+	@Test(enabled = true, priority = 43)  
 	public void MDR_TC32_TC33_TC34_TC35_TC36_TC37_createNewDRwithDifferentAccessTypes() throws Exception {
 		String url =null;
 		try {
@@ -168,10 +168,10 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	*//**
+	/**
 	 * TC_64Delete Discussion Room with WorkSpace, without WorkSpace from
 	 * Messages Updated
-	 *//*
+	 */
 	@Test(enabled = true, priority = 44)  
 	public void MDR_TC64_deleteWorkSpacefromMessages() throws Exception {
 		String url =null;
@@ -202,7 +202,7 @@ public class MessagesDR extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate delete WorkSpace from Messages");
 			waloginpage.backToHomePage(url);
 		}
-	}*/
+	}
 
 	/**
 	 * Editing a post in Discussion Room Also validates
@@ -278,7 +278,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	/*@Test(enabled = true, priority = 47)
+	@Test(enabled = true, priority = 47)
 	public void MDR_TC25_TC26_TC28_TC29_starDrandMuteDrandvaldiation() throws Exception {
 		String url =null;
 		try {
@@ -359,7 +359,7 @@ public class MessagesDR extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to  Leave and Delete DR from ManageRoom");
 			waloginpage.backToHomePage(url);
 		}
-	}*/
+	}
 
 	/**
 	 * Editing a post in Discussion Room Also validates
