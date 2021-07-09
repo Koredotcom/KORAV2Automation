@@ -89,7 +89,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 42) 
+	/*@Test(enabled = true, priority = 42) 
 	public void MDR_TC24_DROnhoverOptionsVerification() throws Exception {
 		String url =null;
 		try {
@@ -115,13 +115,13 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	/**
+	*//**
 	 * "Create a discussion room from All messages/Discussion room and add user
 	 * with > Post only (Default post will be given)"
 	 * 
 	 * @throws Exception
 	 *             Pass
-	 */
+	 *//*
 	@Test(enabled = true, priority = 43)  
 	public void MDR_TC32_TC33_TC34_TC35_TC36_TC37_createNewDRwithDifferentAccessTypes() throws Exception {
 		String url =null;
@@ -167,10 +167,10 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	/**
+	*//**
 	 * TC_64Delete Discussion Room with WorkSpace, without WorkSpace from
 	 * Messages Updated
-	 */
+	 *//*
 	@Test(enabled = true, priority = 44)  
 	public void MDR_TC64_deleteWorkSpacefromMessages() throws Exception {
 		String url =null;
@@ -203,11 +203,11 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	/**
+	*//**
 	 * Editing a post in Discussion Room Also validates
 	 * Edit,Forward,Reminder,Post Info,Delete options displayed in 3 dots to a
 	 * post
-	 */
+	 *//*
 	@Test(enabled = true, priority = 45)  
 	public void MDR_TC53_TC56_EditaPost() throws Exception {
 		String url =null;
@@ -235,9 +235,9 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	/**
+	*//**
 	 * Forward post to new conversation , Existing and DR
-	 */
+	 *//*
 	@Test(enabled = true, priority = 46) 
 	public void MDR_TC49_TC54_TC55_TC57_forwardPostToGroupDrAndNewconv() throws Exception {
 		String url =null;
@@ -265,11 +265,11 @@ public class MessagesDR extends DriverSetUp {
 			wamessagesdrpage.movetoaPostandClickon3dots(standarddrname, post, true);			
 			wamessagesdrpage.forwardPosttonewconvorexisting(post, "NA", "DRDelete", "NA");
 
-			/** when we search with Email address application not showing results temporarily .
+			*//** when we search with Email address application not showing results temporarily .
 			wamessagesdrpage.goToGroupAndPerforminWSDR(standarddrname, false, "");
 			wamessagesdrpage.movetoaPostandClickon3dots(standarddrname, post, true);
 			wamessagesdrpage.forwardPosttonewconvorexisting(post, "NA", "NA", searchwithEmailAddress);
-			 */
+			 *//*
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate forward Post To Group DR And New  Conversation");
@@ -360,11 +360,11 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	/**
+	*//**
 	 * Editing a post in Discussion Room Also validates
 	 * Edit,Forward,Reminder,Post Info,Delete options displayed in 3 dots to a
 	 * post
-	 */
+	 *//*
 	@Test(enabled = true, priority = 49)  
 	public void MDR_TC45_TC52_TC77_DeletePostandCancelnewDR() throws Exception {
 		String url =null;
@@ -391,7 +391,7 @@ public class MessagesDR extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate Delete Post and Cancel new DR");
 			waloginpage.backToHomePage(url);
 		}
-	}
+	}*/
 
 	/**
 	 * At Mentions in posts users should display the users who are part of the
@@ -431,7 +431,7 @@ public class MessagesDR extends DriverSetUp {
 		}
 	}
 
-	@Test(enabled = true, priority = 51) 
+	/*@Test(enabled = true, priority = 51) 
 	public void MDR_TC39_TC72_PostviaEmailToggle() throws Exception {
 		String url =null;
 		try {
@@ -718,5 +718,5 @@ public class MessagesDR extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate messageInfo");
 			waloginpage.backToHomePage(url);
 		}
-	}
+	}*/
 }

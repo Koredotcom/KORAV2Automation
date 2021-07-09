@@ -46,12 +46,7 @@ public class WAHomePage extends PageBase {
 		boolean hmenu = false;
 		boolean discard =false;
 		Thread.sleep(2000);
-		
-		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0){
-			click("//span[@class='p-button-text p-c'][text()='Yes']", "Discard Popup");
-		test.log(LogStatus.INFO, "Selected yes to discard popup".toString()
-				+ test.addScreenCapture(takeScreenShot()));
-		}
+
 		waittillpageload();
 		waitTillappear(er.klogo, "xpath", "Top left menu");
 		System.out.println("Work Assist home screen displayed");
@@ -64,6 +59,11 @@ public class WAHomePage extends PageBase {
 					e.click();
 					System.out.println(menuoption + " option got selected");
 					Thread.sleep(1000);
+					if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0){
+						click("//span[@class='p-button-text p-c'][text()='Yes']", "Discard Popup");
+					test.log(LogStatus.INFO, "Selected yes to discard popup".toString()
+							+ test.addScreenCapture(takeScreenShot()));
+					}
 					waitTillappear(er.klogo, "xpath", "Top left menu");
 					test.log(LogStatus.PASS, menuoption + " selected");
 					break;
@@ -108,6 +108,12 @@ public class WAHomePage extends PageBase {
 				e.click();
 				System.out.println(menuoption + " option got selected");
 				Thread.sleep(1000);
+
+				if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0){
+					click("//span[@class='p-button-text p-c'][text()='Yes']", "Discard Popup");
+				test.log(LogStatus.INFO, "Selected yes to discard popup".toString()
+						+ test.addScreenCapture(takeScreenShot()));
+				}
 				test.log(LogStatus.PASS, "Selected <b>" + menuoption + " </b>option from left menu".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 				break;

@@ -438,7 +438,6 @@ public class WAMessagesDRPage extends PageBase {
 			String AccessType) throws Exception {
 		try {
 			System.out.println("---------------------- createDRwithAccessTypefromMessages -------------");
-			System.out.println("About to click on kmcplusicon");
 			click(er.kmcplusicon, "Plus icon to start new Dsicussion Room");
 			if (getAttributeValue(er.kdSearchboxinmsgnDR, "placeholder").equalsIgnoreCase("Search Messages"))
 				click(er.kmdiscussion, "Create a Discussion Room");
@@ -506,8 +505,7 @@ public class WAMessagesDRPage extends PageBase {
 			Thread.sleep(5000);
 			koramessagespage.enterYourMessageAs("Newely Created Discusion Room " + NewDRname);
 			Thread.sleep(5000);
-			korahomepage.waittillpageload();
-
+			waitUntilDissapear("//div[@class='lds-ring']", "Loading to disappear");
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "FAIELD to create DR with Access Type from Messages");
 
