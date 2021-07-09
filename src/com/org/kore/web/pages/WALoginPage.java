@@ -68,6 +68,19 @@ public class WALoginPage extends PageBase {
 		System.out.println("Choosen microsoft account");
 		Thread.sleep(2000);
 		System.out.println("Waiting for Signin screen or pick ur account screen");
+		
+		boolean profileicon =false;
+		if (profileicon =remoteDriver.findElements(By.xpath(er.kuserprofileicon)).size() > 0){
+			waitAndContinue(er.klogo, "xpath", "Top left menu");
+			clickNIgnoreFail(er.kuserprofileicon, "Click on User profile icon");
+			clickNIgnoreFail(er.klogout, "Logout");
+			test.log(LogStatus.INFO, "Selected Logout from work assist".toString() + test.addScreenCapture(takeScreenShot()));
+			clickNIgnoreFail(er.klogoutyes, "Logout Confirmation Popup Yes");
+			test.log(LogStatus.INFO, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
+			waitTillappear(er.ko365, "xpath", "Choose ur account type");
+			click(er.ko365, "Select Microsoft option");
+		}
+		
 		waitTillClickable("//input[@type='submit'] | //div[@role='heading'][text() = 'Pick an account']", "signin");
 		
 		boolean pickaccount=false;
@@ -149,8 +162,8 @@ public class WALoginPage extends PageBase {
 			test.log(LogStatus.INFO, "Logged out successfully".toString() + test.addScreenCapture(takeScreenShot()));
 			waitTillappear(er.ko365, "xpath", "Choose ur account type");
 			if (relogin) {
-				clearChromeCache();
-			//	launchAndLogoutFrom0365("https://www.office.com/");
+			//	clearChromeCache();
+				launchAndLogoutFrom0365("https://www.office.com/");
 				loginToKora(url, userName, password);
 			}
 		} catch (Exception e) {

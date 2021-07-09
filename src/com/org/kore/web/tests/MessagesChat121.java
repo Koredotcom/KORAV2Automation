@@ -67,7 +67,6 @@ public class MessagesChat121 extends DriverSetUp {
 		//	waloginpage.launchw3(url, korajusername, korajpassword);
 			waloginpage.loginToKora(url, korajusername, korajpassword);
 			wahomepage.selectMenuOption(Messages);
-			waloginpage.logoutAndReLogin(true, url, korahusername, korahpassword);
 			extent.endTest(test);
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate recent contact suggestions");
@@ -75,7 +74,7 @@ public class MessagesChat121 extends DriverSetUp {
 		}
 	}
 	
-	/*@Test(enabled = true, priority = 2)
+	@Test(enabled = true, priority = 2)
 	public void MC_TC3_TC4_TC5_verifyRecentSuggestions() throws Exception {
 		String url =null;
 		try {
@@ -698,9 +697,9 @@ public class MessagesChat121 extends DriverSetUp {
 			test.log(LogStatus.FAIL, "Failed to validate Delete functionality");
 			waloginpage.backToHomePage(url);
 		}
-	}*/
+	}
 
-	/*@Test(enabled = false, priority = 23)
+	@Test(enabled = false, priority = 23)
 	public void MC_TC50_MiddlepanePagination() throws Exception {
 		try {
 			test = extent.startTest(Thread.currentThread().getStackTrace()[1].getMethodName())
@@ -719,5 +718,5 @@ public class MessagesChat121 extends DriverSetUp {
 		} catch (Exception e) {
 			test.log(LogStatus.FAIL, "Failed to validate Middle pane pagination");
 		}
-	}*/ 
+	} 
 }
