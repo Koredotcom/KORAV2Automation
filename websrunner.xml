@@ -4,15 +4,15 @@
 	<test name="Sequential Tests">
 	
 	<!-- <parameter name="environment" value="${prodType}" /> -->
-		<parameter name="environment" value="QA" />
+		<parameter name="environment" value="NA" />
 		<parameter name="browser" value="chrome" />
 		<classes>
 
-			<class name="com.org.kore.web.tests.MessagesChat121" />
+			<!-- <class name="com.org.kore.web.tests.MessagesChat121" />
 			<class name="com.org.kore.web.tests.MessagesChatGroups" />
 			<class name="com.org.kore.web.tests.MessagesChatOnHover" />
 			<class name="com.org.kore.web.tests.MessagesDR"/>
-			<class name="com.org.kore.web.tests.MessagesAttachments" /> 
+			<class name="com.org.kore.web.tests.MessagesAttachments" />  -->
 			<class name="com.org.kore.web.tests.Workspaces"/>
 			
 			

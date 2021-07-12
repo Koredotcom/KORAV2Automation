@@ -67,8 +67,8 @@ public class DriverSetUp {
 	public static String DBName;
 	public static String IntDBName;
 	public static String IncidentDBName;
-	public static String Environment;
-	public static String App;
+//	public static String Environment;
+//	public static String App;
 	public static LinkedHashMap<String, String> propsMap = new LinkedHashMap<>();
 	public static LinkedHashMap<String, String> UtilityMap = new LinkedHashMap<>();
 	public static LinkedHashMap<String, String> testdataMap = new LinkedHashMap<>();
@@ -80,6 +80,7 @@ public class DriverSetUp {
 	public String workingurl;
 	
 	public static String buildNumber;
+	public static String App;
 
 	public static AppiumServiceBuilder builder;
 	public static AppiumDriverLocalService service;
@@ -112,6 +113,10 @@ public class DriverSetUp {
 			// startWindowsAppiumServer();
 			buildNumber = System.getenv("BUILD_NUMBER");
 			System.out.println("Build Number:"+buildNumber);
+			
+			App = System.getenv("ENV");
+			System.out.println("Current environment from Jenkins is:================:"+App);
+			
 			extent = ExtentReportUtility.getReporter(extent);
 			test = DriverSetUp.test;
 			extent = DriverSetUp.extent;
@@ -127,7 +132,7 @@ public class DriverSetUp {
 			// System.out.println(System.getProperty("user.dir"));
 			pb = new PageBase(remoteDriver);
 			browser = ctx.getCurrentXmlTest().getParameter("browser");
-			App = ctx.getCurrentXmlTest().getParameter("environment");
+		//	App = ctx.getCurrentXmlTest().getParameter("environment");
 			DriverSetUp.dr = new DataReader();
 			er = new ElementRepository();
 			fu = new PropertyLoader();

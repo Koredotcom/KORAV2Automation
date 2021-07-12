@@ -83,7 +83,7 @@ public class Workspaces extends DriverSetUp {
 		}
 	}
 	
-	@Test(enabled = true, priority = 61)
+	@Test(enabled = false, priority = 61)
 	public void WS_TC2_createWorkspaceAnddeleteWorkspace() throws Exception {
 		String url =null;
 		try {
