@@ -137,6 +137,8 @@ public class WALoginPage extends PageBase {
 
 	public void backToHomePage(String url) throws Exception{
 		remoteDriver.get(url);
+		test.log(LogStatus.INFO, "Reloaded "+url+" from catch".toString()
+				+ test.addScreenCapture(takeScreenShot()));
 		boolean discard =false;
 		if (discard =remoteDriver.findElements(By.xpath("//div[@class='p-dialog-content']")).size() > 0){
 			click("//span[@class='p-button-text p-c'][text()='Yes']", "Discard Popup");
@@ -206,7 +208,8 @@ public class WALoginPage extends PageBase {
 		test.log(LogStatus.INFO, "Logged out from office 365".toString() + test.addScreenCapture(takeScreenShot()));
 		waitToappearIgnoreFail("//div[@id='switch-account']", "xpath", "logout");
 		test.log(LogStatus.INFO, "Logged out from office 365 and Home screen got displayed".toString() + test.addScreenCapture(takeScreenShot()));
-	//	waitToappearIgnoreFail("//div[@id='switch-account'] | //div[@class='personalization__buttons-container']", "xpath", "logout");
+		remoteDriver.get(o365url);
+		//	waitToappearIgnoreFail("//div[@id='switch-account'] | //div[@class='personalization__buttons-container']", "xpath", "logout");
 	}
 
 	public String getUserDetails() throws Exception {

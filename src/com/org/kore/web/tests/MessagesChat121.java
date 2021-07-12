@@ -515,7 +515,6 @@ public class MessagesChat121 extends DriverSetUp {
 			String replymsg = "It is Reply";
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			wahomepage.selectMenuOption(Messages);
 			wahomepage.selectTopLeftMenuOption("All Messages");
 			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);

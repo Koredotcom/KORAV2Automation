@@ -34,7 +34,8 @@ public class WAWorkspacesPage extends PageBase {
 		String workspacename = null;
 		try {
 			click(er.kwcreatenew, "Create new workspace ");
-			Thread.sleep(2000);
+			Thread.sleep(4000);
+			waitToappear(er.kwdefaulworkspace, "xpath", "New WS Name");
 			workspacename = getText(er.kwdefaulworkspace);
 			if (workspacename.contains("Workspace")) {
 				test.log(LogStatus.PASS, "Default workspace created as " + workspacename + " ".toString()
