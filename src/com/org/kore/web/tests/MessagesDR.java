@@ -647,7 +647,7 @@ public class MessagesDR extends DriverSetUp {
 			String newparticipants = DriverSetUp.drdataMap.get("multipleparticipants");
 			test.log(LogStatus.INFO, "Navigation url :" + url);	
 
-			waloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);	
+		//	waloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);	
 			wahomepage.selectMenuOption(Messages);
 			wahomepage.selectTopLeftMenuOption("Discussion Rooms");						
 			String newDrrandom = "randomDR"+wahomepage.runtimehhmmss();
@@ -692,7 +692,7 @@ public class MessagesDR extends DriverSetUp {
 			String Messages = DriverSetUp.drdataMap.get("messages");								
 			test.log(LogStatus.INFO, "Navigation url :" + url);	
 
-			waloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);			
+		//	waloginpage.logoutAndReLogin(true,url, korajusername, korajpassword);			
 			wahomepage.selectMenuOption(Messages);
 			wahomepage.selectTopLeftMenuOption("Discussion Rooms");						
 			wamessagesdrpage.goToGroupAndPerforminWSDR("DRDelete", false, "");			
