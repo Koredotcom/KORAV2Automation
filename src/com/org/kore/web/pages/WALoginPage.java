@@ -137,6 +137,7 @@ public class WALoginPage extends PageBase {
 
 	public void backToHomePage(String url) throws Exception{
 		remoteDriver.get(url);
+		Thread.sleep(2000);
 		test.log(LogStatus.INFO, "Reloaded "+url+" from catch".toString()
 				+ test.addScreenCapture(takeScreenShot()));
 		boolean discard =false;
@@ -145,6 +146,8 @@ public class WALoginPage extends PageBase {
 		test.log(LogStatus.INFO, "Selected yes to discard popup".toString()
 				+ test.addScreenCapture(takeScreenShot()));
 		}
+		
+		waitUntilDissapear("//div[@class='lds-ring']", "Home Loading");
 		
 	}
 	
