@@ -116,7 +116,6 @@ public class DriverSetUp {
 			
 			App = System.getenv("ENV");
 			System.out.println("Current environment from Jenkins is:================:"+App);
-			
 			extent = ExtentReportUtility.getReporter(extent);
 			test = DriverSetUp.test;
 			extent = DriverSetUp.extent;
@@ -130,6 +129,8 @@ public class DriverSetUp {
 	public void setUp(ITestContext ctx) throws Exception {
 		try {
 			// System.out.println(System.getProperty("user.dir"));
+			if(App==null)
+				App=ctx.getCurrentXmlTest().getParameter("environment");
 			pb = new PageBase(remoteDriver);
 			browser = ctx.getCurrentXmlTest().getParameter("browser");
 		//	App = ctx.getCurrentXmlTest().getParameter("environment");
