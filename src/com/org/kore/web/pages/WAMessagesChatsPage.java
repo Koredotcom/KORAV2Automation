@@ -194,9 +194,10 @@ public class WAMessagesChatsPage extends PageBase {
 	public void select(String participant) throws Exception {
 
 		enterText(er.kmcenterparticipant, participant, "xpath", "Participant name");
-		Thread.sleep(9000);
 		waitTillappear(er.kmcsuggestmailids, "xpath", "Suggested emails");
+		Thread.sleep(9000);
 		List<WebElement> mailid = remoteDriver.findElements(By.xpath(er.kmcsuggestmailids));
+		Thread.sleep(9000);
 		for (WebElement e : mailid) {
 			e.getText().trim();
 			if (e.getText().trim().equalsIgnoreCase(participant)) {
@@ -234,6 +235,7 @@ public class WAMessagesChatsPage extends PageBase {
 	public String enterYourMessageAs(String enterthistext) throws Exception {
 		String chatheadername = null;
 		try {
+			waitUntilDissapear("//div[@class='lds-ring']", "Loading to disappear");
 			WebElement compose = remoteDriver.findElement(By.xpath(er.kcomposebar));
 			compose.sendKeys(enterthistext, Keys.ENTER);
 			Thread.sleep(2000);
