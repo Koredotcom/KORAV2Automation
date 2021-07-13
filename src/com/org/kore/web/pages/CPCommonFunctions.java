@@ -60,7 +60,7 @@ public class CPCommonFunctions extends PageBase {
 			appiumDriver.get(url);
 		} else if (DriverSetUp.propsMap.get("tool").equalsIgnoreCase("Selenium")) {
 			remoteDriver.get(url);	
-		//	remoteDriver.manage().window().maximize();
+			remoteDriver.manage().window().maximize();
 			System.out.println("Loading work assist url");
 		//	System.out.println("After maximize Window height is: " + remoteDriver.manage().window().getSize().getHeight());
 		//	System.out.println("After maximize Window width is: " + remoteDriver.manage().window().getSize().getWidth());
