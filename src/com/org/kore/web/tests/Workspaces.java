@@ -96,7 +96,7 @@ public class Workspaces extends DriverSetUp {
 			String wsname = DriverSetUp.wsdataMap.get("workspaceauto");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			waworkspacepage.createNewWorkspaceAndCheckDefault(wsname);
+			wsname=	waworkspacepage.createNewWorkspaceAndCheckDefault(true,wsname);
 			wahomepage.selectMenuOption(Messages);
 			wahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
 			waworkspacepage.clickOnWorkspace3Dots(wsname);
@@ -122,8 +122,9 @@ public class Workspaces extends DriverSetUp {
 			String invitemems = DriverSetUp.wsdataMap.get("workspacemems");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
+			waloginpage.loginToKora(url, korajusername, korajpassword);
 			wahomepage.selectMenuOption(Workspaces);
-			waworkspacepage.createNewWorkspaceAs(workspaceauto);
+			workspaceauto=	waworkspacepage.createNewWorkspaceAndCheckDefault(false,"NA");
 			waworkspacepage.workspaceDirectInvite(invitemems);
 			waworkspacepage.clickOnWorkspace3Dots(workspaceauto);
 			waworkspacepage.operationsFromWS3Dots(workspaceauto, "Manage");
@@ -153,7 +154,7 @@ public class Workspaces extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
 			wahomepage.selectMenuOption(Workspaces);
-			waworkspacepage.createNewWorkspaceAs(wsname);
+			waworkspacepage.createNewWorkspaceAndCheckDefault(true,wsname);
 			wahomepage.selectMenuOption(Messages);
 			wahomepage.getActiveOptionFromLeftNav("All Messages");
 			waworkspacepage.selectWorkspace(wsname);
@@ -184,7 +185,7 @@ public class Workspaces extends DriverSetUp {
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
 			wahomepage.selectMenuOption(Workspaces);
-			waworkspacepage.createNewWorkspaceAs(workspacename);
+			waworkspacepage.createNewWorkspaceAndCheckDefault(true,workspacename);
 			waworkspacepage.selectDefaultDR();
 			wamessageschatspage.visibilityOfComposeBar(true);
 			wamessageschatspage.verifyGroupCreationTimeline(korajusername);

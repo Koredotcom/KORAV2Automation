@@ -15,7 +15,7 @@ public class ElementRepository {
 			kpwd = null, kosignin = null, kstaysignin = null, ksignwithgoogle = null, ksignwithgooglepage = null,
 			knext = null, kchoosetext = null, kselectaccount = null, kallow = null, klogout = null, klogoutyes = null,
 			khistory = null, ktext = null, kheadermenu = null, ksinglquote = null, klogo = null, kcomposebar = null,
-			kleftactiveoption = null, kattachment = null, kuserprofileicon = null, kmctopleftmenu = null,
+			kleftactiveoption = null, kattachment = null, kuserprofileicon = null,kloading=null, kmctopleftmenu = null,
 			kmbottonleftmenu = null, kmcplusicon = null, kmconv = null, kmcomposebar = null, kmcrecent = null,
 			kmremoveparticipantpopup = null, kmcenterparticipant = null, kmcloseconversation = null,
 			kmcsuggestnames = null, kmcsuggestmailids = null, kmcprofileicon = null, kmcgroupchevronicon = null,
@@ -95,6 +95,7 @@ public class ElementRepository {
 		kleftactiveoption = "//li[@class='active p-menuitem']//span[@class='p-menuitem-text']";
 		kattachment = "//i[@class='p-icon kr-discussion-attachment emojiBtn']";
 		kuserprofileicon = "//div[@class='userIntial']";
+		kloading ="//div[@class='lds-ring']";
 
 		kmremoveparticipantpopup = "//span[@class='p-button-text p-c'][text() = 'Remove']";
 		kmctopleftmenu = "//span[@class='p-menuitem-text']";

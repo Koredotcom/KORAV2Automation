@@ -30,12 +30,15 @@ public class WAWorkspacesPage extends PageBase {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void createNewWorkspaceAndCheckDefault(String createas) throws Exception {
+	public String createNewWorkspaceAndCheckDefault(boolean renamews,String createas) throws Exception {
 		String workspacename = null;
 		try {
 			click(er.kwcreatenew, "Create new workspace ");
-			Thread.sleep(6000);
+			waitUntilDissapear(er.kloading, "xpath", "Loading indicator to be disappeared");
+			Thread.sleep(8000);
 			waitToappear(er.kwdefaulworkspace, "xpath", "New WS Name");
+			click(er.kwdefaulworkspace,"Default WS");
+			Thread.sleep(4000);
 			workspacename = getText(er.kwdefaulworkspace);
 			if (workspacename.contains("Workspace")) {
 				test.log(LogStatus.PASS, "Default workspace created as " + workspacename + " ".toString()
@@ -44,7 +47,7 @@ public class WAWorkspacesPage extends PageBase {
 				test.log(LogStatus.FAIL, "Default workspace is not as expected i.e. " + workspacename + " ".toString()
 						+ test.addScreenCapture(takeScreenShot()));
 			}
-
+			if(renamews){
 			clearAndenterText(er.kwdefaulworkspace, createas, " Default workspace name");
 			String updatedworkspace = getText(er.kwdefaulworkspace);
 			compareActualExpected(updatedworkspace, createas, "Workspace is : ");
@@ -52,21 +55,15 @@ public class WAWorkspacesPage extends PageBase {
 			compareActualExpected(displayed, true, "Discussion Room header");
 			displayed = elementIsDisplayed(er.kwdrgeneral, "xpath");
 			compareActualExpected(displayed, true, "General Discussion Room");
-
+		}
+			workspacename = getText(er.kwdefaulworkspace);
+			return workspacename;
 		} catch (Exception e) {
 
 			test.log(LogStatus.FAIL, "Filed in creation or verification of new workspace".toString()
 					+ test.addScreenCapture(takeScreenShot()));
+			return workspacename;
 		}
-	}
-
-	public String createNewWorkspaceAs(String createas) throws Exception {
-		String updatedws = null;
-		click(er.kwcreatenew, "Create new workspace ");
-		Thread.sleep(2000);
-		clearAndenterText(er.kwdefaulworkspace, createas, " New Workspace");
-		updatedws = getText(er.kwdefaulworkspace);
-		return updatedws;
 	}
 
 	public void selectDefaultDR() throws Exception {
@@ -200,6 +197,7 @@ public class WAWorkspacesPage extends PageBase {
 				clearAndenterText(er.kwdeletewsname, workspacename, "Placeholder to proceed with deletion");
 				click(er.kwproceedDelete, "Proceed to Delete Workspace popup");
 				Thread.sleep(1000);
+				waitUntilDissapear(er.kloading, "Loading indicator to be dismissed");
 				test.log(LogStatus.PASS,
 						workspacename + " Deleted Successfully".toString() + test.addScreenCapture(takeScreenShot()));
 				break;
