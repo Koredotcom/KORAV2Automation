@@ -163,9 +163,9 @@ public class PageBase extends DriverSetUp {
 							"--ignore-certificate-errors", "--disable-extensions", "--no-sandbox",
 							"--disable-dev-shm-usage");*/
 					
-				/*	options.addArguments("--headless","--disable-gpu", "--window-size=1382,744",
+					options.addArguments("--headless","--disable-gpu", "--window-size=1382,744",
 							"--ignore-certificate-errors", "--disable-extensions", "--no-sandbox",
-							"--disable-dev-shm-usage");*/
+							"--disable-dev-shm-usage");
 					options.addArguments("start-maximized");
 					DesiredCapabilities cap = DesiredCapabilities.chrome();
 					cap.setCapability("ignoreZoomSetting", true);
