@@ -197,7 +197,7 @@ public class WAMessagesChatsPage extends PageBase {
 		waitTillappear(er.kmcsuggestmailids, "xpath", "Suggested emails");
 		Thread.sleep(9000);
 		List<WebElement> mailid = remoteDriver.findElements(By.xpath(er.kmcsuggestmailids));
-		Thread.sleep(9000);
+		Thread.sleep(3000);
 		for (WebElement e : mailid) {
 			e.getText().trim();
 			if (e.getText().trim().equalsIgnoreCase(participant)) {
