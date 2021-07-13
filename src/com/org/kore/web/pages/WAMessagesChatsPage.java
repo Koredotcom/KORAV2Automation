@@ -194,7 +194,7 @@ public class WAMessagesChatsPage extends PageBase {
 	public void select(String participant) throws Exception {
 
 		enterText(er.kmcenterparticipant, participant, "xpath", "Participant name");
-		Thread.sleep(4000);
+		Thread.sleep(9000);
 		waitTillappear(er.kmcsuggestmailids, "xpath", "Suggested emails");
 		List<WebElement> mailid = remoteDriver.findElements(By.xpath(er.kmcsuggestmailids));
 		for (WebElement e : mailid) {
@@ -238,6 +238,7 @@ public class WAMessagesChatsPage extends PageBase {
 			compose.sendKeys(enterthistext, Keys.ENTER);
 			Thread.sleep(2000);
 			waitUntilDissapear("//div[@class='lds-ring']", "Loading to disappear");
+			Thread.sleep(3000);
 			waitTillappear(er.kcomposebar, "xpath", "Waiting for compose bar");
 			chatheadername = getText(er.kmchatheadername);
 			test.log(LogStatus.INFO, "In<b> " + chatheadername + " </b>Entered message as " + enterthistext

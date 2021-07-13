@@ -159,7 +159,6 @@ public class MessagesChat121 extends DriverSetUp {
 			String expected3dotoptions = DriverSetUp.testdataMap.get("expectedoptionsfor121");
 			test.log(LogStatus.INFO, "Navigation url :" + url);
 
-			waloginpage.logoutAndReLogin(true, url, korajusername, korajpassword);
 			wahomepage.selectMenuOption("WorkSpaces");
 			wahomepage.selectMenuOption(Messages);
 			wamessageschatspage.startNewConversationWith("chat", newparticipants, true);

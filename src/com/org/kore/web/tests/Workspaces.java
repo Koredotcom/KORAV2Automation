@@ -98,6 +98,7 @@ public class Workspaces extends DriverSetUp {
 
 			waworkspacepage.createNewWorkspaceAndCheckDefault(wsname);
 			wahomepage.selectMenuOption(Messages);
+			wahomepage.selectTopLeftMenuOption("Discussion Rooms"); 
 			waworkspacepage.clickOnWorkspace3Dots(wsname);
 			waworkspacepage.operationsFromWS3Dots(wsname, "Delete");
 			extent.endTest(test);
